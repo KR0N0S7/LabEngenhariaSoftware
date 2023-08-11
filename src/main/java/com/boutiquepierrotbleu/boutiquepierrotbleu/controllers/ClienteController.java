@@ -6,5 +6,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/cliente")
 public class ClienteController {
-
+    // teste
 }
