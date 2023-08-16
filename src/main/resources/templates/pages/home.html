@@ -4,32 +4,147 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../static/css/style.css">
-    <title>teste</title>
+    <title>Home</title>
+    <link rel="shortcut icon" href="../../static/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 </head>
 <body>
-<header class="bg-gray-dark">
-    <nav>
-        <div class="container flex justify-between py-5">
-            <div>
-                <h2>
-                    Boutique Pierrot Bleu
-                </h2>
-            </div>
-            <ol class="flex">
-                <li class="mx-3">Novidades</li>
-                <li class="mx-3">Masculino</li>
-                <li class="mx-3">Feminino</li>
-            </ol>
 
-            <div>
-                <ion-icon class="mx-3" name="search-outline"></ion-icon>
-                <ion-icon class="mx-3" name="cart-outline"></ion-icon>
-                <ion-icon class="mx-3" name="people-outline"></ion-icon> 
-            </div>
-        </div>  
-    </nav>
-</header>
+    <style>
+        .banner-principal {
+            background-image: url(../../static/img/banner-principal.png);
+            height: 100vh;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
 
+    <header>
+        <nav>
+            <div class="container flex justify-between py-5 bg-gray-dark z-10 fixed">
+                <div>
+                    <h2 class="font-bold">
+                        <a href="#">Boutique Pierrot Bleu</a>
+                    </h2>
+                </div>
+                <ol class="flex">
+                    <li class="mx-3">
+                        <a href="#" class="transition duration-500 hover:bg-purple rounded-xl px-3 py-2">Novidades</a>
+                    </li>
+                    <li class="mx-3">
+                        <a href="#" class="transition duration-500 hover:bg-purple rounded-xl px-3 py-2">Masculino</a>
+                    </li>
+                    <li class="mx-3">
+                        <a href="#"class="transition duration-500 hover:bg-purple rounded-xl px-3 py-2">Feminino</a>
+                    </li>
+                </ol>
+
+                <div>
+                    <ion-icon class="mx-3" name="search-outline"></ion-icon>
+                    <ion-icon class="mx-3" name="cart-outline"></ion-icon>
+                    <a href="">
+                        <ion-icon class="mx-3" name="people-outline"></ion-icon> 
+                    </a>
+                </div>
+            </div> 
+        </nav>
+    </header>
+
+    <section class="h-[100vh] banner-principal">
+
+        <div class="container">
+            <div class="pt-52">
+                <img src="../../static/img/desconto.png" alt="desconto">
+                <div>
+                    <a href="#" class="bg-purple px-5 py-5 rounded-2xl inline-block hover:bg-black hover:text-white transition duration-500">
+                        Compre Agora <ion-icon name="arrow-forward-outline"></ion-icon>
+                    </a>
+                </div>
+            </div>
+           
+        </div>
+    
+    </section>
+
+    <section class="my-5">
+        <div class="container">
+            <img src="../../static/img/marcas.png" alt="marcas de roupas">
+            <div class="swiper swiper-roupas my-10" >
+                <div class="swiper-wrapper">
+
+                    <div class="swiper-slide"> 
+                        <div class="w-full">
+                            <img src="../../static/img/swiper-1.png" alt="roupas">
+                            <div class="text-center my-2">
+                                <h2 class="font-bold">Casaco Zebra</h2>
+                                <h3 class="font-bold text-purple">R$1.300</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide"> 
+                        <div class="w-full">
+                            <img src="../../static/img/swiper-1.png" alt="roupas">
+                            <div class="text-center my-2">
+                                <h2 class="font-bold">Casaco Zebra</h2>
+                                <h3 class="font-bold text-purple">R$1.300</h3>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="swiper-slide"> 
+                        <div class="w-full">
+                            <img src="../../static/img/swiper-1.png" alt="roupas">
+                            <div class="text-center my-2">
+                                <h2 class="font-bold">Casaco Zebra</h2>
+                                <h3 class="font-bold text-purple">R$1.300</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide"> 
+                        <div class="w-full">
+                            <img src="../../static/img/swiper-1.png" alt="roupas">
+                            <div class="text-center my-2">
+                                <h2 class="font-bold">Casaco Zebra</h2>
+                                <h3 class="font-bold text-purple">R$1.300</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide"> 
+                        <div class="w-full">
+                            <img src="../../static/img/swiper-1.png" alt="roupas">
+                            <div class="text-center my-2">
+                                <h2 class="font-bold">Casaco Zebra</h2>
+                                <h3 class="font-bold text-purple">R$1.300</h3>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+
+            <div class="flex justify-center">
+                <div class="w-5/12 relative">
+                    <a href="#">
+                        <h2 class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-3xl font-semibold">Masculino</h2>
+                        <img class="hover:bg-black hover:opacity-75 rounded-lg transition duration-500" src="../../static/img/masculino.png" alt="roupa masculina">
+                    </a>
+                </div>
+                <div class="w-5/12 relative">
+                    <a href="#">
+                        <h2 class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-3xl font-semibold">Feminino</h2>
+                        <img class="hover:bg-black hover:opacity-75 rounded-lg transition duration-500" src="../../static/img/feminina.png" alt="roupa feminina">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+  
     <footer class="bg-gray">
         <div class="container py-10">
             <div class="flex">
@@ -130,6 +245,7 @@
         </div>
     </footer>
     
+    <script src="../../static/js/swiper.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
