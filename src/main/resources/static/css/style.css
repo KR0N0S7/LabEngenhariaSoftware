@@ -862,13 +862,10 @@ video {
 
 .hover\:opacity-75:hover {
   opacity: 0.75;
-<<<<<<< HEAD
-=======
 }
 
 
 .hover\:duration-700:hover {
   transition-duration: 700ms;
 
->>>>>>> 1454df9ab9c4291bf5fb65b7fd3b88a4253e3088
 }
