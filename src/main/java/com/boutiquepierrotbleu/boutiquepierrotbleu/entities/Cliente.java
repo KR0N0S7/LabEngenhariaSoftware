@@ -11,5 +11,5 @@ public class Cliente {
     private String telefone;
     private Endereco endereco;
     private String senha;
-
 }
+
