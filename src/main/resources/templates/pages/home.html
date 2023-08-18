@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="header.html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +8,9 @@
     <link rel="shortcut icon" href="../../static/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../../static/js/header.js"></script>
+    <script src="../../static/js/footer.js"></script>
 </head>
 <body>
     <style>
@@ -19,36 +22,9 @@
         }
     </style>
 
-    <header>
-        <nav>
-            <div class="container flex justify-between py-5 bg-gray-dark z-10 fixed">
-                <div>
-                    <h2 class="font-bold">
-                        <a href="#">Boutique Pierrot Bleu</a>
-                    </h2>
-                </div>
-                <ol class="flex">
-                    <li class="mx-3">
-                        <a href="#" class="transition duration-500 hover:bg-purple rounded-xl px-3 py-2">Novidades</a>
-                    </li>
-                    <li class="mx-3">
-                        <a href="#" class="transition duration-500 hover:bg-purple rounded-xl px-3 py-2">Masculino</a>
-                    </li>
-                    <li class="mx-3">
-                        <a href="#"class="transition duration-500 hover:bg-purple rounded-xl px-3 py-2">Feminino</a>
-                    </li>
-                </ol>
 
-                <div>
-                    <ion-icon class="mx-3" name="search-outline"></ion-icon>
-                    <ion-icon class="mx-3" name="cart-outline"></ion-icon>
-                    <a href="">
-                        <ion-icon class="mx-3" name="people-outline"></ion-icon> 
-                    </a>
-                </div>
-            </div> 
-        </nav>
-    </header>
+    <div id="header-placeholder"></div>
+
 
     <section class="h-[100vh] banner-principal">
 
@@ -144,110 +120,8 @@
         </div>
     </section>
   
-    <footer class="bg-gray">
-        <div class="container py-10">
-            <div class="flex">
-                <div class="w-4/12">
-                    <div>
-                        <h2 class="text-2xl tracking-wider font-bold mt-10 mb-16">Boutique Pierrot Bleu</h2>
-                        <h3 class="text-xl">Inscreva-se no nosso site</h3>
-                        <div class="flex items-center">
-                            <input class="pl-5 py-1 my-3 outline-none" type="email" placeholder="Entre com seu email">
-                            <button class="w-8 h-8"> 
-                                <ion-icon name="send-outline" class="bg-purple text-white w-6 h-6 p-1"></ion-icon>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="w-2/12">
-                    <h2 class="mt-10 font-semibold">Nossa Loja</h2>
-                    <ol>
-                        <li class="my-3">
-                            <a href="#">Sobre nós</a>
-                        </li>
-                        <li>
-                            <a href="#">Trabalhe conosco</a>
-                        </li>
-                        <li class="my-3">
-                            <a href="#">Nosso time</a>
-                        </li>
-                        <li>
-                            <a href="#">SAC</a>
-                        </li>
-                    </ol>
-                </div>
-
-                <div class="w-2/12">
-                    <h2 class="mt-10 font-semibold">Compras</h2>
-                    <ol>
-                        <li class="my-3">
-                            <a href="#">Produtos</a>
-                        </li>
-                        <li>
-                            <a href="#">Minha Conta</a>
-                        </li>
-                        <li class="my-3">
-                            <a href="#">Regras de envio</a>
-                        </li>
-                        <li>
-                            <a href="#">Devolução</a>
-                        </li>
-                    </ol>
-                </div>
-
-                <div class="w-2/12">
-                    <h2 class="mt-10 font-semibold">Suporte</h2>
-                    <ol>
-                        <li class="my-3">
-                            <a href="#">Contate-nos</a>
-                        </li>
-                        <li>
-                            <a href="#">Opções de pagamento</a>
-                        </li>
-                        <li class="my-3">
-                            <a href="#">Acessibilidade</a>
-                        </li>
-                        <li>
-                            <a href="#">Afiliados</a>
-                        </li>
-                    </ol>
-                </div>
-        
-            </div>
-           
-            <div class="flex justify-between mt-12">
-
-                <h2 class="text-sm">
-                    @2023 Todos os direitos reservados Pierrot Team.
-                </h2>
-
-                <div class="flex">
-                    <h3 class="text-sm">
-                        Métodos de Pagamentos
-                    </h3>
-                    <ol class="flex ml-3">
-
-                        <li class="mx-2">
-                            <img class="w-8 h-8 object-contain" src="../../static/img/visa.png" alt="">
-                        </li>
-                        <li>
-                            <img class="w-8 h-8 object-contain" src="../../static/img/mastercard.png" alt="">
-                        </li>
-                        <li class="mx-2">
-                            <img class="w-8 h-8 object-contain" src="../../static/img/paypal.png" alt="">
-                        </li>
-                    
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </footer>
-    
-    <script src="../../static/js/swiper.js"></script>
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
+  
+    <div id="footer-placeholder"></div>
 </body>
 </html>
 
