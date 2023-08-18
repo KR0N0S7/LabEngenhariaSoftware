@@ -674,6 +674,10 @@ video {
   height: 100vh;
 }
 
+.h-\[253px\] {
+  height: 253px;
+}
+
 .w-2\/12 {
   width: 16.666667%;
 }
@@ -718,6 +722,10 @@ video {
 
 .flex-col {
   flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
 }
 
 .items-center {
@@ -855,6 +863,10 @@ video {
 
 .tracking-wider {
   letter-spacing: 0.05em;
+}
+
+.tracking-wide {
+  letter-spacing: 0.025em;
 }
 
 .text-purple {
