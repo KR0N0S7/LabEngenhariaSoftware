@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
@@ -43,3 +44,33 @@
 <div id="conteudo" class="container" layout:fragment="content"></div>
 </html>
 
+<header>
+    <nav>
+        <div class="container flex justify-between py-5 bg-gray-dark">
+            <div>
+                <h2 class="font-bold">
+                    <a href="../pages/home.html">Boutique Pierrot Bleu</a>
+                </h2>
+            </div>
+            <ol class="flex">
+                <li class="mx-3">
+                    <a href="#" class="transition duration-500 hover:bg-purple rounded-xl px-3 py-2">Novidades</a>
+                </li>
+                <li class="mx-3">
+                    <a href="#" class="transition duration-500 hover:bg-purple rounded-xl px-3 py-2">Masculino</a>
+                </li>
+                <li class="mx-3">
+                    <a href="#"class="transition duration-500 hover:bg-purple rounded-xl px-3 py-2">Feminino</a>
+                </li>
+            </ol>
+
+            <div>
+                <ion-icon class="mx-3" name="search-outline"></ion-icon>
+                <ion-icon class="mx-3" name="cart-outline"></ion-icon>
+                <a href="../pages/cadastro.html">
+                    <ion-icon class="mx-3" name="people-outline"></ion-icon> 
+                </a>
+            </div>
+        </div> 
+    </nav>
+</header>
