@@ -23,9 +23,9 @@
 
     <div class="container my-10" id="container" class="flex">
 
-        <div class="flex flex-wrap">
+        <div class="flex flex-wrap js-box-products">
             
-            <div class="w-4/12 px-3 ">
+            <!-- <div class="w-4/12 px-3 ">
                 <img src="../../static/img/swiper-1.png" alt="roupas">
                 <div class="text-center my-2">
                     <h2 class="font-bold">Casaco Zebra</h2>
@@ -95,11 +95,29 @@
                     <h2 class="font-bold">Casaco Zebra</h2>
                     <h3 class="font-bold text-purple">R$1.300</h3>
                 </div>
-            </div>
+            </div> -->
 
         </div>
     </div>
     <div id="footer-placeholder"></div>
+
+    
+    <script>
+        if(document.querySelector('.js-box-products')) {
+            const boxProducts = document.querySelector('.js-box-products');
+            const productItem = `<div class="w-4/12 px-3 ">
+                <img src="../../static/img/swiper-1.png" alt="roupas">
+                <div class="text-center my-2">
+                    <h2 class="font-bold">Casaco Zebra</h2>
+                    <h3 class="font-bold text-purple">R$1.300</h3>
+                </div>
+            </div>`;
+
+
+            for(let i = 0; i < 10; i++)
+                boxProducts.insertAdjacentHTML('afterbegin', productItem);
+        }
+    </script>
 </body>
 
 

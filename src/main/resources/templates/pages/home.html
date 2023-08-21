@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{header.html}">
+=======
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="header.html">
 <head>
     <meta charset="UTF-8">
@@ -8,6 +12,8 @@
     <link rel="shortcut icon" href="../../static/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+</head>
+<div layout:fragment="content"></div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../static/js/header.js"></script>
     <script src="../../static/js/footer.js"></script>
@@ -22,9 +28,7 @@
         }
     </style>
 
-
     <div id="header-placeholder"></div>
-
 
     <section class="h-[100vh] banner-principal">
 
@@ -32,7 +36,7 @@
             <div class="pt-52">
                 <img src="../../static/img/desconto.png" alt="desconto">
                 <div>
-                    <a href="#" class="bg-purple px-5 py-5 rounded-2xl inline-block hover:bg-black hover:text-white transition duration-500">
+                    <a href="../pages/novachegada.html" class="bg-purple px-5 py-5 rounded-2xl inline-block hover:bg-black hover:text-white transition duration-500">
                         Compre Agora <ion-icon name="arrow-forward-outline"></ion-icon>
                     </a>
                 </div>
@@ -50,53 +54,83 @@
 
                     <div class="swiper-slide"> 
                         <div class="w-full">
-                            <img src="../../static/img/swiper-1.png" alt="roupas">
-                            <div class="text-center my-2">
-                                <h2 class="font-bold">Casaco Zebra</h2>
-                                <h3 class="font-bold text-purple">R$1.300</h3>
-                            </div>
+                            <a href="">
+                                <img src="../../static/img/swiper-1.png" alt="roupas">
+                                <div class="text-center my-2">
+                                    <h2 class="font-bold">Casaco Zebra</h2>
+                                    <h3 class="font-bold text-purple">R$1.300</h3>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide"> 
+                        <div class="w-full">
+                            <a href="">
+                                <img src="../../static/img/swiper-1.png" alt="roupas">
+                                <div class="text-center my-2">
+                                    <h2 class="font-bold">Casaco Zebra</h2>
+                                    <h3 class="font-bold text-purple">R$1.300</h3>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide"> 
+                        <div class="w-full">
+                            <a href="">
+                                <img src="../../static/img/swiper-1.png" alt="roupas">
+                                <div class="text-center my-2">
+                                    <h2 class="font-bold">Casaco Zebra</h2>
+                                    <h3 class="font-bold text-purple">R$1.300</h3>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide"> 
+                        <div class="w-full">
+                            <a href="">
+                                <img src="../../static/img/swiper-1.png" alt="roupas">
+                                <div class="text-center my-2">
+                                    <h2 class="font-bold">Casaco Zebra</h2>
+                                    <h3 class="font-bold text-purple">R$1.300</h3>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide"> 
+                        <div class="w-full">
+                            <a href="">
+                                <img src="../../static/img/swiper-1.png" alt="roupas">
+                                <div class="text-center my-2">
+                                    <h2 class="font-bold">Casaco Zebra</h2>
+                                    <h3 class="font-bold text-purple">R$1.300</h3>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide"> 
+                        <div class="w-full">
+                            <a href="">
+                                <img src="../../static/img/swiper-1.png" alt="roupas">
+                                <div class="text-center my-2">
+                                    <h2 class="font-bold">Casaco Zebra</h2>
+                                    <h3 class="font-bold text-purple">R$1.300</h3>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide"> 
+                        <div class="w-full">
+                            <a href="">
+                                <img src="../../static/img/swiper-1.png" alt="roupas">
+                                <div class="text-center my-2">
+                                    <h2 class="font-bold">Casaco Zebra</h2>
+                                    <h3 class="font-bold text-purple">R$1.300</h3>
+                                </div>
+                            </a>
                         </div>
                     </div>
 
-                    <div class="swiper-slide"> 
-                        <div class="w-full">
-                            <img src="../../static/img/swiper-1.png" alt="roupas">
-                            <div class="text-center my-2">
-                                <h2 class="font-bold">Casaco Zebra</h2>
-                                <h3 class="font-bold text-purple">R$1.300</h3>
-                            </div>
-                        </div>
-                    </div>
                     
-                    <div class="swiper-slide"> 
-                        <div class="w-full">
-                            <img src="../../static/img/swiper-1.png" alt="roupas">
-                            <div class="text-center my-2">
-                                <h2 class="font-bold">Casaco Zebra</h2>
-                                <h3 class="font-bold text-purple">R$1.300</h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide"> 
-                        <div class="w-full">
-                            <img src="../../static/img/swiper-1.png" alt="roupas">
-                            <div class="text-center my-2">
-                                <h2 class="font-bold">Casaco Zebra</h2>
-                                <h3 class="font-bold text-purple">R$1.300</h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide"> 
-                        <div class="w-full">
-                            <img src="../../static/img/swiper-1.png" alt="roupas">
-                            <div class="text-center my-2">
-                                <h2 class="font-bold">Casaco Zebra</h2>
-                                <h3 class="font-bold text-purple">R$1.300</h3>
-                            </div>
-                        </div>
-                    </div>
                     
                 </div>
                 <div class="swiper-button-next"></div>
@@ -119,7 +153,111 @@
             </div>
         </div>
     </section>
-  
+ 
+    <footer class="bg-gray">
+        <div class="container py-10">
+            <div class="flex">
+                <div class="w-4/12">
+                    <div>
+                        <h2 class="text-2xl tracking-wider font-bold mt-10 mb-16">Boutique Pierrot Bleu</h2>
+                        <h3 class="text-xl">Inscreva-se no nosso site</h3>
+                        <div class="flex items-center">
+                            <input class="pl-5 py-1 my-3 outline-none" type="email" placeholder="Entre com seu email">
+                            <button class="w-8 h-8"> 
+                                <ion-icon name="send-outline" class="bg-purple text-white w-6 h-6 p-1"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-2/12">
+                    <h2 class="mt-10 font-semibold">Nossa Loja</h2>
+                    <ol>
+                        <li class="my-3">
+                            <a href="#">Sobre nós</a>
+                        </li>
+                        <li>
+                            <a href="#">Trabalhe conosco</a>
+                        </li>
+                        <li class="my-3">
+                            <a href="#">Nosso time</a>
+                        </li>
+                        <li>
+                            <a href="#">SAC</a>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="w-2/12">
+                    <h2 class="mt-10 font-semibold">Compras</h2>
+                    <ol>
+                        <li class="my-3">
+                            <a href="#">Produtos</a>
+                        </li>
+                        <li>
+                            <a href="#">Minha Conta</a>
+                        </li>
+                        <li class="my-3">
+                            <a href="#">Regras de envio</a>
+                        </li>
+                        <li>
+                            <a href="#">Devolução</a>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="w-2/12">
+                    <h2 class="mt-10 font-semibold">Suporte</h2>
+                    <ol>
+                        <li class="my-3">
+                            <a href="#">Contate-nos</a>
+                        </li>
+                        <li>
+                            <a href="#">Opções de pagamento</a>
+                        </li>
+                        <li class="my-3">
+                            <a href="#">Acessibilidade</a>
+                        </li>
+                        <li>
+                            <a href="#">Afiliados</a>
+                        </li>
+                    </ol>
+                </div>
+        
+            </div>
+           
+            <div class="flex justify-between mt-12">
+
+                <h2 class="text-sm">
+                    @2023 Todos os direitos reservados Pierrot Team.
+                </h2>
+
+                <div class="flex">
+                    <h3 class="text-sm">
+                        Métodos de Pagamentos
+                    </h3>
+                    <ol class="flex ml-3">
+
+                        <li class="mx-2">
+                            <img class="w-8 h-8 object-contain" src="../../static/img/visa.png" alt="">
+                        </li>
+                        <li>
+                            <img class="w-8 h-8 object-contain" src="../../static/img/mastercard.png" alt="">
+                        </li>
+                        <li class="mx-2">
+                            <img class="w-8 h-8 object-contain" src="../../static/img/paypal.png" alt="">
+                        </li>
+                    
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="../../static/js/swiper.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
   
     <div id="footer-placeholder"></div>
 </body>

@@ -1,3 +1,49 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/css/style.css">
+    <title>teste</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container flex justify-between py-5 bg-gray-dark z-10 fixed">
+                <div>
+                    <h2 class="font-bold">
+                        <a href="#">Boutique Pierrot Bleu</a>
+                    </h2>
+                </div>
+                <ol class="flex">
+                    <li class="mx-3">
+                        <a href="#" class="transition duration-500 hover:bg-purple rounded-xl px-3 py-2">Novidades</a>
+                    </li>
+                    <li class="mx-3">
+                        <a href="#" class="transition duration-500 hover:bg-purple rounded-xl px-3 py-2">Masculino</a>
+                    </li>
+                    <li class="mx-3">
+                        <a href="#"class="transition duration-500 hover:bg-purple rounded-xl px-3 py-2">Feminino</a>
+                    </li>
+                </ol>
+
+                <div>
+                    <ion-icon class="mx-3" name="search-outline"></ion-icon>
+                    <ion-icon class="mx-3" name="cart-outline"></ion-icon>
+                    <a href="">
+                        <ion-icon class="mx-3" name="people-outline"></ion-icon> 
+                    </a>
+                </div>
+            </div> 
+        </nav>
+    </header>
+</body>
+
+<div id="conteudo" class="container" layout:fragment="content"></div>
+</html>
+
 <header>
     <nav>
         <div class="container flex justify-between py-5 bg-gray-dark">
@@ -8,7 +54,7 @@
             </div>
             <ol class="flex">
                 <li class="mx-3">
-                    <a href="#" class="transition duration-500 hover:bg-purple rounded-xl px-3 py-2">Novidades</a>
+                    <a href="../../templates/pages/novachegada.html" class="transition duration-500 hover:bg-purple rounded-xl px-3 py-2">Novidades</a>
                 </li>
                 <li class="mx-3">
                     <a href="#" class="transition duration-500 hover:bg-purple rounded-xl px-3 py-2">Masculino</a>
