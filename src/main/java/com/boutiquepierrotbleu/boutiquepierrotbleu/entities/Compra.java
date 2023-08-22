@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Compra {
@@ -19,8 +21,15 @@ public class Compra {
     private String valorDesconto;
     private String valorFinal;
     private String observacao;
-    private Endereco enderecoEntrega;
     private String numeroCompra;
+
+    @ManyToOne
+    @JoinColumn(name = "endereco_id")
+    private Endereco enderecoEntrega;
+    
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
 
     public Long getId() {
         return id;
@@ -116,6 +125,14 @@ public class Compra {
 
     public void setNumeroCompra(String numeroCompra) {
         this.numeroCompra = numeroCompra;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
 }

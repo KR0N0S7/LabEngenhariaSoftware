@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Creditcard {
@@ -16,6 +18,10 @@ public class Creditcard {
     private String codigoSeguranca;
     private String bandeira;
     private String cpfTitular;
+
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
 
     public Long getId() {
         return id;
@@ -71,6 +77,14 @@ public class Creditcard {
 
     public void setCpfTitular(String cpfTitular) {
         this.cpfTitular = cpfTitular;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
 }
