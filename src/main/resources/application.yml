@@ -1,8 +1,9 @@
 spring:
   datasource:
-    username: root
     url: jdbc:mysql://localhost:3306/pierrotbleu?createDatabaseIfNotExist=True
-    password: root
+    username: admin
+    password: admin123
   jpa:
     hibernate:
       ddl-auto: update
+    

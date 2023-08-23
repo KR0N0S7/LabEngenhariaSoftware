@@ -1,9 +1,12 @@
 package com.boutiquepierrotbleu.boutiquepierrotbleu.entities;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Produto {
@@ -22,6 +25,17 @@ public class Produto {
     private String material;
     private String tipo;
     private String estilo;
+
+    @OneToMany(mappedBy = "produto")
+    private List<ItemProduto> itemProduto;
+
+    public List<ItemProduto> getItemProduto() {
+        return itemProduto;
+    }
+
+    public void setItemProduto(List<ItemProduto> itemProduto) {
+        this.itemProduto = itemProduto;
+    }
 
     public Long getId() {
         return id;
