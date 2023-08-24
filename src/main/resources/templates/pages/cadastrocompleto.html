@@ -1,25 +1,27 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="header.html">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../static/css/style.css">
-    <title>Cadastro Completo</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Home</title>
     <link rel="shortcut icon" href="../../static/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../../static/js/header.js"></script>
-    <script src="../../static/js/footer.js"></script>
+    <script th:src="@{/js/header.js}"></script>
+    <script th:src="@{/js/footer.js}"></script>
 </head>
 
 <body>
-    <div id="header-placeholder"></div> 
+    <div th:replace="pages/header :: header"></div> 
 
 
     <div class="container my-10">
         <div class="flex justify-center items-center flex-col">
-            <img src="../../static/img/cadastro-completo.png" alt="cadastro completo">
+            <figure>
+                <img th:src="@{img/cadastro-completo.png}" alt="cadastro completo">
+            </figure>
             <h2 class="font-bold text-3xl">Obrigado por se cadastrar em nossa loja!</h2>
         </div>
     </div>

@@ -15,24 +15,83 @@
 
 <body>
     <div th:replace="pages/header :: header"></div>
+<<<<<<< HEAD
+=======
+
+    <div class="alert alert-primary" th:if="${mensagem != null}"
+        th:text="${mensagem}"></div>
+
+    <div class="form-validation">
+>>>>>>> 0d0d7f6 (CRUD completo de Cliente)
 
     <div class="container my-10">
         <div class="flex">
             <div class="w-6/12">
+                <form class="form-valide" th:action="@{/cliente/salvar}" method="POST" th:object="${cliente}">
+                    <div class="flex flex-col">
+                        <input type="hidden" th:field="*{id}"/>
+                        
+                        <div class="my-3 flex flex-col">
+                            <label for="Nome Completo" class="my-3 font-bold">Nome Completo</label>
+                            <input type="text" placeholder="Seu nome Completo"
+                                class="form-control" required th:field="*{nomeCompleto}">
+                            <div class="text-danger" th:if="${#fields.hasErrors('nomeCompleto')}"
+                                th:errors="*{nomeCompleto}"></div>
+                        </div>
+                        
+                        <div class="my-3 flex flex-col">
+                            <label for="Telefone" class="my-3 font-bold">Telefone</label>
+                            <input type="text" placeholder="Digite seu Telefone"
+                                class="form-control" required th:field="*{telefone}">
+                            <div class="text-danger" th:if="${#fields.hasErrors('telefone')}"
+                                th:errors="*{telefone}"></div>
+                        </div>
+
+
+                        <div class="my-3 flex flex-col">
+                            <label for="CPF" class="font-bold my-3" >Digite seu CPF</label>
+                            <input type="number" placeholder="00000000000"
+                                class="form-control" required th:field="*{cpf}">
+                            <div class="text-danger" th:if="${#fields.hasErrors('cpf')}"
+                                th:errors="*{cpf}"></div>
+                        </div>
+                        
+                        <div class="my-3 flex flex-col">
+                            <label for="Email" class="font-bold my-3">Email</label>
+                            <input type="text" placeholder="exemplo@email.com"
+                                class="form-control" required th:field="*{email}">
+                            <div class="text-danger" th:if="${#fields.hasErrors('email')}"
+                                th:errors="*{email}"></div>
+                        </div>
+
+                        <div class="my-3 flex flex-col">
+                            <label for="Senha" class="font-bold my-3">Senha</label>
+                            <input type="password" placeholder="Senha"
+                                class="form-control" required th:field="*{senha}">
+                            <div class="text-danger" th:if="${#fields.hasErrors('senha')}"
+                                th:errors="*{senha}"></div>
+                        </div>
+                           
+                    </div>
+                </div>
+                    <div class="mt-10 flex justify-between">
+                        <div>
+                            <a href="#" class="bg-gray py-2 px-2 rounded-lg hover:bg-black hover:text-white transition duration-500 cursor-pointer">Retornar</a>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary bg-purple text-white py-2 px-2 rounded-lg hover:bg-black hover:text-white' transition duration-500 cursor-pointer">Cadastrar</button>
+                        </div>
+                    </div>
+                </div>
+                </form>
+            </div>
+
+            <!-- <div class="w-6/12 ml-5">
                 <form action="#" method="#">
                     <div class="flex flex-col">
                         
-                        <div class="my-3 flex flex-col">
-                            <label for="Nome Completo" class="font-bold">Nome Completo</label>
-                            <input type="text" placeholder="Seu nome Completo">
-                        </div>
-                        
-                        <div class="my-3 flex flex-col">
-                            <label for="Telefone" class="font-bold">Telefone</label>
-                            <input type="text" placeholder="Digite seu Telefone">
-                        </div>
 
-                        <div class="flex flex-col">
+                        <div class="my-3 flex flex-col">
                             <label for="Nome Completo" class="font-bold my-3">Endereço de envio</label>
                             <input type="number" class="my-3 text-lg" placeholder="Cep">
                             <input type="text"  class="my-3 text-lg" placeholder="Logradouro">
@@ -46,45 +105,17 @@
                             </option>
                         </select>
                         
+              
                     </div>
                 </form>
-            </div>
-
-            <div class="w-6/12 ml-5">
-                <form action="#" method="#">
-                    <div class="flex flex-col">
-                        
-                        <div class="my-3 flex flex-col">
-                            <label for="CPF" class="font-bold my-3" >Digite seu CPF</label>
-                            <input type="number" placeholder="CPF">
-                        </div>
-                        
-                        <div class="my-3 flex flex-col">
-                            <label for="Email" class="font-bold my-3">Email</label>
-                            <input type="text" placeholder="Digite seu Email">
-                        </div>
-
-                        <div class="my-3 flex flex-col">
-                            <label for="Senha" class="font-bold my-3">Senha</label>
-                            <input type="password" placeholder="Senha">
-                        </div>
-                                         
-                    </div>
-                </form>
-            </div>
+            </div> -->
         </div>
 
-        <div class="mt-10 flex justify-between">
-            <div>
-                <a href="#" class="bg-gray py-2 px-2 rounded-lg hover:bg-black hover:text-white transition duration-500 cursor-pointer">Retornar</a>
-            </div>
-            <div>
-                <a href="#" class="bg-purple text-white py-2 px-2 rounded-lg hover:bg-black hover:text-white' transition duration-500 cursor-pointer">Continue</a>
-            </div>
-        </div>
-    </div>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0d0d7f6 (CRUD completo de Cliente)
     <div th:replace="pages/footer :: footer"></div>
 </body>
 

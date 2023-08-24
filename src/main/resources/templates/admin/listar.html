@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout.html}">
+<meta charset="UTF-8">
+<div layout:fragment="content">
+	<div class="alert alert-primary" th:if="${#lists.isEmpty(lista)}">
+		Nenhum cliente cadastrado.
+	</div>
+	<div class="alert alert-primary" th:if="${mensagem != null}" th:text="${mensagem}"></div>
+	<div th:if="${not #lists.isEmpty(lista)}">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nome Completo</th>
+					<th>E-mail</th>
+					<th>CPF</th>
+					<th>Telefone</th>
+					<th>Senha</th>
+					<th>Opções</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="cliente : ${lista}">
+					<td th:text="${cliente.id}"></td>
+					<td th:text="${cliente.nomeCompleto}"></td>
+					<td th:text="${cliente.email}"></td>
+					<td th:text="${cliente.cpf}"></td>
+					<td th:text="${cliente.telefone}"></td>
+					<td th:text="${cliente.senha}"></td>
+					<td><a class="btn btn-primary btn-sm" th:href="@{/cliente/novo(id=${cliente.id})}">Editar</a>
+					<a class="btn btn-primary btn-sm" th:href="@{/cliente/excluir(id=${cliente.id})}" 
+					onclick="return confirm('Você realmente deseja excluir esse cliente?')">Excluir</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+</html>

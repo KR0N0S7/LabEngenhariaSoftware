@@ -13,55 +13,56 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/cliente")
+@RequestMapping(path = "cliente")
 public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
-    @RequestMapping(path = "novo")
-    public ModelAndView novoCliente() {
-        ModelAndView mv = new ModelAndView("");
-        mv.addObject("cliente", new Cliente());
+    @RequestMapping("novo")
+    public ModelAndView salvarCliente(@RequestParam(required = false) Long id) {
+        ModelAndView mv = new ModelAndView("pages/cadastro");
+        Cliente cliente = new Cliente();
+        if(id != null) {
+            try {
+                mv.addObject("cliente", clienteService.obterCliente(id));
+                return mv;
+            } catch (Exception e) {
+                mv.addObject("cliente", e.getMessage());
+            }
+        }
+        mv.addObject("cliente", cliente);
         return mv;
     }
 
+
     @RequestMapping(method = RequestMethod.POST, path = "salvar")
-    public ModelAndView salvarCliente(Cliente cliente, BindingResult bindingResult,
+    public ModelAndView clienteSalvo(Cliente cliente, BindingResult bindingResult,
             RedirectAttributes redirectAttributes) {
-        ModelAndView mv = new ModelAndView("redirect:/cliente/listar");
         if (bindingResult.hasErrors()) {
+            ModelAndView mv = new ModelAndView("cliente/cadastro");
             mv.addObject("cliente", cliente);
             return mv;
         }
-        Cliente clienteSalvo = clienteService.salvarCliente(cliente);
+        ModelAndView mv = new ModelAndView(/* "redirect:/cliente/novo"*/"pages/cadastrocompleto");
+        Boolean novo = true;
         if (cliente != null) {
+            novo = false;
+        } 
+        clienteService.salvarCliente(cliente);
+        if (novo) {
             mv.addObject("cliente", new Cliente());
         } else {
-            mv.addObject("cliente", clienteSalvo);
+            mv.addObject("cliente", cliente);
         }
         redirectAttributes.addFlashAttribute("mensagem", "Cliente salvo com sucesso!");
         return mv;
     }
 
-    @RequestMapping("/listar")
+    @RequestMapping("listar")
     public ModelAndView listarClientes() {
-        ModelAndView mv = new ModelAndView("cliente/listar");
-        mv.addObject("clientes", clienteService.listarClientes());
+        ModelAndView mv = new ModelAndView("admin/listar");
+        mv.addObject("lista", clienteService.listarClientes());
         mv.addObject("nome", "Usuário");
-        return mv;
-    }
-
-    @RequestMapping("/editar")
-    public ModelAndView editarCliente(@RequestParam Long id) {
-        ModelAndView mv = new ModelAndView("cliente/editar");
-        Cliente cliente = new Cliente();
-        try {
-            mv.addObject("cliente", clienteService.obterCliente(id));
-        } catch (Exception e) {
-            cliente = new Cliente();
-            mv.addObject("cliente", e.getMessage());
-        }
-        mv.addObject("cliente", cliente);
         return mv;
     }
 
