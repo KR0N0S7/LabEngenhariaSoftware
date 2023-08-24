@@ -1,22 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{header.html}">
-
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="header.html">
+<html xmlns:th="http://www.thymeleaf.org">  
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../static/css/style.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
     <title>Home</title>
     <link rel="shortcut icon" href="../../static/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 </head>
-<div layout:fragment="content"></div>
+<!-- <div layout:fragment="content"></div> -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../../static/js/header.js"></script>
-    <script src="../../static/js/footer.js"></script>
+    <script th:src="@{/js/header.js}"></script>
+    <script th:src="@{/js/footer.js}"></script>
 </head>
 <body>
     <style>
@@ -28,13 +24,13 @@
         }
     </style>
 
-    <div id="header-placeholder"></div>
+    <div th:replace="pages/header :: header"></div>
 
     <section class="h-[100vh] banner-principal">
 
         <div class="container">
             <div class="pt-52">
-                <img src="../../static/img/desconto.png" alt="desconto">
+                <img th:src="@{img/desconto.png}" alt="desconto">
                 <div>
                     <a href="../pages/novachegada.html" class="bg-purple px-5 py-5 rounded-2xl inline-block hover:bg-black hover:text-white transition duration-500">
                         Compre Agora <ion-icon name="arrow-forward-outline"></ion-icon>
@@ -48,14 +44,15 @@
 
     <section class="my-5">
         <div class="container">
-            <img src="../../static/img/marcas.png" alt="marcas de roupas">
+            
+            <img th:src="@{img/marcas.png}" alt="marcas de roupas">
             <div class="swiper swiper-roupas my-10" >
                 <div class="swiper-wrapper">
 
                     <div class="swiper-slide"> 
                         <div class="w-full">
                             <a href="">
-                                <img src="../../static/img/swiper-1.png" alt="roupas">
+                                <img th:src="@{img/swiper-1.png}" alt="roupas">
                                 <div class="text-center my-2">
                                     <h2 class="font-bold">Casaco Zebra</h2>
                                     <h3 class="font-bold text-purple">R$1.300</h3>
@@ -65,8 +62,8 @@
                     </div>
                     <div class="swiper-slide"> 
                         <div class="w-full">
-                            <a href="">
-                                <img src="../../static/img/swiper-1.png" alt="roupas">
+                            <a href="#">
+                                <img th:src="@{img/swiper-1.png}" alt="roupas">
                                 <div class="text-center my-2">
                                     <h2 class="font-bold">Casaco Zebra</h2>
                                     <h3 class="font-bold text-purple">R$1.300</h3>
@@ -76,8 +73,8 @@
                     </div>
                     <div class="swiper-slide"> 
                         <div class="w-full">
-                            <a href="">
-                                <img src="../../static/img/swiper-1.png" alt="roupas">
+                            <a href="#">
+                                <img th:src="@{img/swiper-1.png}" alt="roupas">
                                 <div class="text-center my-2">
                                     <h2 class="font-bold">Casaco Zebra</h2>
                                     <h3 class="font-bold text-purple">R$1.300</h3>
@@ -87,8 +84,8 @@
                     </div>
                     <div class="swiper-slide"> 
                         <div class="w-full">
-                            <a href="">
-                                <img src="../../static/img/swiper-1.png" alt="roupas">
+                            <a href="#">
+                                <img th:src="@{img/swiper-1.png}" alt="roupas">
                                 <div class="text-center my-2">
                                     <h2 class="font-bold">Casaco Zebra</h2>
                                     <h3 class="font-bold text-purple">R$1.300</h3>
@@ -98,8 +95,8 @@
                     </div>
                     <div class="swiper-slide"> 
                         <div class="w-full">
-                            <a href="">
-                                <img src="../../static/img/swiper-1.png" alt="roupas">
+                            <a href="#">
+                                <img th:src="@{img/swiper-1.png}" alt="roupas">
                                 <div class="text-center my-2">
                                     <h2 class="font-bold">Casaco Zebra</h2>
                                     <h3 class="font-bold text-purple">R$1.300</h3>
@@ -109,8 +106,8 @@
                     </div>
                     <div class="swiper-slide"> 
                         <div class="w-full">
-                            <a href="">
-                                <img src="../../static/img/swiper-1.png" alt="roupas">
+                            <a href="#">
+                                <img th:src="@{img/swiper-1.png}" alt="roupas">
                                 <div class="text-center my-2">
                                     <h2 class="font-bold">Casaco Zebra</h2>
                                     <h3 class="font-bold text-purple">R$1.300</h3>
@@ -120,8 +117,8 @@
                     </div>
                     <div class="swiper-slide"> 
                         <div class="w-full">
-                            <a href="">
-                                <img src="../../static/img/swiper-1.png" alt="roupas">
+                            <a href="#">
+                                <img th:src="@{img/swiper-1.png}" alt="roupas">
                                 <div class="text-center my-2">
                                     <h2 class="font-bold">Casaco Zebra</h2>
                                     <h3 class="font-bold text-purple">R$1.300</h3>
@@ -141,125 +138,24 @@
                 <div class="w-5/12 relative">
                     <a href="#">
                         <h2 class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-3xl font-semibold">Masculino</h2>
-                        <img class="hover:bg-black hover:opacity-75 rounded-lg transition duration-500" src="../../static/img/masculino.png" alt="roupa masculina">
+                        <img class="hover:bg-black hover:opacity-75 rounded-lg transition duration-500" th:src="@{img/masculino.png}" alt="roupa masculina">
                     </a>
                 </div>
                 <div class="w-5/12 relative">
                     <a href="#">
                         <h2 class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-3xl font-semibold">Feminino</h2>
-                        <img class="hover:bg-black hover:opacity-75 rounded-lg transition duration-500" src="../../static/img/feminina.png" alt="roupa feminina">
+                        <img class="hover:bg-black hover:opacity-75 rounded-lg transition duration-500" th:src="@{/img/feminina.png}" alt="roupa feminina">
                     </a>
                 </div>
             </div>
         </div>
     </section>
  
-    <footer class="bg-gray">
-        <div class="container py-10">
-            <div class="flex">
-                <div class="w-4/12">
-                    <div>
-                        <h2 class="text-2xl tracking-wider font-bold mt-10 mb-16">Boutique Pierrot Bleu</h2>
-                        <h3 class="text-xl">Inscreva-se no nosso site</h3>
-                        <div class="flex items-center">
-                            <input class="pl-5 py-1 my-3 outline-none" type="email" placeholder="Entre com seu email">
-                            <button class="w-8 h-8"> 
-                                <ion-icon name="send-outline" class="bg-purple text-white w-6 h-6 p-1"></ion-icon>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="w-2/12">
-                    <h2 class="mt-10 font-semibold">Nossa Loja</h2>
-                    <ol>
-                        <li class="my-3">
-                            <a href="#">Sobre nós</a>
-                        </li>
-                        <li>
-                            <a href="#">Trabalhe conosco</a>
-                        </li>
-                        <li class="my-3">
-                            <a href="#">Nosso time</a>
-                        </li>
-                        <li>
-                            <a href="#">SAC</a>
-                        </li>
-                    </ol>
-                </div>
-
-                <div class="w-2/12">
-                    <h2 class="mt-10 font-semibold">Compras</h2>
-                    <ol>
-                        <li class="my-3">
-                            <a href="#">Produtos</a>
-                        </li>
-                        <li>
-                            <a href="#">Minha Conta</a>
-                        </li>
-                        <li class="my-3">
-                            <a href="#">Regras de envio</a>
-                        </li>
-                        <li>
-                            <a href="#">Devolução</a>
-                        </li>
-                    </ol>
-                </div>
-
-                <div class="w-2/12">
-                    <h2 class="mt-10 font-semibold">Suporte</h2>
-                    <ol>
-                        <li class="my-3">
-                            <a href="#">Contate-nos</a>
-                        </li>
-                        <li>
-                            <a href="#">Opções de pagamento</a>
-                        </li>
-                        <li class="my-3">
-                            <a href="#">Acessibilidade</a>
-                        </li>
-                        <li>
-                            <a href="#">Afiliados</a>
-                        </li>
-                    </ol>
-                </div>
-        
-            </div>
-           
-            <div class="flex justify-between mt-12">
-
-                <h2 class="text-sm">
-                    @2023 Todos os direitos reservados Pierrot Team.
-                </h2>
-
-                <div class="flex">
-                    <h3 class="text-sm">
-                        Métodos de Pagamentos
-                    </h3>
-                    <ol class="flex ml-3">
-
-                        <li class="mx-2">
-                            <img class="w-8 h-8 object-contain" src="../../static/img/visa.png" alt="">
-                        </li>
-                        <li>
-                            <img class="w-8 h-8 object-contain" src="../../static/img/mastercard.png" alt="">
-                        </li>
-                        <li class="mx-2">
-                            <img class="w-8 h-8 object-contain" src="../../static/img/paypal.png" alt="">
-                        </li>
-                    
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <div th:replace="pages/footer :: footer"></div>
     
-    <script src="../../static/js/swiper.js"></script>
+    <script th:src="@{/js/swiper.js}"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
-  
-    <div id="footer-placeholder"></div>
 </body>
 </html>
 
