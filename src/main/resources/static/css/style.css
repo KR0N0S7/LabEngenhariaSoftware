@@ -572,10 +572,6 @@ video {
   }
 }
 
-.fixed {
-  position: fixed;
-}
-
 .absolute {
   position: absolute;
 }
@@ -676,6 +672,10 @@ video {
   margin-top: 1.25rem;
 }
 
+.mt-8 {
+  margin-top: 2rem;
+}
+
 .inline-block {
   display: inline-block;
 }
@@ -700,16 +700,8 @@ video {
   height: 100vh;
 }
 
-.h-\[500px\] {
-  height: 500px;
-}
-
 .h-\[200px\] {
   height: 200px;
-}
-
-.h-\[50px\] {
-  height: 50px;
 }
 
 .w-10 {
@@ -742,6 +734,14 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.w-3 {
+  width: 0.75rem;
+}
+
+.w-5 {
+  width: 1.25rem;
 }
 
 .-translate-x-1\/2 {
@@ -786,6 +786,10 @@ video {
   justify-content: space-between;
 }
 
+.justify-around {
+  justify-content: space-around;
+}
+
 .rounded-2xl {
   border-radius: 1rem;
 }
@@ -820,11 +824,6 @@ video {
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
-.bg-blue-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(37 99 235 / var(--tw-bg-opacity));
-}
-
 .bg-gray {
   --tw-bg-opacity: 1;
   background-color: rgb(228 228 228 / var(--tw-bg-opacity));
@@ -854,6 +853,11 @@ video {
   padding: 0.25rem;
 }
 
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -862,11 +866,6 @@ video {
 .px-3 {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
-}
-
-.px-4 {
-  padding-left: 1rem;
-  padding-right: 1rem;
 }
 
 .px-5 {
@@ -889,9 +888,9 @@ video {
   padding-bottom: 0.5rem;
 }
 
-.py-4 {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
 }
 
 .py-5 {
@@ -899,14 +898,8 @@ video {
   padding-bottom: 1.25rem;
 }
 
-.py-3 {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-}
-
-.px-1 {
-  padding-left: 0.25rem;
-  padding-right: 0.25rem;
+.pl-10 {
+  padding-left: 2.5rem;
 }
 
 .pl-5 {
@@ -915,10 +908,6 @@ video {
 
 .pt-52 {
   padding-top: 13rem;
-}
-
-.pl-10 {
-  padding-left: 2.5rem;
 }
 
 .text-center {
@@ -960,6 +949,10 @@ video {
 
 .font-semibold {
   font-weight: 600;
+}
+
+.font-medium {
+  font-weight: 500;
 }
 
 .uppercase {
@@ -1028,11 +1021,6 @@ video {
 .hover\:border-gray-dark:hover {
   --tw-border-opacity: 1;
   border-color: rgb(169 169 169 / var(--tw-border-opacity));
-}
-
-.hover\:border-b-gray-dark:hover {
-  --tw-border-opacity: 1;
-  border-bottom-color: rgb(169 169 169 / var(--tw-border-opacity));
 }
 
 .hover\:bg-black:hover {
