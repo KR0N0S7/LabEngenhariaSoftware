@@ -1,125 +1,32 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="header.html">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../static/css/style.css">
-    <title>Cadastro Completo</title>
-    <link rel="shortcut icon" href="../../static/img/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../../static/js/header.js"></script>
-    <script src="../../static/js/footer.js"></script>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">  
+
+<div th:replace="pages/head :: head"></div>
 
 <body>
-    <div id="header-placeholder"></div> 
+    <div th:replace="pages/header :: header"></div>
 
     <div class="relative">
-        <img class="w-full" src="../../static/img/banner-nova-chegada.png" alt="nova chegada de roupas">
+        <img class="w-full" th:src="@{img/banner-nova-chegada.png}" alt="nova chegada de roupas">
         <h2 class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white font-bold text-3xl tracking-wider">Novas Chegadas</h2>
     </div>
 
-    <div class="container my-10" id="container" class="flex">
+    <div class="container my-10" class="flex">
 
-        <div class="flex flex-wrap js-box-products">
+        <div class="flex flex-wrap">
             
-            <!-- <div class="w-4/12 px-3 ">
-                <img src="../../static/img/swiper-1.png" alt="roupas">
-                <div class="text-center my-2">
-                    <h2 class="font-bold">Casaco Zebra</h2>
-                    <h3 class="font-bold text-purple">R$1.300</h3>
-                </div>
-            </div>
-
-            <div class="w-4/12 px-3">
-                <img src="../../static/img/swiper-1.png" alt="roupas">
-                <div class="text-center my-2">
-                    <h2 class="font-bold">Casaco Zebra</h2>
-                    <h3 class="font-bold text-purple">R$1.300</h3>
-                </div>
-            </div>
-
-            <div class="w-4/12 px-3">
-                <img src="../../static/img/swiper-1.png" alt="roupas">
-                <div class="text-center my-2">
-                    <h2 class="font-bold">Casaco Zebra</h2>
-                    <h3 class="font-bold text-purple">R$1.300</h3>
-                </div>
-            </div>
-
             <div class="w-4/12 px-3 ">
-                <img src="../../static/img/swiper-1.png" alt="roupas">
+                <img th:src="@{/img/swiper-1.png}" alt="roupas">
                 <div class="text-center my-2">
                     <h2 class="font-bold">Casaco Zebra</h2>
                     <h3 class="font-bold text-purple">R$1.300</h3>
                 </div>
-            </div>
-
-            <div class="w-4/12 px-3">
-                <img src="../../static/img/swiper-1.png" alt="roupas">
-                <div class="text-center my-2">
-                    <h2 class="font-bold">Casaco Zebra</h2>
-                    <h3 class="font-bold text-purple">R$1.300</h3>
-                </div>
-            </div>
-
-            <div class="w-4/12 px-3">
-                <img src="../../static/img/swiper-1.png" alt="roupas">
-                <div class="text-center my-2">
-                    <h2 class="font-bold">Casaco Zebra</h2>
-                    <h3 class="font-bold text-purple">R$1.300</h3>
-                </div>
-            </div>
-
-            <div class="w-4/12 px-3 ">
-                <img src="../../static/img/swiper-1.png" alt="roupas">
-                <div class="text-center my-2">
-                    <h2 class="font-bold">Casaco Zebra</h2>
-                    <h3 class="font-bold text-purple">R$1.300</h3>
-                </div>
-            </div>
-
-            <div class="w-4/12 px-3">
-                <img src="../../static/img/swiper-1.png" alt="roupas">
-                <div class="text-center my-2">
-                    <h2 class="font-bold">Casaco Zebra</h2>
-                    <h3 class="font-bold text-purple">R$1.300</h3>
-                </div>
-            </div>
-
-            <div class="w-4/12 px-3">
-                <img src="../../static/img/swiper-1.png" alt="roupas">
-                <div class="text-center my-2">
-                    <h2 class="font-bold">Casaco Zebra</h2>
-                    <h3 class="font-bold text-purple">R$1.300</h3>
-                </div>
-            </div> -->
+            </div>           
 
         </div>
     </div>
-    <div id="footer-placeholder"></div>
+  <div th:replace="pages/footer :: footer"></div>
 
-    
-    <script>
-        if(document.querySelector('.js-box-products')) {
-            const boxProducts = document.querySelector('.js-box-products');
-            const productItem = `<div class="w-4/12 px-3 ">
-                <img src="../../static/img/swiper-1.png" alt="roupas">
-                <div class="text-center my-2">
-                    <h2 class="font-bold">Casaco Zebra</h2>
-                    <h3 class="font-bold text-purple">R$1.300</h3>
-                </div>
-            </div>`;
-
-
-            for(let i = 0; i < 10; i++)
-                boxProducts.insertAdjacentHTML('afterbegin', productItem);
-        }
-    </script>
 </body>
-
-
 </html>
 

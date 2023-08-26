@@ -1,29 +1,16 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="header.html">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../static/css/style.css">
-    <title>Cadastro Completo</title>
-    <link rel="shortcut icon" href="../../static/img/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../../static/js/header.js"></script>
-    <script src="../../static/js/footer.js"></script>
-    <script src="../../static/js/passo.js"></script>
-    <script src="../../static/js/carrinhodecompras.js"></script>
-</head>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="pages/head :: head"></div>
 
 <body>
-    <div id="header-placeholder"></div> 
-
+    <div th:replace="pages/header :: header"></div> 
 
     <section>
         <div class="container my-10">
             <div class="flex flex-wrap">
                 <div class="w-6/12">
-                    <div id="passo-placeholder"></div>
+                   <div th:replace="pages/passo :: passo"></div>
                 
                     <div class="flex justify-between my-4">
                         <h2 class="font-bold text-xl">
@@ -79,7 +66,7 @@
                 </div>
                 
                 <div class="w-6/12 pl-10">
-                    <div id="carrinhodecompras-placeholder"></div>
+                    <div th:replace="pages/roupascarrinho :: roupascarrinho"></div>
                 </div>
                 
             </div>
@@ -87,7 +74,7 @@
     </section>
 
 
-    <div id="footer-placeholder"></div>
+    <div th:replace="pages/footer :: footer"></div>
 </body>
 
 

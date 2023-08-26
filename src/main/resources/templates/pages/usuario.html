@@ -1,21 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="header.html">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../static/css/style.css">
-    <title>Cadastro Completo</title>
-    <link rel="shortcut icon" href="../../static/img/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../../static/js/header.js"></script>
-    <script src="../../static/js/footer.js"></script>
-</head>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 
+<div th:replace="pages/head :: head"></div>
 <body>
-    <div id="header-placeholder"></div> 
-
+    <div th:replace="pages/header :: header"></div>
 
     <section>
         <div class="container my-10">
@@ -58,10 +46,8 @@
         </div>
     </section>
 
-
-    <div id="footer-placeholder"></div>
+    <div th:replace="pages/footer :: footer"></div>
 </body>
-
 
 </html>
 
