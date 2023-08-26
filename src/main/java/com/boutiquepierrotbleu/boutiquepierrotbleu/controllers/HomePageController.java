@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomePageController {
     @GetMapping("/")
     public ModelAndView homepage() {
-          ModelAndView mv = new ModelAndView("pages/modoenvio");
+          ModelAndView mv = new ModelAndView("pages/pagamento");
         return mv;
     }
 }

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+    <div th:replace="pages/head :: head"></div>
+
+<body>
+    <div th:replace="pages/header :: header"></div>
+
+    <section>
+        <div class="container my-10">
+            <div class="flex flex-wrap">
+                <div class="w-6/12">
+                    <div th:replace="pages/passo :: passo"></div>
+                
+                    <div class="flex justify-between my-4">
+                        <h2 class="font-bold text-xl">
+                          Método de pagamento
+                        </h2>
+                    </div>
+
+                    <div>
+                        <form action="" method="" class="flex flex-col">
+                            <div class="flex justify-between items-center">
+                                
+                                <div class="flex">
+                                    <input type="radio" class="w-5">    
+                                    <div class="flex flex-col ml-3">
+                                        <h2 class="font-medium">Cartao de crédito</h2>
+                                    </div>
+                                </div>
+
+                                <img th:src="@{/img/pagamento.png}" alt="pagamento">
+                            </div>
+                            
+
+                            <input type="text" placeholder="Número do Cartão" class="my-5 outline-none">
+                            <input type="text" placeholder="Nome do Cartão" class="my-5 outline-none">
+                            <div class="flex justify-between my-5">
+                                <!-- no backend podems usar esse date que ja mostra o mes, ano, dia -->
+
+                                <!-- <input type="datetime">  -->
+
+                                <!-- só comentar ou descomentar o que for usar -->
+
+                                <!-- ou se preferir podemos fazer com select, seria desse jeito -->
+                                <select name="date" id="date" class="font-medium">
+                                    <option value="janeiro">janeiro</option>
+                                    <option value="fevereiro">fevereiro</option>
+                                    <option value="marco">março</option>
+                                    <option value="abril">abril</option>
+                                </select>
+
+
+                                <select name="years" id="years" class="font-medium">
+                                    <option value="2022">2022</option>
+                                    <option value="2023">2024</option>
+                                    <option value="2024">2023</option>
+                                    <option value="2025">2025</option>
+                                </select>
+
+                                <input type="text" placeholder="CCV" >
+                            </div>
+                            
+
+
+                        </form>
+                    </div>
+
+                    <div class="flex justify-between my-5 items-center  ">
+
+                        <a href="#" class="hover:border-solid hover:border-2 hover:border-gray-dark px-1 py-1">Retornar</a>
+                        <button class="bg-purple px-3 py-3 text-white hover:bg-black transition-all duration-500">Continue</button>
+
+                    </div>
+
+                </div>
+                
+                <div class="w-6/12 pl-10">
+                    <div th:replace="pages/roupascarrinho :: roupascarrinho"></div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+
+    <div th:replace="pages/footer :: footer"></div>
+</body>
+</html>
+
