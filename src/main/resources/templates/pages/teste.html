@@ -1,12 +1,17 @@
 
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<div th:replace="pages/head :: head"></div>
-
+<head>
+    <link rel="stylesheet" href="../../static/css/style.css">
+</head>
 <body>
-    <header th:fragment="header">
+    
+        <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js"></script>
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+     
+      
+
         <nav>
-            <script defer th:src="@{https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js}"></script>
             <div class="container flex justify-between py-5 bg-gray-dark z-10">
                 <div>
                     <h2 class="font-bold">
@@ -26,21 +31,22 @@
                 </ol>
 
                 <div>
-                    <!-- <ion-icon class="mx-3" name="search-outline"></ion-icon> -->
-                    
+                    <ion-icon class="mx-3" name="search-outline"></ion-icon>
                     <div x-data="{ isOpen: false }">
                         <button @click="isOpen = !isOpen">
                             <ion-icon class="mx-3" name="cart-outline">
                         </button>
                         <div x-show="isOpen">
-                            <h1 class="bg-blue-700">
+
+                            <h1 class="bg-bl">
                                 testeue
                             </h1>
                         </div>
-                    </div>  
+                    </div>
                         
-                    <!-- </ion-icon><a href=""><ion-icon class="mx-3" name="people-outline"></ion-icon></a> -->
-
+                    </ion-icon>
+                    <a href=""><ion-icon class="mx-3" name="people-outline"></ion-icon></a>
+                </div>
             </div> 
         </nav>
     </header>
