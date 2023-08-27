@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">  
-
-<div th:replace="pages/head :: head"></div>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+    <div th:replace="pages/head :: head"></div>
 
 <body>
     <div th:replace="pages/header :: header"></div>
@@ -11,10 +10,12 @@
         <h2 class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white font-bold text-3xl tracking-wider">Novas Chegadas</h2>
     </div>
 
-    <div class="container my-10" class="flex">
+    <div class="container my-10">
 
         <div class="flex flex-wrap">
             
+            <!-- so fazer <div th:each="roupa : ${roupas}"></div> para trazer a quantidade de roupas  -->
+
             <div class="w-4/12 px-3 ">
                 <img th:src="@{/img/swiper-1.png}" alt="roupas">
                 <div class="text-center my-2">
