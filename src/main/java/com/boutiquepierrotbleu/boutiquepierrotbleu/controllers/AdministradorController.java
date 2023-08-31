@@ -55,15 +55,15 @@ public class AdministradorController {
 		} else {
 			mv.addObject("admin", cliente);
 		}
-		redirectAttributes.addFlashAttribute("mensagem", "Adminstrador salvo com sucesso.");
+		redirectAttributes.addFlashAttribute("mensagem", "Cliente salvo com sucesso.");
 		return mv;
 	}
 	
 	@RequestMapping("/listar")
 	public ModelAndView listarclientees() {
-		ModelAndView mv = new ModelAndView("admin/listar.html");
+		ModelAndView mv = new ModelAndView("adm/list.html");
 		mv.addObject("lista", clienteService.listarClientes());
-		mv.addObject("nome", "clientees");
+		mv.addObject("nome", "clientes");
 		return mv;
 	}
 	

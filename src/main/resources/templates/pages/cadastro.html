@@ -15,14 +15,11 @@
 
 <body>
     <div th:replace="pages/header :: header"></div>
-<<<<<<< HEAD
-=======
 
     <div class="alert alert-primary" th:if="${mensagem != null}"
         th:text="${mensagem}"></div>
 
     <div class="form-validation">
->>>>>>> 0d0d7f6 (CRUD completo de Cliente)
 
     <div class="container my-10">
         <div class="flex">
@@ -71,51 +68,48 @@
                             <div class="text-danger" th:if="${#fields.hasErrors('senha')}"
                                 th:errors="*{senha}"></div>
                         </div>
-                           
-                    </div>
-                </div>
-                    <div class="mt-10 flex justify-between">
-                        <div>
-                            <a href="#" class="bg-gray py-2 px-2 rounded-lg hover:bg-black hover:text-white transition duration-500 cursor-pointer">Retornar</a>
+
+                        <hr>
+                        <div class="flex flex-col">
+                            <!-- Endereco Fields -->
+                            <div class="form-group">
+                                <label for="rua">Rua</label>
+                                <input type="text" class="form-control" id="rua" name="endereco.rua" placeholder="Enter rua" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="numero">Numero</label>
+                                <input type="text" class="form-control" id="numero" name="endereco.numero" placeholder="Enter numero" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="bairro">Bairro</label>
+                                <input type="text" class="form-control" id="bairro" name="endereco.bairro" placeholder="Enter bairro" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cidade">Cidade</label>
+                                <input type="text" class="form-control" id="cidade" name="endereco.cidade" placeholder="Enter cidade" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="estado">Estado</label>
+                                <input type="text" class="form-control" id="estado" name="endereco.estado" placeholder="Enter estado" required>
+                            </div>
                         </div>
-                        <div>
-                            <button type="submit" class="btn btn-primary bg-purple text-white py-2 px-2 rounded-lg hover:bg-black hover:text-white' transition duration-500 cursor-pointer">Cadastrar</button>
+                    </div>
+                    </div>
+                        <div class="mt-10 flex justify-between">
+                            <div>
+                                <a th:href="@{/}" class="bg-gray py-2 px-2 rounded-lg hover:bg-black hover:text-white transition duration-500 cursor-pointer">Retornar</a>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-primary bg-purple text-white py-2 px-2 rounded-lg hover:bg-black hover:text-white' transition duration-500 cursor-pointer">Cadastrar</button>
+                            </div>
                         </div>
                     </div>
-                </div>
                 </form>
             </div>
 
-            <!-- <div class="w-6/12 ml-5">
-                <form action="#" method="#">
-                    <div class="flex flex-col">
-                        
-
-                        <div class="my-3 flex flex-col">
-                            <label for="Nome Completo" class="font-bold my-3">Endereço de envio</label>
-                            <input type="number" class="my-3 text-lg" placeholder="Cep">
-                            <input type="text"  class="my-3 text-lg" placeholder="Logradouro">
-                            <input type="text"  class="my-3 text-lg" placeholder="Complemento">
-                            <input type="text"  class="my-3 text-lg" placeholder="Cidade">
-                        </div>
-
-                        <select class="font-bold">
-                            <option value="#">
-                                Estado
-                            </option>
-                        </select>
-                        
-              
-                    </div>
-                </form>
-            </div> -->
         </div>
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 0d0d7f6 (CRUD completo de Cliente)
     <div th:replace="pages/footer :: footer"></div>
 </body>
 
