@@ -97,6 +97,16 @@
         }
     }
 
+    function toggleContent() {
+        var content = document.getElementById('hiddenContent');
+        if(content.style.display === "none") {
+            content.style.display = "block";
+        } else {
+            content.style.display = "none";
+        }
+    }
+
+
     function filterTable(value, attribute) {
         var data = Filtro(value, clientes, attribute);
         rebuildTable(data);
