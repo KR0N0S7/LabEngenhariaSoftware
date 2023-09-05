@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Home</title>
+    <link rel="shortcut icon" href="../../static/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:src="@{/js/header.js}"></script>
+    <script th:src="@{/js/footer.js}"></script>
+</head>
+
+<body>
+    <div th:replace="pages/header :: header"></div>
+
+    <div class="alert alert-primary" th:if="${mensagem != null}"
+        th:text="${mensagem}"></div>
+
+    <div class="form-validation">
+
+    <div class="container my-10">
+        <div class="flex">
+            <div class="w-6/12">
+                <form class="form-valide" th:action="@{/cliente/salvar}" method="POST" th:object="${cliente}">
+                    <div class="flex flex-col">
+                        <input type="hidden" th:field="*{id}"/>
+                        
+                        <div class="my-3 flex flex-col">
+                            <label for="Nome Completo" class="my-3 font-bold">Nome Completo</label>
+                            <input type="text" placeholder="Seu nome Completo"
+                                class="form-control" required th:field="*{nomeCompleto}">
+                            <div class="text-danger" th:if="${#fields.hasErrors('nomeCompleto')}"
+                                th:errors="*{nomeCompleto}"></div>
+                        </div>
+                        
+                        <div class="my-3 flex flex-col">
+                            <label for="Telefone" class="my-3 font-bold">Telefone</label>
+                            <input type="text" placeholder="Digite seu Telefone"
+                                class="form-control" required th:field="*{telefone}">
+                            <div class="text-danger" th:if="${#fields.hasErrors('telefone')}"
+                                th:errors="*{telefone}"></div>
+                        </div>
+
+
+                        <div class="my-3 flex flex-col">
+                            <label for="CPF" class="font-bold my-3" >Digite seu CPF</label>
+                            <input type="number" placeholder="00000000000"
+                                class="form-control" required th:field="*{cpf}">
+                            <div class="text-danger" th:if="${#fields.hasErrors('cpf')}"
+                                th:errors="*{cpf}"></div>
+                        </div>
+                        
+                        <div class="my-3 flex flex-col">
+                            <label for="Email" class="font-bold my-3">Email</label>
+                            <input type="text" placeholder="exemplo@email.com"
+                                class="form-control" required th:field="*{email}">
+                            <div class="text-danger" th:if="${#fields.hasErrors('email')}"
+                                th:errors="*{email}"></div>
+                        </div>
+
+
+                        <hr>
+                        
+                    </div>
+                    </div>
+                        <div class="mt-10 flex justify-between">
+                            <div>
+                                <a th:href="@{/}" class="bg-gray py-2 px-2 rounded-lg hover:bg-black hover:text-white transition duration-500 cursor-pointer">Retornar</a>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-primary bg-purple text-white py-2 px-2 rounded-lg hover:bg-black hover:text-white' transition duration-500 cursor-pointer">Cadastrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+
+    <div th:replace="pages/footer :: footer"></div>
+</body>
+</html>
+

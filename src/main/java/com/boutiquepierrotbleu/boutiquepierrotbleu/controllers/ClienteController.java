@@ -17,9 +17,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.boutiquepierrotbleu.boutiquepierrotbleu.dto.ClienteSearchCriteria;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cliente;
+import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Endereco;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.repositories.criteriaFilter.ClienteRepositoryImpl;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.ClienteService;
+import com.boutiquepierrotbleu.boutiquepierrotbleu.services.EnderecoService;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.wrapper.ClienteSearchWrapper;
+
+import jakarta.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,28 +34,77 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
+    @Autowired
+    private EnderecoService enderecoService;
+
     private static final Logger logger = LoggerFactory.getLogger(ClienteRepositoryImpl.class);
 
+    @RequestMapping("cadastro")
+    public ModelAndView cadastroCliente(HttpSession session) {
+        session.setAttribute("id", 3);
+        ModelAndView mv = new ModelAndView("usr/index");
+        mv.addObject("id", session.getAttribute("id"));
+        try {
+            String nome = clienteService.obterCliente((Long) session.getAttribute("id")).getNomeCompleto();
+            session.setAttribute("nome", nome);
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return mv;
+    }
+
     @RequestMapping("novo")
-    public ModelAndView salvarCliente(@RequestParam(required = false) Long id) {
+    public ModelAndView salvarCliente(@RequestParam(required = false) Long id, HttpSession session) {
+        session.setAttribute("id", id);
         ModelAndView mv = new ModelAndView("pages/cadastro");
         Cliente cliente = new Cliente();
+        List<Endereco> enderecos = new ArrayList<>();
         if(id != null) {
             try {
-                mv.addObject("cliente", clienteService.obterCliente(id));
+                cliente = clienteService.obterCliente(id);
+                mv.addObject("cliente", cliente);
+                mv.addObject("enderecoCount", cliente.getEnderecos().size());
+                logger.debug("Received cliente from db: {}", cliente.getEnderecos().size());
+                // enderecos = enderecoService.getEnderecosByClienteId(id);
+                // mv.addObject("enderecos", enderecos); 
                 return mv;
             } catch (Exception e) {
                 mv.addObject("cliente", e.getMessage());
             }
         }
         mv.addObject("cliente", cliente);
+        mv.addObject("enderecos", enderecos); 
         return mv;
     }
 
+    @RequestMapping("editar")
+    public ModelAndView editarCliente(@RequestParam(required = false) Long id, HttpSession session) {
+        session.setAttribute("id", id);
+        ModelAndView mv = new ModelAndView("usr/cadastro");
+        Cliente cliente = new Cliente();
+        List<Endereco> enderecos = new ArrayList<>();
+        if(id != null) {
+            try {
+                cliente = clienteService.obterCliente(id);
+                mv.addObject("cliente", cliente);
+                mv.addObject("enderecoCount", cliente.getEnderecos().size());
+                logger.debug("Received cliente from db: {}", cliente.getEnderecos().size());
+                // enderecos = enderecoService.getEnderecosByClienteId(id);
+                // mv.addObject("enderecos", enderecos); 
+                return mv;
+            } catch (Exception e) {
+                mv.addObject("cliente", e.getMessage());
+            }
+        }
+        mv.addObject("cliente", cliente);
+        mv.addObject("enderecos", enderecos); 
+        return mv;
+    }
 
     @RequestMapping(method = RequestMethod.POST, path = "salvar")
-    public ModelAndView clienteSalvo(Cliente cliente, BindingResult bindingResult,
+    public ModelAndView clienteSalvo(@ModelAttribute("cliente") Cliente cliente, BindingResult bindingResult,
             RedirectAttributes redirectAttributes) {
+        logger.debug("Received endereco from form: {}", cliente.getEnderecos().size());
         if (bindingResult.hasErrors()) {
             ModelAndView mv = new ModelAndView("cliente/cadastro");
             mv.addObject("cliente", cliente);
@@ -62,7 +115,20 @@ public class ClienteController {
         if (cliente != null) {
             novo = false;
         } 
-        clienteService.salvarCliente(cliente);
+        Cliente savedCliente = clienteService.salvarCliente(cliente);
+        List<Endereco> enderecos = savedCliente.getEnderecos();
+        if (enderecos != null) {
+            // iterate over enderecos
+            // Assuming enderecos is a list of Endereco objects in Cliente
+            for (Endereco endereco : enderecos) {
+                endereco.setCliente(savedCliente);
+                enderecoService.salvarEndereco(endereco);
+            }
+        } else {
+            // handle the case where enderecos is null
+            enderecos = new ArrayList<>();
+        }
+
         if (novo) {
             mv.addObject("cliente", new Cliente());
         } else {

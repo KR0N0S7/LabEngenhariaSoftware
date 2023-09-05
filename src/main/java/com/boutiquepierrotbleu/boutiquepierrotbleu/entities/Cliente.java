@@ -1,5 +1,6 @@
 package com.boutiquepierrotbleu.boutiquepierrotbleu.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -20,7 +21,7 @@ public class Cliente {
     private String senha;
 
     @OneToMany(mappedBy = "cliente")
-    private List<Endereco> endereco;
+    private List<Endereco> enderecos = new ArrayList<>();
 
     @OneToMany(mappedBy = "cliente")
     private List<CarrinhoCompra> carrinhoCompra;
@@ -76,12 +77,12 @@ public class Cliente {
         this.telefone = telefone;
     }
 
-    public List<Endereco> getEndereco() {
-        return endereco;
+    public List<Endereco> getEnderecos() {
+        return enderecos;
     }
 
-    public void setEndereco(List<Endereco> endereco) {
-        this.endereco = endereco;
+    public void setEndereco(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
     }
 
     public String getSenha() {

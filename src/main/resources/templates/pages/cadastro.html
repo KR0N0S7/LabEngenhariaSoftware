@@ -72,15 +72,25 @@
                         <hr>
                         <div class="flex flex-col">
                             <!-- Endereco Fields -->
-                            <div class="endereco" data-index="0">
-                                <input type="text" name="enderecos[0].cep" placeholder="CEP" required>
-                                <input type="text" name="enderecos[0].rua" placeholder="Rua" required>
-                                <input type="text" name="enderecos[0].numero" placeholder="Número" required>
-                                <input type="text" name="enderecos[0].bairro" placeholder="Bairro" required>
-                                <input type="text" name="enderecos[0].cidade" placeholder="Cidade" required>
-                                <input type="text" name="enderecos[0].estado" placeholder="Estado" required>
-                            
+                            <div id="enderecos">
+                                <div th:each="endereco, stat : *{enderecos}" th:if="${cliente.id == null}">
+                                    <input type="text" th:name="'enderecos[' + ${stat.index} + '].cep'" placeholder="CEP" required th:field="*{enderecos[__${stat.index}__].cep}">
+                                    <input type="text" th:name="'enderecos[' + ${stat.index} + '].rua'" placeholder="Rua" required th:field="*{enderecos[__${stat.index}__].rua}">
+                                    <input type="text" th:name="'enderecos[' + ${stat.index} + '].numero'" placeholder="Número" required th:field="*{enderecos[__${stat.index}__].numero}">
+                                    <input type="text" th:name="'enderecos[' + ${stat.index} + '].bairro'" placeholder="Bairro" required th:field="*{enderecos[__${stat.index}__].bairro}">
+                                    <input type="text" th:name="'enderecos[' + ${stat.index} + '].cidade'" placeholder="Cidade" required th:field="*{enderecos[__${stat.index}__].cidade}">
+                                    <input type="text" th:name="'enderecos[' + ${stat.index} + '].estado'" placeholder="Estado" required th:field="*{enderecos[__${stat.index}__].estado}">
+                                </div>
+                                <!-- <div th:each="index, stat : ${cliente.enderecos}" class="endereco-entry" th:if="${cliente.id != null}">
+                                    <input type="text" th:name="'enderecos[' + ${stat.index} + '].cep'" placeholder="CEP" required th:field="*{enderecos[__${stat.index}__].cep}">
+                                    <input type="text" th:name="'enderecos[' + ${stat.index} + '].rua'" placeholder="Rua" required th:field="*{enderecos[__${stat.index}__].rua}">
+                                    <input type="text" th:name="'enderecos[' + ${stat.index} + '].numero'" placeholder="Número" required th:field="*{enderecos[__${stat.index}__].numero}">
+                                    <input type="text" th:name="'enderecos[' + ${stat.index} + '].bairro'" placeholder="Bairro" required th:field="*{enderecos[__${stat.index}__].bairro}">
+                                    <input type="text" th:name="'enderecos[' + ${stat.index} + '].cidade'" placeholder="Cidade" required th:field="*{enderecos[__${stat.index}__].cidade}">
+                                    <input type="text" th:name="'enderecos[' + ${stat.index} + '].estado'" placeholder="Estado" required th:field="*{enderecos[__${stat.index}__].estado}">
+                                </div> -->
                             </div>
+                            
                             <!-- Button to add more Endereco fields -->
                             <button type="button" onclick="addEnderecoFields()">Adicionar Endereco</button>
                         </div>

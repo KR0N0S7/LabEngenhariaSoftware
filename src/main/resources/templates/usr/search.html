@@ -1,0 +1,28 @@
+<div th:fragment="searchForm">
+    <div id="filterContainer">
+    <!-- Search Section -->
+    <form th:action="@{/cliente/search}" method="post" th:object="${wrapper}" id="searchForm">
+        <div id="searchCriteriaDiv">
+            <select name="criteriaList[0].attributes" onchange="handleDropdownChange(this.value, this)">
+                <option value="-">-------</option>
+                <option value="nomeCompleto">Nome Completo</option>
+                <option value="email">Email</option>
+                <option value="cpf">CPF</option>
+                <option value="telefone">Telefone</option>
+                <!-- Additional attributes can be added here -->
+            </select>
+            <!-- Here we use data-attribute to store the type of input field for later comparison -->
+            <input type="text" data-attribute="nomeCompleto" placeholder="Nome Completo" th:field="*{criteriaList[0].nomeCompleto}" style="display:none;"/>
+            <input type="text" data-attribute="email" placeholder="exemplo@email.com" th:field="*{criteriaList[0].email}" style="display:none;"/>
+            <input type="text" data-attribute="cpf" placeholder="00000000000" th:field="*{criteriaList[0].cpf}" style="display:none;"/>
+            <input type="text" data-attribute="telefone" placeholder="Telefone" th:field="*{criteriaList[0].telefone}" style="display:none;"/>
+            <!-- Additional input fields can be added here -->
+
+            <!-- corrigir quando seleciona um campo, ele já registra como entrada-->
+        </div>
+        <button type="button" onclick="addSearchFilter()">+</button>
+        <button type="submit">Search</button>
+    </form>
+    <!-- End Search Section -->
+    </div>
+</div>

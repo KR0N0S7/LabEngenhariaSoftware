@@ -1,9 +1,6 @@
 package com.boutiquepierrotbleu.boutiquepierrotbleu.dto;
 
-import java.util.List;
-
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cliente;
-import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Creditcard;
 
 public class ClienteMapper {
     public static Cliente fromClientSearchCriteria(ClienteSearchCriteria clientSearchCriteria) {

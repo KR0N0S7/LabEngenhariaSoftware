@@ -9,11 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.boutiquepierrotbleu.boutiquepierrotbleu.dto.ClienteMapper;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.dto.ClienteSearchCriteria;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cliente;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.repositories.ClienteRepository;
-import com.boutiquepierrotbleu.boutiquepierrotbleu.repositories.criteriaFilter.ClienteRepositoryImpl;
 
 @Service
 public class ClienteService {

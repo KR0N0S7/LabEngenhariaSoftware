@@ -33,4 +33,8 @@ public class EnderecoService {
     public void excluirEndereco(Long id) {
         enderecoRepository.deleteById(id);
     }
+
+    public List<Endereco> getEnderecosByClienteId(Long id) {
+        return enderecoRepository.getEnderecosByClienteId(id);
+    }
 }

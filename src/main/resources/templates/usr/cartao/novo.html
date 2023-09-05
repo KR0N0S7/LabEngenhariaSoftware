@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{usr/layout.html}">
+<meta charset="UTF-8">
+<div layout:fragment="content">
+<div class="alert alert-primary" th:if="${mensagem != null}"
+		th:text="${mensagem}"></div>
+
+	<div class="card">
+		<div class="card-header">
+			<p class="text-primary">Cartão de Crédito</p>
+		</div>
+		<div>
+			<div class="card-body">
+				<form class="row g-3" method="POST" th:object="${cartao}"
+					th:action="@{/cartao/novo}">
+					<input type="hidden" th:field="*{id}"></input>
+
+					<div class="col-4">
+						<label for="nome" class="form-label">Número Cartão </label> <input
+							type="text" class="form-control" th:field="*{numeroCartao}"
+							placeholder="">
+					</div>
+					<div class="col-4">
+						<label for="nome" class="form-label">Nome Titular </label> <input
+							type="text" class="form-control" th:field="*{nomeTitular}"
+							placeholder="">
+					</div>
+					<div class="col-4">
+						<label for="nome" class="form-label">Data Validade </label> <input
+							type="text" class="form-control" th:field="*{dataValidade}"
+							placeholder="">
+					</div>
+					<div class="col-4">
+						<label for="nome" class="form-label">Código Segurança </label> <input
+							type="text" class="form-control" th:field="*{codigoSeguranca}"
+							placeholder="">
+					</div>
+					<div class="col-4">
+						<label for="nome" class="form-label">Bandeira </label> <input
+							type="text" class="form-control" th:field="*{bandeira}"
+							placeholder="">
+					</div>
+					<div class="col-4">
+						<label for="nome" class="form-label">CPF Titular </label> <input
+							type="text" class="form-control" th:field="*{cpfTitular}"
+							placeholder="">
+					</div>
+					
+
+					<div class="rom-row">
+						
+					</div>
+
+				<div class="col-md-2">
+					<button type="submit" class="btn btn-primary">Salvar
+						Cadastro</button>
+				</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+</html>
