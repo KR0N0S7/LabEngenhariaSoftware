@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping(path = "cliente")
+@RequestMapping("cliente")
 public class ClienteController {
     @Autowired
     private ClienteService clienteService;
@@ -40,8 +40,8 @@ public class ClienteController {
     private static final Logger logger = LoggerFactory.getLogger(ClienteRepositoryImpl.class);
 
     @RequestMapping("cadastro")
-    public ModelAndView cadastroCliente(HttpSession session) {
-        session.setAttribute("id", 3);
+    public ModelAndView cadastroCliente(@RequestParam("id") Long id, HttpSession session) {
+        session.setAttribute("id", id);
         ModelAndView mv = new ModelAndView("usr/index");
         mv.addObject("id", session.getAttribute("id"));
         try {
@@ -141,9 +141,13 @@ public class ClienteController {
     @RequestMapping("listar")
     public ModelAndView listarClientes() {
         ModelAndView mv = new ModelAndView("adm/list");
-        mv.addObject("wrapper", new ClienteSearchWrapper());
-        mv.addObject("lista", clienteService.listarClientes());
-        mv.addObject("nome", "Usuário");
+        try {
+            mv.addObject("lista", clienteService.listarClientes());
+            //mv.addObject("wrapper", new ClienteSearchWrapper());
+            //mv.addObject("nome", "Usuário");
+        } catch (Exception e) {
+            mv.addObject("mensagem", "Um erro ocorreu ao listar clientes: " + e.getMessage());
+        }
         return mv;
     }
 
@@ -166,7 +170,6 @@ public class ClienteController {
         attributes.addFlashAttribute("message", "Status atualizado com sucesso!");
         return mv;
     }
-
 
     @RequestMapping("/search")
     public ModelAndView searchClients(@ModelAttribute("wrapper") ClienteSearchWrapper wrapper) {

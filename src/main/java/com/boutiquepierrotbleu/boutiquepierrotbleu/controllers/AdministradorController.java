@@ -21,7 +21,7 @@ public class AdministradorController {
 	
 	@RequestMapping(path = "editar")
 	public ModelAndView editarcliente(@RequestParam(required = false) Long id) {
-		ModelAndView mv = new ModelAndView("index.html");
+		ModelAndView mv = new ModelAndView("adm/index.html");
 		Cliente cliente;
 		if (id == null) {
 			cliente = new Cliente();

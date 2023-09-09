@@ -16,3 +16,8 @@ logging:
     name: logs/application.log  # Store logs in a 'logs' directory with the file name 'application.log'
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %logger{35} - %msg%n"  # Pattern for console logs
+
+server:
+  servlet:
+    session:
+      timeout: 8h

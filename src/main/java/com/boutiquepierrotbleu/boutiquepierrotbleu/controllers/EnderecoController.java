@@ -32,6 +32,7 @@ public class EnderecoController {
 		Endereco endereco;
 		if (id == null) {
 			endereco = new Endereco();
+			mv.addObject("idSession", session.getAttribute("id"));
 		} else {
 			try {
 				endereco = enderecoService.obterEndereco(id);
@@ -69,7 +70,8 @@ public class EnderecoController {
 	@RequestMapping("/listar")
 	public ModelAndView listarenderecoes(HttpSession session) {
 		ModelAndView mv = new ModelAndView("usr/endereco/list.html");
-		mv.addObject("lista", enderecoService.getEnderecosByClienteId((Long) session.getAttribute("id")));
+		Long idSession = (Long) session.getAttribute("id");
+		mv.addObject("lista", enderecoService.getEnderecosByClienteId(idSession));
 		mv.addObject("nome", "enderecos");
 		return mv;
 	}

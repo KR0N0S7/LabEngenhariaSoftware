@@ -3,6 +3,8 @@ package com.boutiquepierrotbleu.boutiquepierrotbleu.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,6 +23,11 @@ public class Cliente {
     private String senha;
 
     @OneToMany(mappedBy = "cliente")
+    @JsonManagedReference // evita loop infinito cliente>enderecos>cliente>enderecos>... 
+    // net::ERR_INCOMPLETE_CHUNKED_ENCODING 200
+    // Caused by: org.thymeleaf.exceptions.TemplateProcessingException: An exception was raised while trying to serialize object to JavaScript using Jackson
+	// at org.thymeleaf.standard.serializer.StandardJavaScriptSerializer$JacksonStandardJavaScriptSerializer.serializeValue(StandardJavaScriptSerializer.java:190) ~[thymeleaf-3.1.2.RELEASE.jar:3.1.2.RELEASE]
+    // Caused by: com.fasterxml.jackson.databind.JsonMa
     private List<Endereco> enderecos = new ArrayList<>();
 
     @OneToMany(mappedBy = "cliente")
