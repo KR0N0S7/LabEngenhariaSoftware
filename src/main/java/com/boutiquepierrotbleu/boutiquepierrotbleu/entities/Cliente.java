@@ -34,6 +34,8 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente")
     private List<Cupom> cupom;
 
+    private boolean ativo = true;
+
     public Long getId() {
         return id;
     }
@@ -121,7 +123,14 @@ public class Cliente {
     public void setCupom(List<Cupom> cupom) {
         this.cupom = cupom;
     }
-    
-    
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
 }
 

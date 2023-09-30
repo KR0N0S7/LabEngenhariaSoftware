@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+<meta charset="UTF-8">
+<div layout:fragment="content">
+    <div class="alert alert-primary" th:if="${#lists.isEmpty(lista)}">
+        Nenhum cliente cadastrado.
+    </div>
+    <div th:if="${message}" class="alert alert-success" role="alert">
+        <p th:text="${message}"></p>
+    </div>
+    <div th:if="${not #lists.isEmpty(lista)}">
+        <!-- <div th:replace="~{adm/search :: searchForm}"></div> -->
+        <div>
+            <a class="btn btn-primary btn-sm" th:href="@{/cliente/novo}">Cadastrar</a>
+            
+        </div>
+
+        <div class="form-check form-switch mt-3" onclick="toggleContent()">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Pesquisa</label>
+        </div>
+
+        <div id="hiddenContent" th:style="${condition} ? '' : 'display: none;'">
+            
+            <button type="button" onclick="addSearchFilter()">+</button>
+            <input class="my-3" id="txtSearch" placeholder="Nome Completo" type="text" name="keyword"></input>
+
+        </div>
+
+        <table id="tabelaCliente" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome Completo</th>
+                    <th>E-mail</th>
+                    <th>CPF</th>
+                    <th>Telefone</th>
+                    <th>Ativo</th>
+                    <th>Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="cliente : ${lista}">
+                    <td th:text="${cliente.id}"></td>
+                    <td th:text="${cliente.nomeCompleto}"></td>
+                    <td th:text="${cliente.email}"></td>
+                    <td th:text="${cliente.cpf}"></td>
+                    <td th:text="${cliente.telefone}"></td>
+                    <td>
+                        <form th:action="@{/cliente/updateAtivo}" method="post">
+                            <input type="hidden" th:name="clienteId" th:value="${cliente.id}" />
+                            <input type="checkbox" class="ativo-checkbox" th:value="${cliente.ativo}" th:checked="${cliente.ativo}" th:onclick="'updateAtivoStatus(this.form, this)'" />
+                        </form>
+                        
+                    </td>
+                    
+                    <td>
+                        <a class="btn btn-primary btn-sm" th:href="@{/cliente/novo(id=${cliente.id})}">Editar</a>
+                        <a class="btn btn-primary btn-sm ml-3" th:href="@{/cliente/excluir(id=${cliente.id})}" 
+                           onclick="return confirm('Você realmente deseja excluir esse cliente?')">Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</html>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+        var clientes = /*[[${lista}]]*/ 'default';
+    /*]]>*/
+    $('#txtSearch').keyup(function(){
+        filterTable($(this).val(), 'nomeCompleto');
+    });
+
+    function addSearchFilter() {
+        var hiddenContent = document.getElementById('hiddenContent');
+        var filterInput = document.createElement('input');
+        filterInput.className = 'my-3';
+        filterInput.type = 'text';
+        filterInput.onkeyup = function() {
+            var attribute = this.getAttribute('data-attribute');
+            filterTable(this.value, attribute);
+        };
+        
+        // Determine the next filter based on existing filters in the hiddenContent div
+        var existingFilters = hiddenContent.getElementsByTagName('input').length;
+        var placeholders = ['Nome Completo', 'E-mail', 'CPF', 'Telefone'];
+        var names = ['nomeCompleto', 'email', 'cpf', 'telefone'];
+        if (existingFilters < placeholders.length) {
+            filterInput.placeholder = placeholders[existingFilters];
+            filterInput.setAttribute('data-attribute', names[existingFilters]);
+            hiddenContent.appendChild(filterInput);
+        }
+    }
+
+    function toggleContent() {
+        var content = document.getElementById('hiddenContent');
+        if(content.style.display === "none") {
+            content.style.display = "block";
+        } else {
+            content.style.display = "none";
+        }
+    }
+
+
+    function filterTable(value, attribute) {
+        var data = Filtro(value, clientes, attribute);
+        rebuildTable(data);
+    }
+
+    function Filtro(value, data, attribute){
+        var filteredData = [];
+        for(var i = 0; i < data.length; i++){
+            value = value.toLowerCase();
+            var columnValue = data[i][attribute].toLowerCase();
+            if(columnValue.includes(value)){
+                filteredData.push(data[i]);
+            }
+        }
+        return filteredData;
+    }
+
+    function rebuildTable(data){
+        var table = document.getElementById('tabelaCliente'); // target the entire table
+        table.innerHTML = '<thead>' +
+            '<tr>' +
+                '<th>Id</th>' +
+                '<th>Nome Completo</th>' +
+                '<th>E-mail</th>' +
+                '<th>CPF</th>' +
+                '<th>Telefone</th>' +
+                '<th>Ativo</th>' +
+                '<th>Opções</th>' +
+            '</tr>' +
+                '</thead><tbody id="tabelaClienteBody"></tbody>'; // add the thead structure
+        var tbody = document.getElementById('tabelaClienteBody'); // target the newly added tbody
+        for(var i = 0; i < data.length; i++){
+            tbody.innerHTML += '<tr>' +
+                                    '<td>' + data[i].id + '</td>' +
+                                    '<td>' + data[i].nomeCompleto + '</td>' +
+                                    '<td>' + data[i].email + '</td>' +
+                                    '<td>' + data[i].cpf + '</td>' +
+                                    '<td>' + data[i].telefone + '</td>' +
+                                    '<td>' + data[i].senha + '</td>' +
+                                    '<td>' +
+                                        '<a class="btn btn-primary btn-sm" th:href="@{{/cliente/novo(id=${{cliente.id}})}}">Editar</a>' +
+                                        '<a class="btn btn-primary btn-sm ml-3" th:href="@{{/cliente/excluir(id=${{cliente.id}})}}" onclick="return confirm(\'Você realmente deseja excluir esse cliente?\')">Excluir</a>' +
+                                    '</td>' +
+                                '</tr>';
+        }
+    }
+
+
+</script>
+
+<script th:inline="javascript">
+    function updateAtivoStatus(formElem, checkboxElem) {
+        var currentStatus = checkboxElem.checked;
+        var confirmationMessage = currentStatus ? "Ativar cliente?" : "Desativar cliente?";
+        
+        if (confirm(confirmationMessage)) {
+            formElem.submit();  // Submit the form to update the status on the server side
+        } else {
+            // Revert the checkbox state
+            checkboxElem.checked = !currentStatus;
+        }
+    }
+</script>
+
+

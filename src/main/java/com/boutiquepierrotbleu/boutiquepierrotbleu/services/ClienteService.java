@@ -2,17 +2,25 @@ package com.boutiquepierrotbleu.boutiquepierrotbleu.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.boutiquepierrotbleu.boutiquepierrotbleu.dto.ClienteMapper;
+import com.boutiquepierrotbleu.boutiquepierrotbleu.dto.ClienteSearchCriteria;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cliente;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.repositories.ClienteRepository;
+import com.boutiquepierrotbleu.boutiquepierrotbleu.repositories.criteriaFilter.ClienteRepositoryImpl;
 
 @Service
 public class ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
+
+    private static final Logger logger = LoggerFactory.getLogger(ClienteService.class);
 
     public Cliente salvarCliente(Cliente cliente) {
         return clienteRepository.save(cliente);
@@ -33,4 +41,28 @@ public class ClienteService {
     public void excluirCliente(Long id) {
         clienteRepository.deleteById(id);
     }
+
+    public List<Cliente> searchClients(ClienteSearchCriteria criteria) {
+        logger.debug("Received search criteria for service: {}", criteria);
+        
+        List<Cliente> foundClients = clienteRepository.findByCriteria(criteria);
+
+        logger.debug("Found {} clients based on the given criteria.", foundClients.size());
+        
+        return foundClients;
+    }
+
+    public List<Cliente> listarClientesAtivos() {
+        List<Cliente> allClients = clienteRepository.findAll();
+        return allClients.stream().filter(cliente -> cliente.isAtivo()).collect(Collectors.toList());
+    }
+
+    public void toggleAtivoStatusById(Long clienteId) {
+        Cliente cliente = clienteRepository.findById(clienteId).orElseThrow(() -> new IllegalArgumentException("Invalid cliente Id:" + clienteId));
+        cliente.setAtivo(!cliente.isAtivo());  // Toggle the ativo status
+        clienteRepository.save(cliente);
+    }
+    
+
+    
 }
