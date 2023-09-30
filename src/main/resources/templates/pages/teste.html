@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="../../static/css/style.css">
+</head>
+<body>
+    
+        <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js"></script>
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+     
+      
+
+        <nav>
+            <div class="container flex justify-between py-5 bg-gray-dark z-10">
+                <div>
+                    <h2 class="font-bold">
+                        <a href="#">Boutique Pierrot Bleu</a>
+                    </h2>
+                </div>
+                <ol class="flex">
+                    <li class="mx-3">
+                        <a href="#" class="transition duration-500 hover:bg-purple rounded-xl px-3 py-2">Novidades</a>
+                    </li>
+                    <li class="mx-3">
+                        <a href="#" class="transition duration-500 hover:bg-purple rounded-xl px-3 py-2">Masculino</a>
+                    </li>
+                    <li class="mx-3">
+                        <a href="#"class="transition duration-500 hover:bg-purple rounded-xl px-3 py-2">Feminino</a>
+                    </li>
+                </ol>
+
+                <div>
+                    <ion-icon class="mx-3" name="search-outline"></ion-icon>
+                    <div x-data="{ isOpen: false }">
+                        <button @click="isOpen = !isOpen">
+                            <ion-icon class="mx-3" name="cart-outline">
+                        </button>
+                        <div x-show="isOpen">
+
+                            <h1 class="bg-bl">
+                                testeue
+                            </h1>
+                        </div>
+                    </div>
+                        
+                    </ion-icon>
+                    <a href=""><ion-icon class="mx-3" name="people-outline"></ion-icon></a>
+                </div>
+            </div> 
+        </nav>
+    </header>
+</body>
+
+
