@@ -10,8 +10,10 @@ spring:
 logging:
   level:
     root: INFO  # General logging level, change to DEBUG for detailed logs during debugging
-    org.springframework: WARN  # Reducing noise from Spring's internal logs
-    com.boutiquepierrotbleu: DEBUG  # Detailed logs for your application's package
+    org:
+      springframework: WARN  # Reducing noise from Spring's internal logs
+    com:
+      boutiquepierrotbleu: DEBUG  # Detailed logs for your application's package
   file:
     name: logs/application.log  # Store logs in a 'logs' directory with the file name 'application.log'
   pattern:

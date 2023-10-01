@@ -60,6 +60,14 @@ public class ClienteService {
         cliente.setAtivo(!cliente.isAtivo());  // Toggle the ativo status
         clienteRepository.save(cliente);
     }
+
+    public Cliente autenticarCliente(String email, String senha) throws Exception {
+        Optional<Cliente> cliente = clienteRepository.findByEmailAndSenha(email, senha);
+        if (cliente.isEmpty()) {
+            throw new Exception("Cliente não encontrado!");
+        }
+        return cliente.get();
+    }
     
 
     

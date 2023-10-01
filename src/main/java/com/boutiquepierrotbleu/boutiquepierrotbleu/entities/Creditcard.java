@@ -19,6 +19,9 @@ public class Creditcard {
     private String bandeira;
     private String cpfTitular;
 
+    //private String paymentGatewayId; // New attribute to represent payment gateway ID
+    //private String transactionId; // New attribute to represent transaction ID
+
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
@@ -87,4 +90,22 @@ public class Creditcard {
         this.cliente = cliente;
     }
 
+    // Methods to interact with the payment gateway API
+    public boolean validateCardDetails(String cardNumber, String expiryDate, String cvv) {
+        // Placeholder method to validate card details using payment gateway API
+        // Integrate with real payment gateway API to validate card details here
+        return true;
+    }
+
+    public boolean processPayment(Double amount, Integer installments) {
+        // Placeholder method to process payment using payment gateway API
+        // Integrate with real payment gateway API to process payment here
+        return true;
+    }
+
+    public boolean processInstallmentPayment(Double amount, Integer installments) {
+        // Placeholder method to process installment payment using payment gateway API
+        // Integrate with real payment gateway API to process installment payment here
+        return true;
+    }
 }

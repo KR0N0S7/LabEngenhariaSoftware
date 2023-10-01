@@ -5,8 +5,10 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.CarrinhoCompra;
+import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.ItemProduto;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.repositories.CarrinhoCompraRepository;
 
 @Service
@@ -32,5 +34,19 @@ public class CarrinhoCompraService {
 
     public void excluirCarrinhoCompra(Long id) {
         carrinhoCompraRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void adicionarItemAoCarrinho(Long carrinhoId, ItemProduto item) throws Exception {
+        CarrinhoCompra carrinho = obterCarrinhoCompra(carrinhoId);
+        carrinho.addItemProduto(item);
+        carrinhoCompraRepository.save(carrinho);
+    }
+
+    @Transactional
+    public void removerItemDoCarrinho(Long carrinhoId, ItemProduto item) throws Exception {
+        CarrinhoCompra carrinho = obterCarrinhoCompra(carrinhoId);
+        carrinho.removeItemProduto(item);
+        carrinhoCompraRepository.save(carrinho);
     }
 }

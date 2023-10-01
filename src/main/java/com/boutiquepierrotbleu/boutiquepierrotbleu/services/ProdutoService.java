@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Produto;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.repositories.ProdutoRepository;
@@ -32,5 +33,19 @@ public class ProdutoService {
 
     public void deletarProduto(Long id) {
         produtoRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void reservarEstoque(Long id, int quantidade) throws Exception {
+        Produto produto = obterProduto(id);
+        produto.reserveStock(quantidade);
+        produtoRepository.save(produto);
+    }
+
+    @Transactional
+    public void liberarEstoque(Long id, int quantidade) throws Exception {
+        Produto produto = obterProduto(id);
+        produto.releaseStock(quantidade);
+        produtoRepository.save(produto);
     }
 }

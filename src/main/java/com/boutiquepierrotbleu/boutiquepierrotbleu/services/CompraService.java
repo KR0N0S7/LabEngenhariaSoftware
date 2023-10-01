@@ -5,7 +5,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.CarrinhoCompra;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Compra;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.repositories.CompraRepository;
 
@@ -32,5 +34,12 @@ public class CompraService {
 
     public void deletarCompra(Long id) {
         compraRepository.deleteById(id);
+    }
+
+    @Transactional
+    public Compra criarCompra(CarrinhoCompra carrinho, String formaPagamento, Integer numeroParcelas) throws Exception {
+        Compra compra = new Compra();
+        compra.criarCompra(carrinho, formaPagamento, numeroParcelas);
+        return compraRepository.save(compra);
     }
 }

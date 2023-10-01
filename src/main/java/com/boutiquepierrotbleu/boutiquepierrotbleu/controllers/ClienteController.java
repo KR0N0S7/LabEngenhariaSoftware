@@ -39,6 +39,47 @@ public class ClienteController {
 
     private static final Logger logger = LoggerFactory.getLogger(ClienteRepositoryImpl.class);
 
+    @RequestMapping("login")
+    public ModelAndView telaLoginCliente(HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        //logger.debug("Session: {}", session.getAttribute("id") + ", " + session.getAttribute("nome"));
+        Object idAttribute = session.getAttribute("id");
+        if (idAttribute == null) {
+            mv = new ModelAndView("usr/login");
+        } else {
+            if (idAttribute != null && "admin".equals(idAttribute.toString())) {
+                mv = new ModelAndView("redirect:/admin/editar");
+            } else {
+                mv = new ModelAndView("redirect:/cliente/cadastro");
+            }
+        }
+        
+        return mv;
+    }
+
+    @RequestMapping("login/autenticar")
+    public ModelAndView autenticarCliente(@RequestParam("email") String email, @RequestParam("senha") String senha,
+            HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        logger.debug("Credenciais: {}", email + ", " + senha);
+        if(email.contentEquals("admin@admin.co")  && senha.contentEquals("admin")) {
+            session.setAttribute("id", "admin");
+            mv = new ModelAndView("redirect:/admin/editar");
+        } else {
+            mv = new ModelAndView("redirect:/");
+            try {
+                Cliente cliente = clienteService.autenticarCliente(email, senha);
+                session.setAttribute("id", cliente.getId());
+                session.setAttribute("nome", cliente.getNomeCompleto());
+                mv.addObject("id", session.getAttribute("id"));
+                mv.addObject("nome", session.getAttribute("nome"));
+            } catch (Exception e) {
+                mv.addObject("mensagem", e.getMessage());
+            }
+        }
+        return mv;
+    }
+
     @RequestMapping("cadastro")
     public ModelAndView cadastroCliente(@RequestParam("id") Long id, HttpSession session) {
         session.setAttribute("id", id);
@@ -56,7 +97,7 @@ public class ClienteController {
     @RequestMapping("novo")
     public ModelAndView salvarCliente(@RequestParam(required = false) Long id, HttpSession session) {
         session.setAttribute("id", id);
-        ModelAndView mv = new ModelAndView("pages/cadastro");
+        ModelAndView mv = new ModelAndView("usr/cadastro");
         Cliente cliente = new Cliente();
         List<Endereco> enderecos = new ArrayList<>();
         if(id != null) {

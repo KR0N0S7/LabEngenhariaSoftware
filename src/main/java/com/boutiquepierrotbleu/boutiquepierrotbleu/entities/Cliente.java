@@ -22,6 +22,8 @@ public class Cliente {
     private String telefone;
     private String senha;
 
+    private Boolean logged;
+
     @OneToMany(mappedBy = "cliente")
     @JsonManagedReference // evita loop infinito cliente>enderecos>cliente>enderecos>... 
     // net::ERR_INCOMPLETE_CHUNKED_ENCODING 200
@@ -138,6 +140,18 @@ public class Cliente {
 
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public Boolean getLogged() {
+        return logged;
+    }
+
+    public void setLogged(Boolean logged) {
+        this.logged = logged;
+    }
+
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
     }
 
 }
