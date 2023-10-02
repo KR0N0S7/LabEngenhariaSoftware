@@ -9,8 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script th:src="@{/js/header.js}"></script>
-    <script th:src="@{/js/footer.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
 </head>
 
 <body>
@@ -31,67 +30,56 @@
                         <div class="my-3 flex flex-col">
                             <label for="Nome Completo" class="my-3 font-bold">Nome Completo</label>
                             <input type="text" placeholder="Seu nome Completo"
-                                class="form-control" required th:field="*{nomeCompleto}">
-                            <div class="text-danger" th:if="${#fields.hasErrors('nomeCompleto')}"
-                                th:errors="*{nomeCompleto}"></div>
+                                class="form-control input-nome-completo" required th:field="*{nomeCompleto}">
+                            <div class="text-danger" th:if="${#fields.hasErrors('nomeCompleto')}" th:errors="*{nomeCompleto}"></div>
                         </div>
                         
                         <div class="my-3 flex flex-col">
                             <label for="Telefone" class="my-3 font-bold">Telefone</label>
-                            <input type="text" placeholder="Digite seu Telefone"
-                                class="form-control" required th:field="*{telefone}">
-                            <div class="text-danger" th:if="${#fields.hasErrors('telefone')}"
-                                th:errors="*{telefone}"></div>
+                            <input type="text" placeholder="Digite seu Telefone" class="form-control input-telefone" required th:field="*{telefone}" maxlength="15">
+                            <div class="text-danger" th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}"></div>
                         </div>
+                        
 
                         <div class="my-3 flex flex-col">
                             <label for="CPF" class="font-bold my-3" >Digite seu CPF</label>
-                            <input type="text" placeholder="000.000.000-00"
-                                class="form-control  cpf-input"  maxlength="14" required th:field="*{cpf}">
+                            <input type="text" placeholder="000.000.000-00" class="form-control cpf-input input-cpf"  maxlength="14" required th:field="*{cpf}">
                             <div class="text-danger" th:if="${#fields.hasErrors('cpf')}"
                                 th:errors="*{cpf}"></div>
                         </div>
                         
                         <div class="my-3 flex flex-col">
                             <label for="Email" class="font-bold my-3">Email</label>
-                            <input type="text" placeholder="exemplo@email.com"
-                                class="form-control" required th:field="*{email}">
+                            <input type="text" placeholder="exemplo@email.com" class="form-control input-email" maxlength="30"  required th:field="*{email}">
                             <div class="text-danger" th:if="${#fields.hasErrors('email')}"
                                 th:errors="*{email}"></div>
                         </div>
 
                         <div class="my-3 flex flex-col">
                             <label for="Senha" class="font-bold my-3">Senha</label>
-                            <input type="password" placeholder="Senha"
-                                class="form-control" required th:field="*{senha}">
+                            <input type="password" placeholder="Senha" class="form-control input-senha" required th:field="*{senha}">
                             <div class="text-danger" th:if="${#fields.hasErrors('senha')}"
                                 th:errors="*{senha}"></div>
                         </div>
 
                         <hr>
-                        <div class="flex flex-col">
+                        <div class="flex flex-col py-5">
                             <!-- Endereco Fields -->
                             <div id="enderecos">
                                 <div th:each="endereco, stat : *{enderecos}" th:if="${cliente.id == null}">
                                     <input type="text" th:name="'enderecos[' + ${stat.index} + '].cep'" placeholder="CEP" required th:field="*{enderecos[__${stat.index}__].cep}">
-                                    <input type="text" th:name="'enderecos[' + ${stat.index} + '].rua'" placeholder="Rua" required th:field="*{enderecos[__${stat.index}__].rua}">
+                                    <!-- <input type="text" th:name="'enderecos[' + ${stat.index} + '].rua'" placeholder="Rua" required th:field="*{enderecos[__${stat.index}__].rua}">
                                     <input type="text" th:name="'enderecos[' + ${stat.index} + '].numero'" placeholder="Número" required th:field="*{enderecos[__${stat.index}__].numero}">
                                     <input type="text" th:name="'enderecos[' + ${stat.index} + '].bairro'" placeholder="Bairro" required th:field="*{enderecos[__${stat.index}__].bairro}">
                                     <input type="text" th:name="'enderecos[' + ${stat.index} + '].cidade'" placeholder="Cidade" required th:field="*{enderecos[__${stat.index}__].cidade}">
-                                    <input type="text" th:name="'enderecos[' + ${stat.index} + '].estado'" placeholder="Estado" required th:field="*{enderecos[__${stat.index}__].estado}">
+                                    <input type="text" th:name="'enderecos[' + ${stat.index} + '].estado'" placeholder="Estado" required th:field="*{enderecos[__${stat.index}__].estado}"> -->
                                 </div>
-                                <!-- <div th:each="index, stat : ${cliente.enderecos}" class="endereco-entry" th:if="${cliente.id != null}">
-                                    <input type="text" th:name="'enderecos[' + ${stat.index} + '].cep'" placeholder="CEP" required th:field="*{enderecos[__${stat.index}__].cep}">
-                                    <input type="text" th:name="'enderecos[' + ${stat.index} + '].rua'" placeholder="Rua" required th:field="*{enderecos[__${stat.index}__].rua}">
-                                    <input type="text" th:name="'enderecos[' + ${stat.index} + '].numero'" placeholder="Número" required th:field="*{enderecos[__${stat.index}__].numero}">
-                                    <input type="text" th:name="'enderecos[' + ${stat.index} + '].bairro'" placeholder="Bairro" required th:field="*{enderecos[__${stat.index}__].bairro}">
-                                    <input type="text" th:name="'enderecos[' + ${stat.index} + '].cidade'" placeholder="Cidade" required th:field="*{enderecos[__${stat.index}__].cidade}">
-                                    <input type="text" th:name="'enderecos[' + ${stat.index} + '].estado'" placeholder="Estado" required th:field="*{enderecos[__${stat.index}__].estado}">
-                                </div> -->
                             </div>
                             
                             <!-- Button to add more Endereco fields -->
-                            <button type="button" onclick="addEnderecoFields()">Adicionar Endereco</button>
+                            <div class="my-5 flex justify-center">
+                                <button class="btn-add-endereco" type="button" onclick="addEnderecoFields()">Adicionar Endereco</button>
+                            </div>
                         </div>
                     </div>
                     </div>
@@ -112,29 +100,40 @@
 
     <div th:replace="pages/footer :: footer"></div>
     <script th:src="@{/js/mask-cpf.js}"></script>
+    <script th:src="@{/js/mask-telefone.js}"></script>
 </body>
 </html>
 
 <script>
-    function addEnderecoFields() {
-        // Get the enderecos container and determine the next index
-        const container = document.getElementById('enderecos');
-        const currentIndex = container.children.length;
-        
-        // Create new Endereco fields with the next index
-        const newEnderecoDiv = document.createElement('div');
-        newEnderecoDiv.className = 'endereco';
-        newEnderecoDiv.setAttribute('data-index', currentIndex);
-        newEnderecoDiv.innerHTML = `
-            <input type="text" name="enderecos[${currentIndex}].rua" placeholder="Rua" required>
-            <input type="text" name="enderecos[${currentIndex}].numero" placeholder="Numero" required>
-            <input type="text" name="enderecos[${currentIndex}].bairro" placeholder="Bairro" required>
-            <input type="text" name="enderecos[${currentIndex}].cidade" placeholder="Cidade" required>
-            <input type="text" name="enderecos[${currentIndex}].estado" placeholder="Estado" required>
-        `;
+    let enderecoIndex = 0; // Inicializa o índice com 0
 
-        // Append the new Endereco fields to the container
-        container.appendChild(newEnderecoDiv);
-    }
+function addEnderecoFields() {
+    // Get the enderecos container
+    const container = document.getElementById('enderecos');
+
+    // Incrementa o índice antes de criar o novo formulário de endereço
+    const currentIndex = enderecoIndex++;
+
+    // Create new Endereco fields with the current index
+    const newEnderecoDiv = document.createElement('div');
+    newEnderecoDiv.className = 'endereco';
+    newEnderecoDiv.innerHTML = `
+    <!-- Adicione um contador dentro do formulário de endereço -->
+    <span class="endereco-count form">Seu formulário é o: ${currentIndex}</span>
+    <div class="flex flex-col my-4">
+        <input type="text" class="input-cep my-10" name="enderecos[${currentIndex}].cep" placeholder="CEP" required>
+        <input type="text" class="input-rua my-10" name="enderecos[${currentIndex}].rua" placeholder="Rua" required>
+        <input type="text" class="input-numero my-10"  name="enderecos[${currentIndex}].numero" placeholder="Número" required>
+        <input type="text" class="input-bairro my-10" name="enderecos[${currentIndex}].bairro" placeholder="Bairro" required>
+        <input type="text" class="input-cidade my-10" name="enderecos[${currentIndex}].cidade" placeholder="Cidade" required>
+        <input type="text" class="input-estado my-10" name="enderecos[${currentIndex}].estado" placeholder="Estado" required>
+    </div>
+    `;
+
+    // Append the new Endereco fields to the container
+    container.appendChild(newEnderecoDiv);
+}
 
 </script>
+
+
