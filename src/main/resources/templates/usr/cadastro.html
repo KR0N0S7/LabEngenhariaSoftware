@@ -44,11 +44,10 @@
                                 th:errors="*{telefone}"></div>
                         </div>
 
-
                         <div class="my-3 flex flex-col">
                             <label for="CPF" class="font-bold my-3" >Digite seu CPF</label>
-                            <input type="number" placeholder="00000000000"
-                                class="form-control" required th:field="*{cpf}">
+                            <input type="text" placeholder="000.000.000-00"
+                                class="form-control  cpf-input"  maxlength="14" required th:field="*{cpf}">
                             <div class="text-danger" th:if="${#fields.hasErrors('cpf')}"
                                 th:errors="*{cpf}"></div>
                         </div>
@@ -112,6 +111,7 @@
 
 
     <div th:replace="pages/footer :: footer"></div>
+    <script th:src="@{/js/mask-cpf.js}"></script>
 </body>
 </html>
 
