@@ -1,16 +1,13 @@
 
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../static/css/style.css">
-    <title>header</title>
-</head>
+<div th:replace="pages/head :: head"></div>
+
 <body>
     <header th:fragment="header">
         <nav>
-            <div class="container flex justify-between py-5 bg-gray-dark z-10 fixed">
+            <script defer th:src="@{https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js}"></script>
+            <div class="container flex justify-between py-5 bg-gray-dark z-10">
                 <div>
                     <h2 class="font-bold">
                         <a th:href="@{/}">Boutique Pierrot Bleu</a>
@@ -35,8 +32,24 @@
                         <ion-icon class="mx-3" name="people-outline"></ion-icon> 
                     </a>
                 </div>
+                    <!-- <ion-icon class="mx-3" name="search-outline"></ion-icon> -->
+                    
+                    <div x-data="{ isOpen: false }">
+                        <button @click="isOpen = !isOpen">
+                            <ion-icon class="mx-3" name="cart-outline">
+                        </button>
+                        <div x-show="isOpen">
+                            <h1 class="bg-blue-700">
+                                testeue
+                            </h1>
+                        </div>
+                    </div>  
+                        
+                    <!-- </ion-icon><a href=""><ion-icon class="mx-3" name="people-outline"></ion-icon></a> -->
+
             </div> 
         </nav>
     </header>
 </body>
+
 

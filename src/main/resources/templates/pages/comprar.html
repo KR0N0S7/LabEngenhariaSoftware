@@ -1,37 +1,44 @@
 <!DOCTYPE html>
 
+
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <div th:replace="pages/head :: head"></div>
 
 <body>
     <div th:replace="pages/header :: header"></div>
+
     <section>
         <div class="container my-10">
             <div class="flex flex-wrap">
                 <div class="w-6/12">
                     <div id="passo-placeholder"></div>
+
                     <div class="flex justify-between my-4">
                         <h2 class="font-bold text-xl">
                             Informações
                         </h2>
+
                         <a href="#">
                             <h2 class="font-bold text-xl mr-24">
                                 Já possui uma conta? <span class="text-purple font-normal">Entrar</span>
                             </h2>
                         </a>
                     </div>
+
                     <div>
                         <form action="" class="flex flex-col" method="">
                             <div>
                                 <input placeholder="Seu e-mail" type="text" />
                             </div>
                             <h2 class="font-bold text-xl mt-10 mb-3">Endereço de envio</h2>
+
                             <select class="font-bold w-full my-4 uppercase">
                                 <option value="roupas">roupas</option>
                                 <option value="sapatos">sapatos</option>
                                 <option value="calcas">calcas</option>
                                 <option value="meias">meias</option>
                             </select>
+
                             <input class="my-3" placeholder="Nome Completo" type="text" />
                             <input placeholder="Endereço" type="text" />
                             <input class="my-3" placeholder="Cidade" type="text" />
@@ -50,12 +57,15 @@
                     </div>
                 </div>y
                 <div class="w-6/12 pl-10">
+
                     <div th:replace="pages/roupascarrinho :: roupascarrinho"></div>
                 </div>
             </div>
         </div>
     </section>
+
     <div th:replace="pages/footer :: footer"></div>
 </body>
 
 </html>
+

@@ -6,6 +6,15 @@
 <body>
     <div th:replace="pages/header :: header"></div>
 
+
+
+    <div class="alert alert-primary" th:if="${mensagem != null}"
+        th:text="${mensagem}"></div>
+
+    <div class="form-validation">
+
+    <div class="container my-10">
+
 <div class="container my-10">
         <div class="flex">
             <div class="w-6/12">
