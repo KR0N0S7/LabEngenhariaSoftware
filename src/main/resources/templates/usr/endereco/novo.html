@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{usr/layout.html}">
+<meta charset="UTF-8">
+<div layout:fragment="content">
+<div class="alert alert-primary" th:if="${mensagem != null}"
+		th:text="${mensagem}"></div>
+
+	<div class="card">
+		<div class="card-header">
+			<p class="text-primary">Endereço</p>
+		</div>
+		<div>
+			<div class="card-body">
+				<form class="row g-3" method="POST" th:object="${endereco}"
+					th:action="@{/endereco/novo}">
+					<input type="hidden" th:field="*{id}" th:value="${idSession}" />
+
+					<div class="col-4">
+						<label for="nome" class="form-label">CEP </label> <input
+							type="text" class="form-control" th:field="*{cep}"
+							placeholder="">
+					</div>
+					<div class="col-4">
+						<label for="nome" class="form-label">Rua </label> <input
+							type="text" class="form-control" th:field="*{rua}"
+							placeholder="">
+					</div>
+					<div class="col-4">
+						<label for="nome" class="form-label">Complemento </label> <input
+							type="text" class="form-control" th:field="*{complemento}"
+							placeholder="">
+					</div>
+					<div class="col-4">
+						<label for="nome" class="form-label">Bairro </label> <input
+							type="text" class="form-control" th:field="*{bairro}"
+							placeholder="">
+					</div>
+					<div class="col-4">
+						<label for="nome" class="form-label">Cidade </label> <input
+							type="text" class="form-control" th:field="*{cidade}"
+							placeholder="">
+					</div>
+					<div class="col-4">
+						<label for="nome" class="form-label">Estado </label> <input
+							type="text" class="form-control" th:field="*{estado}"
+							placeholder="">
+					</div>
+					
+
+					<div class="rom-row">
+						
+					</div>
+
+				<div class="col-md-2">
+					<button type="submit" class="btn btn-primary">Salvar
+						Cadastro</button>
+				</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+</html>

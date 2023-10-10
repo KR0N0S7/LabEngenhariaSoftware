@@ -56,5 +56,26 @@ public class CarrinhoCompra {
         this.cliente = cliente;
     }
 
-    
+    public void addItemProduto(ItemProduto item) {
+        if (item.getProduto().isStockAvailable(item.getQuantidade())) {
+            item.getProduto().reserveStock(item.getQuantidade());
+            itemProduto.add(item);
+            calcularValorTotal();
+        } else {
+            throw new RuntimeException("Insufficient stock available");
+        }
+    }
+
+    public void removeItemProduto(ItemProduto item) {
+        if (itemProduto.remove(item)) {
+            item.getProduto().releaseStock(item.getQuantidade());
+            calcularValorTotal();
+        }
+    }
+
+    public void calcularValorTotal() {
+        valorTotal = itemProduto.stream()
+                .mapToDouble(item -> item.getQuantidade() * item.getProduto().getPreco())
+                .sum();
+    }
 }

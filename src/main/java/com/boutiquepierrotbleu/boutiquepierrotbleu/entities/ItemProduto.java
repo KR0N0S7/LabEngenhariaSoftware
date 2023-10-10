@@ -23,6 +23,10 @@ public class ItemProduto {
     @JoinColumn(name = "produto_id")
     private Produto produto;
 
+    @ManyToOne
+    @JoinColumn(name = "compra_id")
+    private Compra compra;
+
     public Long getId() {
         return id;
     }

@@ -25,6 +25,7 @@ public class Produto {
     private String material;
     private String tipo;
     private String estilo;
+    private Integer estoque;
 
     @OneToMany(mappedBy = "produto")
     private List<ItemProduto> itemProduto;
@@ -139,6 +140,35 @@ public class Produto {
 
     public void setEstilo(String estilo) {
         this.estilo = estilo;
+    }
+
+    public Integer getEstoque() {
+        return estoque;
+    }
+
+    public void setEstoque(Integer estoque) {
+        this.estoque = estoque;
+    }
+
+    // New methods to manage stock
+    public boolean isStockAvailable(int quantity) {
+        return estoque != null && estoque >= quantity;
+    }
+
+    public void reserveStock(int quantity) {
+        if (isStockAvailable(quantity)) {
+            estoque -= quantity;
+        } else {
+            throw new RuntimeException("Insufficient stock available");
+        }
+    }
+
+    public void releaseStock(int quantity) {
+        if (estoque != null) {
+            estoque += quantity;
+        } else {
+            estoque = quantity;
+        }
     }
 
 }

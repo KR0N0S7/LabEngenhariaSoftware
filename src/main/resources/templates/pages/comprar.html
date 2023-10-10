@@ -1,22 +1,23 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"  >
 
+
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <div th:replace="pages/head :: head"></div>
 
 <body>
-    <div th:replace="pages/header :: header"></div> 
+    <div th:replace="pages/header :: header"></div>
 
     <section>
         <div class="container my-10">
             <div class="flex flex-wrap">
                 <div class="w-6/12">
                     <div id="passo-placeholder"></div>
-                
+
                     <div class="flex justify-between my-4">
                         <h2 class="font-bold text-xl">
-                           Informações
+                            Informações
                         </h2>
-                        
+
                         <a href="#">
                             <h2 class="font-bold text-xl mr-24">
                                 Já possui uma conta? <span class="text-purple font-normal">Entrar</span>
@@ -25,14 +26,12 @@
                     </div>
 
                     <div>
-                        <form action="" method="" class="flex flex-col">
+                        <form action="" class="flex flex-col" method="">
                             <div>
-                                <input type="text" placeholder="Seu e-mail">
+                                <input placeholder="Seu e-mail" type="text" />
                             </div>
-
                             <h2 class="font-bold text-xl mt-10 mb-3">Endereço de envio</h2>
 
-                           
                             <select class="font-bold w-full my-4 uppercase">
                                 <option value="roupas">roupas</option>
                                 <option value="sapatos">sapatos</option>
@@ -40,43 +39,33 @@
                                 <option value="meias">meias</option>
                             </select>
 
-                            <input class="my-3" type="text" placeholder="Nome Completo">
-
-                            <input type="text" placeholder="Endereço">
-
-                            <input class="my-3" type="text" placeholder="Cidade">
-
+                            <input class="my-3" placeholder="Nome Completo" type="text" />
+                            <input placeholder="Endereço" type="text" />
+                            <input class="my-3" placeholder="Cidade" type="text" />
                             <select class="font-bold w-full my-4 uppercase">
                                 <option value="Estado">Estado</option>
                             </select>
-
-                            <input class="my-3" type="text" placeholder="CEP">
-
-                            <input type="tel" placeholder="Telefone">
+                            <input class="my-3" placeholder="CEP" type="text" />
+                            <input placeholder="Telefone" type="tel" />
                         </form>
                     </div>
-
-                    <div class="flex justify-between my-5 items-center  ">
-
-                        <a href="#" class="hover:border-solid hover:border-2 hover:border-gray-dark px-1 py-1">Retornar</a>
-                        <button class="bg-purple px-3 py-3 text-white hover:bg-black transition-all duration-500">Continue</button>
-
+                    <div class="flex justify-between my-5 items-center">
+                        <a class="hover:border-solid hover:border-2 hover:border-gray-dark px-1 py-1"
+                            href="#">Retornar</a>
+                        <button
+                            class="bg-purple px-3 py-3 text-white hover:bg-black transition-all duration-500">Continue</button>
                     </div>
-
-                </div>
-
+                </div>y
                 <div class="w-6/12 pl-10">
-                    
+
                     <div th:replace="pages/roupascarrinho :: roupascarrinho"></div>
                 </div>
             </div>
         </div>
     </section>
 
-
     <div th:replace="pages/footer :: footer"></div>
 </body>
-
 
 </html>
 

@@ -15,8 +15,11 @@ public class Cupom {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String codigo;
-    private String tipo;
+    private String tipo; // Tipo can be "PERCENTAGE" or "FIXED_AMOUNT"
+    private Double valor; // New attribute to represent the discount value (percentage or fixed amount)
     private Date dataValidade;
+    private Integer usoLimite; // New attribute to represent the usage limit of the coupon
+    private Integer usoContador; // New attribute to represent the usage counter of the coupon
 
     @ManyToOne
     @JoinColumn(name = "cliente_id")
@@ -54,4 +57,18 @@ public class Cupom {
         this.dataValidade = dataValidade;
     }
 
+    public boolean isValid() {
+        return dataValidade.after(new Date()) && (usoLimite == null || usoContador < usoLimite);
+    }
+
+    public Double aplicarDesconto(Double valorOriginal) {
+        if (isValid()) {
+            if ("PERCENTAGE".equals(tipo)) {
+                return valorOriginal * valor / 100;
+            } else if ("FIXED_AMOUNT".equals(tipo)) {
+                return valor;
+            }
+        }
+        return 0.0;
+    }
 }

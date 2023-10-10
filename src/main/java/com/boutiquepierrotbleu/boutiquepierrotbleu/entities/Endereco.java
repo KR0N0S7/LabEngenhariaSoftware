@@ -2,6 +2,8 @@ package com.boutiquepierrotbleu.boutiquepierrotbleu.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,6 +26,7 @@ public class Endereco {
 
     @ManyToOne
     @JoinColumn(name = "cliente_id")
+    @JsonBackReference // evita loop infinito cliente>enderecos>cliente>enderecos>... no json
     private Cliente cliente;
 
     @OneToMany(mappedBy = "enderecoEntrega")

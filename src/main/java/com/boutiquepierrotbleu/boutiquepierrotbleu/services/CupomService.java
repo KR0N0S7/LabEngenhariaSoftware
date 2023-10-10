@@ -33,4 +33,9 @@ public class CupomService {
     public void excluirCupom(Long id) {
         cupomRepository.deleteById(id);
     }
+
+    public Double aplicarCupom(Long id, Double valorOriginal) throws Exception {
+        Cupom cupom = obterCupom(id);
+        return cupom.aplicarDesconto(valorOriginal);
+    }
 }

@@ -1,11 +1,17 @@
 package com.boutiquepierrotbleu.boutiquepierrotbleu.entities;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Compra {
@@ -16,12 +22,13 @@ public class Compra {
     private String hora;
     private String status;
     private String formaPagamento;
-    private String valorTotal;
-    private String valorFrete;
-    private String valorDesconto;
-    private String valorFinal;
+    private Double valorTotal;
+    private Double valorFrete;
+    private Double valorDesconto;
+    private Double valorFinal;
     private String observacao;
     private String numeroCompra;
+    private Integer numeroParcelas;
 
     @ManyToOne
     @JoinColumn(name = "endereco_id")
@@ -30,6 +37,9 @@ public class Compra {
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
+
+    @OneToMany(mappedBy = "compra")
+    private List<ItemProduto> itens;
 
     public Long getId() {
         return id;
@@ -71,38 +81,6 @@ public class Compra {
         this.formaPagamento = formaPagamento;
     }
 
-    public String getValorTotal() {
-        return valorTotal;
-    }
-
-    public void setValorTotal(String valorTotal) {
-        this.valorTotal = valorTotal;
-    }
-
-    public String getValorFrete() {
-        return valorFrete;
-    }
-
-    public void setValorFrete(String valorFrete) {
-        this.valorFrete = valorFrete;
-    }
-
-    public String getValorDesconto() {
-        return valorDesconto;
-    }
-
-    public void setValorDesconto(String valorDesconto) {
-        this.valorDesconto = valorDesconto;
-    }
-
-    public String getValorFinal() {
-        return valorFinal;
-    }
-
-    public void setValorFinal(String valorFinal) {
-        this.valorFinal = valorFinal;
-    }
-
     public String getObservacao() {
         return observacao;
     }
@@ -135,4 +113,66 @@ public class Compra {
         this.cliente = cliente;
     }
 
+    public Integer getNumeroParcelas() {
+        return numeroParcelas;
+    }
+
+    public void setNumeroParcelas(Integer numeroParcelas) {
+        this.numeroParcelas = numeroParcelas;
+    }
+
+    public Double getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(Double valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+
+    public Double getValorFrete() {
+        return valorFrete;
+    }
+
+    public void setValorFrete(Double valorFrete) {
+        this.valorFrete = valorFrete;
+    }
+
+    public Double getValorDesconto() {
+        return valorDesconto;
+    }
+
+    public void setValorDesconto(Double valorDesconto) {
+        this.valorDesconto = valorDesconto;
+    }
+
+    public Double getValorFinal() {
+        return valorFinal;
+    }
+
+    public void setValorFinal(Double valorFinal) {
+        this.valorFinal = valorFinal;
+    }
+
+    public List<ItemProduto> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<ItemProduto> itens) {
+        this.itens = itens;
+    }
+
+
+    public void criarCompra(CarrinhoCompra carrinho, String formaPagamento, Integer numeroParcelas) {
+        this.cliente = carrinho.getCliente();
+        this.itens = carrinho.getItemProduto();
+        this.formaPagamento = formaPagamento;
+        this.numeroParcelas = numeroParcelas;
+        this.valorTotal = carrinho.getValorTotal();
+        this.data = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        this.hora = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+        this.valorFrete = 0.0;
+        this.valorDesconto = 0.0;
+        this.valorFinal = this.valorTotal + this.valorFrete - this.valorDesconto;
+        this.status = "Aguardando pagamento";
+    }
 }

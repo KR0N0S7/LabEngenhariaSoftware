@@ -33,4 +33,16 @@ public class CreditcardService {
     public void excluirCreditcard(Long id) {
         creditcardRepository.deleteById(id);
     }
+
+    public boolean validarDetalhesDoCartao(String numeroCartao, String dataValidade, String codigoSeguranca) {
+        // Placeholder method to validate card details using payment gateway API
+        // Integrate with real payment gateway API to validate card details here
+        return true;
+    }
+
+    public boolean processarPagamento(Double valor, Integer parcelas) {
+        // Placeholder method to process payment using payment gateway API
+        // Integrate with real payment gateway API to process payment here
+        return true;
+    }
 }

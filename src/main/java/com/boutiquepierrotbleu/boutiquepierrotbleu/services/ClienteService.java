@@ -9,11 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.boutiquepierrotbleu.boutiquepierrotbleu.dto.ClienteMapper;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.dto.ClienteSearchCriteria;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cliente;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.repositories.ClienteRepository;
-import com.boutiquepierrotbleu.boutiquepierrotbleu.repositories.criteriaFilter.ClienteRepositoryImpl;
 
 @Service
 public class ClienteService {
@@ -61,6 +59,14 @@ public class ClienteService {
         Cliente cliente = clienteRepository.findById(clienteId).orElseThrow(() -> new IllegalArgumentException("Invalid cliente Id:" + clienteId));
         cliente.setAtivo(!cliente.isAtivo());  // Toggle the ativo status
         clienteRepository.save(cliente);
+    }
+
+    public Cliente autenticarCliente(String email, String senha) throws Exception {
+        Optional<Cliente> cliente = clienteRepository.findByEmailAndSenha(email, senha);
+        if (cliente.isEmpty()) {
+            throw new Exception("Cliente não encontrado!");
+        }
+        return cliente.get();
     }
     
 
