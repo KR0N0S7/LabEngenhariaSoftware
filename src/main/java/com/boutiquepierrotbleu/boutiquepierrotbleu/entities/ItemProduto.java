@@ -67,4 +67,9 @@ public class ItemProduto {
         this.carrinhoCompra = carrinhoCompra;
     }
 
+    @Override
+    public String toString() {
+        return "ItemProduto [carrinhoCompra=" + carrinhoCompra + ", id=" + id + ", preco=" + preco + ", produto="
+                + produto.getNome() + ", quantidade=" + quantidade + "]";
+    }
 }

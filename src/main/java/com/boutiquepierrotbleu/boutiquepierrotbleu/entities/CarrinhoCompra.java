@@ -2,6 +2,8 @@ package com.boutiquepierrotbleu.boutiquepierrotbleu.entities;
 
 import java.util.List;
 
+import com.boutiquepierrotbleu.boutiquepierrotbleu.exceptions.InsufficientStockException;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -56,21 +58,24 @@ public class CarrinhoCompra {
         this.cliente = cliente;
     }
 
-    public void addItemProduto(ItemProduto item) {
-        if (item.getProduto().isStockAvailable(item.getQuantidade())) {
-            item.getProduto().reserveStock(item.getQuantidade());
-            itemProduto.add(item);
-            calcularValorTotal();
-        } else {
-            throw new RuntimeException("Insufficient stock available");
-        }
+    public Boolean isEmpty() {
+        return itemProduto.isEmpty();
     }
 
-    public void removeItemProduto(ItemProduto item) {
-        if (itemProduto.remove(item)) {
-            item.getProduto().releaseStock(item.getQuantidade());
+    public void addItemProduto(ItemProduto item) {
+        if(item.getProduto().isStockAvailable(item.getQuantidade())) {
+            item.getProduto().reserveStock(item.getQuantidade());
+            this.itemProduto.add(item);
             calcularValorTotal();
+        } else {
+            throw new InsufficientStockException("Estoque insuficiente do produto: " + item.getProduto().getNome());
         }
+    }
+    
+    public void removeItemProduto(ItemProduto item) {
+        this.itemProduto.remove(item);
+        item.getProduto().increaseEstoque(item.getQuantidade());
+        calcularValorTotal();
     }
 
     public void calcularValorTotal() {

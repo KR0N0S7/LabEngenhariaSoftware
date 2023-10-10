@@ -2,6 +2,8 @@ package com.boutiquepierrotbleu.boutiquepierrotbleu.entities;
 
 import java.util.List;
 
+import com.boutiquepierrotbleu.boutiquepierrotbleu.exceptions.InsufficientStockException;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -151,24 +153,19 @@ public class Produto {
     }
 
     // New methods to manage stock
-    public boolean isStockAvailable(int quantity) {
-        return estoque != null && estoque >= quantity;
+    public boolean isStockAvailable(int requiredQuantity) {
+        return this.estoque >= requiredQuantity;
     }
 
     public void reserveStock(int quantity) {
-        if (isStockAvailable(quantity)) {
-            estoque -= quantity;
-        } else {
-            throw new RuntimeException("Insufficient stock available");
+        if(!isStockAvailable(quantity)) {
+            throw new InsufficientStockException("Estoque insuficiente!");
         }
+        this.estoque -= quantity;
     }
 
-    public void releaseStock(int quantity) {
-        if (estoque != null) {
-            estoque += quantity;
-        } else {
-            estoque = quantity;
-        }
+    public void increaseEstoque(int quantity) {
+        this.estoque += quantity;
     }
 
 }

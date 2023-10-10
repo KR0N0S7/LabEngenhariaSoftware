@@ -42,15 +42,17 @@ public class ClienteController {
     @RequestMapping("login")
     public ModelAndView telaLoginCliente(HttpSession session) {
         ModelAndView mv = new ModelAndView();
-        //logger.debug("Session: {}", session.getAttribute("id") + ", " + session.getAttribute("nome"));
+        logger.debug("Session: {}", session.getAttribute("id") + ", " + session.getAttribute("nome"));
         Object idAttribute = session.getAttribute("id");
         if (idAttribute == null) {
             mv = new ModelAndView("usr/login");
         } else {
             if (idAttribute != null && "admin".equals(idAttribute.toString())) {
                 mv = new ModelAndView("redirect:/admin/editar");
+                mv.addObject("id", session.getAttribute("id"));
             } else {
                 mv = new ModelAndView("redirect:/cliente/cadastro");
+                mv.addObject("id", session.getAttribute("id"));
             }
         }
         
@@ -108,6 +110,7 @@ public class ClienteController {
                 logger.debug("Received cliente from db: {}", cliente.getEnderecos().size());
                 // enderecos = enderecoService.getEnderecosByClienteId(id);
                 // mv.addObject("enderecos", enderecos); 
+                mv.addObject("id", session.getAttribute("id"));
                 return mv;
             } catch (Exception e) {
                 mv.addObject("cliente", e.getMessage());
@@ -139,12 +142,13 @@ public class ClienteController {
         }
         mv.addObject("cliente", cliente);
         mv.addObject("enderecos", enderecos); 
+        mv.addObject("id", session.getAttribute("id"));
         return mv;
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "salvar")
     public ModelAndView clienteSalvo(@ModelAttribute("cliente") Cliente cliente, BindingResult bindingResult,
-            RedirectAttributes redirectAttributes) {
+            RedirectAttributes redirectAttributes, HttpSession session) {
         logger.debug("Received endereco from form: {}", cliente.getEnderecos().size());
         if (bindingResult.hasErrors()) {
             ModelAndView mv = new ModelAndView("cliente/cadastro");
@@ -174,6 +178,7 @@ public class ClienteController {
             mv.addObject("cliente", new Cliente());
         } else {
             mv.addObject("cliente", cliente);
+            mv.addObject("id", session.getAttribute("id"));
         }
         redirectAttributes.addFlashAttribute("mensagem", "Cliente salvo com sucesso!");
         return mv;

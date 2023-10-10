@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{usr/layout.html}">
+<meta charset="UTF-8">
+<div layout:fragment="content">
+	<div class="alert alert-primary" th:if="${#lists.isEmpty(lista)}">
+        Carrinho vazio.
+    </div>
+    <div th:if="${message}" class="alert alert-success" role="alert">
+        <p th:text="${message}"></p>
+    </div>
+    <div th:if="${not #lists.isEmpty(lista)}">
+
+        <table id="tabelaCarrinho" class="table table-striped">
+            <thead>
+                <tr>
+                    
+                    <th>Nome</th>
+                    <th>Quantidade</th>
+                    <th>Preço</th>
+                    
+                    <th>Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="itemProduto : ${lista}">
+					<td th:text="${itemProduto.produto.nome}"></td>
+                    <td th:text="${itemProduto.quantidade}"></td>
+                    <td th:text="${itemProduto.preco}"></td>
+                    
+                    
+                    <td>
+                        
+                        <a class="btn btn-primary btn-sm ml-3" th:href="@{/carrinho/remover(id=${itemProduto.id})}" 
+                           onclick="return confirm('Você realmente deseja retirar esse produto?')">Excluir</a>
+                    </td>
+                </tr>
+
+				<tr>
+					<td colspan="2">Total</td>
+					<td th:text="${total}"></td>
+				</tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</html>

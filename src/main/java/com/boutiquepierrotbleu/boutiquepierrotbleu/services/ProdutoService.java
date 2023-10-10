@@ -45,7 +45,7 @@ public class ProdutoService {
     @Transactional
     public void liberarEstoque(Long id, int quantidade) throws Exception {
         Produto produto = obterProduto(id);
-        produto.releaseStock(quantidade);
+        produto.increaseEstoque(quantidade);
         produtoRepository.save(produto);
     }
 }

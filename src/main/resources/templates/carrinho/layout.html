@@ -96,10 +96,6 @@
 								<li><a class="dropdown-item" th:href="@{/}">Listar</a></li>
 								<li><a class="dropdown-item" th:href="@{//novo}">Cadastrar</a></li>
 							</ul></li>
-						<div>
-							<a class="btn btn-primary btn-sm ml-3" th:href="@{/user/logout}" 
-							onclick="return confirm('Você realmente deseja encerrar sessão?')">Logout</a>
-						</div>
 					</ul>
 				</div>
 			</div>
@@ -122,6 +118,6 @@
 		th:src="@{/assets/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.js}"></script>
 
 	<div layout:fragment="scripts"></div>
-	
+
 </body>
 </html>
