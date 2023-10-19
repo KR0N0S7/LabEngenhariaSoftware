@@ -1,5 +1,7 @@
 package com.boutiquepierrotbleu.boutiquepierrotbleu.controllers;
 
+import static org.junit.jupiter.api.DynamicTest.stream;
+
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cliente;
+import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.ItemProduto;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Produto;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.CarrinhoCompraService;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.ClienteService;
@@ -42,7 +45,9 @@ public class ProdutoController {
         mv.addObject("id", idCliente);
 
         Cliente cliente = clienteService.obterCliente(idCliente);
-        Integer numProdutosNoCarrinho = carrinhoCompraService.getOrCreateCart(cliente).getItemProduto().size();
+        Integer numProdutosNoCarrinho = carrinhoCompraService.getOrCreateCart(cliente).getItemProduto().stream()
+                .mapToInt(ItemProduto::getQuantidade)
+                .sum();;
         mv.addObject("numeroProdutos", numProdutosNoCarrinho);
         logger.debug("Session id: {}", session.getId());
         logger.debug("Session id: {}", session.getAttribute("id"));
@@ -51,42 +56,42 @@ public class ProdutoController {
         return mv;
     }
 
-    @RequestMapping(value = "/detalharProduto", method = RequestMethod.GET)
+    @RequestMapping(value = "/detalhar", method = RequestMethod.GET)
     public ModelAndView detalharProduto(Long id) {
         ModelAndView mv = new ModelAndView("path/to/your/view");
         // Your implementation here
         return mv;
     }
 
-    @RequestMapping(value = "/criarProduto", method = RequestMethod.GET)
+    @RequestMapping(value = "/criar", method = RequestMethod.GET)
     public ModelAndView criarProduto() {
         ModelAndView mv = new ModelAndView("path/to/your/view");
         // Your implementation here
         return mv;
     }
 
-    @RequestMapping(value = "/atualizarProduto", method = RequestMethod.GET)
+    @RequestMapping(value = "/atualizar", method = RequestMethod.GET)
     public ModelAndView atualizarProduto(Long id) {
         ModelAndView mv = new ModelAndView("path/to/your/view");
         // Your implementation here
         return mv;
     }
 
-    @RequestMapping(value = "/deletarProduto", method = RequestMethod.GET)
+    @RequestMapping(value = "/deletar", method = RequestMethod.GET)
     public ModelAndView deletarProduto(Long id) {
         ModelAndView mv = new ModelAndView("path/to/your/view");
         // Your implementation here
         return mv;
     }
 
-    @RequestMapping(value = "/reservarEstoqueDeProduto", method = RequestMethod.GET)
+    @RequestMapping(value = "/reservar", method = RequestMethod.GET)
     public ModelAndView reservarEstoqueDeProduto(Long id, Integer quantity) {
         ModelAndView mv = new ModelAndView("path/to/your/view");
         // Your implementation here
         return mv;
     }
 
-    @RequestMapping(value = "/liberarEstoqueDeProduto", method = RequestMethod.GET)
+    @RequestMapping(value = "/liberar", method = RequestMethod.GET)
     public ModelAndView liberarEstoqueDeProduto(Long id, Integer quantity) {
         ModelAndView mv = new ModelAndView("path/to/your/view");
         // Your implementation here

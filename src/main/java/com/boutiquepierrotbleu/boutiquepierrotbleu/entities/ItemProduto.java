@@ -55,8 +55,8 @@ public class ItemProduto {
         return preco;
     }
 
-    public void setPreco(Double preco) {
-        this.preco = preco;
+    public void setPreco(Double preco, Integer quantidade) {
+        this.preco = preco * quantidade;
     }
 
     public CarrinhoCompra getCarrinhoCompra() {

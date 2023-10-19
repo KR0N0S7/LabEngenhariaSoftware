@@ -20,8 +20,8 @@ public class Compra {
     private Long id;
     private String data;
     private String hora;
-    private String status;
-    private String formaPagamento;
+    private Status status;
+    private Pagamento formaPagamento;
     private Double valorTotal;
     private Double valorFrete;
     private Double valorDesconto;
@@ -29,6 +29,9 @@ public class Compra {
     private String observacao;
     private String numeroCompra;
     private Integer numeroParcelas;
+
+    @OneToMany(mappedBy = "compra")
+    private List<Cupom> cupons;
 
     @ManyToOne
     @JoinColumn(name = "endereco_id")
@@ -65,19 +68,19 @@ public class Compra {
         this.hora = hora;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
-    public String getFormaPagamento() {
+    public Pagamento getFormaPagamento() {
         return formaPagamento;
     }
 
-    public void setFormaPagamento(String formaPagamento) {
+    public void setFormaPagamento(Pagamento formaPagamento) {
         this.formaPagamento = formaPagamento;
     }
 
@@ -161,18 +164,29 @@ public class Compra {
         this.itens = itens;
     }
 
+    public List<Cupom> getCupons() {
+        return cupons;
+    }
 
-    public void criarCompra(CarrinhoCompra carrinho, String formaPagamento, Integer numeroParcelas) {
+    public void setCupons(List<Cupom> cupons) {
+        this.cupons = cupons;
+    }
+
+    public Compra(CarrinhoCompra carrinho) {
         this.cliente = carrinho.getCliente();
         this.itens = carrinho.getItemProduto();
-        this.formaPagamento = formaPagamento;
-        this.numeroParcelas = numeroParcelas;
+        this.formaPagamento = null;
+        this.numeroParcelas = 0;
         this.valorTotal = carrinho.getValorTotal();
         this.data = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         this.hora = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
         this.valorFrete = 0.0;
         this.valorDesconto = 0.0;
         this.valorFinal = this.valorTotal + this.valorFrete - this.valorDesconto;
-        this.status = "Aguardando pagamento";
+        this.status = Status.AGUARDANDO_PAGAMENTO;
+        this.observacao = "";
+        this.numeroCompra = "";
+        this.enderecoEntrega = null;
     }
+    
 }

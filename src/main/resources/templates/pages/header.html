@@ -27,25 +27,13 @@
 
                 <div>
                     <ion-icon class="mx-3" name="search-outline"></ion-icon>
-                    <ion-icon class="mx-3" name="cart-outline"></ion-icon> 
+                    <a th:href="@{carrinho/detalhar}">
+                        <ion-icon class="mx-3" name="cart-outline"></ion-icon> 
+                    </a>
                     <a th:href="@{cliente/login}">
                         <ion-icon class="mx-3" name="people-outline"></ion-icon> 
                     </a>
                 </div>
-                    <!-- <ion-icon class="mx-3" name="search-outline"></ion-icon> -->
-                    
-                    <div x-data="{ isOpen: false }">
-                        <button @click="isOpen = !isOpen">
-                            <ion-icon class="mx-3" name="cart-outline">
-                        </button>
-                        <div x-show="isOpen">
-                            <h1 class="bg-blue-700">
-                                testeue
-                            </h1>
-                        </div>
-                    </div>  
-                        
-                    <!-- </ion-icon><a href=""><ion-icon class="mx-3" name="people-outline"></ion-icon></a> -->
 
             </div> 
         </nav>

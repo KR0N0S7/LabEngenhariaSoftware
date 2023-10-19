@@ -44,6 +44,9 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente")
     private List<Cupom> cupom;
 
+    @OneToMany(mappedBy = "cliente")
+    private List<Troca> trocas;
+
     private boolean ativo = true;
 
     public Long getId() {
@@ -154,5 +157,14 @@ public class Cliente {
         this.enderecos = enderecos;
     }
 
+    public List<Troca> getTrocas() {
+        return trocas;
+    }
+
+    public void setTrocas(List<Troca> trocas) {
+        this.trocas = trocas;
+    }
+
+    
 }
 

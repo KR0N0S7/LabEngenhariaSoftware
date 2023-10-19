@@ -36,10 +36,4 @@ public class CompraService {
         compraRepository.deleteById(id);
     }
 
-    @Transactional
-    public Compra criarCompra(CarrinhoCompra carrinho, String formaPagamento, Integer numeroParcelas) throws Exception {
-        Compra compra = new Compra();
-        compra.criarCompra(carrinho, formaPagamento, numeroParcelas);
-        return compraRepository.save(compra);
-    }
 }

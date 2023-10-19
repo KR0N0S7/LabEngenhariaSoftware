@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 @Entity
@@ -31,6 +33,10 @@ public class Produto {
 
     @OneToMany(mappedBy = "produto")
     private List<ItemProduto> itemProduto;
+
+    @ManyToOne
+    @JoinColumn(name = "troca_id")
+    private Troca troca;
 
     public List<ItemProduto> getItemProduto() {
         return itemProduto;
@@ -150,6 +156,14 @@ public class Produto {
 
     public void setEstoque(Integer estoque) {
         this.estoque = estoque;
+    }
+
+    public Troca getTroca() {
+        return troca;
+    }
+
+    public void setTroca(Troca troca) {
+        this.troca = troca;
     }
 
     // New methods to manage stock

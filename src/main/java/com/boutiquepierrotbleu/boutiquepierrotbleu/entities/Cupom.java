@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Cupom {
@@ -24,6 +25,14 @@ public class Cupom {
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
+
+    @ManyToOne
+    @JoinColumn(name = "compra_id")
+    private Compra compra;
+
+    @OneToOne
+    @JoinColumn(name = "troca_id")
+    private Troca troca;
 
     public Long getId() {
         return id;
@@ -60,7 +69,55 @@ public class Cupom {
     public boolean isValid() {
         return dataValidade.after(new Date()) && (usoLimite == null || usoContador < usoLimite);
     }
+    
+    public Double getValor() {
+        return valor;
+    }
 
+    public void setValor(Double valor) {
+        this.valor = valor;
+    }
+
+    public Integer getUsoLimite() {
+        return usoLimite;
+    }
+    
+    public void setUsoLimite(Integer usoLimite) {
+        this.usoLimite = usoLimite;
+    }
+
+    public Integer getUsoContador() {
+        return usoContador;
+    }
+
+    public void setUsoContador(Integer usoContador) {
+        this.usoContador = usoContador;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+    
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Compra getCompra() {
+        return compra;
+    }
+
+    public void setCompra(Compra compra) {
+        this.compra = compra;
+    }
+
+    public Troca getTroca() {
+        return troca;
+    }
+
+    public void setTroca(Troca troca) {
+        this.troca = troca;
+    }
+    
     public Double aplicarDesconto(Double valorOriginal) {
         if (isValid()) {
             if ("PERCENTAGE".equals(tipo)) {
@@ -71,4 +128,5 @@ public class Cupom {
         }
         return 0.0;
     }
+
 }

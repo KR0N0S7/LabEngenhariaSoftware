@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:4567/pierrotbleu?createDatabaseIfNotExist=True
-    username: gugu
-    password: root
+    url: jdbc:mysql://localhost:3306/pierrotbleu?createDatabaseIfNotExist=True
+    username: admin
+    password: admin123
   jpa:
     hibernate:
       ddl-auto: update

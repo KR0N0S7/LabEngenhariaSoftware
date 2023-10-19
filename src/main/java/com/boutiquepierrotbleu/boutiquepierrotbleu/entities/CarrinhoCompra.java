@@ -66,7 +66,7 @@ public class CarrinhoCompra {
         if(item.getProduto().isStockAvailable(item.getQuantidade())) {
             item.getProduto().reserveStock(item.getQuantidade());
             this.itemProduto.add(item);
-            calcularValorTotal();
+            //calcularValorTotal();
         } else {
             throw new InsufficientStockException("Estoque insuficiente do produto: " + item.getProduto().getNome());
         }
@@ -74,13 +74,12 @@ public class CarrinhoCompra {
     
     public void removeItemProduto(ItemProduto item) {
         this.itemProduto.remove(item);
-        item.getProduto().increaseEstoque(item.getQuantidade());
-        calcularValorTotal();
+        //calcularValorTotal();
     }
 
-    public void calcularValorTotal() {
-        valorTotal = itemProduto.stream()
-                .mapToDouble(item -> item.getQuantidade() * item.getProduto().getPreco())
+    public Double calcularValorTotal(CarrinhoCompra carrinhoCompra) {
+        return carrinhoCompra.itemProduto.stream()
+                .mapToDouble(item -> item.getPreco())
                 .sum();
     }
 }

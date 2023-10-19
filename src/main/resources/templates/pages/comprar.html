@@ -1,7 +1,13 @@
 <!DOCTYPE html>
-
-
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
+        crossorigin="anonymous">
+</head>
+
 <div th:replace="pages/head :: head"></div>
 
 <body>
@@ -13,49 +19,46 @@
                 <div class="w-6/12">
                     <div id="passo-placeholder"></div>
 
-                    <div class="flex justify-between my-4">
-                        <h2 class="font-bold text-xl">
-                            Informações
-                        </h2>
-
-                        <a href="#">
-                            <h2 class="font-bold text-xl mr-24">
-                                Já possui uma conta? <span class="text-purple font-normal">Entrar</span>
-                            </h2>
-                        </a>
-                    </div>
-
                     <div>
-                        <form action="" class="flex flex-col" method="">
-                            <div>
-                                <input placeholder="Seu e-mail" type="text" />
+                        <form action="" class="flex flex-col" >
+                            
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
+
                             <h2 class="font-bold text-xl mt-10 mb-3">Endereço de envio</h2>
 
-                            <select class="font-bold w-full my-4 uppercase">
-                                <option value="roupas">roupas</option>
-                                <option value="sapatos">sapatos</option>
-                                <option value="calcas">calcas</option>
-                                <option value="meias">meias</option>
-                            </select>
-
-                            <input class="my-3" placeholder="Nome Completo" type="text" />
-                            <input placeholder="Endereço" type="text" />
-                            <input class="my-3" placeholder="Cidade" type="text" />
-                            <select class="font-bold w-full my-4 uppercase">
-                                <option value="Estado">Estado</option>
-                            </select>
-                            <input class="my-3" placeholder="CEP" type="text" />
-                            <input placeholder="Telefone" type="tel" />
+                            <div>
+                                <label class="font-bold">Selecione o endereço de envio</label>
+                                <select class="form-select" th:object="${endereco}" id="addressDropdown" onchange="updateFields()">
+                                    <option value="" selected="selected">Selecione um endereço</option>
+                                    <option th:each="endereco : ${listaEnderecos}" 
+                                        th:value="${endereco.id}" 
+                                        th:data-rua="${endereco.rua}" 
+                                        th:data-complemento="${endereco.complemento}" 
+                                        th:data-bairro="${endereco.bairro}" 
+                                        th:data-cidade="${endereco.cidade}" 
+                                        th:data-estado="${endereco.estado}" 
+                                        th:data-cep="${endereco.cep}"
+                                        th:text="${endereco.tipo}"></option>
+                                </select>
+                            </div>
+    
+                            <input class="my-3" placeholder="Endereço" type="text" id="enderecoInput" readonly />
+                            <input placeholder="Complemento" type="text" id="complementoInput" readonly />
+                            <input class="my-3" placeholder="Bairro" type="text" id="bairroInput" readonly />
+                            <input placeholder="Cidade" type="text" id="cidadeInput" readonly />
+                            <input class="my-3" placeholder="Estado" type="text" id="estadoInput" readonly />
+                            <input placeholder="CEP" type="text" id="cepInput" readonly />
                         </form>
                     </div>
                     <div class="flex justify-between my-5 items-center">
                         <a class="hover:border-solid hover:border-2 hover:border-gray-dark px-1 py-1"
-                            href="#">Retornar</a>
-                        <button
-                            class="bg-purple px-3 py-3 text-white hover:bg-black transition-all duration-500">Continue</button>
+                            th:href="@{/carrinho/detalhar}">Retornar</a>
+                        <a class="bg-purple px-3 py-3 text-white hover:bg-black transition-all duration-500"
+                            th:href="@{/compra/pagamento}">Continue</a>
                     </div>
-                </div>y
+                </div>
                 <div class="w-6/12 pl-10">
 
                     <div th:replace="pages/roupascarrinho :: roupascarrinho"></div>
@@ -65,6 +68,30 @@
     </section>
 
     <div th:replace="pages/footer :: footer"></div>
+
+    <script>
+        function updateFields() {
+            const dropdown = document.getElementById('addressDropdown');
+            const selectedOption = dropdown.options[dropdown.selectedIndex];
+
+            if (selectedOption.value === "") {
+                // Clear all fields if empty option is selected
+                document.getElementById('enderecoInput').value = "";
+                document.getElementById('complementoInput').value = "";
+                document.getElementById('bairroInput').value = "";
+                document.getElementById('cidadeInput').value = "";
+                document.getElementById('estadoInput').value = "";
+                document.getElementById('cepInput').value = "";
+            } else {
+                document.getElementById('enderecoInput').value = selectedOption.getAttribute('data-rua');
+                document.getElementById('complementoInput').value = selectedOption.getAttribute('data-complemento');
+                document.getElementById('bairroInput').value = selectedOption.getAttribute('data-bairro');
+                document.getElementById('cidadeInput').value = selectedOption.getAttribute('data-cidade');
+                document.getElementById('estadoInput').value = selectedOption.getAttribute('data-estado');
+                document.getElementById('cepInput').value = selectedOption.getAttribute('data-cep');
+            }
+        }
+    </script>
 </body>
 
 </html>

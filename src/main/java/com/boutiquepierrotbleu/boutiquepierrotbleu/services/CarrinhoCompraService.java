@@ -22,9 +22,6 @@ public class CarrinhoCompraService {
     @Autowired
     private ProdutoService produtoService;
 
-    @Autowired
-    private ItemProdutoService itemProdutoService;
-
     public CarrinhoCompra salvarCarrinhoCompra(CarrinhoCompra carrinhoCompra) {
         return carrinhoCompraRepository.save(carrinhoCompra);
     }
@@ -55,26 +52,13 @@ public class CarrinhoCompraService {
             ItemProduto item = new ItemProduto();
             item.setProduto(produto);
             item.setQuantidade(quantity);
-            item.setPreco(produto.getPreco()); // Ensure the price is set based on the current product price
+            item.setPreco(produto.getPreco(), quantity); // Ensure the price is set based on the current product price
             
             carrinho.addItemProduto(item);
             carrinhoCompraRepository.save(carrinho);
         } else {
             throw new InsufficientStockException("Not enough stock for product: " + produto.getNome());
         }
-    }
-
-
-    @Transactional
-    public void removerItemDoCarrinho(Long carrinhoId, Long itemId) throws Exception {
-        CarrinhoCompra carrinho = obterCarrinhoCompra(carrinhoId); // This method should throw an EntityNotFoundException if not found
-        ItemProduto item = itemProdutoService.obterItemProduto(itemId); // This method should throw an EntityNotFoundException if not found
-        
-        Produto produto = item.getProduto(); // Assuming that item has a getProduto() method
-        produto.increaseEstoque(item.getQuantidade()); // This method should update the estoque and save the entity
-        
-        carrinho.removeItemProduto(item);
-        carrinhoCompraRepository.save(carrinho);
     }
 
     public CarrinhoCompra getOrCreateCart(Cliente cliente) {
@@ -86,12 +70,4 @@ public class CarrinhoCompraService {
                                           return carrinhoCompraRepository.save(newCart);
                                       });
     }
-
-    public void addItemProdutoToCart(Cliente cliente, ItemProduto itemProduto) {
-        CarrinhoCompra carrinho = getOrCreateCart(cliente);
-        carrinho.addItemProduto(itemProduto);
-        // Ensure the itemProduto is saved and associated with Produto...
-        carrinhoCompraRepository.save(carrinho);
-    }
-
 }

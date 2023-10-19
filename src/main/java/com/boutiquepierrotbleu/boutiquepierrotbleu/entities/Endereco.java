@@ -17,6 +17,7 @@ public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String tipo;
     private String rua;
     private String complemento;
     private String bairro;
@@ -38,6 +39,14 @@ public class Endereco {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public String getRua() {

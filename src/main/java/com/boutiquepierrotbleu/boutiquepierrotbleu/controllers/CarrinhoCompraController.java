@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.CarrinhoCompra;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cliente;
@@ -51,7 +53,7 @@ public class CarrinhoCompraController {
     }
 
     @RequestMapping(value = "/detalhar", method = RequestMethod.GET)
-    public ModelAndView detalharCarrinho(HttpSession session, Long id) throws Exception {
+    public ModelAndView detalharCarrinho(HttpSession session, @RequestParam(required = false) Long id) throws Exception {
         ModelAndView mv = new ModelAndView("carrinho/index");
         Long idCliente = (Long) session.getAttribute("id");
         CarrinhoCompra carrinho = carrinhoCompraService.getOrCreateCart(clienteService.obterCliente(idCliente));
@@ -83,54 +85,104 @@ public class CarrinhoCompraController {
             // Handle unauthenticated user
             modelAndView = new ModelAndView("redirect:/cliente/login");
         } else {
+            modelAndView = new ModelAndView("redirect:/produto/listarProdutos"); 
+            ItemProduto itemProduto;
             // Create ItemProduto and add to cart.
-            if(carrinho.getItemProduto().stream().anyMatch(item -> item.getProduto().getNome().equals(produto.getNome()))) {
+            if(carrinho.getItemProduto().stream().anyMatch(item -> item.getProduto().getId().equals(produto.getId()))) {
                 // Sum products that already has in cart
                 int index = carrinho.getItemProduto().indexOf(carrinho.getItemProduto().stream().filter(item -> item.getProduto().getNome().equals(produto.getNome())).findFirst().get());
-                carrinho.getItemProduto().get(index).setQuantidade(carrinho.getItemProduto().get(index).getQuantidade() + 1);
+                itemProduto = carrinho.getItemProduto().get(index);
+                itemProduto.setQuantidade(itemProduto.getQuantidade() + 1);
+                itemProduto.setPreco(produto.getPreco(), itemProduto.getQuantidade());
+                logger.debug("Número de {}::::: {}", itemProduto.getProduto().getNome(),itemProduto.getQuantidade());
+                itemProdutoService.salvaItemProduto(itemProduto);
             } else {
-                ItemProduto itemProduto = itemProdutoService.salvaItemProduto(new ItemProduto());
-                    itemProduto.setCarrinhoCompra(carrinho);
-                    itemProduto.setPreco(produto.getPreco());
-                    itemProduto.setProduto(produto);
-                    itemProduto.setQuantidade(1);
-                carrinho.getItemProduto().add(itemProduto);
-                // Handle other necessary properties of itemProduto...
-                logger.debug("Produto::::: {}", produto.getNome());
-                logger.debug("Lista de ItemProduto::::: {}", carrinho.getItemProduto().toString());
-                carrinhoCompraService.addItemProdutoToCart(cliente, itemProduto);
+                if(produto.isStockAvailable(1)) {
+                    itemProduto = itemProdutoService.salvaItemProduto(new ItemProduto());
+                        itemProduto.setCarrinhoCompra(carrinho);
+                        itemProduto.setPreco(produto.getPreco(), 1);
+                        itemProduto.setProduto(produto);
+                        itemProduto.setQuantidade(1);
+                    carrinho.getItemProduto().add(itemProduto);
+                    // Handle other necessary properties of itemProduto...
+                    logger.debug("Produto::::: {}", produto.getNome());
+                    logger.debug("Lista de ItemProduto::::: {}", carrinho.getItemProduto().toString());
+                    //carrinho.addItemProduto(itemProduto); //a entidade é a responsável por verificar disponibilidade
+
+                    logger.debug("Valor total antes::::: {}", carrinho.getValorTotal());
+                    Double valorTotal = carrinho.calcularValorTotal(carrinho);
+                    carrinho.setValorTotal(valorTotal);
+                    carrinhoCompraService.salvarCarrinhoCompra(carrinho);
+                    logger.debug("Valor total depois::::: {}", valorTotal);
+                    // If you want to redirect to the cart view page
+                    // modelAndView = new ModelAndView("redirect:/carrinho");
+                    
+                    modelAndView.addObject("message", "Produto adicionado com sucesso!");
+                    modelAndView.addObject("carrinho", carrinho);
+                    modelAndView.addObject("id", session.getAttribute("id"));
+                } else {
+                    modelAndView.addObject("message", "Produto não disponível no estoque!");
+                }
             }
+            
+            Integer numeroProdutos = carrinho.getItemProduto().stream()
+                .mapToInt(ItemProduto::getQuantidade)
+                .sum();
+            modelAndView.addObject("numeroProdutos", numeroProdutos); 
 
-            carrinho.calcularValorTotal();
-
-            // If you want to redirect to the cart view page
-            // modelAndView = new ModelAndView("redirect:/carrinho");
-
-            // If you want to show a specific page with some model attributes
-            modelAndView = new ModelAndView("redirect:/produto/listarProdutos"); // Specify your page name
-            modelAndView.addObject("message", "Produto adicionado com sucesso!");
-            modelAndView.addObject("carrinho", carrinho);
-            modelAndView.addObject("id", session.getAttribute("id"));
-            modelAndView.addObject("numeroProdutos", carrinho.getItemProduto().size());
+            logger.debug("Número de produtos::::: {}", numeroProdutos);  
         }
         return modelAndView;
     }
 
-    @RequestMapping(value = "/remover", method = RequestMethod.POST)
-    public String removerItemDoCarrinho(Long carrinhoId, Long itemId) {
-        try {
-            carrinhoCompraService.removerItemDoCarrinho(carrinhoId, itemId);
-            return "redirect:/detalharCarrinho?id=" + carrinhoId;
-        } catch (Exception e) {
-            // Log error and redirect to an error page or handle accordingly
-            return "redirect:/errorPage";
-        }
+    @RequestMapping("/remover")
+    public ModelAndView removerItemDoCarrinho(@RequestParam("id") Long itemId, RedirectAttributes redirectAttributes) throws Exception {
+        ModelAndView mv = new ModelAndView("redirect:/carrinho/detalhar");;
+        Long carrinhoId = itemProdutoService.obterItemProduto(itemId).getCarrinhoCompra().getId();
+        CarrinhoCompra carrinho = carrinhoCompraService.obterCarrinhoCompra(carrinhoId);
+        ItemProduto item = itemProdutoService.obterItemProduto(itemId); // This method should throw an EntityNotFoundException if not found
+        
+        logger.debug("Id do produto::::: {}", itemId);  
+        logger.debug("Id do carrinho::::: {}", carrinhoId);
+        
+        if(carrinho.getItemProduto().size() >= 1) {
+            
+            Produto produto = item.getProduto(); 
+            produto.increaseEstoque(item.getQuantidade()); // This method should update the estoque and save the entity
+            produtoService.salvarProduto(produto);
+
+            carrinho.removeItemProduto(item);
+            itemProdutoService.deletarItemProduto(itemId);
+            carrinho.setValorTotal(carrinho.calcularValorTotal(carrinho));
+
+            try {
+                carrinhoCompraService.salvarCarrinhoCompra(carrinho);   
+                redirectAttributes.addFlashAttribute("mensagem", "Produto removido com sucesso!"); 
+                logger.debug("Remoção de produto::::::::::::::::::::::::::::::");      
+            } catch (Exception e) {
+                // Log error and redirect to an error page or handle accordingly
+                redirectAttributes.addFlashAttribute("mensagem", "Erro ao remover produto!");
+                logger.error("Error removing item from cart", e);                
+            }
+        } /*else {
+            
+            Produto produto = item.getProduto(); 
+            produto.increaseEstoque(item.getQuantidade()); // This method should update the estoque and save the entity
+            produtoService.salvarProduto(produto);
+
+            itemProdutoService.deletarItemProduto(itemId);
+
+            carrinhoCompraService.excluirCarrinhoCompra(carrinhoId);
+            redirectAttributes.addFlashAttribute("mensagem", "Carrinho vazio!"); 
+            logger.debug("Exclusão de carrinho::::::::::::::::::::::::::::::");
+        }*/
+
+        return mv;
     }
 
-
-    @RequestMapping(value = "/deletarCarrinho", method = RequestMethod.GET)
+    @RequestMapping("/deletar")
     public ModelAndView deletarCarrinho(Long id) {
-        ModelAndView mv = new ModelAndView("path/to/your/view");
+        ModelAndView mv = new ModelAndView("redirect:/cliente/cadastro");
         // Your implementation here
         return mv;
     }
