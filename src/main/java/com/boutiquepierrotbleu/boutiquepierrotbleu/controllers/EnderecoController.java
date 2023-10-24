@@ -26,7 +26,7 @@ public class EnderecoController {
 	private static final Logger logger = LoggerFactory.getLogger(EnderecoRepository.class);
 
 	@RequestMapping(path = "novo")
-	public ModelAndView editarEnderecoendereco(@RequestParam(required = false) Long id, HttpSession session) throws Exception {
+	public ModelAndView editarEndereco(@RequestParam(required = false) Long id, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView("usr/endereco/novo.html");
 		logger.debug("Session id: ", session.getAttribute("id"));
 		Endereco endereco;
@@ -77,7 +77,7 @@ public class EnderecoController {
 	}
 	
 	@RequestMapping("/excluir")
-	public ModelAndView excluirendereco(@RequestParam Long id, RedirectAttributes redirectAttributes) {
+	public ModelAndView excluirEndereco(@RequestParam Long id, RedirectAttributes redirectAttributes) {
 		ModelAndView mv = new ModelAndView("redirect:/endereco/listar");
 		try {
 			enderecoService.excluirEndereco(id);

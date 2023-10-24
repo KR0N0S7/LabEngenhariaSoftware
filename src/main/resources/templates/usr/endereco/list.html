@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <div layout:fragment="content">
     <div class="alert alert-primary" th:if="${#lists.isEmpty(lista)}">
-        Nenhum endereco cadastrado.
+        Nenhum endereço cadastrado.
     </div>
     <div th:if="${message}" class="alert alert-success" role="alert">
         <p th:text="${message}"></p>
@@ -25,14 +25,13 @@
         <div id="hiddenContent" th:style="${condition} ? '' : 'display: none;'">
             
             <button type="button" onclick="addSearchFilter()">+</button>
-            <input class="my-3" id="txtSearch" placeholder="Nome Completo" type="text" name="keyword"></input>
+            <input class="my-3" id="txtSearch" placeholder="Rua" type="text" name="keyword"></input>
 
         </div>
 
         <table id="tabelaendereco" class="table table-striped">
             <thead>
                 <tr>
-                    <th>Id</th>
                     <th>CEP</th>
                     <th>Rua</th>
                     <th>Complemento</th>
@@ -44,7 +43,6 @@
             </thead>
             <tbody>
                 <tr th:each="endereco : ${lista}">
-                    <td th:text="${endereco.id}"></td>
                     <td th:text="${endereco.cep}"></td>
                     <td th:text="${endereco.rua}"></td>
                     <td th:text="${endereco.complemento}"></td>
@@ -64,12 +62,17 @@
 </div>
 </html>
 
+<div th:replace="pages/head :: head"></div>
+<body>
+	<div th:replace="pages/footer :: footer"></div>
+</body>
+
 <script th:inline="javascript">
     /*<![CDATA[*/
         var enderecos = /*[[${lista}]]*/ 'default';
     /*]]>*/
     $('#txtSearch').keyup(function(){
-        filterTable($(this).val(), 'nomeCompleto');
+        filterTable($(this).val(), 'rua');
     });
 
     function addSearchFilter() {
@@ -84,8 +87,8 @@
         
         // Determine the next filter based on existing filters in the hiddenContent div
         var existingFilters = hiddenContent.getElementsByTagName('input').length;
-        var placeholders = ['Nome Completo', 'E-mail', 'CPF', 'Telefone'];
-        var names = ['nomeCompleto', 'email', 'cpf', 'telefone'];
+        var placeholders = ['Rua', 'Bairro', 'Cidade', 'Estado'];
+        var names = ['rua', 'bairro', 'cidade', 'estado'];
         if (existingFilters < placeholders.length) {
             filterInput.placeholder = placeholders[existingFilters];
             filterInput.setAttribute('data-attribute', names[existingFilters]);
@@ -124,24 +127,24 @@
         var table = document.getElementById('tabelaendereco'); // target the entire table
         table.innerHTML = '<thead>' +
             '<tr>' +
-                '<th>Id</th>' +
-                '<th>Nome Completo</th>' +
-                '<th>E-mail</th>' +
-                '<th>CPF</th>' +
-                '<th>Telefone</th>' +
-                '<th>Ativo</th>' +
+                '<th>CEP</th>' +
+                '<th>Rua</th>' +
+                '<th>Complemento</th>' +
+                '<th>Bairro</th>' +
+                '<th>Cidade</th>' +
+                '<th>Estado</th>' +
                 '<th>Opções</th>' +
             '</tr>' +
                 '</thead><tbody id="tabelaenderecoBody"></tbody>'; // add the thead structure
         var tbody = document.getElementById('tabelaenderecoBody'); // target the newly added tbody
         for(var i = 0; i < data.length; i++){
             tbody.innerHTML += '<tr>' +
-                                    '<td>' + data[i].id + '</td>' +
-                                    '<td>' + data[i].nomeCompleto + '</td>' +
-                                    '<td>' + data[i].email + '</td>' +
-                                    '<td>' + data[i].cpf + '</td>' +
-                                    '<td>' + data[i].telefone + '</td>' +
-                                    '<td>' + data[i].senha + '</td>' +
+                                    '<td>' + data[i].cep + '</td>' +
+                                    '<td>' + data[i].rua + '</td>' +
+                                    '<td>' + data[i].complemento + '</td>' +
+                                    '<td>' + data[i].bairro + '</td>' +
+                                    '<td>' + data[i].cidade + '</td>' +
+                                    '<td>' + data[i].estado + '</td>' +
                                     '<td>' +
                                         '<a class="btn btn-primary btn-sm" th:href="@{{/endereco/novo(id=${{endereco.id}})}}">Editar</a>' +
                                         '<a class="btn btn-primary btn-sm ml-3" th:href="@{{/endereco/excluir(id=${{endereco.id}})}}" onclick="return confirm(\'Você realmente deseja excluir esse endereco?\')">Excluir</a>' +
@@ -153,18 +156,6 @@
 
 </script>
 
-<script th:inline="javascript">
-    function updateAtivoStatus(formElem, checkboxElem) {
-        var currentStatus = checkboxElem.checked;
-        var confirmationMessage = currentStatus ? "Ativar endereco?" : "Desativar endereco?";
-        
-        if (confirm(confirmationMessage)) {
-            formElem.submit();  // Submit the form to update the status on the server side
-        } else {
-            // Revert the checkbox state
-            checkboxElem.checked = !currentStatus;
-        }
-    }
-</script>
+
 
 

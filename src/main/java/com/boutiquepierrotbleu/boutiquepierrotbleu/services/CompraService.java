@@ -36,4 +36,8 @@ public class CompraService {
         compraRepository.deleteById(id);
     }
 
+    public List<Compra> getComprasByClienteId(Long clienteId) {
+        return compraRepository.getComprasByClienteId(clienteId);
+    }
+
 }

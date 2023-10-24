@@ -54,7 +54,7 @@
 						</a>
 							<ul class="dropdown-menu"
 								aria-labelledby="navbarDropdownMenuLink">
-								<li><a class="dropdown-item" th:href="@{/cliente/editar(id=${id})}">Editar</a></li>
+								<li><a class="dropdown-item" th:href="@{/cliente/editar(id=${session.id})}">Editar</a></li>
 								
 							</ul></li>
 						<li class="nav-item dropdown"><a
@@ -73,8 +73,8 @@
 							data-bs-toggle="dropdown" aria-expanded="false"> Cartões de Crédito </a>
 							<ul class="dropdown-menu"
 								aria-labelledby="navbarDropdownMenuLink">
-								<li><a class="dropdown-item" th:href="@{/cupom/listar}">Listar</a></li>
-								<li><a class="dropdown-item" th:href="@{/cupom/novo}">Cadastrar</a></li>
+								<li><a class="dropdown-item" th:href="@{/cartao/listar}">Listar</a></li>
+								<li><a class="dropdown-item" th:href="@{/cartao/novo}">Cadastrar</a></li>
 								
 							</ul></li>
 						<li class="nav-item dropdown"><a
@@ -83,8 +83,8 @@
 							data-bs-toggle="dropdown" aria-expanded="false"> Cupons </a>
 							<ul class="dropdown-menu"
 								aria-labelledby="navbarDropdownMenuLink">
-								<li><a class="dropdown-item" th:href="@{/}">Listar</a></li>
-								<li><a class="dropdown-item" th:href="@{//novo}">Cadastrar</a></li>
+								<li><a class="dropdown-item" th:href="@{/cupom/listar}">Listar</a></li>
+								
 							</ul></li>
 
 						<li class="nav-item dropdown"><a
@@ -93,8 +93,8 @@
 							data-bs-toggle="dropdown" aria-expanded="false"> Compras </a>
 							<ul class="dropdown-menu"
 								aria-labelledby="navbarDropdownMenuLink">
-								<li><a class="dropdown-item" th:href="@{/}">Listar</a></li>
-								<li><a class="dropdown-item" th:href="@{//novo}">Cadastrar</a></li>
+								<li><a class="dropdown-item" th:href="@{/compra/listar}">Listar</a></li>
+								
 							</ul></li>
 						</ul>
 						

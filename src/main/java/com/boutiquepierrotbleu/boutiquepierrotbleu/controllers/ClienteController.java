@@ -98,7 +98,7 @@ public class ClienteController {
 
     @RequestMapping("novo")
     public ModelAndView salvarCliente(@RequestParam(required = false) Long id, HttpSession session) {
-        session.setAttribute("id", id);
+        //Long usrId = (Long) session.getAttribute("id");
         ModelAndView mv = new ModelAndView("usr/cadastro");
         Cliente cliente = new Cliente();
         List<Endereco> enderecos = new ArrayList<>();
@@ -123,7 +123,7 @@ public class ClienteController {
 
     @RequestMapping("editar")
     public ModelAndView editarCliente(@RequestParam(required = false) Long id, HttpSession session) {
-        session.setAttribute("id", id);
+        //session.setAttribute("id", id);
         ModelAndView mv = new ModelAndView("usr/cadastro");
         Cliente cliente = new Cliente();
         List<Endereco> enderecos = new ArrayList<>();

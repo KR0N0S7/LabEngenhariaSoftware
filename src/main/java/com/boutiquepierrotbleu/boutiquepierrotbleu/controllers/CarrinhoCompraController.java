@@ -57,6 +57,7 @@ public class CarrinhoCompraController {
         ModelAndView mv = new ModelAndView("carrinho/index");
         Long idCliente = (Long) session.getAttribute("id");
         CarrinhoCompra carrinho = carrinhoCompraService.getOrCreateCart(clienteService.obterCliente(idCliente));
+        mv.addObject("carrinho", carrinho);
         List<ItemProduto> listaProdutos = carrinho.getItemProduto();
         if(!carrinho.getItemProduto().equals(null)) {
             mv.addObject("total", carrinho.getValorTotal());

@@ -31,6 +31,9 @@ public class Compra {
     private Integer numeroParcelas;
 
     @OneToMany(mappedBy = "compra")
+    private List<Creditcard> cartao;
+
+    @OneToMany(mappedBy = "compra")
     private List<Cupom> cupons;
 
     @ManyToOne
@@ -172,6 +175,14 @@ public class Compra {
         this.cupons = cupons;
     }
 
+    public List<Creditcard> getCartao() {
+        return cartao;
+    }
+
+    public void setCartao(List<Creditcard> cartao) {
+        this.cartao = cartao;
+    }
+
     public Compra(CarrinhoCompra carrinho) {
         this.cliente = carrinho.getCliente();
         this.itens = carrinho.getItemProduto();
@@ -187,6 +198,9 @@ public class Compra {
         this.observacao = "";
         this.numeroCompra = "";
         this.enderecoEntrega = null;
+        this.cartao = null;
     }
-    
+
+    public Compra() {
+    }
 }

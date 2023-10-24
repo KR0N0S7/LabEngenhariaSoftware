@@ -7,27 +7,34 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.CarrinhoCompra;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cliente;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Compra;
+import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Creditcard;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cupom;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Endereco;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.ItemProduto;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Pagamento;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Produto;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.CompraService;
+import com.boutiquepierrotbleu.boutiquepierrotbleu.services.CreditcardService;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.CupomService;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.EnderecoService;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.ProdutoService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("compra")
+@SessionAttributes("compra")
 public class CompraController {
 
     @Autowired
@@ -42,7 +49,19 @@ public class CompraController {
     @Autowired
     private EnderecoService enderecoService;
 
+    @Autowired
+    private CreditcardService creditcardService;
+
     private static final Logger logger = LoggerFactory.getLogger(CompraController.class);
+
+    @ModelAttribute("compra")
+    public Compra initializeCompra(HttpServletRequest request, CarrinhoCompra carrinhoCompra) {
+        if (request.getRequestURI().endsWith("/listar")) {
+            return null;  // or Optional.empty() based on your setup
+        }
+        return new Compra(carrinhoCompra);
+    }
+
 
     /*@RequestMapping(value = "criar", method = RequestMethod.POST)
     public ModelAndView criarCompra(HttpSession session, CarrinhoCompra carrinhoCompra) {
@@ -121,14 +140,17 @@ public class CompraController {
         Compra compra = new Compra(carrinhoCompra);
 
         mv.addObject("compra", compra);
+
+        // ESVAZIAR CARRINHO DE COMPRA!!!!!
         return mv;
     }
 
     @RequestMapping("iniciar")
-    public ModelAndView iniciarCompra(HttpSession session) {
+    public ModelAndView iniciarCompra(@ModelAttribute("compra") Compra compra, HttpSession session, CarrinhoCompra carrinhoCompra) {
         ModelAndView mv = new ModelAndView("pages/comprar");
         Long userId = (Long) session.getAttribute("id");
         List<Endereco> enderecos = enderecoService.getEnderecosByClienteId(userId);
+        logger.debug("Compra:::::::: {}", compra.getValorTotal());
         //mv.addObject("endereco", new Endereco());
         mv.addObject("listaEnderecos", enderecos);
 
@@ -137,8 +159,19 @@ public class CompraController {
     }
 
     @RequestMapping("pagamento")
-    public ModelAndView escolherPagamento(/*Compra compra, Pagamento pagamento*/) {
+    public ModelAndView escolherPagamento(@ModelAttribute("compra") Compra compra, HttpSession session, @RequestParam("selectedEndereco") Endereco endereco) {
         ModelAndView mv = new ModelAndView("pages/pagamento");
+        Long userId = (Long) session.getAttribute("id");
+
+        logger.debug("Endereco:::::::: {}", endereco.getRua());
+        logger.debug("Compra_2:::::::: {}", compra.getValorTotal());
+
+        compra.setEnderecoEntrega(endereco);
+        
+        List<Creditcard> lista = creditcardService.getCartaoByClienteId(userId);
+
+        mv.addObject("lista", lista);
+
         //compra.setFormaPagamento(pagamento);
         //mv.addObject("compra", compra);
         return mv;
@@ -154,29 +187,45 @@ public class CompraController {
     }
 
     @RequestMapping("detalhar")
-    public ModelAndView detalharCompra(/*Long id*/) {
-        ModelAndView mv = new ModelAndView("/compra/detail");
-        // Your implementation here
+    public ModelAndView detalharCompra(@ModelAttribute("compra") Compra compra, HttpSession session, @RequestParam("selectedCartao") Creditcard cartao) {
+        ModelAndView mv = new ModelAndView("compra/resumo");
+        Endereco enderecoEnvio = compra.getEnderecoEntrega();
+        mv.addObject("endereco", enderecoEnvio);
+        mv.addObject("cartao", cartao);
+
+        logger.debug("Cartao:::::::: {}", cartao.getApelidoCartao());
+        List<Creditcard> lista = new ArrayList<Creditcard>();
+        lista.add(cartao);
+        compra.setCartao(lista);
+
+        mv.addObject("compra", compra);
         return mv;
     }
 
     @RequestMapping(value = "/finalizar", method = RequestMethod.POST)
-    public ModelAndView finalizarCompra(Compra compra) {
-        ModelAndView mv = new ModelAndView("path/to/your/view");
+    public ModelAndView finalizarCompra(@ModelAttribute("compra") Compra compra, HttpSession session) {
+        ModelAndView mv = new ModelAndView("compra/finalizada");
+
+        // forma de pagamento inserido manualmente, o certo seria pegar conforme escolha do usuário
+        compra.setFormaPagamento(Pagamento.CARTAO);
+        
         compraService.salvarCompra(compra);
         return mv;
     }
 
-    @RequestMapping(value = "/listar", method = RequestMethod.GET)
-    public ModelAndView listarCompras() {
-        ModelAndView mv = new ModelAndView("path/to/your/view");
-        // Your implementation here
+    @RequestMapping("/listar")
+    public ModelAndView listarCompras(HttpSession session) {
+        ModelAndView mv = new ModelAndView("usr/compra/list");
+        Long clienteId = (Long) session.getAttribute("id");
+        mv.addObject("lista", compraService.getComprasByClienteId(clienteId));
+
+        logger.debug("Clienteeee id:::::::: {}", clienteId);
         return mv;
     }
 
-    @RequestMapping(value = "/deletar", method = RequestMethod.GET)
-    public ModelAndView deletarCompras(Long id) {
-        ModelAndView mv = new ModelAndView("path/to/your/view");
+    @RequestMapping("/detalhar/{id}")
+    public ModelAndView detalharCompra(@RequestParam("id") Long id, HttpSession session) {
+        ModelAndView mv = new ModelAndView("usr/compra/detail");
         // Your implementation here
         return mv;
     }

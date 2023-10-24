@@ -36,6 +36,7 @@ public class Cliente {
     private List<CarrinhoCompra> carrinhoCompra;
 
     @OneToMany(mappedBy = "cliente")
+    @JsonManagedReference
     private List<Creditcard> creditcard;
 
     @OneToMany(mappedBy = "cliente")

@@ -11,7 +11,7 @@ layout:decorate="~{usr/layout.html}">
         <p th:text="${message}"></p>
     </div>
     <div th:if="${not #lists.isEmpty(lista)}">
-
+        
         <table id="tabelaCarrinho" class="table table-striped">
             <thead>
                 <tr>
@@ -48,8 +48,18 @@ layout:decorate="~{usr/layout.html}">
         <div>
             <a th:href="@{/}" class="bg-gray py-2 px-2 rounded-lg hover:bg-black hover:text-white transition duration-500 cursor-pointer">Retornar</a>
         </div>
+        <form th:action="@{/compra/iniciar}" th:object="${carrinho}" method="post">
+            <!-- Hidden fields for carrinhoCompra's properties -->
+            <input type="hidden" th:field="*{id}" />
+            <input type="hidden" th:field="*{valorTotal}" />
+            <input type="hidden" th:field="*{cliente}" />
+            <!-- Submit button -->
+            <button class="btn btn-primary btn-sm ml-3" type="submit">Finalizar Compra</button>
+        </form>
         <div>
-            <a th:href="@{/compra/iniciar}" class="bg-purple text-white py-2 px-2 rounded-lg hover:bg-black hover:text-white' transition duration-500 cursor-pointer">Finalizar Compra</a>
+            <!--<a th:object="${compra}" th:href="@{/compra/iniciar}" 
+                class="bg-purple text-white py-2 px-2 rounded-lg hover:bg-black hover:text-white' transition duration-500 cursor-pointer">
+                Finalizar Compra</a>-->
         </div>
     </div>
 

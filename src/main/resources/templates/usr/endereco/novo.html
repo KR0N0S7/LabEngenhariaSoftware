@@ -7,7 +7,7 @@
 <div class="alert alert-primary" th:if="${mensagem != null}"
 		th:text="${mensagem}"></div>
 
-	<div class="card">
+	<div class="card mb-4">
 		<div class="card-header">
 			<p class="text-primary">Endereço</p>
 		</div>
@@ -69,3 +69,8 @@
 	</div>
 </div>
 </html>
+
+<div th:replace="pages/head :: head"></div>
+<body>
+	<div th:replace="pages/footer :: footer"></div>
+</body>

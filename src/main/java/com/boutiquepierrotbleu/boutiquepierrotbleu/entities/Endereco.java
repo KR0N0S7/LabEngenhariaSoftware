@@ -3,6 +3,7 @@ package com.boutiquepierrotbleu.boutiquepierrotbleu.entities;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,6 +18,7 @@ public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @JsonIgnore
     private String tipo;
     private String rua;
     private String complemento;
@@ -31,6 +33,7 @@ public class Endereco {
     private Cliente cliente;
 
     @OneToMany(mappedBy = "enderecoEntrega")
+    @JsonIgnore
     private List<Compra> compra;
 
     public Long getId() {
