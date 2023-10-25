@@ -37,7 +37,7 @@
 							<ul class="dropdown-menu"
 								aria-labelledby="navbarDropdownMenuLink">
 								<li><a class="dropdown-item" th:href="@{/cliente/listar}">Listar</a></li>
-								<li><a class="dropdown-item" th:href="@{/cliente/novo}">Cadastrar</a></li>
+								<li><a class="dropdown-item" th:href="@{/admin/cliente}">Cadastrar</a></li>
 								
 							</ul></li>
 						<li class="nav-item dropdown"><a
@@ -46,8 +46,8 @@
 							data-bs-toggle="dropdown" aria-expanded="false"> Produtos </a>
 							<ul class="dropdown-menu"
 								aria-labelledby="navbarDropdownMenuLink">
-								<li><a class="dropdown-item" th:href="@{/produto/listar}">Listar</a></li>
-								<li><a class="dropdown-item" th:href="@{/produto/novo}">Cadastrar</a></li>
+								<li><a class="dropdown-item" th:href="@{/produto/list}">Listar</a></li>
+								<li><a class="dropdown-item" th:href="@{/produto/criar}">Cadastrar</a></li>
 								
 							</ul></li>
 						<li class="nav-item dropdown"><a
@@ -70,6 +70,8 @@
 								<li><a class="dropdown-item" th:href="@{//novo}">Cadastrar</a></li>
 							</ul></li>
 					</ul>
+					<a class="btn btn-primary btn-sm ml-3" th:href="@{/user/logout}" 
+						onclick="return confirm('Você realmente deseja encerrar sessão?')">Logout</a>
 				</div>
 			</div>
 		</nav>

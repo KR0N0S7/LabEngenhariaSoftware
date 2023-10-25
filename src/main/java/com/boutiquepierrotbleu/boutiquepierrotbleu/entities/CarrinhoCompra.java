@@ -19,6 +19,8 @@ public class CarrinhoCompra {
     private Long id;
     private Double valorTotal;
 
+    private boolean ativo = true;
+
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
@@ -60,6 +62,14 @@ public class CarrinhoCompra {
 
     public Boolean isEmpty() {
         return itemProduto.isEmpty();
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 
     public void addItemProduto(ItemProduto item) {

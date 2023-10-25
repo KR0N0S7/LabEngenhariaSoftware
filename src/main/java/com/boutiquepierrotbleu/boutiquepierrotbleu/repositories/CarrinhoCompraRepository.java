@@ -10,4 +10,6 @@ public interface CarrinhoCompraRepository extends JpaRepository<CarrinhoCompra, 
 
     Optional<CarrinhoCompra> findByCliente(Cliente cliente);
 
+    Optional<CarrinhoCompra> findByClienteAndAtivo(Cliente cliente, boolean ativo);
+
 }

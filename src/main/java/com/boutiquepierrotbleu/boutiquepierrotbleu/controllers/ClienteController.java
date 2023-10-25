@@ -184,6 +184,49 @@ public class ClienteController {
         return mv;
     }
 
+    @RequestMapping("senha")
+    public ModelAndView alterarSenha(@RequestParam(required = false) Long id) {
+        ModelAndView mv = new ModelAndView("usr/senha/alterar");
+        Cliente cliente = new Cliente();
+        if(id != null) {
+            try {
+                cliente = clienteService.obterCliente(id);
+                mv.addObject("cliente", cliente);
+                return mv;
+            } catch (Exception e) {
+                mv.addObject("cliente", e.getMessage());
+            }
+        }
+        mv.addObject("cliente", cliente);
+        return mv;
+    }
+
+    @RequestMapping(method = RequestMethod.POST, path = "senha/alterada")
+    public ModelAndView senhaAlterada(@ModelAttribute("cliente") Cliente cliente, BindingResult bindingResult,
+            RedirectAttributes redirectAttributes, HttpSession session) {
+        
+        if (bindingResult.hasErrors()) {
+            ModelAndView mv = new ModelAndView("cliente/senha");
+            mv.addObject("cliente", cliente);
+            return mv;
+        }
+        ModelAndView mv = new ModelAndView("redirect:/cliente/senha");
+        Boolean novo = true;
+        if (cliente != null) {
+            novo = false;
+        } 
+        Cliente savedCliente = clienteService.salvarCliente(cliente);
+
+        if (novo) {
+            mv.addObject("cliente", new Cliente());
+        } else {
+            mv.addObject("cliente", savedCliente);
+            mv.addObject("id", session.getAttribute("id"));
+        }
+        redirectAttributes.addFlashAttribute("passwordUpdateSuccess", true);
+        return mv;
+    }
+
     @RequestMapping("listar")
     public ModelAndView listarClientes() {
         ModelAndView mv = new ModelAndView("adm/list");

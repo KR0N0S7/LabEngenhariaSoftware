@@ -48,4 +48,10 @@ public class ProdutoService {
         produto.increaseEstoque(quantidade);
         produtoRepository.save(produto);
     }
+
+    public void toggleAtivoStatusById(Long produtoId) {
+        Produto produto = produtoRepository.findById(produtoId).orElseThrow(() -> new IllegalArgumentException("Invalid Produto Id:" + produtoId));
+        produto.setAtivo(!produto.isAtivo());  // Toggle the ativo status
+        produtoRepository.save(produto);
+    }
 }

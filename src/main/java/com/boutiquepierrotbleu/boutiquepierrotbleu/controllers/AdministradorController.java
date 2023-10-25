@@ -40,7 +40,7 @@ public class AdministradorController {
 	@RequestMapping(method = RequestMethod.POST, path = "editar")
 	public ModelAndView clienteSalvo(Cliente cliente, BindingResult bidingResult, RedirectAttributes redirectAttributes) {
 		if (bidingResult.hasErrors()) {
-			ModelAndView mv = new ModelAndView("admin/form.html");
+			ModelAndView mv = new ModelAndView("admin/cliente/novo");
 			mv.addObject("admin", cliente);
 			return mv;
 		}
@@ -55,7 +55,7 @@ public class AdministradorController {
 		} else {
 			mv.addObject("admin", cliente);
 		}
-		redirectAttributes.addFlashAttribute("mensagem", "Cliente salvo com sucesso.");
+		redirectAttributes.addFlashAttribute("clienteCreatedSuccess", true);
 		return mv;
 	}
 	
@@ -78,4 +78,14 @@ public class AdministradorController {
 		}
 		return mv;
 	}
+
+	@RequestMapping("cliente")
+	public ModelAndView novoCliente() {
+		ModelAndView mv = new ModelAndView("adm/cliente/novo");
+		Cliente cliente = new Cliente();
+		mv.addObject("cliente", cliente);
+		return mv;
+	}
+
+
 }

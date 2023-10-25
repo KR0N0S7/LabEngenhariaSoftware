@@ -29,6 +29,8 @@ public class Compra {
     private String observacao;
     private String numeroCompra;
     private Integer numeroParcelas;
+    
+    private Long carrinhoId;
 
     @OneToMany(mappedBy = "compra")
     private List<Creditcard> cartao;
@@ -183,12 +185,24 @@ public class Compra {
         this.cartao = cartao;
     }
 
+    public Long getCarrinhoId() {
+        return carrinhoId;
+    }
+
+    public void setCarrinhoId(Long carrinhoId) {
+        this.carrinhoId = carrinhoId;
+    }
+
     public Compra(CarrinhoCompra carrinho) {
         this.cliente = carrinho.getCliente();
         this.itens = carrinho.getItemProduto();
         this.formaPagamento = null;
         this.numeroParcelas = 0;
-        this.valorTotal = carrinho.getValorTotal();
+        if(carrinho.getValorTotal() != null) {
+            this.valorTotal = carrinho.getValorTotal();
+        } else {
+            this.valorTotal = 0.0;
+        }
         this.data = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         this.hora = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
         this.valorFrete = 0.0;
@@ -199,6 +213,7 @@ public class Compra {
         this.numeroCompra = "";
         this.enderecoEntrega = null;
         this.cartao = null;
+        this.carrinhoId = carrinho.getId();
     }
 
     public Compra() {

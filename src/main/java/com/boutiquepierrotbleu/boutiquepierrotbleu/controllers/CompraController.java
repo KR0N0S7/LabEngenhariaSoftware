@@ -23,6 +23,8 @@ import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Endereco;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.ItemProduto;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Pagamento;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Produto;
+import com.boutiquepierrotbleu.boutiquepierrotbleu.services.CarrinhoCompraService;
+import com.boutiquepierrotbleu.boutiquepierrotbleu.services.ClienteService;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.CompraService;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.CreditcardService;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.CupomService;
@@ -51,6 +53,12 @@ public class CompraController {
 
     @Autowired
     private CreditcardService creditcardService;
+
+    @Autowired
+    private CarrinhoCompraService carrinhoCompraService;
+
+    @Autowired
+    private ClienteService clienteService;
 
     private static final Logger logger = LoggerFactory.getLogger(CompraController.class);
 
@@ -203,13 +211,23 @@ public class CompraController {
     }
 
     @RequestMapping(value = "/finalizar", method = RequestMethod.POST)
-    public ModelAndView finalizarCompra(@ModelAttribute("compra") Compra compra, HttpSession session) {
+    public ModelAndView finalizarCompra(@ModelAttribute("compra") Compra compra, HttpSession session) throws Exception {
         ModelAndView mv = new ModelAndView("compra/finalizada");
 
+        Long clienteId = session.getAttribute("id") != null ? (Long) session.getAttribute("id") : null;
+        Cliente cliente = clienteService.obterCliente(clienteId);
+        compra.setCarrinhoId(carrinhoCompraService.getOrCreateCart(cliente).getId());
+
         // forma de pagamento inserido manualmente, o certo seria pegar conforme escolha do usuário
-        compra.setFormaPagamento(Pagamento.CARTAO);
+        compra.setFormaPagamento(Pagamento.CRÉDITO);
         
-        compraService.salvarCompra(compra);
+        Compra compraFinalizada = compraService.salvarCompra(compra);
+        
+        CarrinhoCompra carrinho = carrinhoCompraService.obterCarrinhoCompra(compraFinalizada.getCarrinhoId());
+        carrinho.setAtivo(false);
+        carrinhoCompraService.salvarCarrinhoCompra(carrinho);
+        
+        logger.debug("Carrinho:::::::: {}", carrinho.getItemProduto().size());
         return mv;
     }
 

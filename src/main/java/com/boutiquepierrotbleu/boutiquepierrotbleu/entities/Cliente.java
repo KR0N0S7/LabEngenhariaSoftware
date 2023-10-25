@@ -3,6 +3,7 @@ package com.boutiquepierrotbleu.boutiquepierrotbleu.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
@@ -33,6 +34,7 @@ public class Cliente {
     private List<Endereco> enderecos = new ArrayList<>();
 
     @OneToMany(mappedBy = "cliente")
+    @JsonIgnore
     private List<CarrinhoCompra> carrinhoCompra;
 
     @OneToMany(mappedBy = "cliente")
@@ -40,12 +42,15 @@ public class Cliente {
     private List<Creditcard> creditcard;
 
     @OneToMany(mappedBy = "cliente")
+    @JsonIgnore
     private List<Compra> compra;
 
     @OneToMany(mappedBy = "cliente")
+    @JsonIgnore
     private List<Cupom> cupom;
 
     @OneToMany(mappedBy = "cliente")
+    @JsonIgnore
     private List<Troca> trocas;
 
     private boolean ativo = true;

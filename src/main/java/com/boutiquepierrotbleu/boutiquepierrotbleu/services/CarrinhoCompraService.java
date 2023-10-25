@@ -62,12 +62,13 @@ public class CarrinhoCompraService {
     }
 
     public CarrinhoCompra getOrCreateCart(Cliente cliente) {
-        // Retrieve existing cart or create a new one
-        return carrinhoCompraRepository.findByCliente(cliente)
+        // Retrieve active cart or create a new one
+        return carrinhoCompraRepository.findByClienteAndAtivo(cliente, true)
                                       .orElseGet(() -> {
                                           CarrinhoCompra newCart = new CarrinhoCompra();
                                           newCart.setCliente(cliente);
                                           return carrinhoCompraRepository.save(newCart);
                                       });
     }
+    
 }

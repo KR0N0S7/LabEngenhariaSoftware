@@ -47,25 +47,34 @@ public class CarrinhoCompraController {
         return clienteService.obterCliente(clienteId);
     }
     
-    public CarrinhoCompra criarCarrinho(Long produtoId) {
+    public CarrinhoCompra criarCarrinho(Long id) {
         CarrinhoCompra carrinho = new CarrinhoCompra();
         return carrinhoCompraService.salvarCarrinhoCompra(carrinho);
     }
 
     @RequestMapping(value = "/detalhar", method = RequestMethod.GET)
     public ModelAndView detalharCarrinho(HttpSession session, @RequestParam(required = false) Long id) throws Exception {
-        ModelAndView mv = new ModelAndView("carrinho/index");
-        Long idCliente = (Long) session.getAttribute("id");
-        CarrinhoCompra carrinho = carrinhoCompraService.getOrCreateCart(clienteService.obterCliente(idCliente));
-        mv.addObject("carrinho", carrinho);
-        List<ItemProduto> listaProdutos = carrinho.getItemProduto();
-        if(!carrinho.getItemProduto().equals(null)) {
-            mv.addObject("total", carrinho.getValorTotal());
-            mv.addObject("lista", listaProdutos);
+        ModelAndView mv;
+        if(session.getAttribute("id") == null) {
+            mv = new ModelAndView("redirect:/cliente/login");
         } else {
-            mv.addObject("message", "Carrinho vazio!");
+            mv = new ModelAndView("carrinho/index");
+            List<ItemProduto> listaProdutos = new ArrayList<ItemProduto>();
+            Long idCliente = (Long) session.getAttribute("id");
+            CarrinhoCompra carrinho = carrinhoCompraService.getOrCreateCart(clienteService.obterCliente(idCliente));
+            listaProdutos = carrinho.getItemProduto();
+            logger.debug("Carrinho ativo aqui !!!!!!::::: {}", carrinho.isAtivo());
+
+            mv.addObject("carrinho", carrinho);
+            if(carrinho.getItemProduto() != null) {
+                mv.addObject("total", carrinho.getValorTotal());
+                mv.addObject("lista", listaProdutos);
+            } else {
+                //mv.addObject("message", "Carrinho vazio!");
+            }
         }
         return mv;
+        
     }
 
     @RequestMapping(value = "/adicionar", method = RequestMethod.POST)

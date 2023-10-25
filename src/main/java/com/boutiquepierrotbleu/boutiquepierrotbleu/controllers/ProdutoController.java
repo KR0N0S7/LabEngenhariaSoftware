@@ -8,9 +8,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cliente;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.ItemProduto;
@@ -63,12 +67,45 @@ public class ProdutoController {
         return mv;
     }
 
-    @RequestMapping(value = "/criar", method = RequestMethod.GET)
-    public ModelAndView criarProduto() {
-        ModelAndView mv = new ModelAndView("path/to/your/view");
-        // Your implementation here
-        return mv;
+    @RequestMapping("/criar")
+    public ModelAndView criarProduto(@RequestParam(required = false) Long id) {
+        ModelAndView mv = new ModelAndView("adm/produto/novo");
+		Produto produto;
+		if (id == null) {
+			produto = new Produto();
+		} else {
+			try {
+				produto = produtoService.obterProduto(id);
+			} catch (Exception e) {
+				produto = new Produto();
+				mv.addObject("mensagem", e.getMessage());
+			}
+		}
+		mv.addObject("produto", produto);
+		return mv;
     }
+
+    @RequestMapping(method = RequestMethod.POST, path = "editar")
+	public ModelAndView produtoSalvo(Produto produto, BindingResult bidingResult, RedirectAttributes redirectAttributes) {
+		if (bidingResult.hasErrors()) {
+			ModelAndView mv = new ModelAndView("produto/criar");
+			mv.addObject("produto", produto);
+			return mv;
+		}
+		ModelAndView mv = new ModelAndView("redirect:/produto/criar");
+		boolean novo = true;
+		if (produto != null) {
+			novo = false;
+		}
+		produtoService.salvarProduto(produto);
+		if (novo) {
+			mv.addObject("produto", new Produto());
+		} else {
+			mv.addObject("produto", produto);
+		}
+		redirectAttributes.addFlashAttribute("produtoCreatedSuccess", true);
+		return mv;
+	}
 
     @RequestMapping(value = "/atualizar", method = RequestMethod.GET)
     public ModelAndView atualizarProduto(Long id) {
@@ -95,6 +132,23 @@ public class ProdutoController {
     public ModelAndView liberarEstoqueDeProduto(Long id, Integer quantity) {
         ModelAndView mv = new ModelAndView("path/to/your/view");
         // Your implementation here
+        return mv;
+    }
+
+    @PostMapping("/updateAtivo")
+    public ModelAndView updateAtivoStatus(@RequestParam("produtoId") Long produtoId, RedirectAttributes attributes) {
+        ModelAndView mv = new ModelAndView("redirect:/produto/list");
+        produtoService.toggleAtivoStatusById(produtoId);
+        attributes.addFlashAttribute("message", "Status atualizado com sucesso!");
+        return mv;
+    }
+
+    @RequestMapping("/list")
+    public ModelAndView listarTodosProdutos() {
+        ModelAndView mv = new ModelAndView("adm/produto/list");
+        
+        mv.addObject("lista", produtoService.listarProdutos());
+        
         return mv;
     }
 }

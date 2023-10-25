@@ -3,6 +3,7 @@ package com.boutiquepierrotbleu.boutiquepierrotbleu.entities;
 import java.util.List;
 
 import com.boutiquepierrotbleu.boutiquepierrotbleu.exceptions.InsufficientStockException;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,12 +31,16 @@ public class Produto {
     private String tipo;
     private String estilo;
     private Integer estoque;
+    private boolean ativo = true;
+
 
     @OneToMany(mappedBy = "produto")
+    @JsonIgnore
     private List<ItemProduto> itemProduto;
 
     @ManyToOne
     @JoinColumn(name = "troca_id")
+    @JsonIgnore
     private Troca troca;
 
     public List<ItemProduto> getItemProduto() {
@@ -165,6 +170,14 @@ public class Produto {
     public void setTroca(Troca troca) {
         this.troca = troca;
     }
+    
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
 
     // New methods to manage stock
     public boolean isStockAvailable(int requiredQuantity) {
@@ -182,4 +195,5 @@ public class Produto {
         this.estoque += quantity;
     }
 
+    
 }
