@@ -1,102 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Pierrot Bleu</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link th:href="@{/css/styles.css}" rel="stylesheet" />
-        
-        <div th:if="${message}" class="alert alert-success" role="alert">
-            <p th:text="${message}"></p>
-        </div>
-    </head>
-    <div th:replace="pages/head :: head"></div>
-    <body>
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#!">Pierrot Bleu</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{/}">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" th:href="@{/}"></a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" th:href="@{/}">Produtos</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <!--<li><a class="dropdown-item" href="#!">Produtos Populares</a></li>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Pierrot Bleu</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link th:href="@{/css/styles.css}" rel="stylesheet" />
+    <link th:href="@{/css/style_sidebar.css}" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <div th:if="${message}" class="alert alert-success" role="alert">
+        <p th:text="${message}"></p>
+    </div>
+</head>
+<div th:replace="pages/head :: head"></div>
+
+<body>
+
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="#!">Pierrot Bleu</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{/}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/}"></a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" th:href="@{/}">Produtos</a></li>
+                            <li>
+                                <hr class="dropdown-divider" />
+                            </li>
+                            <!--<li><a class="dropdown-item" href="#!">Produtos Populares</a></li>
                                 <li><a class="dropdown-item" href="#!">Novidades</a></li>-->
-                            </ul>
-                        </li>
-                    </ul>
-                    <form class="d-flex">
-                        <!--<form th:action="@{/carrinho/detalhar}" method="get">
+                        </ul>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <!--<form th:action="@{/carrinho/detalhar}" method="get">
                             <button class="btn btn-outline-dark">
                                 <i class="bi-cart-fill me-1"></i>
                                 Carrinho
                                 <span class="badge bg-dark text-white ms-1 rounded-pill" th:text="${numeroProdutos}"></span>
                             </button>
                         </form>-->
-                        <!--<li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{/carrinho/detalhar}">Carrinho</a>
+                    <!--<li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{/carrinho/detalhar}">Carrinho</a>
                             <span th:text="${numeroProdutos}"></span></li>-->
-                        
-                        <a class="btn btn-outline-dark" th:href="@{/carrinho/detalhar}">
-                            <i class="bi-cart-fill me-1"></i>
-                            Carrinho
-                            <span class="badge bg-dark text-white ms-1 rounded-pill" th:text="${numeroProdutos}">0</span>
-                        </a>
 
+                    <a class="btn btn-outline-dark" th:href="@{/carrinho/detalhar}">
+                        <i class="bi-cart-fill me-1"></i>
+                        Carrinho
+                        <span class="badge bg-dark text-white ms-1 rounded-pill" th:text="${numeroProdutos}">0</span>
+                    </a>
+
+                </form>
+            </div>
+        </div>
+    </nav>
+    <!-- Header-->
+    <header class="bg-dark py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">Compre com estilo</h1>
+                <p class="lead fw-normal text-white-50 mb-0">Com Pierrot Bleu</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="wrapper d-flex align-items-stretch">
+        <nav id="sidebar">
+            <div class="custom-menu">
+                <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                    <i class="fa fa-bars"></i>
+                    <span class="sr-only">Toggle Menu</span>
+                </button>
+            </div>
+            <div class="p-4 pt-5">
+                <h1><a href="index.html" class="logo">Roupas & Acessórios</a></h1>
+                <ul class="list-unstyled components mb-5">
+                    <li class="active">
+                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle">Roupas</a>
+                        <ul class="collapse list-unstyled" id="homeSubmenu">
+                            <li>
+                                <a href="#">Home 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Home 2</a>
+                            </li>
+                            <li>
+                                <a href="#">Home 3</a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li>
+                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle">Acessórios</a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu">
+                            <li>
+                                <a href="#">Page 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Page 2</a>
+                            </li>
+                            <li>
+                                <a href="#">Page 3</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Portfolio</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                </ul>
+
+                <div class="mb-5">
+                    <h3 class="h6">Procurar</h3>
+                    <form action="#" class="colorlib-subscribe-form">
+                        <div class="form-group d-flex">
+                            <div class="icon"><span class="icon-paper-plane"></span></div>
+                            <input type="text" class="form-control" placeholder="Digite o nome do produto.">
+                        </div>
                     </form>
                 </div>
+
             </div>
         </nav>
-        <!-- Header-->
-        <header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Compre com estilo</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">Com Pierrot Bleu</p>
-                </div>
-            </div>
-        </header>
-        <!-- Section-->
-        <section class="py-5">
-            <div class="container px-4 px-lg-5 mt-5">
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-4" th:each="produto : ${produtos}">
-                                <img th:src="@{'/images/produtos/' + ${produto.imagem}}" alt="Product Image" class="img-fluid">
-                                <h2 th:text="${produto.nome}"></h2>
-                                <p th:text="'Price: $' + ${produto.preco}"></p>
-                                <form th:action="@{/carrinho/adicionar}" method="post">
-                                    <input type="hidden" th:value="${produto.id}" name="produtoId" />
-                                    <button type="submit" th:disabled="${produto.estoque == 0}">Adicionar ao Carrinho</button>
-                                </form>
+
+        <!-- Page Content  -->
+        <div id="content" class="p-4 p-md-5 pt-5">
+
+            <!-- Section-->
+            <section class="py-5">
+                <div class="container px-4 px-lg-5 mt-5">
+                    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-4" th:each="produto : ${produtos}">
+                                    <img th:src="@{'/images/produtos/' + ${produto.imagem}}" alt="Product Image"
+                                        class="img-fluid">
+                                    <h2 th:text="${produto.nome}"></h2>
+                                    <p th:text="'Price: $' + ${produto.preco}"></p>
+                                    <form method="post">
+                                        <input type="hidden" th:value="${produto.id}" name="produtoId" />
+                                        <button type="button" class="btn btn-primary add-to-cart-btn" 
+                                            th:attr="data-product-id=${produto.id}" th:disabled="${produto.estoque == 0}">
+                                            Adicionar ao Carrinho</button>
+
+                                    </form>
+                                </div>
                             </div>
                         </div>
+
+
                     </div>
-                    
-                    
                 </div>
+            </section>
+            <!-- Footer-->
+        </div>
+    </div>
+
+    <div class="modal fade" id="quantityModal" tabindex="-1" role="dialog" aria-labelledby="quantityModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="quantityModalLabel">Selecione a quantidade</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-        </section>
-        <!-- Footer-->
-        
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-    </body>
-    <div th:replace="pages/footer :: footer"></div>
+            <div class="modal-body">
+              <div class="input-group">
+                <button class="btn btn-outline-secondary" type="button" id="button-minus">-</button>
+                <input type="text" class="form-control" value="1" id="quantityInput">
+                <button class="btn btn-outline-secondary" type="button" id="button-plus">+</button>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+              <button type="button" class="btn btn-primary" id="addToCartBtn">Adicionar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        $(document).ready(function () {
+          let selectedProductId = null;
+          let selectedQuantity = 1;
+      
+          $('.add-to-cart-btn').click(function () {
+            selectedProductId = $(this).data('product-id');
+            $('#quantityModal').modal('show');
+          });
+      
+          $('#button-plus').click(function () {
+            selectedQuantity++;
+            $('#quantityInput').val(selectedQuantity);
+          });
+      
+          $('#button-minus').click(function () {
+            if (selectedQuantity > 1) {
+              selectedQuantity--;
+              $('#quantityInput').val(selectedQuantity);
+            }
+          });
+      
+          $('#addToCartBtn').click(function () {
+            $.ajax({
+                url: "/carrinho/adicionar",
+                type: "POST",
+                data: { produtoId: selectedProductId, quantidade: selectedQuantity },
+                success: function (response) {
+                alert('Produto adicionado com sucesso!');
+                },
+                error: function (error) {
+                alert('Falha ao adicionar ao carrinho!');
+                }
+            });
+            $('#quantityModal').modal('hide');
+            });
+
+        });
+      </script>
+    
+
+    <!-- Bootstrap core JS-->
+    <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js}"></script>
+    <!-- Core theme JS-->
+    <script th:src="@{js/scripts.js}"></script>
+    <script th:src="@{js/jquery.min.js}"></script>
+    <script th:src="@{js/popper.js}"></script>
+    <script th:src="@{js/bootstrap.min.js}"></script>
+    <script th:src="@{js/main.js}"></script>
+</body>
+<div th:replace="pages/footer :: footer"></div>
+
 </html>
+
+  

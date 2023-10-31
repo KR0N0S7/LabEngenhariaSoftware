@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.boutiquepierrotbleu.boutiquepierrotbleu.exceptions.InsufficientStockException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,8 +22,8 @@ public class Produto {
     private String nome;
     private String descricao;
     private Double preco;
+    private Double custo;
     private String imagem;
-    private String categoria;
     private String tamanho;
     private String cor;
     private String marca;
@@ -32,6 +33,11 @@ public class Produto {
     private String estilo;
     private Integer estoque;
     private boolean ativo = true;
+
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    @JsonManagedReference
+    private ValorCategoria categoria;
 
 
     @OneToMany(mappedBy = "produto")
@@ -83,6 +89,14 @@ public class Produto {
         this.preco = preco;
     }
 
+    public Double getCusto() {
+        return custo;
+    }
+
+    public void setCusto(Double custo) {
+        this.custo = custo;
+    }
+
     public String getImagem() {
         return imagem;
     }
@@ -91,11 +105,11 @@ public class Produto {
         this.imagem = imagem;
     }
 
-    public String getCategoria() {
+    public ValorCategoria getValorCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setValorCategoria(ValorCategoria categoria) {
         this.categoria = categoria;
     }
 
@@ -195,5 +209,7 @@ public class Produto {
         this.estoque += quantity;
     }
 
-    
+    public void decreaseEstoque(int quantity) {
+        this.estoque -= quantity;
+    }
 }

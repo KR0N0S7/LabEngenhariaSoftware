@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{usr/layout.html}">
+	layout:decorate="~{adm/layout.html}">
 <meta charset="UTF-8">
 <div layout:fragment="content">
 <div class="alert alert-primary" th:if="${mensagem != null}"
@@ -37,11 +37,11 @@
 
 
                         <div class="my-3 flex flex-col">
-                            <label for="preco" class="font-bold my-3" >Preço</label>
+                            <label for="custo" class="font-bold my-3" >Custo</label>
                             <input type="number" placeholder="999.999,99"
-                                class="form-control" required th:field="*{preco}">
-                            <div class="text-danger" th:if="${#fields.hasErrors('preco')}"
-                                th:errors="*{preco}"></div>
+                                class="form-control" required th:field="*{custo}">
+                            <div class="text-danger" th:if="${#fields.hasErrors('custo')}"
+                                th:errors="*{custo}" ></div>
                         </div>
                         
                         <div class="my-3 flex flex-col">
@@ -51,7 +51,7 @@
                             <div class="text-danger" th:if="${#fields.hasErrors('imagem')}"
                                 th:errors="*{imagem}"></div>
                         </div>
-
+<!--
                         <div class="my-3 flex flex-col">
                             <label for="categoria" class="font-bold my-3">Categoria</label>
                             <input type="text" placeholder="Vestido, Calça, Camisa, etc..."
@@ -59,6 +59,14 @@
                             <div class="text-danger" th:if="${#fields.hasErrors('categoria')}"
                                 th:errors="*{categoria}"></div>
                         </div>
+-->
+                        <select class="form-select" th:field="${produto.valorCategoria}">
+                            <option value="" selected="selected">Categoria</option>
+                            <option th:each="categoria : ${lista}" 
+                                th:value="${categoria.id}" th:text="${categoria.categoria}"
+                                ></option>
+                        </select>
+
 					
                         <div class="my-3 flex flex-col">
                             <label for="tamanho" class="font-bold my-3">Tamanho</label>

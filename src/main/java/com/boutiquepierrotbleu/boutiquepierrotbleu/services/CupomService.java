@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cliente;
+import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Compra;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cupom;
+import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Troca;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.repositories.CupomRepository;
 
 @Service
@@ -42,7 +44,7 @@ public class CupomService {
         return cupom.aplicarDesconto(valorOriginal);
     }
 
-    public Cupom generateAndSaveCupom(Cliente cliente) {
+    public Cupom generateAndSaveCupom(Cliente cliente, Compra compra) {
         // Logic to generate a unique coupon code
         String uniqueCode = generateUniqueCode();
         
@@ -50,8 +52,30 @@ public class CupomService {
         Cupom novoCupom = new Cupom();
         novoCupom.setCodigo(uniqueCode);
         novoCupom.setCliente(cliente);  // assuming a bidirectional relationship
+        novoCupom.setCompra(compra);    // assuming a bidirectional relationship
         novoCupom.setUsoContador(0);
         novoCupom.setUsoLimite(1);
+        novoCupom.setTipo("DESCONTO");
+        
+        // Save the coupon in the database
+        cupomRepository.save(novoCupom);
+        
+        return novoCupom;
+    }
+
+    public Cupom gerarCupomTroca(Cliente cliente, Compra compra, Troca troca) {
+        // Logic to generate a unique coupon code
+        String uniqueCode = generateUniqueCode();
+        
+        // Create a new Coupon object
+        Cupom novoCupom = new Cupom();
+        novoCupom.setCodigo(uniqueCode);
+        novoCupom.setCliente(cliente);  // assuming a bidirectional relationship
+        novoCupom.setCompra(compra);    // assuming a bidirectional relationship
+        novoCupom.setTroca(troca);      // assuming a bidirectional relationship
+        novoCupom.setUsoContador(0);
+        novoCupom.setUsoLimite(1);
+        novoCupom.setTipo("TROCA");
         
         // Save the coupon in the database
         cupomRepository.save(novoCupom);

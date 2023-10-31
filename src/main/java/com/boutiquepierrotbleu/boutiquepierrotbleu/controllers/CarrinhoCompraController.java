@@ -1,15 +1,20 @@
 package com.boutiquepierrotbleu.boutiquepierrotbleu.controllers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -78,7 +83,10 @@ public class CarrinhoCompraController {
     }
 
     @RequestMapping(value = "/adicionar", method = RequestMethod.POST)
-    public ModelAndView adicionarItemNoCarrinho(HttpSession session, Long produtoId) throws Exception {
+    public ModelAndView adicionarItemNoCarrinho(HttpSession session, 
+        @RequestParam (value ="produtoId") Long produtoId, 
+        @RequestParam (value ="quantidade") Integer quantity) throws Exception {
+
         Long clienteId = (Long) session.getAttribute("id");
         Cliente cliente = clienteService.obterCliente(clienteId);
         Produto produto = produtoService.obterProduto(produtoId);
@@ -99,20 +107,27 @@ public class CarrinhoCompraController {
             ItemProduto itemProduto;
             // Create ItemProduto and add to cart.
             if(carrinho.getItemProduto().stream().anyMatch(item -> item.getProduto().getId().equals(produto.getId()))) {
-                // Sum products that already has in cart
-                int index = carrinho.getItemProduto().indexOf(carrinho.getItemProduto().stream().filter(item -> item.getProduto().getNome().equals(produto.getNome())).findFirst().get());
-                itemProduto = carrinho.getItemProduto().get(index);
-                itemProduto.setQuantidade(itemProduto.getQuantidade() + 1);
-                itemProduto.setPreco(produto.getPreco(), itemProduto.getQuantidade());
-                logger.debug("Número de {}::::: {}", itemProduto.getProduto().getNome(),itemProduto.getQuantidade());
-                itemProdutoService.salvaItemProduto(itemProduto);
-            } else {
                 if(produto.isStockAvailable(1)) {
+                    // Sum products that already has in cart
+                    int index = carrinho.getItemProduto().indexOf(carrinho.getItemProduto().stream().filter(item -> item.getProduto().getNome().equals(produto.getNome())).findFirst().get());
+                    itemProduto = carrinho.getItemProduto().get(index);
+                    itemProduto.setQuantidade(itemProduto.getQuantidade() + quantity);
+                    itemProduto.setPreco(produto.getPreco(), itemProduto.getQuantidade());
+                    logger.debug("Número de {}::::: {}", itemProduto.getProduto().getNome(),itemProduto.getQuantidade());
+                    itemProdutoService.salvaItemProduto(itemProduto);
+
+                    produto.decreaseEstoque(quantity);
+                    produtoService.salvarProduto(produto);
+                } else {
+                    modelAndView.addObject("message", "Estoque insuficiente!");
+                }
+            } else {
+                if(produto.isStockAvailable(quantity)) {
                     itemProduto = itemProdutoService.salvaItemProduto(new ItemProduto());
                         itemProduto.setCarrinhoCompra(carrinho);
-                        itemProduto.setPreco(produto.getPreco(), 1);
+                        itemProduto.setPreco(produto.getPreco(), quantity);
                         itemProduto.setProduto(produto);
-                        itemProduto.setQuantidade(1);
+                        itemProduto.setQuantidade(quantity);
                     carrinho.getItemProduto().add(itemProduto);
                     // Handle other necessary properties of itemProduto...
                     logger.debug("Produto::::: {}", produto.getNome());
@@ -130,6 +145,9 @@ public class CarrinhoCompraController {
                     modelAndView.addObject("message", "Produto adicionado com sucesso!");
                     modelAndView.addObject("carrinho", carrinho);
                     modelAndView.addObject("id", session.getAttribute("id"));
+
+                    produto.decreaseEstoque(1);
+                    produtoService.salvarProduto(produto);
                 } else {
                     modelAndView.addObject("message", "Produto não disponível no estoque!");
                 }
@@ -196,4 +214,78 @@ public class CarrinhoCompraController {
         // Your implementation here
         return mv;
     }
+
+    @RequestMapping("/aumentar")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> aumentarQuantidade(@RequestParam Long itemProdutoId, HttpSession session) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            ItemProduto itemProduto = itemProdutoService.obterItemProduto(itemProdutoId);
+            Produto produto = itemProduto.getProduto();
+            CarrinhoCompra carrinho = itemProduto.getCarrinhoCompra();
+
+            if(produto.getEstoque() == 0) {
+                response.put("success", false);
+                response.put("message", "Estoque insuficiente!");
+            } else {
+                itemProduto.setQuantidade(itemProduto.getQuantidade() + 1);
+                produto.decreaseEstoque(1);
+                itemProdutoService.salvaItemProduto(itemProduto);
+                produtoService.salvarProduto(produto);
+                carrinho.setValorTotal(carrinho.calcularValorTotal(carrinho));
+                carrinhoCompraService.salvarCarrinhoCompra(carrinho);
+
+                response.put("success", true);
+                response.put("message", "Quantidade aumentada com sucesso!");
+                response.put("total", carrinho.getValorTotal());
+            }
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("message", "Erro ao aumentar a quantidade");
+        }
+        return ResponseEntity.ok(response);
+    }
+
+
+    @RequestMapping("/diminuir")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> diminuirQuantidade(@RequestParam Long itemProdutoId, HttpSession session) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            ItemProduto itemProduto = itemProdutoService.obterItemProduto(itemProdutoId);
+            Produto produto = itemProduto.getProduto();
+            CarrinhoCompra carrinho = itemProduto.getCarrinhoCompra();
+
+            if (itemProduto.getQuantidade() > 1) {
+                itemProduto.setQuantidade(itemProduto.getQuantidade() - 1);
+                produto.increaseEstoque(1);
+                itemProdutoService.salvaItemProduto(itemProduto);
+                produtoService.salvarProduto(produto);
+                carrinho.setValorTotal(carrinho.calcularValorTotal(carrinho));
+                carrinhoCompraService.salvarCarrinhoCompra(carrinho);
+
+                response.put("success", true);
+                response.put("message", "Quantidade diminuída com sucesso!");
+                response.put("total", carrinho.getValorTotal());
+            } else if (itemProduto.getQuantidade() == 1) {
+                Long carrinhoId = itemProduto.getCarrinhoCompra().getId();
+                carrinho = carrinhoCompraService.obterCarrinhoCompra(carrinhoId);
+                itemProdutoService.deletarItemProduto(itemProdutoId);
+                carrinho.setValorTotal(carrinho.calcularValorTotal(carrinho));
+                carrinhoCompraService.salvarCarrinhoCompra(carrinho);
+                response.put("success", true);
+                response.put("message", "Produto removido do carrinho!");
+                response.put("total", carrinho.getValorTotal());
+            } else {
+                response.put("success", false);
+                response.put("message", "Quantidade inválida!");
+            }
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("message", "Erro ao diminuir a quantidade");
+        }
+        return ResponseEntity.ok(response);
+    }
+
+
 }

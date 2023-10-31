@@ -5,6 +5,8 @@ layout:decorate="~{usr/layout.html}">
 <meta charset="UTF-8">
 <head>
 	<link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <div layout:fragment="content">
     
@@ -30,7 +32,12 @@ layout:decorate="~{usr/layout.html}">
             <tbody>
                 <tr th:each="itemProduto : ${lista}">
 					<td th:text="${itemProduto.produto.nome}"></td>
-                    <td th:text="${itemProduto.quantidade}"></td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-outline-secondary change-quantity" data-action="decrease" th:data-item-id="${itemProduto.id}">-</button>
+                        <span th:text="${itemProduto.quantidade}"></span>
+                        <button type="button" class="btn btn-sm btn-outline-secondary change-quantity" data-action="increase" th:data-item-id="${itemProduto.id}">+</button>
+                    </td>
+                    
                     <td th:text="${itemProduto.preco}"></td>
                     
                     
@@ -70,3 +77,36 @@ layout:decorate="~{usr/layout.html}">
     <div th:replace="pages/footer :: footer"></div>
 </div>
 </html>
+
+<script>
+    $(document).ready(function () {
+        $('.change-quantity').click(function () {
+            const action = $(this).data('action');
+            const itemProdutoId = $(this).data('item-id');
+            
+            const url = action === 'increase' ? '/carrinho/aumentar' : '/carrinho/diminuir';
+
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: { itemProdutoId: itemProdutoId },
+                success: function (response) {
+                    if (response.success) {
+                        // alert('Quantidade atualizada com sucesso!');
+                        // Atualize a quantidade na tela aqui, se necessário
+                        location.reload();
+                    } else {
+                        alert('Erro ao atualizar a quantidade: ' + response.message);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert('Ocorreu um erro ao atualizar a quantidade');
+                    console.error('Detalhes do erro:', error);
+                }
+
+            });
+        });
+    });
+
+    
+</script>

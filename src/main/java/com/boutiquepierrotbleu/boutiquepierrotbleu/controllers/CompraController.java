@@ -23,6 +23,8 @@ import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Endereco;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.ItemProduto;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Pagamento;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Produto;
+import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Status;
+import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Troca;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.CarrinhoCompraService;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.ClienteService;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.CompraService;
@@ -30,6 +32,7 @@ import com.boutiquepierrotbleu.boutiquepierrotbleu.services.CreditcardService;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.CupomService;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.EnderecoService;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.ProdutoService;
+import com.boutiquepierrotbleu.boutiquepierrotbleu.services.TrocaService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -59,6 +62,9 @@ public class CompraController {
 
     @Autowired
     private ClienteService clienteService;
+
+    @Autowired
+    private TrocaService trocaService;
 
     private static final Logger logger = LoggerFactory.getLogger(CompraController.class);
 
@@ -143,9 +149,9 @@ public class CompraController {
         }
 
         // Generate a coupon
-        Cupom novoCupom = cupomService.generateAndSaveCupom(cliente);
-
+        
         Compra compra = new Compra(carrinhoCompra);
+        Cupom novoCupom = cupomService.generateAndSaveCupom(cliente, compra);
 
         mv.addObject("compra", compra);
 
@@ -241,10 +247,35 @@ public class CompraController {
         return mv;
     }
 
-    @RequestMapping("/detalhar/{id}")
-    public ModelAndView detalharCompra(@RequestParam("id") Long id, HttpSession session) {
+    @RequestMapping("/detail")
+    public ModelAndView detalharCompra(@RequestParam("id") Long id, HttpSession session) throws Exception {
         ModelAndView mv = new ModelAndView("usr/compra/detail");
-        // Your implementation here
+        
+        Compra compra = compraService.obterCompra(id);
+        mv.addObject("compra", compra);
+        return mv;
+    }
+
+    @RequestMapping("/listarAdmin")
+    public ModelAndView listarComprasAdmin() {
+        ModelAndView mv = new ModelAndView("adm/compras/listar");
+        mv.addObject("lista", compraService.listarCompras());
+        return mv;
+    }
+
+    @RequestMapping("/enviado")
+    public ModelAndView compraEnviada(@RequestParam("id") Long id, HttpSession session) throws Exception {
+        ModelAndView mv = new ModelAndView("adm/compras/listar");
+        Compra compra = compraService.obterCompra(id);
+        Troca troca = new Troca();
+        Cliente cliente = compra.getCliente();
+        compra.setStatus(Status.ENTREGUE);
+        compraService.salvarCompra(compra);
+        troca.setCliente(cliente);
+        trocaService.salvarTroca(troca);
+
+        cupomService.gerarCupomTroca(cliente, compra, troca);
+        mv.addObject("lista", compraService.listarCompras());
         return mv;
     }
 }

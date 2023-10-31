@@ -7,8 +7,8 @@
     <div class="alert alert-primary" th:if="${#lists.isEmpty(lista)}">
         Nenhum cliente cadastrado.
     </div>
-    <div th:if="${message}" class="alert alert-success" role="alert">
-        <p th:text="${message}"></p>
+    <div th:if="${mensagem}" class="alert alert-success" role="alert">
+        <p th:text="${mensagem}"></p>
     </div>
     <div th:if="${not #lists.isEmpty(lista)}">
         <!-- <div th:replace="~{adm/search :: searchForm}"></div> -->
@@ -176,9 +176,9 @@
 <script th:inline="javascript">
     function updateAtivoStatus(formElem, checkboxElem) {
         var currentStatus = checkboxElem.checked;
-        var confirmationMessage = currentStatus ? "Ativar cliente?" : "Desativar cliente?";
+        var confirmationmensagem = currentStatus ? "Ativar cliente?" : "Desativar cliente?";
         
-        if (confirm(confirmationMessage)) {
+        if (confirm(confirmationmensagem)) {
             formElem.submit();  // Submit the form to update the status on the server side
         } else {
             // Revert the checkbox state

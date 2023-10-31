@@ -1,7 +1,7 @@
 package com.boutiquepierrotbleu.boutiquepierrotbleu.controllers;
 
-import static org.junit.jupiter.api.DynamicTest.stream;
-
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -19,7 +19,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cliente;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.ItemProduto;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Produto;
+import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.ValorCategoria;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.CarrinhoCompraService;
+import com.boutiquepierrotbleu.boutiquepierrotbleu.services.CategoriaService;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.ClienteService;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.ProdutoService;
 
@@ -38,6 +40,9 @@ public class ProdutoController {
     @Autowired
     private CarrinhoCompraService carrinhoCompraService;
     
+    @Autowired
+    private CategoriaService categoriaService;
+
     private static final Logger logger = LoggerFactory.getLogger(ProdutoController.class);
 
     @RequestMapping("listarProdutos")
@@ -82,6 +87,9 @@ public class ProdutoController {
 			}
 		}
 		mv.addObject("produto", produto);
+
+        List<ValorCategoria> lista = categoriaService.getCategorias();
+        mv.addObject("lista", lista);
 		return mv;
     }
 
@@ -97,32 +105,70 @@ public class ProdutoController {
 		if (produto != null) {
 			novo = false;
 		}
-		produtoService.salvarProduto(produto);
 		if (novo) {
 			mv.addObject("produto", new Produto());
 		} else {
-			mv.addObject("produto", produto);
+            mv.addObject("produto", produto);
 		}
+        if (produto != null) {
+            Float porcentagem = produto.getValorCategoria().getPorcentagem();
+            Double valor = (1.00 + (porcentagem * 0.01)) * produto.getCusto();
+
+            BigDecimal bd = new BigDecimal(valor).setScale(2, RoundingMode.HALF_UP);
+            Double roundedValue = bd.doubleValue();
+
+            produto.setPreco(roundedValue);
+            logger.debug("Porcentagem::::::::::::::: {}", produto.getValorCategoria());
+        }
+        produtoService.salvarProduto(produto);
+
+        mv.addObject("mensagem", "Produto salvo com sucesso!"); 
 		redirectAttributes.addFlashAttribute("produtoCreatedSuccess", true);
 		return mv;
 	}
 
-    @RequestMapping(value = "/atualizar", method = RequestMethod.GET)
-    public ModelAndView atualizarProduto(Long id) {
-        ModelAndView mv = new ModelAndView("path/to/your/view");
-        // Your implementation here
+    @RequestMapping(value = "estoque", method = RequestMethod.GET)
+    public ModelAndView atualizarEstoqueProduto(@RequestParam(required = false) Long id) {
+        ModelAndView mv = new ModelAndView("adm/produto/estoque");
+        
+        Produto produto;
+		try {
+            produto = produtoService.obterProduto(id);
+            String nome = produto.getNome();
+            mv.addObject("nome", nome);
+            //mv.addObject("produto", produto);
+        } catch (Exception e) {
+            produto = new Produto();
+            mv.addObject("mensagem", e.getMessage());
+        }
+
+        Integer quantidade = 0;
+        mv.addObject("quatidade", quantidade);
+        mv.addObject("id", id);
         return mv;
     }
 
+    @RequestMapping(value = "atualizar", method = RequestMethod.POST)
+    public ModelAndView reservarEstoqueDeProduto(@RequestParam("id")Long id, @RequestParam("quantidade") Integer quantidade) {
+        ModelAndView mv = new ModelAndView("adm/produto/list");
+        Produto produto;
+		try {
+            produto = produtoService.obterProduto(id);
+            
+        } catch (Exception e) {
+            produto = new Produto();
+            mv.addObject("mensagem", e.getMessage());
+        }
+        Integer estoqueAntigo = produto.getEstoque();
+        produto.setEstoque(estoqueAntigo + quantidade);
+        produtoService.salvarProduto(produto);
+        mv.addObject("lista", produtoService.listarProdutos());
+        mv.addObject("mensagem", "Estoque atualizado com sucesso!");
+        return mv;
+    }
+    
     @RequestMapping(value = "/deletar", method = RequestMethod.GET)
     public ModelAndView deletarProduto(Long id) {
-        ModelAndView mv = new ModelAndView("path/to/your/view");
-        // Your implementation here
-        return mv;
-    }
-
-    @RequestMapping(value = "/reservar", method = RequestMethod.GET)
-    public ModelAndView reservarEstoqueDeProduto(Long id, Integer quantity) {
         ModelAndView mv = new ModelAndView("path/to/your/view");
         // Your implementation here
         return mv;

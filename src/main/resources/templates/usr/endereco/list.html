@@ -7,8 +7,8 @@
     <div class="alert alert-primary" th:if="${#lists.isEmpty(lista)}">
         Nenhum endereço cadastrado.
     </div>
-    <div th:if="${message}" class="alert alert-success" role="alert">
-        <p th:text="${message}"></p>
+    <div th:if="${mensagem}" class="alert alert-success" role="alert">
+        <p th:text="${mensagem}"></p>
     </div>
     <div th:if="${not #lists.isEmpty(lista)}">
         

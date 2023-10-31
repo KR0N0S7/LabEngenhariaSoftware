@@ -7,8 +7,8 @@
     <div class="alert alert-primary" th:if="${#lists.isEmpty(lista)}">
         Nenhum produto cadastrado.
     </div>
-    <div th:if="${message}" class="alert alert-success" role="alert">
-        <p th:text="${message}"></p>
+    <div th:if="${mensagem}" class="alert alert-success" role="alert">
+        <p th:text="${mensagem}"></p>
     </div>
     <div th:if="${not #lists.isEmpty(lista)}">
         <!-- <div th:replace="~{adm/search :: searchForm}"></div> -->
@@ -51,7 +51,7 @@
                 <tr th:each="produto : ${lista}">
                     <td th:text="${produto.nome}"></td>
                     <td th:text="${produto.descricao}"></td>
-                    <td th:text="${produto.categoria}"></td>
+                    <td th:text="${produto.valorCategoria.categoria}"></td>
                     <td th:text="${produto.tamanho}"></td>
                     <td th:text="${produto.cor}"></td>
                     <td th:text="${produto.marca}"></td>
@@ -70,6 +70,7 @@
                     </td>
                     
                     <td>
+                        <a class="btn btn-primary btn-sm" th:href="@{/produto/estoque(id=${produto.id})}">Estoque</a>
                         <a class="btn btn-primary btn-sm" th:href="@{/produto/criar(id=${produto.id})}">Editar</a>
                         <a class="btn btn-primary btn-sm ml-3" th:href="@{/produto/excluir(id=${produto.id})}" 
                            onclick="return confirm('Você realmente deseja excluir esse Produto?')">Excluir</a>
@@ -101,8 +102,8 @@
         
         // Determine the next filter based on existing filters in the hiddenContent div
         var existingFilters = hiddenContent.getElementsByTagName('input').length;
-        var placeholders = ['Nome', 'Categoria', 'Cor', 'Marca', 'Gênero', 'Material', 'Tipo', 'Tamanho', 'Ativo'];
-        var names = ['nome', 'categoria', 'cor', 'marca', 'genero', 'material', 'tipo', 'tamanho', 'ativo'];
+        var placeholders = ['Nome', 'Cor', 'Marca', 'Gênero', 'Material', 'Tipo', 'Tamanho', 'Ativo'];
+        var names = ['nome', 'cor', 'marca', 'genero', 'material', 'tipo', 'tamanho', 'ativo'];
         if (existingFilters < placeholders.length) {
             filterInput.placeholder = placeholders[existingFilters];
             filterInput.setAttribute('data-attribute', names[existingFilters]);
@@ -172,7 +173,7 @@
             tbody.innerHTML += '<tr>' +
                                     '<td>' + data[i].nome + '</td>' +
                                     '<td>' + data[i].descricao + '</td>' +
-                                    '<td>' + data[i].categoria + '</td>' +
+                                    '<td>' + data[i].valorCategoria.categoria + '</td>' +
                                     '<td>' + data[i].tamanho + '</td>' +
                                     '<td>' + data[i].cor + '</td>' +
                                     '<td>' + data[i].marca + '</td>' +
