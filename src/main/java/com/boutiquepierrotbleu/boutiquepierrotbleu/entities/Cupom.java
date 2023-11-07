@@ -1,6 +1,7 @@
 package com.boutiquepierrotbleu.boutiquepierrotbleu.entities;
 
 import java.util.Date;
+import java.util.UUID;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,8 +31,7 @@ public class Cupom {
     @JoinColumn(name = "compra_id")
     private Compra compra;
 
-    @OneToOne
-    @JoinColumn(name = "troca_id")
+    @OneToOne(mappedBy = "cupom")
     private Troca troca;
 
     public Long getId() {
@@ -129,4 +129,26 @@ public class Cupom {
         return 0.0;
     }
 
+    private String generateUniqueCode() {
+        return UUID.randomUUID().toString();
+    }
+
+    public Cupom gerarCupom(Cliente cliente, Compra compra, String tipo, Double valor) {
+        // Logic to generate a unique coupon code
+        String uniqueCode = generateUniqueCode();
+        
+        // Create a new Coupon object
+        Cupom novoCupom = new Cupom();
+        novoCupom.setCodigo(uniqueCode);
+        novoCupom.setCliente(cliente);  // assuming a bidirectional relationship
+        novoCupom.setCompra(compra);    // assuming a bidirectional relationship
+        novoCupom.setUsoContador(0);
+        novoCupom.setUsoLimite(1);
+        novoCupom.setTipo(tipo);
+        novoCupom.setValor(valor);
+
+        return novoCupom;
+    }
+
+    
 }

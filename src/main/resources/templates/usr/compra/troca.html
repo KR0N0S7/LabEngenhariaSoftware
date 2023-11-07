@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{usr/layout.html}">
+<meta charset="UTF-8">
+<div layout:fragment="content">
+
+	<head>
+		<link rel="stylesheet" th:href="@{/css/styles.css}" />
+	</head>
+	<div class="alert alert-primary" th:if="${mensagem != null}" th:text="${mensagem}"></div>
+
+	<div class="card mb-4">
+		<div class="card-header">
+			<p class="text-primary">Produtos</p>
+		</div>
+		<div class="flex flex-wrap">
+
+			<div class="card-body">
+				<form class="row g-3" th:action="@{/compra/trocarSelecionados}">
+
+					<div th:each="item, iterStat : ${itens}">
+						<div class="col-md-4">
+							<input type="checkbox" th:id="'item' + ${iterStat.index}" th:value="${item.id}"
+								name="selectedItems" />
+							<label th:for="'item' + ${iterStat.index}" th:text="${item.produto.nome}">Nome do
+								Produto</label>
+							<p th:text="'Preço: R$' + ${item.preco}">Preço do Produto</p>
+						</div>
+					</div>
+
+
+					<div class="d-flex justify-content-between">
+						<div class="col-md-2 h5-inline">
+							<button type="submit" class="btn btn-primary">Voltar</button>
+						</div>
+						<h5 class="fw-normal btn btn-primary mb-0 h5-inline">
+							<button type="submit" class="btn btn-primary"
+								onclick="return confirm('Deseja solicitar a troca?')">Trocar</button>
+						</h5>
+					</div>
+
+
+				</form>
+			</div>
+
+		</div>
+	</div>
+
+</div>
+
+</html>
+
+<div th:replace="pages/head :: head"></div>
+
+<body>
+	<div th:replace="pages/footer :: footer"></div>
+</body>

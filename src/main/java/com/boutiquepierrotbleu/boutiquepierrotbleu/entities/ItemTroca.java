@@ -1,34 +1,24 @@
 package com.boutiquepierrotbleu.boutiquepierrotbleu.entities;
 
-import java.time.LocalDate;
-import java.util.List;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 
 @Entity
-public class Troca {
+public class ItemTroca {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String motivo;
-    private Status status;
     private String descricao;
     private String codigo;
-    private LocalDate data;
-
-    @OneToMany(mappedBy = "troca")
-    private List<Produto> produtos;
-
-    @OneToOne
-    @JoinColumn(name = "cupom_id")
-    private Cupom cupom;
+    private String data;
+    private Integer quantidade;
+    private Double valor;
 
     @ManyToOne
     @JoinColumn(name = "cliente_id")
@@ -38,8 +28,13 @@ public class Troca {
     @JoinColumn(name = "compra_id")
     private Compra compra;
 
-    @OneToMany(mappedBy = "troca")
-    public List<ItemTroca> itemTroca;
+    @ManyToOne
+    @JoinColumn(name = "troca_id")
+    private Troca troca;
+    
+    @ManyToOne
+    @JoinColumn(name = "produto_id")
+    private Produto produto;
 
     public Long getId() {
         return id;
@@ -55,14 +50,6 @@ public class Troca {
 
     public void setMotivo(String motivo) {
         this.motivo = motivo;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
     }
 
     public String getDescricao() {
@@ -81,28 +68,12 @@ public class Troca {
         this.codigo = codigo;
     }
 
-    public LocalDate getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(LocalDate data) {
+    public void setData(String data) {
         this.data = data;
-    }
-
-    public List<Produto> getProdutos() {
-        return produtos;
-    }
-
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
-    }
-
-    public Cupom getCupom() {
-        return cupom;
-    }
-
-    public void setCupom(Cupom cupom) {
-        this.cupom = cupom;
     }
 
     public Cliente getCliente() {
@@ -121,20 +92,36 @@ public class Troca {
         this.compra = compra;
     }
 
-    public List<ItemTroca> getItemTroca() {
-        return itemTroca;
+    public Troca getTroca() {
+        return troca;
     }
 
-    public void setItemTroca(List<ItemTroca> itemTroca) {
-        this.itemTroca = itemTroca;
+    public void setTroca(Troca troca) {
+        this.troca = troca;
     }
-    
-    public Double calculoValorTroca(List<ItemProduto> itens) {
-        Double valor = 0.00;
-        for (ItemProduto item : itens) {
-            valor += item.getPreco();
-        }
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
+
+    public Double getValor() {
         return valor;
-
     }
+
+    public void setValor(Double valor) {
+        this.valor = valor;
+    }
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
+    }
+
 }

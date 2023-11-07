@@ -53,6 +53,10 @@ public class Cliente {
     @JsonIgnore
     private List<Troca> trocas;
 
+    @OneToMany(mappedBy = "cliente")
+    @JsonManagedReference
+    private List<ItemTroca> itemTroca;   
+
     private boolean ativo = true;
 
     public Long getId() {
@@ -169,6 +173,14 @@ public class Cliente {
 
     public void setTrocas(List<Troca> trocas) {
         this.trocas = trocas;
+    }
+
+    public List<ItemTroca> getItemTroca() {
+        return itemTroca;
+    }
+
+    public void setItemTroca(List<ItemTroca> itemTroca) {
+        this.itemTroca = itemTroca;
     }
 
     

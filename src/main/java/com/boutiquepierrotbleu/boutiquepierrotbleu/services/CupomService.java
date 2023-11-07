@@ -44,47 +44,26 @@ public class CupomService {
         return cupom.aplicarDesconto(valorOriginal);
     }
 
-    public Cupom generateAndSaveCupom(Cliente cliente, Compra compra) {
-        // Logic to generate a unique coupon code
-        String uniqueCode = generateUniqueCode();
-        
-        // Create a new Coupon object
+    public Cupom gerarCupomDesconto(Cliente cliente, Compra compra, Double porcentagem) {
+        String tipo = "Desconto";
         Cupom novoCupom = new Cupom();
-        novoCupom.setCodigo(uniqueCode);
-        novoCupom.setCliente(cliente);  // assuming a bidirectional relationship
-        novoCupom.setCompra(compra);    // assuming a bidirectional relationship
-        novoCupom.setUsoContador(0);
-        novoCupom.setUsoLimite(1);
-        novoCupom.setTipo("DESCONTO");
-        
+        novoCupom.gerarCupom(cliente, compra, tipo, porcentagem);
+
         // Save the coupon in the database
         cupomRepository.save(novoCupom);
         
         return novoCupom;
     }
 
-    public Cupom gerarCupomTroca(Cliente cliente, Compra compra, Troca troca) {
-        // Logic to generate a unique coupon code
-        String uniqueCode = generateUniqueCode();
-        
-        // Create a new Coupon object
+    public Cupom gerarCupomTroca(Cliente cliente, Compra compra, Troca troca, Double valor) {
+        String tipo = "Troca";
         Cupom novoCupom = new Cupom();
-        novoCupom.setCodigo(uniqueCode);
-        novoCupom.setCliente(cliente);  // assuming a bidirectional relationship
-        novoCupom.setCompra(compra);    // assuming a bidirectional relationship
-        novoCupom.setTroca(troca);      // assuming a bidirectional relationship
-        novoCupom.setUsoContador(0);
-        novoCupom.setUsoLimite(1);
-        novoCupom.setTipo("TROCA");
-        
+        novoCupom.gerarCupom(cliente, compra, tipo, valor);
+
         // Save the coupon in the database
         cupomRepository.save(novoCupom);
         
         return novoCupom;
-    }
-
-    private String generateUniqueCode() {
-        return UUID.randomUUID().toString();
     }
 
     public boolean validateCupom(String cupomCodigo) {

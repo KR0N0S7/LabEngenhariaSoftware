@@ -49,6 +49,12 @@ public class Compra {
     @OneToMany(mappedBy = "compra")
     private List<ItemProduto> itens;
 
+    @OneToMany(mappedBy = "compra")
+    private List<Troca> trocas;
+
+    @OneToMany(mappedBy = "compra")
+    private List<ItemTroca> itemTroca;
+
     public Long getId() {
         return id;
     }
@@ -192,6 +198,22 @@ public class Compra {
     public void setCarrinhoId(Long carrinhoId) {
         this.carrinhoId = carrinhoId;
     }
+    
+     public List<Troca> getTrocas() {
+        return trocas;
+    }
+
+    public void setTrocas(List<Troca> trocas) {
+        this.trocas = trocas;
+    }
+
+    public List<ItemTroca> getItemTroca() {
+        return itemTroca;
+    }
+
+    public void setItemTroca(List<ItemTroca> itemTroca) {
+        this.itemTroca = itemTroca;
+    }
 
     public Compra(CarrinhoCompra carrinho) {
         this.cliente = carrinho.getCliente();
@@ -208,7 +230,7 @@ public class Compra {
         this.valorFrete = 0.0;
         this.valorDesconto = 0.0;
         this.valorFinal = this.valorTotal + this.valorFrete - this.valorDesconto;
-        this.status = Status.AGUARDANDO_PAGAMENTO;
+        this.status = Status.EM_PROCESSAMENTO;
         this.observacao = "";
         this.numeroCompra = "";
         this.enderecoEntrega = null;

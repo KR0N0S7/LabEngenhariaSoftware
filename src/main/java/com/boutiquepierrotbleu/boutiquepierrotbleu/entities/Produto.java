@@ -44,10 +44,9 @@ public class Produto {
     @JsonIgnore
     private List<ItemProduto> itemProduto;
 
-    @ManyToOne
-    @JoinColumn(name = "troca_id")
+    @OneToMany(mappedBy = "produto")
     @JsonIgnore
-    private Troca troca;
+    private List<ItemTroca> itemTrocas;
 
     public List<ItemProduto> getItemProduto() {
         return itemProduto;
@@ -177,12 +176,12 @@ public class Produto {
         this.estoque = estoque;
     }
 
-    public Troca getTroca() {
-        return troca;
+    public List<ItemTroca> getTroca() {
+        return itemTrocas;
     }
 
-    public void setTroca(Troca troca) {
-        this.troca = troca;
+    public void setTroca(List<ItemTroca> troca) {
+        this.itemTrocas = troca;
     }
     
     public boolean isAtivo() {

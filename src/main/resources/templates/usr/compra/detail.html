@@ -4,6 +4,9 @@
 	layout:decorate="~{usr/layout.html}">
 <meta charset="UTF-8">
 <div layout:fragment="content">
+	<head>
+        <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    </head>
 <div class="alert alert-primary" th:if="${mensagem != null}"
 		th:text="${mensagem}"></div>
 
@@ -17,45 +20,48 @@
 				<form class="row g-3" 
 					th:action="@{/compra/listar}">
 
-					<div class="col-4">
+					<div class="col-6">
 						<label for="nome" class="form-label">Data da Compra </label> <span
 							type="text" class="form-control" 
 							th:text="${compra.data}">
 					</div>
-					<div class="col-4">
+					<div class="col-6">
 						<label for="nome" class="form-label">Hora da Compra</label> <span
 							type="text" class="form-control" 
 							th:text="${compra.hora}">
 					</div>
-					<div class="col-4">
+					<div class="col-6">
 						<label for="nome" class="form-label">Forma de Pagamento </label> <span
 							type="text" class="form-control" 
 							th:text="${compra.formaPagamento}">
 					</div>
-					<div class="col-4">
+					<div class="col-6">
 						<label for="nome" class="form-label">Valor do Frete </label> <span
 							type="text" class="form-control" 
 							th:text="${compra.valorFrete}">
 					</div>
-					<div class="col-4">
+					<div class="col-6">
 						<label for="nome" class="form-label">Valor Total </label> <span
 							type="text" class="form-control" 
 							th:text="${compra.valorFinal}">
 					</div>
-					<div class="col-4">
+					<div class="col-6">
 						<label for="nome" class="form-label">Status </label> <span
 							type="text" class="form-control" 
 							th:text="${compra.status}">
 					</div>
 					
 
-					<div class="rom-row">
-						
+					<div class="d-flex justify-content-between">
+						<div class="col-md-2 h5-inline">
+							<button type="submit" class="btn btn-primary">Voltar</button>
+						</div>
+						<h5 class="fw-normal btn btn-primary mb-0 h5-inline">
+							<a th:href="@{/compra/trocar(id=${compra.id})}" 
+								onclick="return confirm('Deseja solicitar a troca?')">Trocar</a>
+						</h5>						
 					</div>
 
-					<div class="col-md-2">
-						<button type="submit" class="btn btn-primary">Voltar</button>
-					</div>
 
 				</form>
 			</div>

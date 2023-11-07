@@ -48,9 +48,8 @@
                     <td th:text="${compra.status}"></td>
                     
                     <td>
+                        <a class="btn btn-primary btn-sm" th:href="@{/compra/detalharAdmin(id=${compra.id})}">Detalhes</a>
                         
-                        <a class="btn btn-primary btn-sm ml-3" th:href="@{/compra/enviado(id=${compra.id})}" 
-                           onclick="return confirm('A compra realmente foi enviada?')">Enviado</a>
                     </td>
                 </tr>
             </tbody>

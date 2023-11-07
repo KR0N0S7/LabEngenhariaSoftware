@@ -14,4 +14,12 @@ public class TrocaService {
     public Troca salvarTroca(Troca troca) {
         return trocaRepository.save(troca);
     }
+
+    public Troca obterTrocaByCompraId(Long id) {
+        return trocaRepository.findByCompraId(id);
+    }
+
+    public Troca obterTroca(Long id) {
+        return trocaRepository.findById(id).get();
+    }
 }
