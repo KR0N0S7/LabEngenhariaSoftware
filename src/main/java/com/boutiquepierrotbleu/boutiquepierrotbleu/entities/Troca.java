@@ -22,9 +22,7 @@ public class Troca {
     private String descricao;
     private String codigo;
     private LocalDate data;
-
-    @OneToMany(mappedBy = "troca")
-    private List<Produto> produtos;
+    private Double valorTroca;
 
     @OneToOne
     @JoinColumn(name = "cupom_id")
@@ -89,14 +87,6 @@ public class Troca {
         this.data = data;
     }
 
-    public List<Produto> getProdutos() {
-        return produtos;
-    }
-
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
-    }
-
     public Cupom getCupom() {
         return cupom;
     }
@@ -128,13 +118,20 @@ public class Troca {
     public void setItemTroca(List<ItemTroca> itemTroca) {
         this.itemTroca = itemTroca;
     }
+
+    public Double getValorTroca() {
+        return valorTroca;
+    }
+
+    public void setValorTroca(Double valorTroca) {
+        this.valorTroca = valorTroca;
+    }
     
-    public Double calculoValorTroca(List<ItemProduto> itens) {
+    public Double calculoValorTroca(List<ItemTroca> itens) {
         Double valor = 0.00;
-        for (ItemProduto item : itens) {
-            valor += item.getPreco();
+        for (ItemTroca item : itens) {
+            valor += item.getValor();
         }
         return valor;
-
     }
 }

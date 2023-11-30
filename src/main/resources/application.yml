@@ -23,4 +23,4 @@ server:
   servlet:
     session:
       persistent: true
-      timeout: 8h
+      timeout: 16h

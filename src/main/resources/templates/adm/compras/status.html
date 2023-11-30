@@ -90,10 +90,34 @@
                                 </h5>
                             </div>
 
+                            <div th:if="${status == 'APROVADO'}" class="link-container">
+                                <h5 class="fw-normal mb-0 h5-inline">
+                                    <a th:href="@{/compra/enviar(id=${compra.id})}" 
+                                        onclick="return confirm('Deseja confirmar o envio da compra?')">Enviado</a>
+
+                                </h5>
+                                <h5 class="fw-normal mb-0 h5-inline">
+                                    <a th:href="@{/compra/cancelar(id=${compra.id})}" 
+                                    onclick="return confirm('Deseja cancelar a compra?')">Cancelar</a>
+                                </h5>
+                            </div>
+
                             <div th:if="${status == 'EM_TROCA'}" class="link-container">
                                 <h5 class="fw-normal mb-0 h5-inline">
                                     <a th:href="@{/compra/aceitar(id=${troca.id})}" 
                                         onclick="return confirm('Deseja realmente aprovar a troca?')">Aceitar</a>
+
+                                </h5>
+                                <h5 class="fw-normal mb-0 h5-inline">
+                                    <a th:href="@{/compra/recusar(id=${troca.id})}" 
+                                    onclick="return confirm('Deseja recusar a troca?')">Recusar</a>
+                                </h5>
+                            </div>
+
+                            <div th:if="${status == 'ENVIADO'}" class="link-container">
+                                <h5 class="fw-normal mb-0 h5-inline">
+                                    <a th:href="@{/compra/recebidoTroca(id=${troca.id})}" 
+                                        onclick="return confirm('Deseja confirmar recebimento dos produtos aa troca?')">Confirmar</a>
 
                                 </h5>
                                 <h5 class="fw-normal mb-0 h5-inline">

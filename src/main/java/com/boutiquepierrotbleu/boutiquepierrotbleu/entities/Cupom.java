@@ -129,25 +129,17 @@ public class Cupom {
         return 0.0;
     }
 
-    private String generateUniqueCode() {
-        return UUID.randomUUID().toString();
-    }
-
     public Cupom gerarCupom(Cliente cliente, Compra compra, String tipo, Double valor) {
         // Logic to generate a unique coupon code
-        String uniqueCode = generateUniqueCode();
-        
-        // Create a new Coupon object
-        Cupom novoCupom = new Cupom();
-        novoCupom.setCodigo(uniqueCode);
-        novoCupom.setCliente(cliente);  // assuming a bidirectional relationship
-        novoCupom.setCompra(compra);    // assuming a bidirectional relationship
-        novoCupom.setUsoContador(0);
-        novoCupom.setUsoLimite(1);
-        novoCupom.setTipo(tipo);
-        novoCupom.setValor(valor);
+        this.codigo = UUID.randomUUID().toString();
+        this.setCliente(cliente);  // assuming a bidirectional relationship
+        this.setCompra(compra);    // assuming a bidirectional relationship
+        this.setUsoContador(0);
+        this.setUsoLimite(1);
+        this.setTipo(tipo);
+        this.setValor(valor);
 
-        return novoCupom;
+        return this;
     }
 
     

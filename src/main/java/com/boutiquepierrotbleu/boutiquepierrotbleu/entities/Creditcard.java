@@ -21,6 +21,7 @@ public class Creditcard {
     private String bandeira;
     private String cpfTitular;
     private String apelidoCartao;
+    private Double valorParcela;
 
     @ManyToOne
     @JoinColumn(name = "compra_id")
@@ -112,6 +113,15 @@ public class Creditcard {
 
     public void setCompra(Compra compra) {
         this.compra = compra;
+    }
+
+
+    public Double getValorParcela() {
+        return valorParcela;
+    }
+
+    public void setValorParcela(Double valorParcela) {
+        this.valorParcela = valorParcela;
     }
 
     // Methods to interact with the payment gateway API

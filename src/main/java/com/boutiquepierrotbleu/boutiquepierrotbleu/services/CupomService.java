@@ -60,10 +60,7 @@ public class CupomService {
         Cupom novoCupom = new Cupom();
         novoCupom.gerarCupom(cliente, compra, tipo, valor);
 
-        // Save the coupon in the database
-        cupomRepository.save(novoCupom);
-        
-        return novoCupom;
+        return cupomRepository.save(novoCupom);
     }
 
     public boolean validateCupom(String cupomCodigo) {
@@ -91,6 +88,14 @@ public class CupomService {
 
         // If all checks pass, return true
         return true;
+    }
+
+    public List<Cupom> listarCuponsByClienteId(Long clienteId) {
+        return cupomRepository.findAllByClienteId(clienteId);
+    }
+
+    public double getDiscountAmount(String couponCode) {
+        return cupomRepository.findByCodigo(couponCode).get().getValor();
     }
 
 }

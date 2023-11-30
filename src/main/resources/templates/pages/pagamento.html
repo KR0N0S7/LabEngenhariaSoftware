@@ -19,7 +19,7 @@
 
 
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50"
+                        <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="50"
                             aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
 
@@ -31,7 +31,7 @@
 
                     <div>
                         <form th:action="@{/compra/detalhar}" th:object="${creditcard}" method="post"
-                            class="flex flex-col">
+                            modelAttribute="compra" class="flex flex-col">
                             <!-- Credit Card Radio Button -->
                             <div class="flex justify-between items-center">
                                 <div class="flex">
@@ -42,33 +42,44 @@
                                 </div>
                                 <img th:src="@{/img/pagamento.png}" alt="pagamento">
                             </div>
-
+                            
+                            <div id="creditCardContainer">
                             <!-- Credit Card Fields - initially hidden -->
-                            <div class="creditCardFields" style="display:none;">
-                                <!--<label class="font-bold">Selecione um Cartão.</label>-->
-                                <select class="form-select" th:object="${creditcard}" name="selectedCartao"
-                                    id="cartaoDropdown" onchange="updateFields()">
-                                    <option value="" selected="selected">Selecione um Cartão:</option>
-                                    <option th:each="creditcard : ${lista}" th:value="${creditcard.id}"
-                                        th:data-numero="${creditcard.numeroCartao}"
-                                        th:data-nome="${creditcard.nomeTitular}"
-                                        th:data-validade="${creditcard.dataValidade}"
-                                        th:data-codigo="${creditcard.codigoSeguranca}"
-                                        th:data-bandeira="${creditcard.bandeira}" th:data-cpf="${creditcard.cpfTitular}"
-                                        th:text="${creditcard.apelidoCartao}"></option>
-                                </select>
+                                <div class="creditCardFields" style="display:none;">
+                                    <!--<label class="font-bold">Selecione um Cartão.</label>-->
+                                    <select class="form-select" th:object="${creditcard}" name="selectedCartao"
+                                        id="cartaoDropdown" onchange="updateFields()">
+                                        <option value="" selected="selected">Selecione um Cartão:</option>
+                                        <option th:each="creditcard : ${lista}" th:value="${creditcard.id}"
+                                            th:data-numero="${creditcard.numeroCartao}"
+                                            th:data-nome="${creditcard.nomeTitular}"
+                                            th:data-validade="${creditcard.dataValidade}"
+                                            th:data-codigo="${creditcard.codigoSeguranca}"
+                                            th:data-bandeira="${creditcard.bandeira}" 
+                                            th:data-cpf="${creditcard.cpfTitular}"
+                                            th:data-parcela="${creditcard.valorParcela}"
+                                            th:text="${creditcard.apelidoCartao}"></option>
+                                    </select>
 
 
-                                <input class="my-3" placeholder="Número do Cartão" type="text" id="numeroCartaoInput"
-                                    readonly />
-                                <input placeholder="Nome do Titular" type="text" id="nomeTitularInput" readonly />
-                                <input class="my-3" placeholder="dataValidade" type="text" id="dataValidadeInput"
-                                    readonly />
-                                <input placeholder="Código de Segurança" type="text" id="codigoSegurancaInput"
-                                    readonly />
-                                <input class="my-3" placeholder="Bandeira" type="text" id="bandeiraInput" readonly />
-                                <input placeholder="CPF do Titular" type="text" id="cpfTitularInput" readonly />
+                                    <input class="my-3" placeholder="Número do Cartão" type="text" id="numeroCartaoInput"
+                                        readonly />
+                                    <input placeholder="Nome do Titular" type="text" id="nomeTitularInput" readonly />
+                                    <input class="my-3" placeholder="dataValidade" type="text" id="dataValidadeInput"
+                                        readonly />
+                                    <input placeholder="Código de Segurança" type="text" id="codigoSegurancaInput"
+                                        readonly />
+                                    <input class="my-3" placeholder="Bandeira" type="text" id="bandeiraInput" readonly />
+                                    <input placeholder="CPF do Titular" type="text" id="cpfTitularInput" readonly />
+                                    <input type="number" placeholder="Valor da Parcela" name="valorParcela" class="valorParcelaInput"/>
+                                    <div>
+                                        <button type="button"
+                                            class="addCardButton bg-purple px-3 py-3 text-white hover:bg-black transition-all duration-500">+</button>
+
+                                    </div>
+                                </div>
                             </div>
+
 
 
                             <div class="flex my-5">
@@ -78,7 +89,7 @@
                                 </div>
                             </div>
 
-                            <div class="flex">
+                            <div class="flex my-3">
                                 <input type="radio" class="w-5" name="paymentMethod">
                                 <div class="flex flex-col ml-3">
                                     <h2 class="font-medium">PIX</h2>
@@ -87,8 +98,8 @@
 
                             <div class="flex justify-between my-5 items-center  ">
 
-                                <a href="#" class="hover:border-solid hover:border-2 hover:border-gray-dark px-1 py-1"
-                                    th:href="@{/compra/iniciar}">Retornar</a>
+                                <a class="hover:border-solid hover:border-2 hover:border-gray-dark px-1 py-1"
+                                    th:href="@{/compra/cupom}">Retornar</a>
                                 <button
                                     class="bg-purple px-3 py-3 text-white hover:bg-black transition-all duration-500"
                                     type="submit">Continue</button>
@@ -156,6 +167,58 @@
             }
         }
     </script>
+ 
+    <script>
+        function updateSelectOptions() {
+            var allSelectedValues = Array.from(document.querySelectorAll('.creditCardFields select'))
+                                        .map(select => select.value)
+                                        .filter(value => value); // Filtra valores não vazios
+
+            document.querySelectorAll('.creditCardFields select').forEach(select => {
+                Array.from(select.options).forEach(option => {
+                    option.style.display = allSelectedValues.includes(option.value) ? 'none' : 'block';
+                });
+            });
+        }
+
+        function addNewCardFields(button) {
+            var allContainers = document.querySelectorAll('.creditCardFields');
+            var lastContainer = allContainers[allContainers.length - 1];
+            var select = lastContainer.querySelector('select');
+
+            if (select && select.value) {
+                var clone = lastContainer.cloneNode(true); // Clona o último conjunto de campos
+                clone.querySelector('select').selectedIndex = 0; // Reseta o select
+                clone.querySelector('.valorParcelaInput').value = ''; // Reseta o valor da parcela
+
+                // Remova o botão '+' do clone para evitar duplicação
+                var addButtonClone = clone.querySelector('.addCardButton');
+                addButtonClone.parentNode.removeChild(addButtonClone);
+
+                // Adiciona o clone ao DOM após o último conjunto de campos
+                lastContainer.after(clone);
+
+                // Move o botão '+' para depois do clone
+                button.parentNode.removeChild(button);
+                clone.after(button);
+
+                updateSelectOptions(); // Atualiza as opções dos selects
+            } else {
+                alert("Por favor, selecione um cartão antes de adicionar outro.");
+            }
+        }
+
+        // Selecione todos os botões '+' e adicione o evento de clique
+        document.querySelectorAll('.addCardButton').forEach(button => {
+            button.addEventListener('click', function() {
+                addNewCardFields(this);
+            });
+        });
+
+        // Atualização inicial das opções de seleção
+        updateSelectOptions();
+    </script>
+
 
 </body>
 

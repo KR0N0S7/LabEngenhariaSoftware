@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{usr/layout.html}">
+<meta charset="UTF-8">
+<div layout:fragment="content">
+    <div class="alert alert-primary" th:if="${#lists.isEmpty(lista)}">
+        Nenhuma compra realizada.
+    </div>
+    <div th:if="${mensagem}" class="alert alert-success" role="alert">
+        <p th:text="${mensagem}"></p>
+    </div>
+    <div th:if="${not #lists.isEmpty(lista)}">
+
+        <table id="tabelacompra" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Número da Compra</th>
+                    <th>Data</th>
+                    <th>Hora</th>
+                    <th>Forma de Pagamento</th>
+                    <th>Valor do Frete</th>
+                    <th>Valor Total</th>
+                    <th>Status</th>
+                    <th>Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="compra : ${lista}">
+                    <td th:text="${compra.numeroCompra}"></td>
+                    <td th:text="${compra.data}"></td>
+                    <td th:text="${compra.hora}"></td>
+                    <td th:text="${compra.formaPagamento}"></td>
+                    <td th:text="${compra.valorFrete}"></td>
+                    <td th:text="${compra.valorTotal}"></td>
+                    <td th:text="${compra.status}"></td>
+                                     
+                    <td>
+                        <a class="btn btn-primary btn-sm" th:href="@{/compra/detail(id=${compra.id})}">Verificar</a>
+                        
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</html>
+
+
+
+<div th:replace="pages/head :: head"></div>
+<body>
+	<div th:replace="pages/footer :: footer"></div>
+</body>
+
+
+

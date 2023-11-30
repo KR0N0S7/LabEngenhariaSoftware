@@ -1,20 +1,21 @@
 package com.boutiquepierrotbleu.boutiquepierrotbleu.controllers;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -37,6 +38,7 @@ import com.boutiquepierrotbleu.boutiquepierrotbleu.services.CreditcardService;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.CupomService;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.EnderecoService;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.ItemProdutoService;
+import com.boutiquepierrotbleu.boutiquepierrotbleu.services.ItemTrocaService;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.ProdutoService;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.TrocaService;
 
@@ -44,6 +46,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
+@ControllerAdvice
 @RequestMapping("compra")
 @SessionAttributes("compra")
 public class CompraController {
@@ -75,13 +78,13 @@ public class CompraController {
     @Autowired
     private ItemProdutoService itemProdutoService;
 
+    @Autowired
+    private ItemTrocaService itemTrocaService;
+
     private static final Logger logger = LoggerFactory.getLogger(CompraController.class);
 
-    @ModelAttribute("compra")
-    public Compra initializeCompra(HttpServletRequest request, CarrinhoCompra carrinhoCompra) {
-        if (request.getRequestURI().endsWith("/listar")) {
-            return null;  // or Optional.empty() based on your setup
-        }
+    public Compra initializeCompra(CarrinhoCompra carrinhoCompra) {
+        logger.debug("Chegou Aqui!!!!!!!!!!!!!!!!::::::::");
         return new Compra(carrinhoCompra);
     }
 
@@ -169,79 +172,143 @@ public class CompraController {
     }
 
     @RequestMapping("iniciar")
-    public ModelAndView iniciarCompra(@ModelAttribute("compra") Compra compra, HttpSession session, CarrinhoCompra carrinhoCompra) {
+    public ModelAndView iniciarCompra(HttpSession session, CarrinhoCompra carrinhoCompra) {
         ModelAndView mv = new ModelAndView("pages/comprar");
+        Compra compra = initializeCompra(carrinhoCompra);
+        session.setAttribute("compra", compra);
         Long userId = (Long) session.getAttribute("id");
         List<Endereco> enderecos = enderecoService.getEnderecosByClienteId(userId);
-        logger.debug("Compra:::::::: {}", compra.getValorTotal());
         //mv.addObject("endereco", new Endereco());
         mv.addObject("listaEnderecos", enderecos);
-
+        mv.addObject("total", compra.getValorTotal());
+        
+        logger.debug("Compra:::::::: {}", compra.getValorTotal());
         logger.debug("Enderecos:::::::: {}", enderecos);
+        logger.debug("Session:::::::: {}", session.getAttribute("compra"));
         return mv;
     }
 
-    @RequestMapping("pagamento")
-    public ModelAndView escolherPagamento(@ModelAttribute("compra") Compra compra, HttpSession session, @RequestParam("selectedEndereco") Endereco endereco) {
-        ModelAndView mv = new ModelAndView("pages/pagamento");
+    @RequestMapping("cupom")
+    public ModelAndView aplicarCupomCompra(HttpSession session, @RequestParam("selectedEndereco") Endereco endereco) {
+        ModelAndView mv = new ModelAndView();
+        logger.debug("Session cupom:::::::: {}", session.getAttribute("compra"));
         Long userId = (Long) session.getAttribute("id");
 
-        logger.debug("Endereco:::::::: {}", endereco.getRua());
-        logger.debug("Compra_2:::::::: {}", compra.getValorTotal());
+        Compra compra = (Compra) session.getAttribute("compra");
 
         compra.setEnderecoEntrega(endereco);
+
+        logger.debug("Endereco:::::::: {}", endereco.getRua());
+
+        List<Cupom> listaCupom = cupomService.listarCuponsByClienteId(userId);
+
+        mv.addObject("listaCupom", listaCupom);
+
+        if(!listaCupom.isEmpty()) {
+            mv.addObject("total", compra.getValorTotal());
+            mv.addObject("cupomFlag", true); 
+            mv.addObject("compra/pagamento");
+        } else {
+            mv.addObject("compra/resumo");
+            Endereco enderecoEnvio = compra.getEnderecoEntrega();
+            logger.debug("Endereço Rua:::::::: {}", enderecoEnvio.getRua());
+            mv.addObject("endereco", enderecoEnvio);
+        }
+        
+        logger.debug("Compra:::::::: {}", compra.getValorTotal());
+        return mv;
+    }
+
+    @RequestMapping(value = "/aplicarCupom", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<?> aplicarCupom(@RequestBody String cupomIdStr, HttpSession session) throws Exception {
+        logger.debug("Entrou aqui!!!:::::::::::::::::::::::::::::::::::::::::::::::::::");
+
+        // Verificar se o cupomIdStr não é nulo ou vazio
+        if (cupomIdStr != null && !cupomIdStr.isEmpty() && !cupomIdStr.equals("\"\"")) {
+            cupomIdStr = cupomIdStr.replace("\"", ""); // Remove as aspas extras
+            Long cupomId = Long.parseLong(cupomIdStr);
+
+            Compra compra = (Compra) session.getAttribute("compra");
+            Cupom cupom = cupomService.obterCupom(cupomId);
+
+            double novoValorTotal = compra.getValorTotal() - cupom.getValor();
+            compra.setValorFinal(novoValorTotal);
+
+            session.setAttribute("compra", compra);
+
+            logger.debug("Compra_2total:::::::: {}", compra.getValorTotal());
+            logger.debug("Compra_2final:::::::: {}", compra.getValorFinal());
+
+            return ResponseEntity.ok(novoValorTotal);
+        } else {
+            Compra compra = (Compra) session.getAttribute("compra");
+            compra.setValorFinal(compra.getValorTotal());
+            
+            logger.debug("Compra_2retornototal:::::::: {}", compra.getValorTotal());
+            logger.debug("Compra_2retornofinal:::::::: {}", compra.getValorFinal());
+
+            return ResponseEntity.ok(compra.getValorTotal());
+        }
+    }
+
+
+    @RequestMapping("pagamento")
+    public ModelAndView escolherPagamento(HttpSession session) {
+        ModelAndView mv = new ModelAndView("pages/pagamento");
+        Long userId = (Long) session.getAttribute("id");
+        Compra compra = (Compra) session.getAttribute("compra");
+        
+        logger.debug("Compra_2total:::::::: {}", compra.getValorTotal());
+        logger.debug("Compra_2final:::::::: {}", compra.getValorFinal());
+        
+        mv.addObject("compra", compra.getId());
+        mv.addObject("total", compra.getValorFinal());
         
         List<Creditcard> lista = creditcardService.getCartaoByClienteId(userId);
 
         mv.addObject("lista", lista);
 
+        logger.debug("Session pagamento:::::::: {}", session.getAttribute("compra"));
         //compra.setFormaPagamento(pagamento);
         //mv.addObject("compra", compra);
         return mv;
     }
-
-    public ModelAndView aplicarCupom(Compra compra, Cupom cupom) {
-        ModelAndView mv = new ModelAndView("path/to/finalizar");
-        
-        Double valorFinal = cupomService.aplicarCupom(cupom, compra.getValorTotal());
-        compra.setValorTotal(valorFinal);
-        mv.addObject("compra", compra);
-        return mv;
-    }
-
+    
     @RequestMapping("detalhar")
-    public ModelAndView detalharCompra(@ModelAttribute("compra") Compra compra, HttpSession session, @RequestParam("selectedCartao") Creditcard cartao) {
+    public ModelAndView detalharCompra(HttpSession session, @RequestParam("selectedCartao") Creditcard cartao) {
+        logger.debug("Session:::::::: {}", session.getAttribute("compra"));
         ModelAndView mv = new ModelAndView("compra/resumo");
+        Compra compra = (Compra) session.getAttribute("compra");
         Endereco enderecoEnvio = compra.getEnderecoEntrega();
+        List<Creditcard> cartoes = new ArrayList<>();
+        cartoes.add(cartao);
+        compra.setCartao(cartoes);
+        logger.debug("Endereço Rua:::::::: {}", enderecoEnvio.getRua());
         mv.addObject("endereco", enderecoEnvio);
-        mv.addObject("cartao", cartao);
-
-        logger.debug("Cartao:::::::: {}", cartao.getApelidoCartao());
-        List<Creditcard> lista = new ArrayList<Creditcard>();
-        lista.add(cartao);
-        compra.setCartao(lista);
+        mv.addObject("total", compra.getValorFinal());
+        mv.addObject("cartoes", cartoes);
 
         mv.addObject("compra", compra);
         return mv;
     }
 
     @RequestMapping(value = "/finalizar", method = RequestMethod.POST)
-    public ModelAndView finalizarCompra(@ModelAttribute("compra") Compra compra, HttpSession session) throws Exception {
+    public ModelAndView finalizarCompra(HttpSession session) throws Exception {
         ModelAndView mv = new ModelAndView("compra/finalizada");
 
+        Compra compra = (Compra) session.getAttribute("compra");
         Long clienteId = session.getAttribute("id") != null ? (Long) session.getAttribute("id") : null;
         Cliente cliente = clienteService.obterCliente(clienteId);
         compra.setCarrinhoId(carrinhoCompraService.getOrCreateCart(cliente).getId());
-
-        // forma de pagamento inserido manualmente, o certo seria pegar conforme escolha do usuário
-        compra.setFormaPagamento(Pagamento.CRÉDITO);
         
         Compra compraFinalizada = compraService.salvarCompra(compra);
         
         CarrinhoCompra carrinho = carrinhoCompraService.obterCarrinhoCompra(compraFinalizada.getCarrinhoId());
         carrinho.setAtivo(false);
         carrinhoCompraService.salvarCarrinhoCompra(carrinho);
-        
+        session.removeAttribute("compra");
+
         logger.debug("Carrinho:::::::: {}", carrinho.getItemProduto().size());
         return mv;
     }
@@ -259,8 +326,23 @@ public class CompraController {
     @RequestMapping("/detail")
     public ModelAndView detalharCompra(@RequestParam("id") Long id, HttpSession session) throws Exception {
         ModelAndView mv = new ModelAndView("usr/compra/detail");
-        
         Compra compra = compraService.obterCompra(id);
+        logger.debug("Status:::::::: {}", compra.getStatus());
+        String status = compra.getStatus().toString();
+        mv.addObject("status", status);
+        mv.addObject("compra", compra);
+        return mv;
+    }
+
+    @RequestMapping("/recebido")
+    public ModelAndView recebidoCompra(@RequestParam("id") Long id, HttpSession session) throws Exception {
+        ModelAndView mv = new ModelAndView("usr/compra/detail");
+        Compra compra = compraService.obterCompra(id);
+        compra.setStatus(Status.ENTREGUE);
+        compraService.salvarCompra(compra);
+        logger.debug("Status:::::::: {}", compra.getStatus());
+        String status = compra.getStatus().toString();
+        mv.addObject("status", status);
         mv.addObject("compra", compra);
         return mv;
     }
@@ -285,7 +367,7 @@ public class CompraController {
         String nome = cliente.getNomeCompleto();
         mv.addObject("nome", nome);
         Troca troca = new Troca();
-        if(status.equals("EM_TROCA") || status.equals("TROCA_AUTORIZADA")) {
+        if(status.equals("EM_TROCA") || status.equals("TROCA_AUTORIZADA") || status.equals("ENVIADO") || status.equals("TROCADO")) {
             troca = trocaService.obterTrocaByCompraId(id);
             mv.addObject("troca", troca);
         } 
@@ -298,15 +380,31 @@ public class CompraController {
     }
 
     @RequestMapping("/aprovar")
-    public ModelAndView aprovarCompra(@RequestParam("id") Long id, HttpSession session) throws Exception {
+    public ModelAndView aprovarCompraADM(@RequestParam("id") Long id, HttpSession session) throws Exception {
         Compra compra = compraService.obterCompra(id);
         compra.setStatus(Status.APROVADO);
         compraService.salvarCompra(compra);
         return respostaDetalhesCompraAdmin(id);
     }
 
+    @RequestMapping("/enviar") 
+    public ModelAndView enviarCompraADM(@RequestParam("id") Long id, HttpSession session) throws Exception {
+        Compra compra = compraService.obterCompra(id);
+        compra.setStatus(Status.EM_TRANSITO);
+        compraService.salvarCompra(compra);
+        return respostaDetalhesCompraAdmin(id);
+    }
+
+    @RequestMapping("/entregue")
+    public ModelAndView entregarCompraADM(@RequestParam("id") Long id, HttpSession session) throws Exception {
+        Compra compra = compraService.obterCompra(id);
+        compra.setStatus(Status.ENTREGUE);
+        compraService.salvarCompra(compra);
+        return respostaDetalhesCompraAdmin(id);
+    }
+
     @RequestMapping("/cancelar")
-    public ModelAndView cancelarCompra(@RequestParam("id") Long id, HttpSession session) throws Exception {
+    public ModelAndView cancelarCompraADM(@RequestParam("id") Long id, HttpSession session) throws Exception {
         Compra compra = compraService.obterCompra(id);
         compra.setStatus(Status.CANCELADO);
         compraService.salvarCompra(compra);
@@ -319,21 +417,22 @@ public class CompraController {
         List<ItemProduto> itens = compra.getItens();
         ModelAndView mv = new ModelAndView("usr/compra/troca");
         mv.addObject("itens", itens);
-        logger.debug("Compra:::::::: {}", itens.size());
+        logger.debug("Lista Itens:::::::: {}", itens.size());
         return mv;
     }
 
     @RequestMapping("/trocarSelecionados")
     public ModelAndView trocarSelecionados(@RequestParam("selectedItems") List<Long> id, HttpSession session) throws Exception {
-        logger.debug("Compra:::::::: {}", id.size());
+        logger.debug("Lista produtos selecionados:::::::: {}", id.size());
         Long idCliente = (Long) session.getAttribute("id");
         Compra compra = compraService.obterCompra(idCliente);
         compra.setStatus(Status.EM_TROCA);
-        compraService.salvarCompra(compra);
+        compra = compraService.salvarCompra(compra);
         ModelAndView mv = new ModelAndView("usr/compra/solicitacaoTroca");
 
         List<Produto> produtos = new ArrayList<Produto>();
         List<ItemTroca> itensTroca = new ArrayList<ItemTroca>();
+        Double valor = 0.0;
         for (Long itemProduto : id) {
             ItemProduto item = itemProdutoService.obterItemProduto(itemProduto);
             Produto produto = item.getProduto();
@@ -344,6 +443,8 @@ public class CompraController {
             itemTroca.setCompra(compra);
             itemTroca.setQuantidade(item.getQuantidade());
             itemTroca.setValor(item.getProduto().getPreco() * item.getQuantidade());
+            itemTroca.setTrocado(false);
+            valor += itemTroca.getValor();
             itensTroca.add(itemTroca);
         }
 
@@ -352,17 +453,16 @@ public class CompraController {
             LocalDate data = LocalDate.now();
     
             troca = new Troca();
-            troca.setProdutos(produtos);
             troca.setCliente(compra.getCliente());
             troca.setData(data);
             troca.setStatus(Status.EM_TROCA);
             troca.setCompra(compra);
-            trocaService.salvarTroca(troca);
-    
-            mv.addObject("troca", troca);
-
+            troca.setValorTroca(valor);
+            troca = trocaService.salvarTroca(troca);
+            
         }
-
+        mv.addObject("troca", troca);
+        
         for(ItemTroca itemTroca : itensTroca) {
             itemTroca.setTroca(troca);
             itemTrocaService.salvarItemTroca(itemTroca);
@@ -373,33 +473,67 @@ public class CompraController {
     }
     
     @RequestMapping("/aceitar")
-    public ModelAndView aceitarTroca(@RequestParam("id") Long id, HttpSession session) throws Exception {
+    public ModelAndView aceitarTrocaADM(@RequestParam("id") Long id, HttpSession session) throws Exception {
         Troca troca = trocaService.obterTroca(id);
         Compra compra = troca.getCompra();
-        Cliente cliente = compra.getCliente();
+        //Cliente cliente = compra.getCliente();
         compra.setStatus(Status.TROCA_AUTORIZADA);
-        compraService.salvarCompra(compra);
+        compra = compraService.salvarCompra(compra);
         troca.setStatus(Status.TROCA_AUTORIZADA);
-        trocaService.salvarTroca(troca);
-        List<ItemProduto> itens = new ArrayList<ItemProduto>();
-        for (Produto produto : troca.getProdutos()) {
-            List<ItemProduto> item = produto.getItemProduto();
-            for(ItemProduto itemProduto : item) {
-                itens.add(itemProduto);
-            }
-        }
-        Double valor = troca.calculoValorTroca(itens);
+        troca = trocaService.salvarTroca(troca);
+        //List<ItemTroca> itens = troca.getItemTroca();
         
-        cupomService.gerarCupomTroca(cliente, compra, troca, valor);
+        //Double valor = troca.calculoValorTroca(itens);
         
         return respostaDetalhesCompraAdmin(id);
     }
     
     @RequestMapping("/recusar")
-    public ModelAndView recusarTroca(@RequestParam("id") Long id, HttpSession session) throws Exception {
+    public ModelAndView recusarTrocaADM(@RequestParam("id") Long id, HttpSession session) throws Exception {
         Compra compra = compraService.obterCompra(id);
         compra.setStatus(Status.REPROVADO);
+        compra = compraService.salvarCompra(compra);
+        return respostaDetalhesCompraAdmin(id);
+    }
+
+    @RequestMapping("/enviado")
+    public ModelAndView enviadoTroca(@RequestParam("id") Long id, HttpSession session) throws Exception {
+        Compra compra = compraService.obterCompra(id);
+        compra.setStatus(Status.ENVIADO);
+        compra = compraService.salvarCompra(compra);
+        List<ItemProduto> itens = compra.getItens();
+        ModelAndView mv = new ModelAndView("usr/compra/detail");
+        mv.addObject("itens", itens);
+        logger.debug("lista de itens enviados:::::::: {}", itens.size());
+        return mv;
+    }
+
+    @RequestMapping("/recebidoTroca")
+    public ModelAndView recebidoTrocaADM(@RequestParam("id") Long id, HttpSession session) throws Exception {
+        Troca troca = trocaService.obterTroca(id);
+        Cliente cliente =  troca.getCliente();
+        
+        Compra compra = troca.getCompra();
+        compra.setStatus(Status.TROCADO);
         compraService.salvarCompra(compra);
+        
+        troca.setStatus(Status.TROCADO);
+        troca = trocaService.salvarTroca(troca);
+
+        List<ItemTroca> lista = troca.getItemTroca();
+        for(ItemTroca item : lista) {
+            if(item.getTrocado() == false) {
+                item.setTrocado(true);
+                itemTrocaService.salvarItemTroca(item);
+            }
+        }
+
+        Double valor = troca.getValorTroca();
+
+        Cupom cupom = cupomService.gerarCupomTroca(cliente, compra, troca, valor);
+
+        logger.debug("Cupom value:::::::: {}", cupom.getValor());
+
         return respostaDetalhesCompraAdmin(id);
     }
 }

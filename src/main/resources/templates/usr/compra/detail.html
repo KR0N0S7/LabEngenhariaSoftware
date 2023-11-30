@@ -56,10 +56,24 @@
 						<div class="col-md-2 h5-inline">
 							<button type="submit" class="btn btn-primary">Voltar</button>
 						</div>
-						<h5 class="fw-normal btn btn-primary mb-0 h5-inline">
-							<a th:href="@{/compra/trocar(id=${compra.id})}" 
-								onclick="return confirm('Deseja solicitar a troca?')">Trocar</a>
-						</h5>						
+						<div th:if="${status == 'EM_TRANSITO'}" class="link-container">
+							<h5 class="fw-normal btn btn-primary mb-0 h5-inline">
+								<a th:href="@{/compra/recebido(id=${compra.id})}" 
+									onclick="return confirm('Deseja confirmar o recebimento da compra?')">Confirmar</a>
+							</h5>		
+						</div>	
+						<div th:if="${status == 'ENTREGUE'}" class="link-container">
+							<h5 class="fw-normal btn btn-primary mb-0 h5-inline">
+								<a th:href="@{/compra/trocar(id=${compra.id})}" 
+									onclick="return confirm('Deseja solicitar a troca?')">Trocar</a>
+							</h5>		
+						</div>		
+						<div th:if="${status == 'TROCA_AUTORIZADA'}" class="link-container">
+							<h5 class="fw-normal btn btn-primary mb-0 h5-inline">
+								<a th:href="@{/compra/enviado(id=${compra.id})}" 
+									onclick="return confirm('Deseja confirmar envio dos produtos para a troca?')">Enviado</a>
+							</h5>		
+						</div>			
 					</div>
 
 

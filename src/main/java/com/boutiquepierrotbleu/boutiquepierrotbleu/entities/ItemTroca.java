@@ -19,6 +19,7 @@ public class ItemTroca {
     private String data;
     private Integer quantidade;
     private Double valor;
+    private Boolean trocado;
 
     @ManyToOne
     @JoinColumn(name = "cliente_id")
@@ -122,6 +123,14 @@ public class ItemTroca {
 
     public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
+    }
+
+    public Boolean getTrocado() {
+        return trocado;
+    }
+
+    public void setTrocado(Boolean trocado) {
+        this.trocado = trocado;
     }
 
 }

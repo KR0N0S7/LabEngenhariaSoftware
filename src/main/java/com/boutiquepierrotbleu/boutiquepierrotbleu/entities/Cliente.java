@@ -54,7 +54,7 @@ public class Cliente {
     private List<Troca> trocas;
 
     @OneToMany(mappedBy = "cliente")
-    @JsonManagedReference
+    @JsonIgnore
     private List<ItemTroca> itemTroca;   
 
     private boolean ativo = true;
