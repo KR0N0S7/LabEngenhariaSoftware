@@ -233,6 +233,9 @@ public class CompraController {
             Cupom cupom = cupomService.obterCupom(cupomId);
 
             double novoValorTotal = compra.getValorTotal() - cupom.getValor();
+            if(novoValorTotal < 0) {
+                novoValorTotal = 0;
+            }
             compra.setValorFinal(novoValorTotal);
 
             session.setAttribute("compra", compra);
@@ -270,8 +273,8 @@ public class CompraController {
         mv.addObject("lista", lista);
 
         logger.debug("Session pagamento:::::::: {}", session.getAttribute("compra"));
-        //compra.setFormaPagamento(pagamento);
-        //mv.addObject("compra", compra);
+        logger.debug("Valor Final!!!!!:::::::: {}", compra.getValorFinal());
+        // deve ser possível pagar a compra com mais de um cartão de crédito
         return mv;
     }
     

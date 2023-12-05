@@ -71,7 +71,10 @@
                                         readonly />
                                     <input class="my-3" placeholder="Bandeira" type="text" id="bandeiraInput" readonly />
                                     <input placeholder="CPF do Titular" type="text" id="cpfTitularInput" readonly />
-                                    <input type="number" placeholder="Valor da Parcela" name="valorParcela" class="valorParcelaInput"/>
+                                    <input type="number" placeholder="Valor da Parcela" name="valorParcela" 
+                                        step="0.01"
+                                        id="valorParcelaInput" class="valorParcelaInput" />
+
                                     <div>
                                         <button type="button"
                                             class="addCardButton bg-purple px-3 py-3 text-white hover:bg-black transition-all duration-500">+</button>
@@ -96,12 +99,15 @@
                                 </div>
                             </div>
 
+                            <div id="total" th:text="${total}" style="display: none;"></div>
+
                             <div class="flex justify-between my-5 items-center  ">
 
                                 <a class="hover:border-solid hover:border-2 hover:border-gray-dark px-1 py-1"
                                     th:href="@{/compra/cupom}">Retornar</a>
-                                <button
+                                <button id="botaoContinuar" onclick="return validarParcelaAoContinuar();"
                                     class="bg-purple px-3 py-3 text-white hover:bg-black transition-all duration-500"
+                                    data-total="${total}" 
                                     type="submit">Continue</button>
 
                             </div>
@@ -218,7 +224,27 @@
         // Atualização inicial das opções de seleção
         updateSelectOptions();
     </script>
+    <script>
+        function validarParcelaAoContinuar() {
+            var parcelas = document.getElementsByClassName('valorParcelaInput');
+            var somaParcelas = 0;
+            for (var i = 0; i < parcelas.length; i++) {
+                somaParcelas += parseFloat(parcelas[i].value) || 0;
+            }
+            console.log(somaParcelas);
+            var divTotal = document.getElementById('total');
+            var valorFinal = parseFloat(divTotal.innerText);
+            var tolerancia = 0.01;
+            console.log(valorFinal);
 
+            if (somaParcelas < 10 || Math.abs(somaParcelas - valorFinal) > tolerancia) {
+                alert("Valor da parcela deve ser entre R$10 e o valor final da compra.");
+                return false; // Impede a submissão do formulário
+            }
+        
+            return true; // Permite a submissão do formulário
+        }
+    </script>        
 
 </body>
 
