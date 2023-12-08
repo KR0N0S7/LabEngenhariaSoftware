@@ -1,0 +1,12 @@
+[
+  {
+    "route": "GET /error",
+    "parameters": "()",
+    "status": 404
+  },
+  {
+    "route": "GET /webjars/bootstrap/4.0.0-2/css/bootstrap.min.css",
+    "parameters": "()",
+    "status": 404
+  }
+]

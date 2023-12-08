@@ -1,0 +1,149 @@
+{
+  "events": [
+    {
+      "event": "call",
+      "http_server_request": {
+        "headers": {
+          "sec-fetch-mode": "navigate",
+          "sec-fetch-site": "none",
+          "accept-language": "en-US,en;q=0.9",
+          "cookie": "JSESSIONID=AAC8FDEB2507CD3EC2273F8DD2D72F36",
+          "sec-fetch-user": "?1",
+          "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+          "sec-ch-ua": "\"Microsoft Edge\";v=\"119\", \"Chromium\";v=\"119\", \"Not?A_Brand\";v=\"24\"",
+          "sec-ch-ua-mobile": "?0",
+          "sec-ch-ua-platform": "\"Linux\"",
+          "host": "localhost:8080",
+          "upgrade-insecure-requests": "1",
+          "connection": "keep-alive",
+          "cache-control": "max-age=0",
+          "accept-encoding": "gzip, deflate, br",
+          "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 Edg/119.0.0.0",
+          "sec-fetch-dest": "document"
+        },
+        "normalized_path_info": "/",
+        "path_info": "/",
+        "protocol": "HTTP/1.1",
+        "request_method": "GET"
+      },
+      "id": 1,
+      "thread_id": 46
+    },
+    {
+      "defined_class": "com.boutiquepierrotbleu.boutiquepierrotbleu.controllers.HomePageController",
+      "event": "call",
+      "id": 2,
+      "lineno": 11,
+      "method_id": "homepage",
+      "path": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/controllers/HomePageController.java",
+      "receiver": {
+        "class": "com.boutiquepierrotbleu.boutiquepierrotbleu.controllers.HomePageController",
+        "object_id": 2062919381,
+        "value": "com.boutiquepierrotbleu.boutiquepierrotbleu.controllers.HomePageController@7af5a6d5"
+      },
+      "static": false,
+      "thread_id": 46
+    },
+    {
+      "elapsed": 0.021972006,
+      "event": "return",
+      "id": 3,
+      "parent_id": 2,
+      "return_value": {
+        "class": "org.springframework.web.servlet.ModelAndView",
+        "object_id": 1248920074,
+        "value": "ModelAndView [view=\"pages/home\"; model={}]"
+      },
+      "thread_id": 46
+    },
+    {
+      "elapsed": 0.21314435,
+      "event": "return",
+      "http_server_response": {
+        "headers": {
+          "Transfer-Encoding": "chunked",
+          "Keep-Alive": "timeout=60",
+          "Connection": "keep-alive",
+          "Content-Language": "en-US",
+          "Date": "Tue, 05 Dec 2023 20:05:59 GMT",
+          "Content-Type": "text/html;charset=UTF-8"
+        },
+        "status": 200
+      },
+      "id": 4,
+      "parent_id": 1,
+      "thread_id": 46
+    }
+  ],
+  "version": "1.2",
+  "metadata": {
+    "name": "GET / (200) - 17:05:56.665",
+    "app": "LabEngenhariaSoftware",
+    "language": {
+      "name": "java",
+      "version": "17.0.8+7",
+      "engine": "OpenJDK 64-Bit Server VM"
+    },
+    "client": {
+      "name": "appmap-java",
+      "url": "https://github.com/appland/appmap-java"
+    },
+    "recorder": {
+      "name": "request_recording",
+      "type": "requests"
+    },
+    "recording": {},
+    "git": {
+      "repository": "https://github.com/KR0N0S7/LabEngenhariaSoftware.git",
+      "branch": "manutencao"
+    }
+  },
+  "classMap": [
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "name": "homepage",
+                          "type": "function",
+                          "static": false,
+                          "location": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/controllers/HomePageController.java:11"
+                        }
+                      ],
+                      "name": "HomePageController",
+                      "type": "class"
+                    }
+                  ],
+                  "name": "controllers",
+                  "type": "package"
+                }
+              ],
+              "name": "boutiquepierrotbleu",
+              "type": "package"
+            }
+          ],
+          "name": "boutiquepierrotbleu",
+          "type": "package"
+        }
+      ],
+      "name": "com",
+      "type": "package"
+    },
+    {
+      "type": "http",
+      "name": "HTTP server requests",
+      "children": [
+        {
+          "type": "route",
+          "name": "GET /"
+        }
+      ]
+    }
+  ]
+}

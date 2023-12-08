@@ -1,0 +1,6 @@
+[
+  {
+    "caller": "GET /cliente/login",
+    "callee": "com/boutiquepierrotbleu"
+  }
+]

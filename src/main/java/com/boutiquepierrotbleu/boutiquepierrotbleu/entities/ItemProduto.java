@@ -67,9 +67,23 @@ public class ItemProduto {
         this.carrinhoCompra = carrinhoCompra;
     }
 
+     public void setPreco(Double preco) {
+        this.preco = preco;
+    }
+
+    public Compra getCompra() {
+        return compra;
+    }
+
+    public void setCompra(Compra compra) {
+        this.compra = compra;
+    } 
+
     @Override
     public String toString() {
         return "ItemProduto [carrinhoCompra=" + carrinhoCompra + ", id=" + id + ", preco=" + preco + ", produto="
                 + produto.getNome() + ", quantidade=" + quantidade + "]";
     }
+
+   
 }

@@ -2,13 +2,20 @@ package com.boutiquepierrotbleu.boutiquepierrotbleu.controllers;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -88,57 +95,6 @@ public class CompraController {
         return new Compra(carrinhoCompra);
     }
 
-
-    /*@RequestMapping(value = "criar", method = RequestMethod.POST)
-    public ModelAndView criarCompra(HttpSession session, CarrinhoCompra carrinhoCompra) {
-        ModelAndView mv = new ModelAndView("path/to/pagamento");
-        Compra compra = new Compra();
-        
-        // Get the client from the session
-        Cliente cliente = (Cliente) session.getAttribute("cliente");
-        
-        // Validate the items in the cart
-        for(ItemProduto item : carrinhoCompra.getItemProduto()) {
-            Produto produto = item.getProduto();
-            
-            // Check stock availability
-            if(produto.getEstoque() < item.getQuantidade()) {
-                //throw new InsufficientStockException(produto);
-            }
-            
-            // Update stock level
-            produto.setEstoque(produto.getEstoque() - item.getQuantidade());
-            produtoService.salvarProduto(produto);
-        }
-        
-        // Calculate the total price
-        double totalPrice = carrinhoCompra.getItemProduto().stream()
-            .mapToDouble(item -> item.getProduto().getPreco() * item.getQuantidade())
-            .sum();
-        
-        // Generate a coupon
-        Cupom novoCupom = cupomService.generateAndSaveCupom(cliente);
-
-        // Process the payment
-        // This might involve calling a payment API and handling the response
-        
-        // Update the Compra object
-        compra.setCliente(cliente);
-        compra.setValorTotal(totalPrice);
-        compra.setItens(new ArrayList<ItemProduto>(carrinhoCompra.getItemProduto()));
-        compra.setCupons(new ArrayList<Cupom>(){
-            {
-                add(novoCupom);
-            }
-        });
-
-        // Save the Compra object in the database
-        compra = compraService.salvarCompra(compra);
-        mv.addObject("compra", compra);
-        mv.addObject("message", "Compra realizada com sucesso!");
-        return mv;
-    }*/
-
     @RequestMapping("concluir")
     public ModelAndView criarCompra(HttpSession session, CarrinhoCompra carrinhoCompra) {
         ModelAndView mv = new ModelAndView("page/to/compraFinalizada");
@@ -175,7 +131,7 @@ public class CompraController {
     public ModelAndView iniciarCompra(HttpSession session, CarrinhoCompra carrinhoCompra) {
         ModelAndView mv = new ModelAndView("pages/comprar");
         Compra compra = initializeCompra(carrinhoCompra);
-        session.setAttribute("compra", compra);
+        session.setAttribute("compra-obj", compra);
         Long userId = (Long) session.getAttribute("id");
         List<Endereco> enderecos = enderecoService.getEnderecosByClienteId(userId);
         //mv.addObject("endereco", new Endereco());
@@ -184,17 +140,17 @@ public class CompraController {
         
         logger.debug("Compra:::::::: {}", compra.getValorTotal());
         logger.debug("Enderecos:::::::: {}", enderecos);
-        logger.debug("Session:::::::: {}", session.getAttribute("compra"));
+        logger.debug("Session:::::::: {}", session.getAttribute("compra-obj"));
         return mv;
     }
 
     @RequestMapping("cupom")
     public ModelAndView aplicarCupomCompra(HttpSession session, @RequestParam("selectedEndereco") Endereco endereco) {
         ModelAndView mv = new ModelAndView();
-        logger.debug("Session cupom:::::::: {}", session.getAttribute("compra"));
+        logger.debug("Session cupom:::::::: {}", session.getAttribute("compra-obj"));
         Long userId = (Long) session.getAttribute("id");
 
-        Compra compra = (Compra) session.getAttribute("compra");
+        Compra compra = (Compra) session.getAttribute("compra-obj");
 
         compra.setEnderecoEntrega(endereco);
 
@@ -229,7 +185,7 @@ public class CompraController {
             cupomIdStr = cupomIdStr.replace("\"", ""); // Remove as aspas extras
             Long cupomId = Long.parseLong(cupomIdStr);
 
-            Compra compra = (Compra) session.getAttribute("compra");
+            Compra compra = (Compra) session.getAttribute("compra-obj");
             Cupom cupom = cupomService.obterCupom(cupomId);
 
             double novoValorTotal = compra.getValorTotal() - cupom.getValor();
@@ -245,7 +201,7 @@ public class CompraController {
 
             return ResponseEntity.ok(novoValorTotal);
         } else {
-            Compra compra = (Compra) session.getAttribute("compra");
+            Compra compra = (Compra) session.getAttribute("compra-obj");
             compra.setValorFinal(compra.getValorTotal());
             
             logger.debug("Compra_2retornototal:::::::: {}", compra.getValorTotal());
@@ -260,7 +216,7 @@ public class CompraController {
     public ModelAndView escolherPagamento(HttpSession session) {
         ModelAndView mv = new ModelAndView("pages/pagamento");
         Long userId = (Long) session.getAttribute("id");
-        Compra compra = (Compra) session.getAttribute("compra");
+        Compra compra = (Compra) session.getAttribute("compra-obj");
         
         logger.debug("Compra_2total:::::::: {}", compra.getValorTotal());
         logger.debug("Compra_2final:::::::: {}", compra.getValorFinal());
@@ -272,7 +228,7 @@ public class CompraController {
 
         mv.addObject("lista", lista);
 
-        logger.debug("Session pagamento:::::::: {}", session.getAttribute("compra"));
+        logger.debug("Session pagamento:::::::: {}", session.getAttribute("compra-obj"));
         logger.debug("Valor Final!!!!!:::::::: {}", compra.getValorFinal());
         // deve ser possível pagar a compra com mais de um cartão de crédito
         return mv;
@@ -280,9 +236,9 @@ public class CompraController {
     
     @RequestMapping("detalhar")
     public ModelAndView detalharCompra(HttpSession session, @RequestParam("selectedCartao") Creditcard cartao) {
-        logger.debug("Session:::::::: {}", session.getAttribute("compra"));
+        logger.debug("Session:::::::: {}", session.getAttribute("compra-obj"));
         ModelAndView mv = new ModelAndView("compra/resumo");
-        Compra compra = (Compra) session.getAttribute("compra");
+        Compra compra = (Compra) session.getAttribute("compra-obj");
         Endereco enderecoEnvio = compra.getEnderecoEntrega();
         List<Creditcard> cartoes = new ArrayList<>();
         cartoes.add(cartao);
@@ -300,7 +256,7 @@ public class CompraController {
     public ModelAndView finalizarCompra(HttpSession session) throws Exception {
         ModelAndView mv = new ModelAndView("compra/finalizada");
 
-        Compra compra = (Compra) session.getAttribute("compra");
+        Compra compra = (Compra) session.getAttribute("compra-obj");
         Long clienteId = session.getAttribute("id") != null ? (Long) session.getAttribute("id") : null;
         Cliente cliente = clienteService.obterCliente(clienteId);
         compra.setCarrinhoId(carrinhoCompraService.getOrCreateCart(cliente).getId());
@@ -310,7 +266,7 @@ public class CompraController {
         CarrinhoCompra carrinho = carrinhoCompraService.obterCarrinhoCompra(compraFinalizada.getCarrinhoId());
         carrinho.setAtivo(false);
         carrinhoCompraService.salvarCarrinhoCompra(carrinho);
-        session.removeAttribute("compra");
+        session.removeAttribute("compra-obj");
 
         logger.debug("Carrinho:::::::: {}", carrinho.getItemProduto().size());
         return mv;
@@ -539,4 +495,40 @@ public class CompraController {
 
         return respostaDetalhesCompraAdmin(id);
     }
+
+    @GetMapping("/comprasPorMes")
+    public String comprasPorMes(Model model) {
+
+
+        // Obter dados agregados de compras por mês
+        Map<String, Long> comprasPorMes = compraService.getComprasPorMes();
+
+        // Lista com a ordem correta dos meses
+        List<String> monthOrder = Arrays.asList(
+                "01", "02", "03", "04", "05", "06",
+                "07", "08", "09", "10", "11", "12"
+        );
+
+        // Mapa para armazenar os dados ordenados com todos os meses
+        Map<String, Long> sortedComprasPorMes = new LinkedHashMap<>();
+
+        // Preencher o mapa ordenado com todos os meses e valores de compras (ou zero se não houver compras)
+        for (String month : monthOrder) {
+            sortedComprasPorMes.put(month, comprasPorMes.getOrDefault(month, 0L));
+            logger.debug("Month:::::::: {}", month);
+            logger.debug("compras::::::::::::: {}", comprasPorMes.getOrDefault(month, 0L));
+        }
+
+        // Adiciona dados ordenados ao modelo para serem usados no template
+        model.addAttribute("comprasLabels", sortedComprasPorMes.keySet());
+        model.addAttribute("comprasData", sortedComprasPorMes.values());
+
+        Map<String, Map<String, Integer>> detalhamentoComprasPorMes = compraService.getDetalhamentoComprasPorMes();
+        model.addAttribute("detalhamentoComprasPorMes", detalhamentoComprasPorMes);
+        logger.debug("Detalhamento:::::::::::::::::::::::::::: {}", detalhamentoComprasPorMes);
+
+        // Nome do template Thymeleaf para exibir o gráfico
+        return "adm/main/barchart";
+    }
+    
 }

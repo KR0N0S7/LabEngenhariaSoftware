@@ -1,0 +1,10 @@
+[
+  {
+    "caller": "POST /cliente/login/autenticar",
+    "callee": "com/boutiquepierrotbleu"
+  },
+  {
+    "caller": "com/boutiquepierrotbleu",
+    "callee": "select c1_0.id,c1_0.ativo,c1_0.cpf,c1_0.email,c1_0.logged,c1_0.nome_completo,c1_0.senha,c1_0.telefone from cliente c1_0 where c1_0.email=? and c1_0.senha=?"
+  }
+]

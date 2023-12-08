@@ -1,0 +1,7 @@
+[
+  {
+    "route": "GET /produto/listarProdutos",
+    "parameters": "()",
+    "status": 200
+  }
+]

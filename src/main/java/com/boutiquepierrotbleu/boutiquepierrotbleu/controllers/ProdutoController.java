@@ -2,13 +2,24 @@ package com.boutiquepierrotbleu.boutiquepierrotbleu.controllers;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,6 +34,7 @@ import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.ValorCategoria;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.CarrinhoCompraService;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.CategoriaService;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.ClienteService;
+import com.boutiquepierrotbleu.boutiquepierrotbleu.services.CompraService;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.ProdutoService;
 
 import jakarta.servlet.http.HttpSession;
@@ -42,6 +54,9 @@ public class ProdutoController {
     
     @Autowired
     private CategoriaService categoriaService;
+
+    @Autowired
+    private CompraService compraService;
 
     private static final Logger logger = LoggerFactory.getLogger(ProdutoController.class);
 
@@ -197,4 +212,42 @@ public class ProdutoController {
         
         return mv;
     }
+
+    @GetMapping("/vendasPorProduto")
+    public String vendasPorProduto(Model model) {
+        // Lista com a ordem correta dos meses (assegure-se de que esta lista esteja definida corretamente)
+        List<String> monthOrder = Arrays.asList("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12");
+
+        // Esta estrutura irá armazenar os dados finais para o gráfico
+        Map<String, Map<String, Integer>> vendasPorProdutoEMes = compraService.getVendasPorProdutoEMes();
+
+        logger.debug("Vendas Produtos por Mes::::::::::::::: {}", vendasPorProdutoEMes);
+
+        // Extrair os nomes dos produtos para serem as legendas das linhas do gráfico
+        Set<String> produtos = new HashSet<>();
+        vendasPorProdutoEMes.forEach((mes, vendasPorProduto) -> produtos.addAll(vendasPorProduto.keySet()));
+
+        // Estruturar os dados de vendas para cada produto por mês
+        List<Map<String, Object>> dadosGrafico = new ArrayList<>();
+        produtos.forEach(produto -> {
+            Map<String, Object> dadosProduto = new HashMap<>();
+            dadosProduto.put("label", produto);
+            
+            List<Integer> vendasMensais = monthOrder.stream()
+                .map(mes -> vendasPorProdutoEMes.getOrDefault(mes, Collections.emptyMap())
+                .getOrDefault(produto, 0))
+                .collect(Collectors.toList());
+            
+            dadosProduto.put("data", vendasMensais);
+            dadosGrafico.add(dadosProduto);
+        });
+
+        // Adicionar os meses e os dados estruturados ao modelo
+        model.addAttribute("meses", monthOrder);
+        model.addAttribute("dadosGrafico", dadosGrafico);
+
+        // Nome do template Thymeleaf para exibir o gráfico
+        return "adm/main/linechart";
+    }
+
 }

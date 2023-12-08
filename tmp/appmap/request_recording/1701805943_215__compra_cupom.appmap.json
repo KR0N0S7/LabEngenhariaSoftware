@@ -1,0 +1,502 @@
+{
+  "events": [
+    {
+      "event": "call",
+      "http_server_request": {
+        "headers": {
+          "sec-fetch-mode": "navigate",
+          "content-length": "18",
+          "referer": "http://localhost:8080/compra/iniciar",
+          "sec-fetch-site": "same-origin",
+          "accept-language": "en-US,en;q=0.9",
+          "cookie": "JSESSIONID=AAC8FDEB2507CD3EC2273F8DD2D72F36",
+          "origin": "http://localhost:8080",
+          "sec-fetch-user": "?1",
+          "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+          "sec-ch-ua": "\"Microsoft Edge\";v=\"119\", \"Chromium\";v=\"119\", \"Not?A_Brand\";v=\"24\"",
+          "sec-ch-ua-mobile": "?0",
+          "sec-ch-ua-platform": "\"Linux\"",
+          "host": "localhost:8080",
+          "upgrade-insecure-requests": "1",
+          "connection": "keep-alive",
+          "content-type": "application/x-www-form-urlencoded",
+          "cache-control": "max-age=0",
+          "accept-encoding": "gzip, deflate, br",
+          "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 Edg/119.0.0.0",
+          "sec-fetch-dest": "document"
+        },
+        "normalized_path_info": "/compra/cupom",
+        "path_info": "/compra/cupom",
+        "protocol": "HTTP/1.1",
+        "request_method": "POST"
+      },
+      "id": 1,
+      "message": [
+        {
+          "class": "java.lang.String",
+          "kind": "req",
+          "name": "selectedEndereco",
+          "object_id": 329633365,
+          "value": "1"
+        }
+      ],
+      "thread_id": 52
+    },
+    {
+      "event": "call",
+      "id": 2,
+      "sql_query": {
+        "database_type": "MySQL",
+        "sql": "select e1_0.id,e1_0.bairro,e1_0.cep,e1_0.cidade,c1_0.id,c1_0.ativo,c1_0.cpf,c1_0.email,c1_0.logged,c1_0.nome_completo,c1_0.senha,c1_0.telefone,e1_0.complemento,e1_0.estado,e1_0.rua,e1_0.tipo from endereco e1_0 left join cliente c1_0 on c1_0.id=e1_0.cliente_id where e1_0.id=?"
+      },
+      "thread_id": 52
+    },
+    {
+      "elapsed": 0.0000720997,
+      "event": "return",
+      "id": 3,
+      "parent_id": 2,
+      "thread_id": 52
+    },
+    {
+      "defined_class": "com.boutiquepierrotbleu.boutiquepierrotbleu.controllers.CompraController",
+      "event": "call",
+      "id": 4,
+      "lineno": 193,
+      "method_id": "aplicarCupomCompra",
+      "parameters": [
+        {
+          "class": "org.apache.catalina.session.StandardSessionFacade",
+          "kind": "req",
+          "name": "session",
+          "object_id": 1925223114,
+          "value": "org.apache.catalina.session.StandardSessionFacade@72c092ca"
+        },
+        {
+          "class": "com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Endereco",
+          "kind": "req",
+          "name": "endereco",
+          "object_id": 283874865,
+          "value": "com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Endereco@10eb9631"
+        }
+      ],
+      "path": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/controllers/CompraController.java",
+      "receiver": {
+        "class": "com.boutiquepierrotbleu.boutiquepierrotbleu.controllers.CompraController",
+        "object_id": 1499556501,
+        "value": "com.boutiquepierrotbleu.boutiquepierrotbleu.controllers.CompraController@59616a95"
+      },
+      "static": false,
+      "thread_id": 52
+    },
+    {
+      "defined_class": "com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Compra",
+      "event": "call",
+      "id": 5,
+      "lineno": 111,
+      "method_id": "setEnderecoEntrega",
+      "parameters": [
+        {
+          "class": "com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Endereco",
+          "kind": "req",
+          "name": "enderecoEntrega",
+          "object_id": 283874865,
+          "value": "com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Endereco@10eb9631"
+        }
+      ],
+      "path": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/entities/Compra.java",
+      "receiver": {
+        "class": "com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Compra",
+        "object_id": 2075196231,
+        "value": "com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Compra@7bb0fb47"
+      },
+      "static": false,
+      "thread_id": 52
+    },
+    {
+      "elapsed": 0.0001170165,
+      "event": "return",
+      "id": 6,
+      "parent_id": 5,
+      "thread_id": 52
+    },
+    {
+      "defined_class": "com.boutiquepierrotbleu.boutiquepierrotbleu.services.CupomService",
+      "event": "call",
+      "id": 7,
+      "lineno": 94,
+      "method_id": "listarCuponsByClienteId",
+      "parameters": [
+        {
+          "class": "java.lang.Long",
+          "kind": "req",
+          "name": "clienteId",
+          "object_id": 1308048504,
+          "value": "1"
+        }
+      ],
+      "path": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/services/CupomService.java",
+      "receiver": {
+        "class": "com.boutiquepierrotbleu.boutiquepierrotbleu.services.CupomService",
+        "object_id": 631588590,
+        "value": "com.boutiquepierrotbleu.boutiquepierrotbleu.services.CupomService@25a546ee"
+      },
+      "static": false,
+      "thread_id": 52
+    },
+    {
+      "defined_class": "com.boutiquepierrotbleu.boutiquepierrotbleu.repositories.CupomRepository",
+      "event": "call",
+      "id": 8,
+      "lineno": -1,
+      "method_id": "findAllByClienteId",
+      "parameters": [
+        {
+          "class": "java.lang.Long",
+          "kind": "req",
+          "name": "p0",
+          "object_id": 1308048504,
+          "value": "1"
+        }
+      ],
+      "path": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/repositories/CupomRepository.java",
+      "receiver": {
+        "class": "jdk.proxy4.$Proxy161",
+        "object_id": 1039628613,
+        "value": "org.springframework.data.jpa.repository.support.SimpleJpaRepository@55f69ad1"
+      },
+      "static": false,
+      "thread_id": 52
+    },
+    {
+      "event": "call",
+      "id": 9,
+      "sql_query": {
+        "database_type": "MySQL",
+        "sql": "select c1_0.id,c1_0.cliente_id,c1_0.codigo,c1_0.compra_id,c1_0.data_validade,c1_0.tipo,c1_0.uso_contador,c1_0.uso_limite,c1_0.valor from cupom c1_0 where c1_0.cliente_id=?"
+      },
+      "thread_id": 52
+    },
+    {
+      "elapsed": 0.0002324746,
+      "event": "return",
+      "id": 10,
+      "parent_id": 9,
+      "thread_id": 52
+    },
+    {
+      "event": "call",
+      "id": 11,
+      "sql_query": {
+        "database_type": "MySQL",
+        "sql": "select c1_0.id,c1_0.carrinho_id,c2_0.id,c2_0.ativo,c2_0.cpf,c2_0.email,c2_0.logged,c2_0.nome_completo,c2_0.senha,c2_0.telefone,c1_0.data,ee1_0.id,ee1_0.bairro,ee1_0.cep,ee1_0.cidade,c3_0.id,c3_0.ativo,c3_0.cpf,c3_0.email,c3_0.logged,c3_0.nome_completo,c3_0.senha,c3_0.telefone,ee1_0.complemento,ee1_0.estado,ee1_0.rua,ee1_0.tipo,c1_0.forma_pagamento,c1_0.hora,c1_0.numero_compra,c1_0.numero_parcelas,c1_0.observacao,c1_0.status,c1_0.valor_desconto,c1_0.valor_final,c1_0.valor_frete,c1_0.valor_total from compra c1_0 left join cliente c2_0 on c2_0.id=c1_0.cliente_id left join endereco ee1_0 on ee1_0.id=c1_0.endereco_id left join cliente c3_0 on c3_0.id=ee1_0.cliente_id where c1_0.id=?"
+      },
+      "thread_id": 52
+    },
+    {
+      "elapsed": 0.0001028565,
+      "event": "return",
+      "id": 12,
+      "parent_id": 11,
+      "thread_id": 52
+    },
+    {
+      "event": "call",
+      "id": 13,
+      "sql_query": {
+        "database_type": "MySQL",
+        "sql": "select t1_0.id,c1_0.id,c1_0.ativo,c1_0.cpf,c1_0.email,c1_0.logged,c1_0.nome_completo,c1_0.senha,c1_0.telefone,t1_0.codigo,c2_0.id,c2_0.carrinho_id,c3_0.id,c3_0.ativo,c3_0.cpf,c3_0.email,c3_0.logged,c3_0.nome_completo,c3_0.senha,c3_0.telefone,c2_0.data,ee1_0.id,ee1_0.bairro,ee1_0.cep,ee1_0.cidade,ee1_0.cliente_id,ee1_0.complemento,ee1_0.estado,ee1_0.rua,ee1_0.tipo,c2_0.forma_pagamento,c2_0.hora,c2_0.numero_compra,c2_0.numero_parcelas,c2_0.observacao,c2_0.status,c2_0.valor_desconto,c2_0.valor_final,c2_0.valor_frete,c2_0.valor_total,c5_0.id,c6_0.id,c6_0.ativo,c6_0.cpf,c6_0.email,c6_0.logged,c6_0.nome_completo,c6_0.senha,c6_0.telefone,c5_0.codigo,c7_0.id,c7_0.carrinho_id,c7_0.cliente_id,c7_0.data,c7_0.endereco_id,c7_0.forma_pagamento,c7_0.hora,c7_0.numero_compra,c7_0.numero_parcelas,c7_0.observacao,c7_0.status,c7_0.valor_desconto,c7_0.valor_final,c7_0.valor_frete,c7_0.valor_total,c5_0.data_validade,c5_0.tipo,c5_0.uso_contador,c5_0.uso_limite,c5_0.valor,t1_0.data,t1_0.descricao,t1_0.motivo,t1_0.status,t1_0.valor_troca from troca t1_0 left join cliente c1_0 on c1_0.id=t1_0.cliente_id left join compra c2_0 on c2_0.id=t1_0.compra_id left join cliente c3_0 on c3_0.id=c2_0.cliente_id left join endereco ee1_0 on ee1_0.id=c2_0.endereco_id left join cupom c5_0 on c5_0.id=t1_0.cupom_id left join cliente c6_0 on c6_0.id=c5_0.cliente_id left join compra c7_0 on c7_0.id=c5_0.compra_id where t1_0.cupom_id=?"
+      },
+      "thread_id": 52
+    },
+    {
+      "elapsed": 0.0001299968,
+      "event": "return",
+      "id": 14,
+      "parent_id": 13,
+      "thread_id": 52
+    },
+    {
+      "event": "call",
+      "id": 15,
+      "sql_query": {
+        "database_type": "MySQL",
+        "sql": "select t1_0.id,c1_0.id,c1_0.ativo,c1_0.cpf,c1_0.email,c1_0.logged,c1_0.nome_completo,c1_0.senha,c1_0.telefone,t1_0.codigo,c2_0.id,c2_0.carrinho_id,c3_0.id,c3_0.ativo,c3_0.cpf,c3_0.email,c3_0.logged,c3_0.nome_completo,c3_0.senha,c3_0.telefone,c2_0.data,ee1_0.id,ee1_0.bairro,ee1_0.cep,ee1_0.cidade,ee1_0.cliente_id,ee1_0.complemento,ee1_0.estado,ee1_0.rua,ee1_0.tipo,c2_0.forma_pagamento,c2_0.hora,c2_0.numero_compra,c2_0.numero_parcelas,c2_0.observacao,c2_0.status,c2_0.valor_desconto,c2_0.valor_final,c2_0.valor_frete,c2_0.valor_total,c5_0.id,c6_0.id,c6_0.ativo,c6_0.cpf,c6_0.email,c6_0.logged,c6_0.nome_completo,c6_0.senha,c6_0.telefone,c5_0.codigo,c7_0.id,c7_0.carrinho_id,c7_0.cliente_id,c7_0.data,c7_0.endereco_id,c7_0.forma_pagamento,c7_0.hora,c7_0.numero_compra,c7_0.numero_parcelas,c7_0.observacao,c7_0.status,c7_0.valor_desconto,c7_0.valor_final,c7_0.valor_frete,c7_0.valor_total,c5_0.data_validade,c5_0.tipo,c5_0.uso_contador,c5_0.uso_limite,c5_0.valor,t1_0.data,t1_0.descricao,t1_0.motivo,t1_0.status,t1_0.valor_troca from troca t1_0 left join cliente c1_0 on c1_0.id=t1_0.cliente_id left join compra c2_0 on c2_0.id=t1_0.compra_id left join cliente c3_0 on c3_0.id=c2_0.cliente_id left join endereco ee1_0 on ee1_0.id=c2_0.endereco_id left join cupom c5_0 on c5_0.id=t1_0.cupom_id left join cliente c6_0 on c6_0.id=c5_0.cliente_id left join compra c7_0 on c7_0.id=c5_0.compra_id where t1_0.cupom_id=?"
+      },
+      "thread_id": 52
+    },
+    {
+      "elapsed": 0.0001504968,
+      "event": "return",
+      "id": 16,
+      "parent_id": 15,
+      "thread_id": 52
+    },
+    {
+      "event": "call",
+      "id": 17,
+      "sql_query": {
+        "database_type": "MySQL",
+        "sql": "select t1_0.id,c1_0.id,c1_0.ativo,c1_0.cpf,c1_0.email,c1_0.logged,c1_0.nome_completo,c1_0.senha,c1_0.telefone,t1_0.codigo,c2_0.id,c2_0.carrinho_id,c3_0.id,c3_0.ativo,c3_0.cpf,c3_0.email,c3_0.logged,c3_0.nome_completo,c3_0.senha,c3_0.telefone,c2_0.data,ee1_0.id,ee1_0.bairro,ee1_0.cep,ee1_0.cidade,ee1_0.cliente_id,ee1_0.complemento,ee1_0.estado,ee1_0.rua,ee1_0.tipo,c2_0.forma_pagamento,c2_0.hora,c2_0.numero_compra,c2_0.numero_parcelas,c2_0.observacao,c2_0.status,c2_0.valor_desconto,c2_0.valor_final,c2_0.valor_frete,c2_0.valor_total,c5_0.id,c6_0.id,c6_0.ativo,c6_0.cpf,c6_0.email,c6_0.logged,c6_0.nome_completo,c6_0.senha,c6_0.telefone,c5_0.codigo,c7_0.id,c7_0.carrinho_id,c7_0.cliente_id,c7_0.data,c7_0.endereco_id,c7_0.forma_pagamento,c7_0.hora,c7_0.numero_compra,c7_0.numero_parcelas,c7_0.observacao,c7_0.status,c7_0.valor_desconto,c7_0.valor_final,c7_0.valor_frete,c7_0.valor_total,c5_0.data_validade,c5_0.tipo,c5_0.uso_contador,c5_0.uso_limite,c5_0.valor,t1_0.data,t1_0.descricao,t1_0.motivo,t1_0.status,t1_0.valor_troca from troca t1_0 left join cliente c1_0 on c1_0.id=t1_0.cliente_id left join compra c2_0 on c2_0.id=t1_0.compra_id left join cliente c3_0 on c3_0.id=c2_0.cliente_id left join endereco ee1_0 on ee1_0.id=c2_0.endereco_id left join cupom c5_0 on c5_0.id=t1_0.cupom_id left join cliente c6_0 on c6_0.id=c5_0.cliente_id left join compra c7_0 on c7_0.id=c5_0.compra_id where t1_0.cupom_id=?"
+      },
+      "thread_id": 52
+    },
+    {
+      "elapsed": 0.0001952775,
+      "event": "return",
+      "id": 18,
+      "parent_id": 17,
+      "thread_id": 52
+    },
+    {
+      "event": "call",
+      "id": 19,
+      "sql_query": {
+        "database_type": "MySQL",
+        "sql": "select t1_0.id,c1_0.id,c1_0.ativo,c1_0.cpf,c1_0.email,c1_0.logged,c1_0.nome_completo,c1_0.senha,c1_0.telefone,t1_0.codigo,c2_0.id,c2_0.carrinho_id,c3_0.id,c3_0.ativo,c3_0.cpf,c3_0.email,c3_0.logged,c3_0.nome_completo,c3_0.senha,c3_0.telefone,c2_0.data,ee1_0.id,ee1_0.bairro,ee1_0.cep,ee1_0.cidade,ee1_0.cliente_id,ee1_0.complemento,ee1_0.estado,ee1_0.rua,ee1_0.tipo,c2_0.forma_pagamento,c2_0.hora,c2_0.numero_compra,c2_0.numero_parcelas,c2_0.observacao,c2_0.status,c2_0.valor_desconto,c2_0.valor_final,c2_0.valor_frete,c2_0.valor_total,c5_0.id,c6_0.id,c6_0.ativo,c6_0.cpf,c6_0.email,c6_0.logged,c6_0.nome_completo,c6_0.senha,c6_0.telefone,c5_0.codigo,c7_0.id,c7_0.carrinho_id,c7_0.cliente_id,c7_0.data,c7_0.endereco_id,c7_0.forma_pagamento,c7_0.hora,c7_0.numero_compra,c7_0.numero_parcelas,c7_0.observacao,c7_0.status,c7_0.valor_desconto,c7_0.valor_final,c7_0.valor_frete,c7_0.valor_total,c5_0.data_validade,c5_0.tipo,c5_0.uso_contador,c5_0.uso_limite,c5_0.valor,t1_0.data,t1_0.descricao,t1_0.motivo,t1_0.status,t1_0.valor_troca from troca t1_0 left join cliente c1_0 on c1_0.id=t1_0.cliente_id left join compra c2_0 on c2_0.id=t1_0.compra_id left join cliente c3_0 on c3_0.id=c2_0.cliente_id left join endereco ee1_0 on ee1_0.id=c2_0.endereco_id left join cupom c5_0 on c5_0.id=t1_0.cupom_id left join cliente c6_0 on c6_0.id=c5_0.cliente_id left join compra c7_0 on c7_0.id=c5_0.compra_id where t1_0.cupom_id=?"
+      },
+      "thread_id": 52
+    },
+    {
+      "elapsed": 0.0001547224,
+      "event": "return",
+      "id": 20,
+      "parent_id": 19,
+      "thread_id": 52
+    },
+    {
+      "event": "call",
+      "id": 21,
+      "sql_query": {
+        "database_type": "MySQL",
+        "sql": "select t1_0.id,c1_0.id,c1_0.ativo,c1_0.cpf,c1_0.email,c1_0.logged,c1_0.nome_completo,c1_0.senha,c1_0.telefone,t1_0.codigo,c2_0.id,c2_0.carrinho_id,c3_0.id,c3_0.ativo,c3_0.cpf,c3_0.email,c3_0.logged,c3_0.nome_completo,c3_0.senha,c3_0.telefone,c2_0.data,ee1_0.id,ee1_0.bairro,ee1_0.cep,ee1_0.cidade,ee1_0.cliente_id,ee1_0.complemento,ee1_0.estado,ee1_0.rua,ee1_0.tipo,c2_0.forma_pagamento,c2_0.hora,c2_0.numero_compra,c2_0.numero_parcelas,c2_0.observacao,c2_0.status,c2_0.valor_desconto,c2_0.valor_final,c2_0.valor_frete,c2_0.valor_total,c5_0.id,c6_0.id,c6_0.ativo,c6_0.cpf,c6_0.email,c6_0.logged,c6_0.nome_completo,c6_0.senha,c6_0.telefone,c5_0.codigo,c7_0.id,c7_0.carrinho_id,c7_0.cliente_id,c7_0.data,c7_0.endereco_id,c7_0.forma_pagamento,c7_0.hora,c7_0.numero_compra,c7_0.numero_parcelas,c7_0.observacao,c7_0.status,c7_0.valor_desconto,c7_0.valor_final,c7_0.valor_frete,c7_0.valor_total,c5_0.data_validade,c5_0.tipo,c5_0.uso_contador,c5_0.uso_limite,c5_0.valor,t1_0.data,t1_0.descricao,t1_0.motivo,t1_0.status,t1_0.valor_troca from troca t1_0 left join cliente c1_0 on c1_0.id=t1_0.cliente_id left join compra c2_0 on c2_0.id=t1_0.compra_id left join cliente c3_0 on c3_0.id=c2_0.cliente_id left join endereco ee1_0 on ee1_0.id=c2_0.endereco_id left join cupom c5_0 on c5_0.id=t1_0.cupom_id left join cliente c6_0 on c6_0.id=c5_0.cliente_id left join compra c7_0 on c7_0.id=c5_0.compra_id where t1_0.cupom_id=?"
+      },
+      "thread_id": 52
+    },
+    {
+      "elapsed": 0.0002489803,
+      "event": "return",
+      "id": 22,
+      "parent_id": 21,
+      "thread_id": 52
+    },
+    {
+      "event": "call",
+      "id": 23,
+      "sql_query": {
+        "database_type": "MySQL",
+        "sql": "select t1_0.id,c1_0.id,c1_0.ativo,c1_0.cpf,c1_0.email,c1_0.logged,c1_0.nome_completo,c1_0.senha,c1_0.telefone,t1_0.codigo,c2_0.id,c2_0.carrinho_id,c3_0.id,c3_0.ativo,c3_0.cpf,c3_0.email,c3_0.logged,c3_0.nome_completo,c3_0.senha,c3_0.telefone,c2_0.data,ee1_0.id,ee1_0.bairro,ee1_0.cep,ee1_0.cidade,ee1_0.cliente_id,ee1_0.complemento,ee1_0.estado,ee1_0.rua,ee1_0.tipo,c2_0.forma_pagamento,c2_0.hora,c2_0.numero_compra,c2_0.numero_parcelas,c2_0.observacao,c2_0.status,c2_0.valor_desconto,c2_0.valor_final,c2_0.valor_frete,c2_0.valor_total,c5_0.id,c6_0.id,c6_0.ativo,c6_0.cpf,c6_0.email,c6_0.logged,c6_0.nome_completo,c6_0.senha,c6_0.telefone,c5_0.codigo,c7_0.id,c7_0.carrinho_id,c7_0.cliente_id,c7_0.data,c7_0.endereco_id,c7_0.forma_pagamento,c7_0.hora,c7_0.numero_compra,c7_0.numero_parcelas,c7_0.observacao,c7_0.status,c7_0.valor_desconto,c7_0.valor_final,c7_0.valor_frete,c7_0.valor_total,c5_0.data_validade,c5_0.tipo,c5_0.uso_contador,c5_0.uso_limite,c5_0.valor,t1_0.data,t1_0.descricao,t1_0.motivo,t1_0.status,t1_0.valor_troca from troca t1_0 left join cliente c1_0 on c1_0.id=t1_0.cliente_id left join compra c2_0 on c2_0.id=t1_0.compra_id left join cliente c3_0 on c3_0.id=c2_0.cliente_id left join endereco ee1_0 on ee1_0.id=c2_0.endereco_id left join cupom c5_0 on c5_0.id=t1_0.cupom_id left join cliente c6_0 on c6_0.id=c5_0.cliente_id left join compra c7_0 on c7_0.id=c5_0.compra_id where t1_0.cupom_id=?"
+      },
+      "thread_id": 52
+    },
+    {
+      "elapsed": 0.0003615106,
+      "event": "return",
+      "id": 24,
+      "parent_id": 23,
+      "thread_id": 52
+    },
+    {
+      "elapsed": 0.017443636,
+      "event": "return",
+      "id": 25,
+      "parent_id": 8,
+      "return_value": {
+        "class": "java.util.ArrayList",
+        "object_id": 1815863748,
+        "value": "[com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cupom@1f57f67e, com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cupom@77f10eb3, com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cupom@7cb4864e, com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cupom@4c9125ba, com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cupom@6d3d1307, com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cupom@19cbde86]"
+      },
+      "thread_id": 52
+    },
+    {
+      "elapsed": 0.018060278,
+      "event": "return",
+      "id": 26,
+      "parent_id": 7,
+      "return_value": {
+        "class": "java.util.ArrayList",
+        "object_id": 1815863748,
+        "value": "[com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cupom@1f57f67e, com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cupom@77f10eb3, com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cupom@7cb4864e, com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cupom@4c9125ba, com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cupom@6d3d1307, com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cupom@19cbde86]"
+      },
+      "thread_id": 52
+    },
+    {
+      "elapsed": 0.018660044,
+      "event": "return",
+      "id": 27,
+      "parent_id": 4,
+      "return_value": {
+        "class": "org.springframework.web.servlet.ModelAndView",
+        "object_id": 294618102,
+        "value": "ModelAndView [view=[null]; model={listaCupom=[com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cupom@1f57f67e, com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cupom@77f10eb3, com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cupom@7cb4864e, com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cupom@4c9125ba, com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cupom@6d3d1307, com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cupom@19cbde86], total=100.0, cupomFlag=true, string=compra/pagamento}]"
+      },
+      "thread_id": 52
+    },
+    {
+      "elapsed": 0.027323464,
+      "event": "return",
+      "http_server_response": {
+        "headers": {
+          "Transfer-Encoding": "chunked",
+          "Keep-Alive": "timeout=60",
+          "Cache-Control": "no-store",
+          "Connection": "keep-alive",
+          "Content-Language": "en-US",
+          "Date": "Tue, 05 Dec 2023 19:52:23 GMT",
+          "Content-Type": "text/html;charset=UTF-8"
+        },
+        "status": 200
+      },
+      "id": 28,
+      "parent_id": 1,
+      "thread_id": 52
+    }
+  ],
+  "version": "1.2",
+  "metadata": {
+    "name": "POST /compra/cupom (200) - 16:52:23.215",
+    "app": "LabEngenhariaSoftware",
+    "language": {
+      "name": "java",
+      "version": "17.0.8+7",
+      "engine": "OpenJDK 64-Bit Server VM"
+    },
+    "client": {
+      "name": "appmap-java",
+      "url": "https://github.com/appland/appmap-java"
+    },
+    "recorder": {
+      "name": "request_recording",
+      "type": "requests"
+    },
+    "recording": {},
+    "git": {
+      "repository": "https://github.com/KR0N0S7/LabEngenhariaSoftware.git",
+      "branch": "manutencao"
+    }
+  },
+  "classMap": [
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "name": "listarCuponsByClienteId",
+                          "type": "function",
+                          "static": false,
+                          "location": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/services/CupomService.java:94"
+                        }
+                      ],
+                      "name": "CupomService",
+                      "type": "class"
+                    }
+                  ],
+                  "name": "services",
+                  "type": "package"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "name": "setEnderecoEntrega",
+                          "type": "function",
+                          "static": false,
+                          "location": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/entities/Compra.java:111"
+                        }
+                      ],
+                      "name": "Compra",
+                      "type": "class"
+                    }
+                  ],
+                  "name": "entities",
+                  "type": "package"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "name": "findAllByClienteId",
+                          "type": "function",
+                          "static": false,
+                          "location": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/repositories/CupomRepository.java:-1"
+                        }
+                      ],
+                      "name": "CupomRepository",
+                      "type": "class"
+                    }
+                  ],
+                  "name": "repositories",
+                  "type": "package"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "name": "aplicarCupomCompra",
+                          "type": "function",
+                          "static": false,
+                          "location": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/controllers/CompraController.java:193"
+                        }
+                      ],
+                      "name": "CompraController",
+                      "type": "class"
+                    }
+                  ],
+                  "name": "controllers",
+                  "type": "package"
+                }
+              ],
+              "name": "boutiquepierrotbleu",
+              "type": "package"
+            }
+          ],
+          "name": "boutiquepierrotbleu",
+          "type": "package"
+        }
+      ],
+      "name": "com",
+      "type": "package"
+    },
+    {
+      "type": "http",
+      "name": "HTTP server requests",
+      "children": [
+        {
+          "type": "route",
+          "name": "POST /compra/cupom"
+        }
+      ]
+    },
+    {
+      "type": "database",
+      "name": "Database",
+      "children": [
+        {
+          "type": "query",
+          "name": "select e1_0.id,e1_0.bairro,e1_0.cep,e1_0.cidade,c1_0.id,c1_0.ativo,c1_0.cpf,c1_0.email,c1_0.logged,c1_0.nome_completo,c1_0.senha,c1_0.telefone,e1_0.complemento,e1_0.estado,e1_0.rua,e1_0.tipo from endereco e1_0 left join cliente c1_0 on c1_0.id=e1_0.cliente_id where e1_0.id=?"
+        },
+        {
+          "type": "query",
+          "name": "select c1_0.id,c1_0.cliente_id,c1_0.codigo,c1_0.compra_id,c1_0.data_validade,c1_0.tipo,c1_0.uso_contador,c1_0.uso_limite,c1_0.valor from cupom c1_0 where c1_0.cliente_id=?"
+        },
+        {
+          "type": "query",
+          "name": "select c1_0.id,c1_0.carrinho_id,c2_0.id,c2_0.ativo,c2_0.cpf,c2_0.email,c2_0.logged,c2_0.nome_completo,c2_0.senha,c2_0.telefone,c1_0.data,ee1_0.id,ee1_0.bairro,ee1_0.cep,ee1_0.cidade,c3_0.id,c3_0.ativo,c3_0.cpf,c3_0.email,c3_0.logged,c3_0.nome_completo,c3_0.senha,c3_0.telefone,ee1_0.complemento,ee1_0.estado,ee1_0.rua,ee1_0.tipo,c1_0.forma_pagamento,c1_0.hora,c1_0.numero_compra,c1_0.numero_parcelas,c1_0.observacao,c1_0.status,c1_0.valor_desconto,c1_0.valor_final,c1_0.valor_frete,c1_0.valor_total from compra c1_0 left join cliente c2_0 on c2_0.id=c1_0.cliente_id left join endereco ee1_0 on ee1_0.id=c1_0.endereco_id left join cliente c3_0 on c3_0.id=ee1_0.cliente_id where c1_0.id=?"
+        },
+        {
+          "type": "query",
+          "name": "select t1_0.id,c1_0.id,c1_0.ativo,c1_0.cpf,c1_0.email,c1_0.logged,c1_0.nome_completo,c1_0.senha,c1_0.telefone,t1_0.codigo,c2_0.id,c2_0.carrinho_id,c3_0.id,c3_0.ativo,c3_0.cpf,c3_0.email,c3_0.logged,c3_0.nome_completo,c3_0.senha,c3_0.telefone,c2_0.data,ee1_0.id,ee1_0.bairro,ee1_0.cep,ee1_0.cidade,ee1_0.cliente_id,ee1_0.complemento,ee1_0.estado,ee1_0.rua,ee1_0.tipo,c2_0.forma_pagamento,c2_0.hora,c2_0.numero_compra,c2_0.numero_parcelas,c2_0.observacao,c2_0.status,c2_0.valor_desconto,c2_0.valor_final,c2_0.valor_frete,c2_0.valor_total,c5_0.id,c6_0.id,c6_0.ativo,c6_0.cpf,c6_0.email,c6_0.logged,c6_0.nome_completo,c6_0.senha,c6_0.telefone,c5_0.codigo,c7_0.id,c7_0.carrinho_id,c7_0.cliente_id,c7_0.data,c7_0.endereco_id,c7_0.forma_pagamento,c7_0.hora,c7_0.numero_compra,c7_0.numero_parcelas,c7_0.observacao,c7_0.status,c7_0.valor_desconto,c7_0.valor_final,c7_0.valor_frete,c7_0.valor_total,c5_0.data_validade,c5_0.tipo,c5_0.uso_contador,c5_0.uso_limite,c5_0.valor,t1_0.data,t1_0.descricao,t1_0.motivo,t1_0.status,t1_0.valor_troca from troca t1_0 left join cliente c1_0 on c1_0.id=t1_0.cliente_id left join compra c2_0 on c2_0.id=t1_0.compra_id left join cliente c3_0 on c3_0.id=c2_0.cliente_id left join endereco ee1_0 on ee1_0.id=c2_0.endereco_id left join cupom c5_0 on c5_0.id=t1_0.cupom_id left join cliente c6_0 on c6_0.id=c5_0.cliente_id left join compra c7_0 on c7_0.id=c5_0.compra_id where t1_0.cupom_id=?"
+        }
+      ]
+    }
+  ]
+}

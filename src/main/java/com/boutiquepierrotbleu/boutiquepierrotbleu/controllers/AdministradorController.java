@@ -19,9 +19,9 @@ public class AdministradorController {
 	@Autowired
 	private ClienteService clienteService;
 	
-	@RequestMapping(path = "editar")
+	@RequestMapping("editar")
 	public ModelAndView editarcliente(@RequestParam(required = false) Long id) {
-		ModelAndView mv = new ModelAndView("adm/index.html");
+		ModelAndView mv = new ModelAndView("adm/main/index.html");
 		Cliente cliente;
 		if (id == null) {
 			cliente = new Cliente();
@@ -34,6 +34,13 @@ public class AdministradorController {
 			}
 		}
 		mv.addObject("admin", cliente);
+		return mv;
+	}
+
+	@RequestMapping("main")
+	public ModelAndView mainAdmin() {
+		ModelAndView mv = new ModelAndView("adm/index.html");
+		
 		return mv;
 	}
 	

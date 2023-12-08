@@ -1,0 +1,124 @@
+[
+  {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "name": "listarCuponsByClienteId",
+                        "type": "function",
+                        "static": false,
+                        "location": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/services/CupomService.java:94"
+                      }
+                    ],
+                    "name": "CupomService",
+                    "type": "class"
+                  }
+                ],
+                "name": "services",
+                "type": "package"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "name": "setEnderecoEntrega",
+                        "type": "function",
+                        "static": false,
+                        "location": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/entities/Compra.java:111"
+                      }
+                    ],
+                    "name": "Compra",
+                    "type": "class"
+                  }
+                ],
+                "name": "entities",
+                "type": "package"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "name": "findAllByClienteId",
+                        "type": "function",
+                        "static": false,
+                        "location": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/repositories/CupomRepository.java:-1"
+                      }
+                    ],
+                    "name": "CupomRepository",
+                    "type": "class"
+                  }
+                ],
+                "name": "repositories",
+                "type": "package"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "name": "aplicarCupomCompra",
+                        "type": "function",
+                        "static": false,
+                        "location": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/controllers/CompraController.java:193"
+                      }
+                    ],
+                    "name": "CompraController",
+                    "type": "class"
+                  }
+                ],
+                "name": "controllers",
+                "type": "package"
+              }
+            ],
+            "name": "boutiquepierrotbleu",
+            "type": "package"
+          }
+        ],
+        "name": "boutiquepierrotbleu",
+        "type": "package"
+      }
+    ],
+    "name": "com",
+    "type": "package"
+  },
+  {
+    "type": "http",
+    "name": "HTTP server requests",
+    "children": [
+      {
+        "type": "route",
+        "name": "POST /compra/cupom"
+      }
+    ]
+  },
+  {
+    "type": "database",
+    "name": "Database",
+    "children": [
+      {
+        "type": "query",
+        "name": "select e1_0.id,e1_0.bairro,e1_0.cep,e1_0.cidade,c1_0.id,c1_0.ativo,c1_0.cpf,c1_0.email,c1_0.logged,c1_0.nome_completo,c1_0.senha,c1_0.telefone,e1_0.complemento,e1_0.estado,e1_0.rua,e1_0.tipo from endereco e1_0 left join cliente c1_0 on c1_0.id=e1_0.cliente_id where e1_0.id=?"
+      },
+      {
+        "type": "query",
+        "name": "select c1_0.id,c1_0.cliente_id,c1_0.codigo,c1_0.compra_id,c1_0.data_validade,c1_0.tipo,c1_0.uso_contador,c1_0.uso_limite,c1_0.valor from cupom c1_0 where c1_0.cliente_id=?"
+      },
+      {
+        "type": "query",
+        "name": "select c1_0.id,c1_0.carrinho_id,c2_0.id,c2_0.ativo,c2_0.cpf,c2_0.email,c2_0.logged,c2_0.nome_completo,c2_0.senha,c2_0.telefone,c1_0.data,ee1_0.id,ee1_0.bairro,ee1_0.cep,ee1_0.cidade,c3_0.id,c3_0.ativo,c3_0.cpf,c3_0.email,c3_0.logged,c3_0.nome_completo,c3_0.senha,c3_0.telefone,ee1_0.complemento,ee1_0.estado,ee1_0.rua,ee1_0.tipo,c1_0.forma_pagamento,c1_0.hora,c1_0.numero_compra,c1_0.numero_parcelas,c1_0.observacao,c1_0.status,c1_0.valor_desconto,c1_0.valor_final,c1_0.valor_frete,c1_0.valor_total from compra c1_0 left join cliente c2_0 on c2_0.id=c1_0.cliente_id left join endereco ee1_0 on ee1_0.id=c1_0.endereco_id left join cliente c3_0 on c3_0.id=ee1_0.cliente_id where c1_0.id=?"
+      },
+      {
+        "type": "query",
+        "name": "select t1_0.id,c1_0.id,c1_0.ativo,c1_0.cpf,c1_0.email,c1_0.logged,c1_0.nome_completo,c1_0.senha,c1_0.telefone,t1_0.codigo,c2_0.id,c2_0.carrinho_id,c3_0.id,c3_0.ativo,c3_0.cpf,c3_0.email,c3_0.logged,c3_0.nome_completo,c3_0.senha,c3_0.telefone,c2_0.data,ee1_0.id,ee1_0.bairro,ee1_0.cep,ee1_0.cidade,ee1_0.cliente_id,ee1_0.complemento,ee1_0.estado,ee1_0.rua,ee1_0.tipo,c2_0.forma_pagamento,c2_0.hora,c2_0.numero_compra,c2_0.numero_parcelas,c2_0.observacao,c2_0.status,c2_0.valor_desconto,c2_0.valor_final,c2_0.valor_frete,c2_0.valor_total,c5_0.id,c6_0.id,c6_0.ativo,c6_0.cpf,c6_0.email,c6_0.logged,c6_0.nome_completo,c6_0.senha,c6_0.telefone,c5_0.codigo,c7_0.id,c7_0.carrinho_id,c7_0.cliente_id,c7_0.data,c7_0.endereco_id,c7_0.forma_pagamento,c7_0.hora,c7_0.numero_compra,c7_0.numero_parcelas,c7_0.observacao,c7_0.status,c7_0.valor_desconto,c7_0.valor_final,c7_0.valor_frete,c7_0.valor_total,c5_0.data_validade,c5_0.tipo,c5_0.uso_contador,c5_0.uso_limite,c5_0.valor,t1_0.data,t1_0.descricao,t1_0.motivo,t1_0.status,t1_0.valor_troca from troca t1_0 left join cliente c1_0 on c1_0.id=t1_0.cliente_id left join compra c2_0 on c2_0.id=t1_0.compra_id left join cliente c3_0 on c3_0.id=c2_0.cliente_id left join endereco ee1_0 on ee1_0.id=c2_0.endereco_id left join cupom c5_0 on c5_0.id=t1_0.cupom_id left join cliente c6_0 on c6_0.id=c5_0.cliente_id left join compra c7_0 on c7_0.id=c5_0.compra_id where t1_0.cupom_id=?"
+      }
+    ]
+  }
+]

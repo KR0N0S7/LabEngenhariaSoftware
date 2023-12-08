@@ -1,0 +1,7 @@
+[
+  "insert into carrinho_compra (ativo,cliente_id,valor_total) values (?,?,?)",
+  "select c1_0.id,c1_0.ativo,c1_0.cpf,c1_0.email,c1_0.logged,c1_0.nome_completo,c1_0.senha,c1_0.telefone from cliente c1_0 where c1_0.id=?",
+  "select cc1_0.id,cc1_0.ativo,cc1_0.cliente_id,cc1_0.valor_total from carrinho_compra cc1_0 where cc1_0.cliente_id=? and cc1_0.ativo=?",
+  "select p1_0.id,p1_0.ativo,p1_0.categoria_id,p1_0.cor,p1_0.custo,p1_0.descricao,p1_0.estilo,p1_0.estoque,p1_0.genero,p1_0.imagem,p1_0.marca,p1_0.material,p1_0.nome,p1_0.preco,p1_0.tamanho,p1_0.tipo from produto p1_0",
+  "select vc1_0.id,vc1_0.categoria,vc1_0.porcentagem from valor_categoria vc1_0 where vc1_0.id=?"
+]

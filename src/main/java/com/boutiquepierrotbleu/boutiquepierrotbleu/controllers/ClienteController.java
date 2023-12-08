@@ -43,14 +43,23 @@ public class ClienteController {
     public ModelAndView telaLoginCliente(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         logger.debug("Session: {}", session.getAttribute("id") + ", " + session.getAttribute("nome"));
-        Object idAttribute = session.getAttribute("id");
+        Object idAttribute;
+        if(session.getAttribute("nome") == "admin") {
+            idAttribute = (String) session.getAttribute("id");
+        } else {
+            idAttribute = (Long) session.getAttribute("id");
+        }
         if (idAttribute == null) {
             mv = new ModelAndView("usr/login");
         } else {
-            if (idAttribute != null && "admin".equals(idAttribute.toString())) {
+            logger.debug("Session ID::::::::::::::::::: {}", idAttribute);
+            logger.debug("Logica!!!!!!!!!!!!!!::::::::::::::::::: {}",idAttribute.equals("admin"));
+            if (idAttribute.equals("admin")) {
+                logger.debug("Truuuuuuuuuuuuuuuuuuue!!!!!!!!!!!!:::::::::::::::::::");
                 mv = new ModelAndView("redirect:/admin/editar");
-                mv.addObject("id", session.getAttribute("id"));
+                //mv.addObject("id", session.getAttribute("id"));
             } else {
+                logger.debug("Caiu aqui!!!!!!!!!!!!:::::::::::::::::::");
                 mv = new ModelAndView("redirect:/cliente/cadastro");
                 mv.addObject("id", session.getAttribute("id"));
             }
@@ -66,6 +75,7 @@ public class ClienteController {
         logger.debug("Credenciais: {}", email + ", " + senha);
         if(email.contentEquals("admin@admin.co")  && senha.contentEquals("admin")) {
             session.setAttribute("id", "admin");
+            session.setAttribute("nome", "admin");
             mv = new ModelAndView("redirect:/admin/editar");
         } else {
             mv = new ModelAndView("redirect:/");

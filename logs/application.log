@@ -1,2 +1,437 @@
-2023-12-05T01:33:32.524-03:00  INFO 5644 --- [Thread-19] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown initiated...
-2023-12-05T01:33:32.541-03:00  INFO 5644 --- [Thread-19] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown completed.
+2023-12-08T00:17:24.245-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : Month:::::::: 01
+2023-12-08T00:17:24.326-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:17:24.327-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : Month:::::::: 02
+2023-12-08T00:17:24.328-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:17:24.328-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : Month:::::::: 03
+2023-12-08T00:17:24.328-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : compras::::::::::::: 2
+2023-12-08T00:17:24.328-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : Month:::::::: 04
+2023-12-08T00:17:24.328-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:17:24.328-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : Month:::::::: 05
+2023-12-08T00:17:24.328-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:17:24.328-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : Month:::::::: 06
+2023-12-08T00:17:24.328-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:17:24.329-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : Month:::::::: 07
+2023-12-08T00:17:24.329-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:17:24.329-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : Month:::::::: 08
+2023-12-08T00:17:24.329-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:17:24.330-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : Month:::::::: 09
+2023-12-08T00:17:24.330-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:17:24.330-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : Month:::::::: 10
+2023-12-08T00:17:24.330-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : compras::::::::::::: 5
+2023-12-08T00:17:24.330-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : Month:::::::: 11
+2023-12-08T00:17:24.330-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : compras::::::::::::: 3
+2023-12-08T00:17:24.330-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : Month:::::::: 12
+2023-12-08T00:17:24.330-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : compras::::::::::::: 4
+2023-12-08T00:17:24.566-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : Detalhamento:::::::::::::::::::::::::::: {11={Saia=2}, 12={Saia=1, Jaqueta=2, Calça=3}, 01={Vestido=1}, 03={Vestido=2}, 07={Vestido=1}, 09={Vestido=3}, 10={Saia=2, Jaqueta=1, Vestido=3}}
+2023-12-08T00:17:24.608-03:00  WARN 38593 --- [http-nio-8080-exec-3] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-3][adm/main/barchart] Deprecated unwrapped fragment expression "adm/main/templates/graficoCompras :: graficoCompras" found in template adm/main/barchart, line 313, col 14. Please use the complete syntax of fragment expressions instead ("~{adm/main/templates/graficoCompras :: graficoCompras}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2023-12-08T00:19:00.335-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : Month:::::::: 01
+2023-12-08T00:19:00.336-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:19:00.336-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : Month:::::::: 02
+2023-12-08T00:19:00.336-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:19:00.337-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : Month:::::::: 03
+2023-12-08T00:19:00.337-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : compras::::::::::::: 2
+2023-12-08T00:19:00.337-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : Month:::::::: 04
+2023-12-08T00:19:00.337-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:19:00.337-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : Month:::::::: 05
+2023-12-08T00:19:00.337-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:19:00.337-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : Month:::::::: 06
+2023-12-08T00:19:00.337-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:19:00.337-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : Month:::::::: 07
+2023-12-08T00:19:00.337-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:19:00.338-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : Month:::::::: 08
+2023-12-08T00:19:00.338-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:19:00.338-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : Month:::::::: 09
+2023-12-08T00:19:00.338-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:19:00.338-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : Month:::::::: 10
+2023-12-08T00:19:00.338-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : compras::::::::::::: 5
+2023-12-08T00:19:00.338-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : Month:::::::: 11
+2023-12-08T00:19:00.338-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : compras::::::::::::: 3
+2023-12-08T00:19:00.338-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : Month:::::::: 12
+2023-12-08T00:19:00.338-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : compras::::::::::::: 4
+2023-12-08T00:19:00.506-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.CompraController       : Detalhamento:::::::::::::::::::::::::::: {11={Saia=2}, 12={Saia=1, Jaqueta=2, Calça=3}, 01={Vestido=1}, 03={Vestido=2}, 07={Vestido=1}, 09={Vestido=3}, 10={Saia=2, Jaqueta=1, Vestido=3}}
+2023-12-08T00:19:00.517-03:00  WARN 38593 --- [http-nio-8080-exec-3] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-3][adm/main/barchart] Deprecated unwrapped fragment expression "adm/main/templates/graficoCompras :: graficoCompras" found in template adm/main/barchart, line 313, col 14. Please use the complete syntax of fragment expressions instead ("~{adm/main/templates/graficoCompras :: graficoCompras}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2023-12-08T00:19:25.678-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : Month:::::::: 01
+2023-12-08T00:19:25.679-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:19:25.679-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : Month:::::::: 02
+2023-12-08T00:19:25.679-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:19:25.679-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : Month:::::::: 03
+2023-12-08T00:19:25.679-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : compras::::::::::::: 2
+2023-12-08T00:19:25.679-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : Month:::::::: 04
+2023-12-08T00:19:25.679-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:19:25.680-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : Month:::::::: 05
+2023-12-08T00:19:25.680-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:19:25.680-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : Month:::::::: 06
+2023-12-08T00:19:25.680-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:19:25.680-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : Month:::::::: 07
+2023-12-08T00:19:25.680-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:19:25.680-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : Month:::::::: 08
+2023-12-08T00:19:25.680-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:19:25.680-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : Month:::::::: 09
+2023-12-08T00:19:25.680-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:19:25.681-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : Month:::::::: 10
+2023-12-08T00:19:25.681-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : compras::::::::::::: 5
+2023-12-08T00:19:25.681-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : Month:::::::: 11
+2023-12-08T00:19:25.681-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : compras::::::::::::: 3
+2023-12-08T00:19:25.681-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : Month:::::::: 12
+2023-12-08T00:19:25.681-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : compras::::::::::::: 4
+2023-12-08T00:19:25.790-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : Detalhamento:::::::::::::::::::::::::::: {11={Saia=2}, 12={Saia=1, Jaqueta=2, Calça=3}, 01={Vestido=1}, 03={Vestido=2}, 07={Vestido=1}, 09={Vestido=3}, 10={Saia=2, Jaqueta=1, Vestido=3}}
+2023-12-08T00:19:25.802-03:00  WARN 38593 --- [http-nio-8080-exec-6] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-6][adm/main/barchart] Deprecated unwrapped fragment expression "adm/main/templates/graficoCompras :: graficoCompras" found in template adm/main/barchart, line 313, col 14. Please use the complete syntax of fragment expressions instead ("~{adm/main/templates/graficoCompras :: graficoCompras}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2023-12-08T00:20:56.989-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 01
+2023-12-08T00:20:56.989-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:20:56.989-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 02
+2023-12-08T00:20:56.989-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:20:56.990-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 03
+2023-12-08T00:20:56.990-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 2
+2023-12-08T00:20:56.990-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 04
+2023-12-08T00:20:56.990-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:20:56.990-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 05
+2023-12-08T00:20:56.990-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:20:56.990-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 06
+2023-12-08T00:20:56.990-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:20:56.990-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 07
+2023-12-08T00:20:56.990-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:20:56.991-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 08
+2023-12-08T00:20:56.991-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:20:56.991-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 09
+2023-12-08T00:20:56.991-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:20:56.991-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 10
+2023-12-08T00:20:56.991-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 5
+2023-12-08T00:20:56.991-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 11
+2023-12-08T00:20:56.991-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 3
+2023-12-08T00:20:56.991-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 12
+2023-12-08T00:20:56.991-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 4
+2023-12-08T00:20:57.086-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Detalhamento:::::::::::::::::::::::::::: {11={Saia=2}, 12={Saia=1, Jaqueta=2, Calça=3}, 01={Vestido=1}, 03={Vestido=2}, 07={Vestido=1}, 09={Vestido=3}, 10={Saia=2, Jaqueta=1, Vestido=3}}
+2023-12-08T00:20:57.096-03:00  WARN 38593 --- [http-nio-8080-exec-2] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-2][adm/main/barchart] Deprecated unwrapped fragment expression "adm/main/templates/graficoCompras :: graficoCompras" found in template adm/main/barchart, line 313, col 14. Please use the complete syntax of fragment expressions instead ("~{adm/main/templates/graficoCompras :: graficoCompras}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2023-12-08T00:21:05.457-03:00 DEBUG 38593 --- [http-nio-8080-exec-1] c.b.b.controllers.CompraController       : Month:::::::: 01
+2023-12-08T00:21:05.457-03:00 DEBUG 38593 --- [http-nio-8080-exec-1] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:21:05.457-03:00 DEBUG 38593 --- [http-nio-8080-exec-1] c.b.b.controllers.CompraController       : Month:::::::: 02
+2023-12-08T00:21:05.458-03:00 DEBUG 38593 --- [http-nio-8080-exec-1] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:21:05.458-03:00 DEBUG 38593 --- [http-nio-8080-exec-1] c.b.b.controllers.CompraController       : Month:::::::: 03
+2023-12-08T00:21:05.458-03:00 DEBUG 38593 --- [http-nio-8080-exec-1] c.b.b.controllers.CompraController       : compras::::::::::::: 2
+2023-12-08T00:21:05.458-03:00 DEBUG 38593 --- [http-nio-8080-exec-1] c.b.b.controllers.CompraController       : Month:::::::: 04
+2023-12-08T00:21:05.458-03:00 DEBUG 38593 --- [http-nio-8080-exec-1] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:21:05.458-03:00 DEBUG 38593 --- [http-nio-8080-exec-1] c.b.b.controllers.CompraController       : Month:::::::: 05
+2023-12-08T00:21:05.458-03:00 DEBUG 38593 --- [http-nio-8080-exec-1] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:21:05.458-03:00 DEBUG 38593 --- [http-nio-8080-exec-1] c.b.b.controllers.CompraController       : Month:::::::: 06
+2023-12-08T00:21:05.458-03:00 DEBUG 38593 --- [http-nio-8080-exec-1] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:21:05.458-03:00 DEBUG 38593 --- [http-nio-8080-exec-1] c.b.b.controllers.CompraController       : Month:::::::: 07
+2023-12-08T00:21:05.458-03:00 DEBUG 38593 --- [http-nio-8080-exec-1] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:21:05.459-03:00 DEBUG 38593 --- [http-nio-8080-exec-1] c.b.b.controllers.CompraController       : Month:::::::: 08
+2023-12-08T00:21:05.459-03:00 DEBUG 38593 --- [http-nio-8080-exec-1] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:21:05.459-03:00 DEBUG 38593 --- [http-nio-8080-exec-1] c.b.b.controllers.CompraController       : Month:::::::: 09
+2023-12-08T00:21:05.459-03:00 DEBUG 38593 --- [http-nio-8080-exec-1] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:21:05.459-03:00 DEBUG 38593 --- [http-nio-8080-exec-1] c.b.b.controllers.CompraController       : Month:::::::: 10
+2023-12-08T00:21:05.459-03:00 DEBUG 38593 --- [http-nio-8080-exec-1] c.b.b.controllers.CompraController       : compras::::::::::::: 5
+2023-12-08T00:21:05.459-03:00 DEBUG 38593 --- [http-nio-8080-exec-1] c.b.b.controllers.CompraController       : Month:::::::: 11
+2023-12-08T00:21:05.459-03:00 DEBUG 38593 --- [http-nio-8080-exec-1] c.b.b.controllers.CompraController       : compras::::::::::::: 3
+2023-12-08T00:21:05.459-03:00 DEBUG 38593 --- [http-nio-8080-exec-1] c.b.b.controllers.CompraController       : Month:::::::: 12
+2023-12-08T00:21:05.459-03:00 DEBUG 38593 --- [http-nio-8080-exec-1] c.b.b.controllers.CompraController       : compras::::::::::::: 4
+2023-12-08T00:21:05.566-03:00 DEBUG 38593 --- [http-nio-8080-exec-1] c.b.b.controllers.CompraController       : Detalhamento:::::::::::::::::::::::::::: {11={Saia=2}, 12={Saia=1, Jaqueta=2, Calça=3}, 01={Vestido=1}, 03={Vestido=2}, 07={Vestido=1}, 09={Vestido=3}, 10={Saia=2, Jaqueta=1, Vestido=3}}
+2023-12-08T00:21:05.574-03:00  WARN 38593 --- [http-nio-8080-exec-1] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-1][adm/main/barchart] Deprecated unwrapped fragment expression "adm/main/templates/graficoCompras :: graficoCompras" found in template adm/main/barchart, line 313, col 14. Please use the complete syntax of fragment expressions instead ("~{adm/main/templates/graficoCompras :: graficoCompras}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2023-12-08T00:21:10.122-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 01
+2023-12-08T00:21:10.122-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:21:10.123-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 02
+2023-12-08T00:21:10.123-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:21:10.123-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 03
+2023-12-08T00:21:10.123-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 2
+2023-12-08T00:21:10.123-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 04
+2023-12-08T00:21:10.123-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:21:10.123-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 05
+2023-12-08T00:21:10.123-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:21:10.123-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 06
+2023-12-08T00:21:10.124-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:21:10.124-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 07
+2023-12-08T00:21:10.124-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:21:10.124-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 08
+2023-12-08T00:21:10.124-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:21:10.124-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 09
+2023-12-08T00:21:10.124-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:21:10.124-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 10
+2023-12-08T00:21:10.124-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 5
+2023-12-08T00:21:10.124-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 11
+2023-12-08T00:21:10.125-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 3
+2023-12-08T00:21:10.125-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 12
+2023-12-08T00:21:10.125-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 4
+2023-12-08T00:21:10.206-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Detalhamento:::::::::::::::::::::::::::: {11={Saia=2}, 12={Saia=1, Jaqueta=2, Calça=3}, 01={Vestido=1}, 03={Vestido=2}, 07={Vestido=1}, 09={Vestido=3}, 10={Saia=2, Jaqueta=1, Vestido=3}}
+2023-12-08T00:21:10.215-03:00  WARN 38593 --- [http-nio-8080-exec-4] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-4][adm/main/barchart] Deprecated unwrapped fragment expression "adm/main/templates/graficoCompras :: graficoCompras" found in template adm/main/barchart, line 313, col 14. Please use the complete syntax of fragment expressions instead ("~{adm/main/templates/graficoCompras :: graficoCompras}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2023-12-08T00:21:14.481-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 01
+2023-12-08T00:21:14.482-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:21:14.482-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 02
+2023-12-08T00:21:14.482-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:21:14.482-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 03
+2023-12-08T00:21:14.483-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 2
+2023-12-08T00:21:14.483-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 04
+2023-12-08T00:21:14.483-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:21:14.483-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 05
+2023-12-08T00:21:14.483-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:21:14.483-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 06
+2023-12-08T00:21:14.484-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:21:14.484-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 07
+2023-12-08T00:21:14.484-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:21:14.484-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 08
+2023-12-08T00:21:14.484-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:21:14.484-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 09
+2023-12-08T00:21:14.484-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:21:14.484-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 10
+2023-12-08T00:21:14.485-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 5
+2023-12-08T00:21:14.485-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 11
+2023-12-08T00:21:14.485-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 3
+2023-12-08T00:21:14.485-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 12
+2023-12-08T00:21:14.485-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 4
+2023-12-08T00:21:14.573-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Detalhamento:::::::::::::::::::::::::::: {11={Saia=2}, 12={Saia=1, Jaqueta=2, Calça=3}, 01={Vestido=1}, 03={Vestido=2}, 07={Vestido=1}, 09={Vestido=3}, 10={Saia=2, Jaqueta=1, Vestido=3}}
+2023-12-08T00:21:14.585-03:00  WARN 38593 --- [http-nio-8080-exec-2] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-2][adm/main/barchart] Deprecated unwrapped fragment expression "adm/main/templates/graficoCompras :: graficoCompras" found in template adm/main/barchart, line 313, col 14. Please use the complete syntax of fragment expressions instead ("~{adm/main/templates/graficoCompras :: graficoCompras}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2023-12-08T00:21:56.486-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 01
+2023-12-08T00:21:56.487-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:21:56.487-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 02
+2023-12-08T00:21:56.487-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:21:56.487-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 03
+2023-12-08T00:21:56.487-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 2
+2023-12-08T00:21:56.487-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 04
+2023-12-08T00:21:56.487-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:21:56.487-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 05
+2023-12-08T00:21:56.487-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:21:56.487-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 06
+2023-12-08T00:21:56.487-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:21:56.488-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 07
+2023-12-08T00:21:56.488-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:21:56.488-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 08
+2023-12-08T00:21:56.488-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:21:56.488-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 09
+2023-12-08T00:21:56.488-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:21:56.488-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 10
+2023-12-08T00:21:56.488-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 5
+2023-12-08T00:21:56.488-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 11
+2023-12-08T00:21:56.488-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 3
+2023-12-08T00:21:56.489-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 12
+2023-12-08T00:21:56.489-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 4
+2023-12-08T00:21:56.563-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Detalhamento:::::::::::::::::::::::::::: {11={Saia=2}, 12={Saia=1, Jaqueta=2, Calça=3}, 01={Vestido=1}, 03={Vestido=2}, 07={Vestido=1}, 09={Vestido=3}, 10={Saia=2, Jaqueta=1, Vestido=3}}
+2023-12-08T00:21:56.571-03:00  WARN 38593 --- [http-nio-8080-exec-4] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-4][adm/main/barchart] Deprecated unwrapped fragment expression "adm/main/templates/graficoCompras :: graficoCompras" found in template adm/main/barchart, line 302, col 14. Please use the complete syntax of fragment expressions instead ("~{adm/main/templates/graficoCompras :: graficoCompras}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2023-12-08T00:22:03.318-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 01
+2023-12-08T00:22:03.319-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:22:03.319-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 02
+2023-12-08T00:22:03.319-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:22:03.319-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 03
+2023-12-08T00:22:03.319-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 2
+2023-12-08T00:22:03.320-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 04
+2023-12-08T00:22:03.320-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:22:03.320-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 05
+2023-12-08T00:22:03.320-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:22:03.320-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 06
+2023-12-08T00:22:03.320-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:22:03.320-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 07
+2023-12-08T00:22:03.320-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:22:03.320-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 08
+2023-12-08T00:22:03.320-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:22:03.320-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 09
+2023-12-08T00:22:03.320-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:22:03.321-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 10
+2023-12-08T00:22:03.321-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 5
+2023-12-08T00:22:03.321-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 11
+2023-12-08T00:22:03.321-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 3
+2023-12-08T00:22:03.321-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Month:::::::: 12
+2023-12-08T00:22:03.321-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : compras::::::::::::: 4
+2023-12-08T00:22:03.401-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.controllers.CompraController       : Detalhamento:::::::::::::::::::::::::::: {11={Saia=2}, 12={Saia=1, Jaqueta=2, Calça=3}, 01={Vestido=1}, 03={Vestido=2}, 07={Vestido=1}, 09={Vestido=3}, 10={Saia=2, Jaqueta=1, Vestido=3}}
+2023-12-08T00:22:03.412-03:00  WARN 38593 --- [http-nio-8080-exec-2] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-2][adm/main/barchart] Deprecated unwrapped fragment expression "adm/main/templates/graficoCompras :: graficoCompras" found in template adm/main/barchart, line 302, col 14. Please use the complete syntax of fragment expressions instead ("~{adm/main/templates/graficoCompras :: graficoCompras}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2023-12-08T00:23:18.468-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 01
+2023-12-08T00:23:18.469-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:23:18.469-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 02
+2023-12-08T00:23:18.469-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:23:18.469-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 03
+2023-12-08T00:23:18.469-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 2
+2023-12-08T00:23:18.469-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 04
+2023-12-08T00:23:18.469-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:23:18.470-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 05
+2023-12-08T00:23:18.470-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:23:18.470-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 06
+2023-12-08T00:23:18.470-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:23:18.470-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 07
+2023-12-08T00:23:18.470-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:23:18.470-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 08
+2023-12-08T00:23:18.470-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:23:18.471-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 09
+2023-12-08T00:23:18.471-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:23:18.471-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 10
+2023-12-08T00:23:18.471-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 5
+2023-12-08T00:23:18.471-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 11
+2023-12-08T00:23:18.471-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 3
+2023-12-08T00:23:18.471-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 12
+2023-12-08T00:23:18.471-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 4
+2023-12-08T00:23:18.586-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Detalhamento:::::::::::::::::::::::::::: {11={Saia=2}, 12={Saia=1, Jaqueta=2, Calça=3}, 01={Vestido=1}, 03={Vestido=2}, 07={Vestido=1}, 09={Vestido=3}, 10={Saia=2, Jaqueta=1, Vestido=3}}
+2023-12-08T00:23:18.594-03:00  WARN 38593 --- [http-nio-8080-exec-5] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-5][adm/main/barchart] Deprecated unwrapped fragment expression "adm/main/templates/graficoCompras :: graficoCompras" found in template adm/main/barchart, line 300, col 14. Please use the complete syntax of fragment expressions instead ("~{adm/main/templates/graficoCompras :: graficoCompras}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2023-12-08T00:23:22.588-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.ProdutoController      : Vendas Produtos por Mes::::::::::::::: {11={Saia=2}, 12={Saia=1, Jaqueta=2, Calça=3}, 01={Vestido=1}, 03={Vestido=2}, 07={Vestido=1}, 09={Vestido=3}, 10={Saia=2, Jaqueta=1, Vestido=3}}
+2023-12-08T00:23:22.609-03:00  WARN 38593 --- [http-nio-8080-exec-6] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-6][adm/main/linechart] Deprecated unwrapped fragment expression "adm/main/templates/graficoProduto :: graficoProduto" found in template adm/main/linechart, line 311, col 14. Please use the complete syntax of fragment expressions instead ("~{adm/main/templates/graficoProduto :: graficoProduto}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2023-12-08T00:23:28.922-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 01
+2023-12-08T00:23:28.923-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:23:28.923-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 02
+2023-12-08T00:23:28.923-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:23:28.923-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 03
+2023-12-08T00:23:28.924-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 2
+2023-12-08T00:23:28.924-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 04
+2023-12-08T00:23:28.924-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:23:28.924-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 05
+2023-12-08T00:23:28.924-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:23:28.924-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 06
+2023-12-08T00:23:28.924-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:23:28.924-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 07
+2023-12-08T00:23:28.924-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:23:28.924-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 08
+2023-12-08T00:23:28.924-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:23:28.925-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 09
+2023-12-08T00:23:28.925-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:23:28.925-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 10
+2023-12-08T00:23:28.925-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 5
+2023-12-08T00:23:28.925-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 11
+2023-12-08T00:23:28.925-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 3
+2023-12-08T00:23:28.925-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 12
+2023-12-08T00:23:28.925-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 4
+2023-12-08T00:23:29.013-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Detalhamento:::::::::::::::::::::::::::: {11={Saia=2}, 12={Saia=1, Jaqueta=2, Calça=3}, 01={Vestido=1}, 03={Vestido=2}, 07={Vestido=1}, 09={Vestido=3}, 10={Saia=2, Jaqueta=1, Vestido=3}}
+2023-12-08T00:23:29.021-03:00  WARN 38593 --- [http-nio-8080-exec-4] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-4][adm/main/barchart] Deprecated unwrapped fragment expression "adm/main/templates/graficoCompras :: graficoCompras" found in template adm/main/barchart, line 300, col 14. Please use the complete syntax of fragment expressions instead ("~{adm/main/templates/graficoCompras :: graficoCompras}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2023-12-08T00:23:55.361-03:00 DEBUG 38593 --- [http-nio-8080-exec-9] c.b.b.controllers.CompraController       : Month:::::::: 01
+2023-12-08T00:23:55.362-03:00 DEBUG 38593 --- [http-nio-8080-exec-9] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:23:55.362-03:00 DEBUG 38593 --- [http-nio-8080-exec-9] c.b.b.controllers.CompraController       : Month:::::::: 02
+2023-12-08T00:23:55.362-03:00 DEBUG 38593 --- [http-nio-8080-exec-9] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:23:55.362-03:00 DEBUG 38593 --- [http-nio-8080-exec-9] c.b.b.controllers.CompraController       : Month:::::::: 03
+2023-12-08T00:23:55.362-03:00 DEBUG 38593 --- [http-nio-8080-exec-9] c.b.b.controllers.CompraController       : compras::::::::::::: 2
+2023-12-08T00:23:55.362-03:00 DEBUG 38593 --- [http-nio-8080-exec-9] c.b.b.controllers.CompraController       : Month:::::::: 04
+2023-12-08T00:23:55.362-03:00 DEBUG 38593 --- [http-nio-8080-exec-9] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:23:55.362-03:00 DEBUG 38593 --- [http-nio-8080-exec-9] c.b.b.controllers.CompraController       : Month:::::::: 05
+2023-12-08T00:23:55.362-03:00 DEBUG 38593 --- [http-nio-8080-exec-9] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:23:55.362-03:00 DEBUG 38593 --- [http-nio-8080-exec-9] c.b.b.controllers.CompraController       : Month:::::::: 06
+2023-12-08T00:23:55.362-03:00 DEBUG 38593 --- [http-nio-8080-exec-9] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:23:55.362-03:00 DEBUG 38593 --- [http-nio-8080-exec-9] c.b.b.controllers.CompraController       : Month:::::::: 07
+2023-12-08T00:23:55.363-03:00 DEBUG 38593 --- [http-nio-8080-exec-9] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:23:55.363-03:00 DEBUG 38593 --- [http-nio-8080-exec-9] c.b.b.controllers.CompraController       : Month:::::::: 08
+2023-12-08T00:23:55.363-03:00 DEBUG 38593 --- [http-nio-8080-exec-9] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:23:55.363-03:00 DEBUG 38593 --- [http-nio-8080-exec-9] c.b.b.controllers.CompraController       : Month:::::::: 09
+2023-12-08T00:23:55.363-03:00 DEBUG 38593 --- [http-nio-8080-exec-9] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:23:55.363-03:00 DEBUG 38593 --- [http-nio-8080-exec-9] c.b.b.controllers.CompraController       : Month:::::::: 10
+2023-12-08T00:23:55.363-03:00 DEBUG 38593 --- [http-nio-8080-exec-9] c.b.b.controllers.CompraController       : compras::::::::::::: 5
+2023-12-08T00:23:55.363-03:00 DEBUG 38593 --- [http-nio-8080-exec-9] c.b.b.controllers.CompraController       : Month:::::::: 11
+2023-12-08T00:23:55.363-03:00 DEBUG 38593 --- [http-nio-8080-exec-9] c.b.b.controllers.CompraController       : compras::::::::::::: 3
+2023-12-08T00:23:55.363-03:00 DEBUG 38593 --- [http-nio-8080-exec-9] c.b.b.controllers.CompraController       : Month:::::::: 12
+2023-12-08T00:23:55.363-03:00 DEBUG 38593 --- [http-nio-8080-exec-9] c.b.b.controllers.CompraController       : compras::::::::::::: 4
+2023-12-08T00:23:55.450-03:00 DEBUG 38593 --- [http-nio-8080-exec-9] c.b.b.controllers.CompraController       : Detalhamento:::::::::::::::::::::::::::: {11={Saia=2}, 12={Saia=1, Jaqueta=2, Calça=3}, 01={Vestido=1}, 03={Vestido=2}, 07={Vestido=1}, 09={Vestido=3}, 10={Saia=2, Jaqueta=1, Vestido=3}}
+2023-12-08T00:23:55.460-03:00  WARN 38593 --- [http-nio-8080-exec-9] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-9][adm/main/barchart] Deprecated unwrapped fragment expression "adm/main/templates/graficoCompras :: graficoCompras" found in template adm/main/barchart, line 300, col 14. Please use the complete syntax of fragment expressions instead ("~{adm/main/templates/graficoCompras :: graficoCompras}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2023-12-08T00:24:03.228-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.ProdutoController      : Vendas Produtos por Mes::::::::::::::: {11={Saia=2}, 12={Saia=1, Jaqueta=2, Calça=3}, 01={Vestido=1}, 03={Vestido=2}, 07={Vestido=1}, 09={Vestido=3}, 10={Saia=2, Jaqueta=1, Vestido=3}}
+2023-12-08T00:24:03.237-03:00  WARN 38593 --- [http-nio-8080-exec-3] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-3][adm/main/linechart] Deprecated unwrapped fragment expression "adm/main/templates/graficoProduto :: graficoProduto" found in template adm/main/linechart, line 300, col 14. Please use the complete syntax of fragment expressions instead ("~{adm/main/templates/graficoProduto :: graficoProduto}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2023-12-08T00:24:07.566-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : Month:::::::: 01
+2023-12-08T00:24:07.567-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:24:07.567-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : Month:::::::: 02
+2023-12-08T00:24:07.567-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:24:07.567-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : Month:::::::: 03
+2023-12-08T00:24:07.567-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : compras::::::::::::: 2
+2023-12-08T00:24:07.567-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : Month:::::::: 04
+2023-12-08T00:24:07.567-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:24:07.567-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : Month:::::::: 05
+2023-12-08T00:24:07.568-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:24:07.568-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : Month:::::::: 06
+2023-12-08T00:24:07.568-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:24:07.568-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : Month:::::::: 07
+2023-12-08T00:24:07.568-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:24:07.568-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : Month:::::::: 08
+2023-12-08T00:24:07.568-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:24:07.568-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : Month:::::::: 09
+2023-12-08T00:24:07.569-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:24:07.569-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : Month:::::::: 10
+2023-12-08T00:24:07.569-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : compras::::::::::::: 5
+2023-12-08T00:24:07.569-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : Month:::::::: 11
+2023-12-08T00:24:07.569-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : compras::::::::::::: 3
+2023-12-08T00:24:07.569-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : Month:::::::: 12
+2023-12-08T00:24:07.569-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : compras::::::::::::: 4
+2023-12-08T00:24:07.658-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.controllers.CompraController       : Detalhamento:::::::::::::::::::::::::::: {11={Saia=2}, 12={Saia=1, Jaqueta=2, Calça=3}, 01={Vestido=1}, 03={Vestido=2}, 07={Vestido=1}, 09={Vestido=3}, 10={Saia=2, Jaqueta=1, Vestido=3}}
+2023-12-08T00:24:07.669-03:00  WARN 38593 --- [http-nio-8080-exec-6] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-6][adm/main/barchart] Deprecated unwrapped fragment expression "adm/main/templates/graficoCompras :: graficoCompras" found in template adm/main/barchart, line 300, col 14. Please use the complete syntax of fragment expressions instead ("~{adm/main/templates/graficoCompras :: graficoCompras}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2023-12-08T00:26:11.887-03:00  WARN 38593 --- [http-nio-8080-exec-2] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-2][pages/home] Deprecated unwrapped fragment expression "pages/head :: head" found in template pages/home, line 4, col 6. Please use the complete syntax of fragment expressions instead ("~{pages/head :: head}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2023-12-08T00:26:11.892-03:00  WARN 38593 --- [http-nio-8080-exec-2] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-2][pages/home] Deprecated unwrapped fragment expression "pages/header :: header" found in template pages/home, line 16, col 10. Please use the complete syntax of fragment expressions instead ("~{pages/header :: header}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2023-12-08T00:26:11.901-03:00  WARN 38593 --- [http-nio-8080-exec-2] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-2][pages/home] Deprecated unwrapped fragment expression "pages/footer :: footer" found in template pages/home, line 141, col 10. Please use the complete syntax of fragment expressions instead ("~{pages/footer :: footer}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2023-12-08T00:26:14.392-03:00 DEBUG 38593 --- [http-nio-8080-exec-6] c.b.b.r.c.ClienteRepositoryImpl          : Session: null, null
+2023-12-08T00:26:20.110-03:00 DEBUG 38593 --- [http-nio-8080-exec-2] c.b.b.r.c.ClienteRepositoryImpl          : Credenciais: admin@admin.co, admin
+2023-12-08T00:26:28.875-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.ProdutoController      : Vendas Produtos por Mes::::::::::::::: {11={Saia=2}, 12={Saia=1, Jaqueta=2, Calça=3}, 01={Vestido=1}, 03={Vestido=2}, 07={Vestido=1}, 09={Vestido=3}, 10={Saia=2, Jaqueta=1, Vestido=3}}
+2023-12-08T00:26:28.884-03:00  WARN 38593 --- [http-nio-8080-exec-4] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-4][adm/main/linechart] Deprecated unwrapped fragment expression "adm/main/templates/graficoProduto :: graficoProduto" found in template adm/main/linechart, line 300, col 14. Please use the complete syntax of fragment expressions instead ("~{adm/main/templates/graficoProduto :: graficoProduto}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2023-12-08T00:26:33.734-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 01
+2023-12-08T00:26:33.734-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:26:33.734-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 02
+2023-12-08T00:26:33.734-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:26:33.735-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 03
+2023-12-08T00:26:33.735-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 2
+2023-12-08T00:26:33.735-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 04
+2023-12-08T00:26:33.735-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:26:33.735-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 05
+2023-12-08T00:26:33.735-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:26:33.735-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 06
+2023-12-08T00:26:33.735-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:26:33.735-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 07
+2023-12-08T00:26:33.735-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:26:33.735-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 08
+2023-12-08T00:26:33.735-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:26:33.735-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 09
+2023-12-08T00:26:33.736-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:26:33.736-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 10
+2023-12-08T00:26:33.736-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 5
+2023-12-08T00:26:33.736-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 11
+2023-12-08T00:26:33.736-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 3
+2023-12-08T00:26:33.736-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 12
+2023-12-08T00:26:33.736-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 4
+2023-12-08T00:26:33.809-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Detalhamento:::::::::::::::::::::::::::: {11={Saia=2}, 12={Saia=1, Jaqueta=2, Calça=3}, 01={Vestido=1}, 03={Vestido=2}, 07={Vestido=1}, 09={Vestido=3}, 10={Saia=2, Jaqueta=1, Vestido=3}}
+2023-12-08T00:26:33.818-03:00  WARN 38593 --- [http-nio-8080-exec-5] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-5][adm/main/barchart] Deprecated unwrapped fragment expression "adm/main/templates/graficoCompras :: graficoCompras" found in template adm/main/barchart, line 300, col 14. Please use the complete syntax of fragment expressions instead ("~{adm/main/templates/graficoCompras :: graficoCompras}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2023-12-08T00:26:38.858-03:00 DEBUG 38593 --- [http-nio-8080-exec-8] c.b.b.controllers.ProdutoController      : Vendas Produtos por Mes::::::::::::::: {11={Saia=2}, 12={Saia=1, Jaqueta=2, Calça=3}, 01={Vestido=1}, 03={Vestido=2}, 07={Vestido=1}, 09={Vestido=3}, 10={Saia=2, Jaqueta=1, Vestido=3}}
+2023-12-08T00:26:38.866-03:00  WARN 38593 --- [http-nio-8080-exec-8] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-8][adm/main/linechart] Deprecated unwrapped fragment expression "adm/main/templates/graficoProduto :: graficoProduto" found in template adm/main/linechart, line 300, col 14. Please use the complete syntax of fragment expressions instead ("~{adm/main/templates/graficoProduto :: graficoProduto}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2023-12-08T00:26:42.616-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 01
+2023-12-08T00:26:42.617-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:26:42.617-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 02
+2023-12-08T00:26:42.617-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:26:42.617-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 03
+2023-12-08T00:26:42.617-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 2
+2023-12-08T00:26:42.617-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 04
+2023-12-08T00:26:42.617-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:26:42.618-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 05
+2023-12-08T00:26:42.618-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:26:42.618-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 06
+2023-12-08T00:26:42.618-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:26:42.618-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 07
+2023-12-08T00:26:42.618-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:26:42.618-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 08
+2023-12-08T00:26:42.618-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:26:42.618-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 09
+2023-12-08T00:26:42.618-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:26:42.618-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 10
+2023-12-08T00:26:42.618-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 5
+2023-12-08T00:26:42.618-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 11
+2023-12-08T00:26:42.618-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 3
+2023-12-08T00:26:42.619-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Month:::::::: 12
+2023-12-08T00:26:42.619-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : compras::::::::::::: 4
+2023-12-08T00:26:42.708-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.CompraController       : Detalhamento:::::::::::::::::::::::::::: {11={Saia=2}, 12={Saia=1, Jaqueta=2, Calça=3}, 01={Vestido=1}, 03={Vestido=2}, 07={Vestido=1}, 09={Vestido=3}, 10={Saia=2, Jaqueta=1, Vestido=3}}
+2023-12-08T00:26:42.717-03:00  WARN 38593 --- [http-nio-8080-exec-4] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-4][adm/main/barchart] Deprecated unwrapped fragment expression "adm/main/templates/graficoCompras :: graficoCompras" found in template adm/main/barchart, line 300, col 14. Please use the complete syntax of fragment expressions instead ("~{adm/main/templates/graficoCompras :: graficoCompras}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2023-12-08T00:28:23.171-03:00 DEBUG 38593 --- [http-nio-8080-exec-4] c.b.b.controllers.ProdutoController      : Vendas Produtos por Mes::::::::::::::: {11={Saia=2}, 12={Saia=1, Jaqueta=2, Calça=3}, 01={Vestido=1}, 03={Vestido=2}, 07={Vestido=1}, 09={Vestido=3}, 10={Saia=2, Jaqueta=1, Vestido=3}}
+2023-12-08T00:28:23.183-03:00  WARN 38593 --- [http-nio-8080-exec-4] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-4][adm/main/linechart] Deprecated unwrapped fragment expression "adm/main/templates/graficoProduto :: graficoProduto" found in template adm/main/linechart, line 300, col 14. Please use the complete syntax of fragment expressions instead ("~{adm/main/templates/graficoProduto :: graficoProduto}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2023-12-08T00:29:00.957-03:00 DEBUG 38593 --- [http-nio-8080-exec-10] c.b.b.controllers.ProdutoController      : Vendas Produtos por Mes::::::::::::::: {11={Saia=2}, 12={Saia=1, Jaqueta=2, Calça=3}, 01={Vestido=1}, 03={Vestido=2}, 07={Vestido=1}, 09={Vestido=3}, 10={Saia=2, Jaqueta=1, Vestido=3}}
+2023-12-08T00:29:00.964-03:00  WARN 38593 --- [http-nio-8080-exec-10] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-10][adm/main/linechart] Deprecated unwrapped fragment expression "adm/main/templates/graficoProduto :: graficoProduto" found in template adm/main/linechart, line 300, col 14. Please use the complete syntax of fragment expressions instead ("~{adm/main/templates/graficoProduto :: graficoProduto}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2023-12-08T00:29:07.058-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 01
+2023-12-08T00:29:07.058-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:29:07.058-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 02
+2023-12-08T00:29:07.058-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:29:07.059-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 03
+2023-12-08T00:29:07.059-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 2
+2023-12-08T00:29:07.059-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 04
+2023-12-08T00:29:07.059-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:29:07.059-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 05
+2023-12-08T00:29:07.059-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:29:07.059-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 06
+2023-12-08T00:29:07.059-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:29:07.060-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 07
+2023-12-08T00:29:07.060-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:29:07.060-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 08
+2023-12-08T00:29:07.060-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 0
+2023-12-08T00:29:07.060-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 09
+2023-12-08T00:29:07.060-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 1
+2023-12-08T00:29:07.060-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 10
+2023-12-08T00:29:07.060-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 5
+2023-12-08T00:29:07.060-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 11
+2023-12-08T00:29:07.060-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 3
+2023-12-08T00:29:07.061-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Month:::::::: 12
+2023-12-08T00:29:07.061-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : compras::::::::::::: 4
+2023-12-08T00:29:07.142-03:00 DEBUG 38593 --- [http-nio-8080-exec-5] c.b.b.controllers.CompraController       : Detalhamento:::::::::::::::::::::::::::: {11={Saia=2}, 12={Saia=1, Jaqueta=2, Calça=3}, 01={Vestido=1}, 03={Vestido=2}, 07={Vestido=1}, 09={Vestido=3}, 10={Saia=2, Jaqueta=1, Vestido=3}}
+2023-12-08T00:29:07.151-03:00  WARN 38593 --- [http-nio-8080-exec-5] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-5][adm/main/barchart] Deprecated unwrapped fragment expression "adm/main/templates/graficoCompras :: graficoCompras" found in template adm/main/barchart, line 300, col 14. Please use the complete syntax of fragment expressions instead ("~{adm/main/templates/graficoCompras :: graficoCompras}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2023-12-08T00:29:27.581-03:00 DEBUG 38593 --- [http-nio-8080-exec-3] c.b.b.controllers.ProdutoController      : Vendas Produtos por Mes::::::::::::::: {11={Saia=2}, 12={Saia=1, Jaqueta=2, Calça=3}, 01={Vestido=1}, 03={Vestido=2}, 07={Vestido=1}, 09={Vestido=3}, 10={Saia=2, Jaqueta=1, Vestido=3}}
+2023-12-08T00:29:27.594-03:00  WARN 38593 --- [http-nio-8080-exec-3] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-3][adm/main/linechart] Deprecated unwrapped fragment expression "adm/main/templates/graficoProduto :: graficoProduto" found in template adm/main/linechart, line 300, col 14. Please use the complete syntax of fragment expressions instead ("~{adm/main/templates/graficoProduto :: graficoProduto}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2023-12-08T00:33:54.522-03:00  INFO 38593 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-33 - Shutdown initiated...
+2023-12-08T00:33:54.709-03:00  INFO 38593 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-33 - Shutdown completed.

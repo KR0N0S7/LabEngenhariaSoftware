@@ -1,0 +1,7 @@
+[
+  {
+    "route": "GET /cliente/cadastro",
+    "parameters": "(id)",
+    "status": 200
+  }
+]
