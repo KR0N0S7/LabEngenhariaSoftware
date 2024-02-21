@@ -1,5 +1,7 @@
 package com.boutiquepierrotbleu.boutiquepierrotbleu.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,10 @@ public class ItemTrocaService {
 
     public void salvarItemTroca(ItemTroca itemTroca) {
         itemTrocaRepository.save(itemTroca);
+    }
+
+    public List<ItemTroca> obterTrocaByCompraIdTrocado(Long trocaId, boolean trocado) {
+        return itemTrocaRepository.findByTrocaIdAndTrocado(trocaId, trocado);
     }
     
 }

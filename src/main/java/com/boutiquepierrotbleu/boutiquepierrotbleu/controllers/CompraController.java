@@ -260,8 +260,12 @@ public class CompraController {
         Long clienteId = session.getAttribute("id") != null ? (Long) session.getAttribute("id") : null;
         Cliente cliente = clienteService.obterCliente(clienteId);
         compra.setCarrinhoId(carrinhoCompraService.getOrCreateCart(cliente).getId());
-        
+
         Compra compraFinalizada = compraService.salvarCompra(compra);
+        Long compraId = compraFinalizada.getId();
+        String numeroCompra = 20301200 + compraId.toString();
+        compraFinalizada.setNumeroCompra(numeroCompra);
+        compraService.salvarCompra(compraFinalizada);
         
         CarrinhoCompra carrinho = carrinhoCompraService.obterCarrinhoCompra(compraFinalizada.getCarrinhoId());
         carrinho.setAtivo(false);
@@ -297,8 +301,10 @@ public class CompraController {
     public ModelAndView recebidoCompra(@RequestParam("id") Long id, HttpSession session) throws Exception {
         ModelAndView mv = new ModelAndView("usr/compra/detail");
         Compra compra = compraService.obterCompra(id);
-        compra.setStatus(Status.ENTREGUE);
-        compraService.salvarCompra(compra);
+        if(compra.getStatus() == Status.EM_TRANSITO) {
+            compra.setStatus(Status.ENTREGUE);
+            compraService.salvarCompra(compra);
+        }
         logger.debug("Status:::::::: {}", compra.getStatus());
         String status = compra.getStatus().toString();
         mv.addObject("status", status);
@@ -323,8 +329,12 @@ public class CompraController {
         mv.addObject("itens", itens);
         Cliente cliente = compra.getCliente();
         mv.addObject("cliente", cliente);
-        String nome = cliente.getNomeCompleto();
-        mv.addObject("nome", nome);
+        // if(compra.getStatus() != Status.ENTREGUE) {
+        //     logger.debug("Cliente status:::::::: {}", compra.getStatus());
+        //     String nome = cliente.getNomeCompleto();
+        //     mv.addObject("nome", nome);
+
+        // }
         Troca troca = new Troca();
         if(status.equals("EM_TROCA") || status.equals("TROCA_AUTORIZADA") || status.equals("ENVIADO") || status.equals("TROCADO")) {
             troca = trocaService.obterTrocaByCompraId(id);
@@ -341,16 +351,20 @@ public class CompraController {
     @RequestMapping("/aprovar")
     public ModelAndView aprovarCompraADM(@RequestParam("id") Long id, HttpSession session) throws Exception {
         Compra compra = compraService.obterCompra(id);
-        compra.setStatus(Status.APROVADO);
-        compraService.salvarCompra(compra);
+        if(compra.getStatus() == Status.EM_PROCESSAMENTO) {
+            compra.setStatus(Status.APROVADO);
+            compraService.salvarCompra(compra);
+        }
         return respostaDetalhesCompraAdmin(id);
     }
 
     @RequestMapping("/enviar") 
     public ModelAndView enviarCompraADM(@RequestParam("id") Long id, HttpSession session) throws Exception {
         Compra compra = compraService.obterCompra(id);
-        compra.setStatus(Status.EM_TRANSITO);
-        compraService.salvarCompra(compra);
+        if(compra.getStatus() == Status.APROVADO) {
+            compra.setStatus(Status.EM_TRANSITO);
+            compraService.salvarCompra(compra);
+        }
         return respostaDetalhesCompraAdmin(id);
     }
 
@@ -383,51 +397,55 @@ public class CompraController {
     @RequestMapping("/trocarSelecionados")
     public ModelAndView trocarSelecionados(@RequestParam("selectedItems") List<Long> id, HttpSession session) throws Exception {
         logger.debug("Lista produtos selecionados:::::::: {}", id.size());
+        for(Long idz : id) {
+            logger.debug("Nome do produto selecionado:::::::: {}", itemProdutoService.obterItemProduto(idz));
+        }
         Long idCliente = (Long) session.getAttribute("id");
-        Compra compra = compraService.obterCompra(idCliente);
-        compra.setStatus(Status.EM_TROCA);
-        compra = compraService.salvarCompra(compra);
         ModelAndView mv = new ModelAndView("usr/compra/solicitacaoTroca");
-
-        List<Produto> produtos = new ArrayList<Produto>();
-        List<ItemTroca> itensTroca = new ArrayList<ItemTroca>();
-        Double valor = 0.0;
-        for (Long itemProduto : id) {
-            ItemProduto item = itemProdutoService.obterItemProduto(itemProduto);
-            Produto produto = item.getProduto();
-            produtos.add(produto);
-            ItemTroca itemTroca = new ItemTroca();
-            itemTroca.setProduto(produto);
-            itemTroca.setCliente(compra.getCliente());
-            itemTroca.setCompra(compra);
-            itemTroca.setQuantidade(item.getQuantidade());
-            itemTroca.setValor(item.getProduto().getPreco() * item.getQuantidade());
-            itemTroca.setTrocado(false);
-            valor += itemTroca.getValor();
-            itensTroca.add(itemTroca);
-        }
-
-        Troca troca = trocaService.obterTrocaByCompraId(compra.getId());
-        if(troca == null) {
-            LocalDate data = LocalDate.now();
+        Compra compra = compraService.obterCompra(idCliente);
+        if(compra.getStatus() == Status.ENTREGUE) {
+            compra.setStatus(Status.EM_TROCA);
+            compra = compraService.salvarCompra(compra);
+            List<Produto> produtos = new ArrayList<Produto>();
+            List<ItemTroca> itensTroca = new ArrayList<ItemTroca>();
+            Double valor = 0.0;
+            for (Long itemProduto : id) {
+                ItemProduto item = itemProdutoService.obterItemProduto(itemProduto);
+                Produto produto = item.getProduto();
+                produtos.add(produto);
+                ItemTroca itemTroca = new ItemTroca();
+                itemTroca.setProduto(produto);
+                itemTroca.setCliente(compra.getCliente());
+                itemTroca.setCompra(compra);
+                itemTroca.setQuantidade(item.getQuantidade());
+                itemTroca.setValor(item.getProduto().getPreco() * item.getQuantidade());
+                itemTroca.setTrocado(false);
+                valor += itemTroca.getValor();
+                itensTroca.add(itemTroca);
+            }
     
-            troca = new Troca();
-            troca.setCliente(compra.getCliente());
-            troca.setData(data);
-            troca.setStatus(Status.EM_TROCA);
-            troca.setCompra(compra);
-            troca.setValorTroca(valor);
-            troca = trocaService.salvarTroca(troca);
-            
-        }
-        mv.addObject("troca", troca);
+            Troca troca = trocaService.obterTrocaByCompraId(compra.getId());
+            if(troca == null) {
+                LocalDate data = LocalDate.now();
         
-        for(ItemTroca itemTroca : itensTroca) {
-            itemTroca.setTroca(troca);
-            itemTrocaService.salvarItemTroca(itemTroca);
+                troca = new Troca();
+                troca.setCliente(compra.getCliente());
+                troca.setData(data);
+                troca.setStatus(Status.EM_TROCA);
+                troca.setCompra(compra);
+                troca.setValorTroca(valor);
+                troca = trocaService.salvarTroca(troca);
+                
+            }
+            mv.addObject("troca", troca);
+            
+            for(ItemTroca itemTroca : itensTroca) {
+                itemTroca.setTroca(troca);
+                itemTroca.setTrocado(false);
+                itemTrocaService.salvarItemTroca(itemTroca);
+            }
+            mv.addObject("itensTroca", itensTroca);
         }
-        mv.addObject("itensTroca", itensTroca);
-
         return mv;
     }
     
@@ -435,34 +453,48 @@ public class CompraController {
     public ModelAndView aceitarTrocaADM(@RequestParam("id") Long id, HttpSession session) throws Exception {
         Troca troca = trocaService.obterTroca(id);
         Compra compra = troca.getCompra();
+        if(compra.getStatus() == Status.EM_TROCA) {
+            compra.setStatus(Status.TROCA_AUTORIZADA);
+            compra = compraService.salvarCompra(compra);
+            troca.setStatus(Status.TROCA_AUTORIZADA);
+            List<ItemTroca> listaItensTroca = itemTrocaService.obterTrocaByCompraIdTrocado(troca.getId(), false);
+            Double valor = 0.0;
+            for(ItemTroca item : listaItensTroca) {
+                valor += item.getValor();
+            }
+            troca.setValorTroca(valor);
+            troca = trocaService.salvarTroca(troca);
+        }
         //Cliente cliente = compra.getCliente();
-        compra.setStatus(Status.TROCA_AUTORIZADA);
-        compra = compraService.salvarCompra(compra);
-        troca.setStatus(Status.TROCA_AUTORIZADA);
-        troca = trocaService.salvarTroca(troca);
         //List<ItemTroca> itens = troca.getItemTroca();
         
         //Double valor = troca.calculoValorTroca(itens);
-        
-        return respostaDetalhesCompraAdmin(id);
+        Long compraId = compra.getId();
+        return respostaDetalhesCompraAdmin(compraId);
     }
     
     @RequestMapping("/recusar")
     public ModelAndView recusarTrocaADM(@RequestParam("id") Long id, HttpSession session) throws Exception {
         Compra compra = compraService.obterCompra(id);
-        compra.setStatus(Status.REPROVADO);
-        compra = compraService.salvarCompra(compra);
+        if(compra.getStatus() == Status.EM_TROCA) {
+            compra.setStatus(Status.REPROVADO);
+            compra = compraService.salvarCompra(compra);
+        }
         return respostaDetalhesCompraAdmin(id);
     }
 
     @RequestMapping("/enviado")
     public ModelAndView enviadoTroca(@RequestParam("id") Long id, HttpSession session) throws Exception {
         Compra compra = compraService.obterCompra(id);
-        compra.setStatus(Status.ENVIADO);
-        compra = compraService.salvarCompra(compra);
+        if(compra.getStatus() == Status.TROCA_AUTORIZADA) {
+            logger.debug("Compra status:::::::: {}", compra.getStatus());
+            compra.setStatus(Status.ENVIADO);
+            compra = compraService.salvarCompra(compra);
+        }
         List<ItemProduto> itens = compra.getItens();
         ModelAndView mv = new ModelAndView("usr/compra/detail");
         mv.addObject("itens", itens);
+        mv.addObject("compra", compra);
         logger.debug("lista de itens enviados:::::::: {}", itens.size());
         return mv;
     }
@@ -473,6 +505,7 @@ public class CompraController {
         Cliente cliente =  troca.getCliente();
         
         Compra compra = troca.getCompra();
+        
         compra.setStatus(Status.TROCADO);
         compraService.salvarCompra(compra);
         
@@ -493,7 +526,9 @@ public class CompraController {
 
         logger.debug("Cupom value:::::::: {}", cupom.getValor());
 
-        return respostaDetalhesCompraAdmin(id);
+        Long compraId = compra.getId();
+
+        return respostaDetalhesCompraAdmin(compraId);
     }
 
     @GetMapping("/comprasPorMes")

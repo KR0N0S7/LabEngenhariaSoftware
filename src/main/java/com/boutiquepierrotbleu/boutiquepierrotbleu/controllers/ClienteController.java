@@ -1,5 +1,6 @@
 package com.boutiquepierrotbleu.boutiquepierrotbleu.controllers;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,10 +18,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.boutiquepierrotbleu.boutiquepierrotbleu.dto.ClienteSearchCriteria;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cliente;
+import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Compra;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Endereco;
+import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.ItemProduto;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.repositories.criteriaFilter.ClienteRepositoryImpl;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.ClienteService;
+import com.boutiquepierrotbleu.boutiquepierrotbleu.services.CompraService;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.EnderecoService;
+import com.boutiquepierrotbleu.boutiquepierrotbleu.services.ProdutoService;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.wrapper.ClienteSearchWrapper;
 
 import jakarta.servlet.http.HttpSession;
@@ -37,18 +42,20 @@ public class ClienteController {
     @Autowired
     private EnderecoService enderecoService;
 
+    @Autowired
+    private CompraService compraService;
+
+    @Autowired
+    private ProdutoService produtoService;
+
     private static final Logger logger = LoggerFactory.getLogger(ClienteRepositoryImpl.class);
 
     @RequestMapping("login")
     public ModelAndView telaLoginCliente(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         logger.debug("Session: {}", session.getAttribute("id") + ", " + session.getAttribute("nome"));
-        Object idAttribute;
-        if(session.getAttribute("nome") == "admin") {
-            idAttribute = (String) session.getAttribute("id");
-        } else {
-            idAttribute = (Long) session.getAttribute("id");
-        }
+        Object idAttribute = session.getAttribute("id");
+        
         if (idAttribute == null) {
             mv = new ModelAndView("usr/login");
         } else {
@@ -77,6 +84,29 @@ public class ClienteController {
             session.setAttribute("id", "admin");
             session.setAttribute("nome", "admin");
             mv = new ModelAndView("redirect:/admin/editar");
+            List<Compra> compras = compraService.listarCompras();
+            Double lucro = 0.0;
+            Double valorVenda = 0.0;
+            Double valorCusto = 0.0;
+            Integer quantiaProduto = 0;
+            List<ItemProduto> itens = null;
+            for (Compra compra : compras) {
+                itens = compra.getItens();
+                for(ItemProduto item : itens) {
+                    quantiaProduto = item.getQuantidade();
+                    valorVenda += item.getProduto().getPreco()*quantiaProduto;
+                    valorCusto += item.getProduto().getCusto()*quantiaProduto;
+                }
+            }
+            lucro = valorVenda - valorCusto;
+            DecimalFormat decimalFormat = new DecimalFormat("#.##");
+
+            String numeroFormatado = decimalFormat.format(lucro);
+            mv.addObject("vendas", compras.size());
+            mv.addObject("clientes", clienteService.listarClientes().size());
+            mv.addObject("produtos", produtoService.listarProdutos().size());
+
+            mv.addObject("lucro", numeroFormatado);
         } else {
             mv = new ModelAndView("redirect:/");
             try {
