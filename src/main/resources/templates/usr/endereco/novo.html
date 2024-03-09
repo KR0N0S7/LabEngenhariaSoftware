@@ -14,8 +14,8 @@
 		<div>
 			<div class="card-body">
 				<form class="row g-3" method="POST" th:object="${endereco}"
-					th:action="@{/endereco/novo}">
-					<input type="hidden" th:field="*{id}" th:value="${idSession}" />
+					th:action="@{/endereco/editar}">
+					<input type="hidden" name="clienteId" th:value="${idSession}" />
 
 					<div class="col-4">
 						<label for="nome" class="form-label">CEP </label> <input

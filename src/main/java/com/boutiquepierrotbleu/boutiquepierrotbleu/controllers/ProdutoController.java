@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.CarrinhoCompra;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cliente;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.ItemProduto;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Produto;
@@ -51,7 +52,7 @@ public class ProdutoController {
 
     @Autowired
     private CarrinhoCompraService carrinhoCompraService;
-    
+
     @Autowired
     private CategoriaService categoriaService;
 
@@ -65,18 +66,30 @@ public class ProdutoController {
         ModelAndView mv = new ModelAndView("produto/page");
         List<Produto> produtos = produtoService.listarProdutos();
         mv.addObject("produtos", produtos);
-        Long idCliente = (Long) session.getAttribute("id");
-        mv.addObject("id", idCliente);
 
-        Cliente cliente = clienteService.obterCliente(idCliente);
-        Integer numProdutosNoCarrinho = carrinhoCompraService.getOrCreateCart(cliente).getItemProduto().stream()
-                .mapToInt(ItemProduto::getQuantidade)
-                .sum();;
-        mv.addObject("numeroProdutos", numProdutosNoCarrinho);
-        logger.debug("Session id: {}", session.getId());
-        logger.debug("Session id: {}", session.getAttribute("id"));
-        logger.debug("Nome do cliente: {}", cliente.getNomeCompleto());
-        logger.debug("Numero de produtos: {}", numProdutosNoCarrinho);
+        Long idCliente = (Long) session.getAttribute("id");
+
+        if (idCliente != null) {
+            mv.addObject("id", idCliente);
+
+            Cliente cliente = clienteService.obterCliente(idCliente);
+
+            CarrinhoCompra carrinho = carrinhoCompraService.getOrCreateCart(cliente);
+
+            if (!carrinho.isEmpty()) {
+                Integer numProdutosNoCarrinho = carrinho.getItemProduto().stream()
+                        .mapToInt(ItemProduto::getQuantidade)
+                        .sum();
+
+                mv.addObject("numeroProdutos", numProdutosNoCarrinho);
+
+                logger.debug("Numero de produtos: {}", numProdutosNoCarrinho);
+            }
+            logger.debug("Session id: {}", session.getId());
+            logger.debug("Session id: {}", session.getAttribute("id"));
+            logger.debug("Nome do cliente: {}", cliente.getNomeCompleto());
+        }
+
         return mv;
     }
 
@@ -90,41 +103,42 @@ public class ProdutoController {
     @RequestMapping("/criar")
     public ModelAndView criarProduto(@RequestParam(required = false) Long id) {
         ModelAndView mv = new ModelAndView("adm/produto/novo");
-		Produto produto;
-		if (id == null) {
-			produto = new Produto();
-		} else {
-			try {
-				produto = produtoService.obterProduto(id);
-			} catch (Exception e) {
-				produto = new Produto();
-				mv.addObject("mensagem", e.getMessage());
-			}
-		}
-		mv.addObject("produto", produto);
+        Produto produto;
+        if (id == null) {
+            produto = new Produto();
+        } else {
+            try {
+                produto = produtoService.obterProduto(id);
+            } catch (Exception e) {
+                produto = new Produto();
+                mv.addObject("mensagem", e.getMessage());
+            }
+        }
+        mv.addObject("produto", produto);
 
         List<ValorCategoria> lista = categoriaService.getCategorias();
         mv.addObject("lista", lista);
-		return mv;
+        return mv;
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "editar")
-	public ModelAndView produtoSalvo(Produto produto, BindingResult bidingResult, RedirectAttributes redirectAttributes) {
-		if (bidingResult.hasErrors()) {
-			ModelAndView mv = new ModelAndView("produto/criar");
-			mv.addObject("produto", produto);
-			return mv;
-		}
-		ModelAndView mv = new ModelAndView("redirect:/produto/criar");
-		boolean novo = true;
-		if (produto != null) {
-			novo = false;
-		}
-		if (novo) {
-			mv.addObject("produto", new Produto());
-		} else {
+    public ModelAndView produtoSalvo(Produto produto, BindingResult bidingResult,
+            RedirectAttributes redirectAttributes) {
+        if (bidingResult.hasErrors()) {
+            ModelAndView mv = new ModelAndView("produto/criar");
             mv.addObject("produto", produto);
-		}
+            return mv;
+        }
+        ModelAndView mv = new ModelAndView("redirect:/produto/criar");
+        boolean novo = true;
+        if (produto != null) {
+            novo = false;
+        }
+        if (novo) {
+            mv.addObject("produto", new Produto());
+        } else {
+            mv.addObject("produto", produto);
+        }
         if (produto != null) {
             Float porcentagem = produto.getValorCategoria().getPorcentagem();
             Double valor = (1.00 + (porcentagem * 0.01)) * produto.getCusto();
@@ -137,21 +151,21 @@ public class ProdutoController {
         }
         produtoService.salvarProduto(produto);
 
-        mv.addObject("mensagem", "Produto salvo com sucesso!"); 
-		redirectAttributes.addFlashAttribute("produtoCreatedSuccess", true);
-		return mv;
-	}
+        mv.addObject("mensagem", "Produto salvo com sucesso!");
+        redirectAttributes.addFlashAttribute("produtoCreatedSuccess", true);
+        return mv;
+    }
 
     @RequestMapping(value = "estoque", method = RequestMethod.GET)
     public ModelAndView atualizarEstoqueProduto(@RequestParam(required = false) Long id) {
         ModelAndView mv = new ModelAndView("adm/produto/estoque");
-        
+
         Produto produto;
-		try {
+        try {
             produto = produtoService.obterProduto(id);
             String nome = produto.getNome();
             mv.addObject("nome", nome);
-            //mv.addObject("produto", produto);
+            // mv.addObject("produto", produto);
         } catch (Exception e) {
             produto = new Produto();
             mv.addObject("mensagem", e.getMessage());
@@ -164,12 +178,13 @@ public class ProdutoController {
     }
 
     @RequestMapping(value = "atualizar", method = RequestMethod.POST)
-    public ModelAndView reservarEstoqueDeProduto(@RequestParam("id")Long id, @RequestParam("quantidade") Integer quantidade) {
+    public ModelAndView reservarEstoqueDeProduto(@RequestParam("id") Long id,
+            @RequestParam("quantidade") Integer quantidade) {
         ModelAndView mv = new ModelAndView("adm/produto/list");
         Produto produto;
-		try {
+        try {
             produto = produtoService.obterProduto(id);
-            
+
         } catch (Exception e) {
             produto = new Produto();
             mv.addObject("mensagem", e.getMessage());
@@ -181,7 +196,7 @@ public class ProdutoController {
         mv.addObject("mensagem", "Estoque atualizado com sucesso!");
         return mv;
     }
-    
+
     @RequestMapping(value = "/deletar", method = RequestMethod.GET)
     public ModelAndView deletarProduto(Long id) {
         ModelAndView mv = new ModelAndView("path/to/your/view");
@@ -207,15 +222,16 @@ public class ProdutoController {
     @RequestMapping("/list")
     public ModelAndView listarTodosProdutos() {
         ModelAndView mv = new ModelAndView("adm/produto/list");
-        
+
         mv.addObject("lista", produtoService.listarProdutos());
-        
+
         return mv;
     }
 
     @GetMapping("/vendasPorProduto")
     public String vendasPorProduto(Model model) {
-        // Lista com a ordem correta dos meses (assegure-se de que esta lista esteja definida corretamente)
+        // Lista com a ordem correta dos meses (assegure-se de que esta lista esteja
+        // definida corretamente)
         List<String> monthOrder = Arrays.asList("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12");
 
         // Esta estrutura irá armazenar os dados finais para o gráfico
@@ -232,12 +248,12 @@ public class ProdutoController {
         produtos.forEach(produto -> {
             Map<String, Object> dadosProduto = new HashMap<>();
             dadosProduto.put("label", produto);
-            
+
             List<Integer> vendasMensais = monthOrder.stream()
-                .map(mes -> vendasPorProdutoEMes.getOrDefault(mes, Collections.emptyMap())
-                .getOrDefault(produto, 0))
-                .collect(Collectors.toList());
-            
+                    .map(mes -> vendasPorProdutoEMes.getOrDefault(mes, Collections.emptyMap())
+                            .getOrDefault(produto, 0))
+                    .collect(Collectors.toList());
+
             dadosProduto.put("data", vendasMensais);
             dadosGrafico.add(dadosProduto);
         });

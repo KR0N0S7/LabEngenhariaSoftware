@@ -51,16 +51,20 @@ public class CarrinhoCompraController {
         Long clienteId = (Long) session.getAttribute("clienteId");
         return clienteService.obterCliente(clienteId);
     }
-    
+
     public CarrinhoCompra criarCarrinho(Long id) {
         CarrinhoCompra carrinho = new CarrinhoCompra();
         return carrinhoCompraService.salvarCarrinhoCompra(carrinho);
     }
 
     @RequestMapping(value = "/detalhar", method = RequestMethod.GET)
-    public ModelAndView detalharCarrinho(HttpSession session, @RequestParam(required = false) Long id) throws Exception {
+    public ModelAndView detalharCarrinho(HttpSession session, @RequestParam(required = false) Long id)
+            throws Exception {
         ModelAndView mv;
-        if(session.getAttribute("id") == null) {
+
+        logger.debug("Sessionnnnnnnnn !!!!!!::::: {}", session.getAttribute("id"));
+
+        if (session.getAttribute("id") == null) {
             mv = new ModelAndView("redirect:/cliente/login");
         } else {
             mv = new ModelAndView("carrinho/index");
@@ -71,49 +75,52 @@ public class CarrinhoCompraController {
             logger.debug("Carrinho ativo aqui !!!!!!::::: {}", carrinho.isAtivo());
 
             mv.addObject("carrinho", carrinho);
-            if(carrinho.getItemProduto() != null) {
+            if (carrinho.getItemProduto() != null) {
                 mv.addObject("total", carrinho.getValorTotal());
                 mv.addObject("lista", listaProdutos);
             } else {
-                //mv.addObject("message", "Carrinho vazio!");
+                // mv.addObject("message", "Carrinho vazio!");
             }
         }
         return mv;
-        
+
     }
 
     @RequestMapping(value = "/adicionar", method = RequestMethod.POST)
-    public ModelAndView adicionarItemNoCarrinho(HttpSession session, 
-        @RequestParam (value ="produtoId") Long produtoId, 
-        @RequestParam (value ="quantidade") Integer quantity) throws Exception {
+    public ModelAndView adicionarItemNoCarrinho(HttpSession session,
+            @RequestParam(value = "produtoId") Long produtoId,
+            @RequestParam(value = "quantidade") Integer quantity) throws Exception {
 
         Long clienteId = (Long) session.getAttribute("id");
+
         Cliente cliente = clienteService.obterCliente(clienteId);
         Produto produto = produtoService.obterProduto(produtoId);
         ModelAndView modelAndView;
 
         CarrinhoCompra carrinho = carrinhoCompraService.getOrCreateCart(cliente);
-        
-        if(carrinho.getItemProduto().equals(null)) {
+
+        if (carrinho.getItemProduto().equals(null)) {
             carrinho.setItemProduto(new ArrayList<ItemProduto>());
         }
 
-        
-        if(cliente == null) {
+        if (cliente == null) {
             // Handle unauthenticated user
             modelAndView = new ModelAndView("redirect:/cliente/login");
         } else {
-            modelAndView = new ModelAndView("redirect:/produto/listarProdutos"); 
+            modelAndView = new ModelAndView("redirect:/produto/listarProdutos");
             ItemProduto itemProduto;
             // Create ItemProduto and add to cart.
-            if(carrinho.getItemProduto().stream().anyMatch(item -> item.getProduto().getId().equals(produto.getId()))) {
-                if(produto.isStockAvailable(1)) {
+            if (carrinho.getItemProduto().stream()
+                    .anyMatch(item -> item.getProduto().getId().equals(produto.getId()))) {
+                if (produto.isStockAvailable(1)) {
                     // Sum products that already has in cart
-                    int index = carrinho.getItemProduto().indexOf(carrinho.getItemProduto().stream().filter(item -> item.getProduto().getNome().equals(produto.getNome())).findFirst().get());
+                    int index = carrinho.getItemProduto().indexOf(carrinho.getItemProduto().stream()
+                            .filter(item -> item.getProduto().getNome().equals(produto.getNome())).findFirst().get());
                     itemProduto = carrinho.getItemProduto().get(index);
                     itemProduto.setQuantidade(itemProduto.getQuantidade() + quantity);
                     itemProduto.setPreco(produto.getPreco(), itemProduto.getQuantidade());
-                    logger.debug("Número de {}::::: {}", itemProduto.getProduto().getNome(),itemProduto.getQuantidade());
+                    logger.debug("Número de {}::::: {}", itemProduto.getProduto().getNome(),
+                            itemProduto.getQuantidade());
                     itemProdutoService.salvaItemProduto(itemProduto);
 
                     produto.decreaseEstoque(quantity);
@@ -122,17 +129,18 @@ public class CarrinhoCompraController {
                     modelAndView.addObject("message", "Estoque insuficiente!");
                 }
             } else {
-                if(produto.isStockAvailable(quantity)) {
+                if (produto.isStockAvailable(quantity)) {
                     itemProduto = itemProdutoService.salvaItemProduto(new ItemProduto());
-                        itemProduto.setCarrinhoCompra(carrinho);
-                        itemProduto.setPreco(produto.getPreco(), quantity);
-                        itemProduto.setProduto(produto);
-                        itemProduto.setQuantidade(quantity);
+                    itemProduto.setCarrinhoCompra(carrinho);
+                    itemProduto.setPreco(produto.getPreco(), quantity);
+                    itemProduto.setProduto(produto);
+                    itemProduto.setQuantidade(quantity);
                     carrinho.getItemProduto().add(itemProduto);
                     // Handle other necessary properties of itemProduto...
                     logger.debug("Produto::::: {}", produto.getNome());
                     logger.debug("Lista de ItemProduto::::: {}", carrinho.getItemProduto().toString());
-                    //carrinho.addItemProduto(itemProduto); //a entidade é a responsável por verificar disponibilidade
+                    // carrinho.addItemProduto(itemProduto); //a entidade é a responsável por
+                    // verificar disponibilidade
 
                     logger.debug("Valor total antes::::: {}", carrinho.getValorTotal());
                     Double valorTotal = carrinho.calcularValorTotal(carrinho);
@@ -141,7 +149,7 @@ public class CarrinhoCompraController {
                     logger.debug("Valor total depois::::: {}", valorTotal);
                     // If you want to redirect to the cart view page
                     // modelAndView = new ModelAndView("redirect:/carrinho");
-                    
+
                     modelAndView.addObject("message", "Produto adicionado com sucesso!");
                     modelAndView.addObject("carrinho", carrinho);
                     modelAndView.addObject("id", session.getAttribute("id"));
@@ -152,30 +160,33 @@ public class CarrinhoCompraController {
                     modelAndView.addObject("message", "Produto não disponível no estoque!");
                 }
             }
-            
-            Integer numeroProdutos = carrinho.getItemProduto().stream()
-                .mapToInt(ItemProduto::getQuantidade)
-                .sum();
-            modelAndView.addObject("numeroProdutos", numeroProdutos); 
 
-            logger.debug("Número de produtos::::: {}", numeroProdutos);  
+            Integer numeroProdutos = carrinho.getItemProduto().stream()
+                    .mapToInt(ItemProduto::getQuantidade)
+                    .sum();
+            modelAndView.addObject("numeroProdutos", numeroProdutos);
+
+            logger.debug("Número de produtos::::: {}", numeroProdutos);
         }
         return modelAndView;
     }
 
     @RequestMapping("/remover")
-    public ModelAndView removerItemDoCarrinho(@RequestParam("id") Long itemId, RedirectAttributes redirectAttributes) throws Exception {
-        ModelAndView mv = new ModelAndView("redirect:/carrinho/detalhar");;
+    public ModelAndView removerItemDoCarrinho(@RequestParam("id") Long itemId, RedirectAttributes redirectAttributes)
+            throws Exception {
+        ModelAndView mv = new ModelAndView("redirect:/carrinho/detalhar");
+        ;
         Long carrinhoId = itemProdutoService.obterItemProduto(itemId).getCarrinhoCompra().getId();
         CarrinhoCompra carrinho = carrinhoCompraService.obterCarrinhoCompra(carrinhoId);
-        ItemProduto item = itemProdutoService.obterItemProduto(itemId); // This method should throw an EntityNotFoundException if not found
-        
-        logger.debug("Id do produto::::: {}", itemId);  
+        ItemProduto item = itemProdutoService.obterItemProduto(itemId); // This method should throw an
+                                                                        // EntityNotFoundException if not found
+
+        logger.debug("Id do produto::::: {}", itemId);
         logger.debug("Id do carrinho::::: {}", carrinhoId);
-        
-        if(carrinho.getItemProduto().size() >= 1) {
-            
-            Produto produto = item.getProduto(); 
+
+        if (carrinho.getItemProduto().size() >= 1) {
+
+            Produto produto = item.getProduto();
             produto.increaseEstoque(item.getQuantidade()); // This method should update the estoque and save the entity
             produtoService.salvarProduto(produto);
 
@@ -184,26 +195,29 @@ public class CarrinhoCompraController {
             carrinho.setValorTotal(carrinho.calcularValorTotal(carrinho));
 
             try {
-                carrinhoCompraService.salvarCarrinhoCompra(carrinho);   
-                redirectAttributes.addFlashAttribute("mensagem", "Produto removido com sucesso!"); 
-                logger.debug("Remoção de produto::::::::::::::::::::::::::::::");      
+                carrinhoCompraService.salvarCarrinhoCompra(carrinho);
+                redirectAttributes.addFlashAttribute("mensagem", "Produto removido com sucesso!");
+                logger.debug("Remoção de produto::::::::::::::::::::::::::::::");
             } catch (Exception e) {
                 // Log error and redirect to an error page or handle accordingly
                 redirectAttributes.addFlashAttribute("mensagem", "Erro ao remover produto!");
-                logger.error("Error removing item from cart", e);                
+                logger.error("Error removing item from cart", e);
             }
-        } /*else {
-            
-            Produto produto = item.getProduto(); 
-            produto.increaseEstoque(item.getQuantidade()); // This method should update the estoque and save the entity
-            produtoService.salvarProduto(produto);
-
-            itemProdutoService.deletarItemProduto(itemId);
-
-            carrinhoCompraService.excluirCarrinhoCompra(carrinhoId);
-            redirectAttributes.addFlashAttribute("mensagem", "Carrinho vazio!"); 
-            logger.debug("Exclusão de carrinho::::::::::::::::::::::::::::::");
-        }*/
+        } /*
+           * else {
+           * 
+           * Produto produto = item.getProduto();
+           * produto.increaseEstoque(item.getQuantidade()); // This method should update
+           * the estoque and save the entity
+           * produtoService.salvarProduto(produto);
+           * 
+           * itemProdutoService.deletarItemProduto(itemId);
+           * 
+           * carrinhoCompraService.excluirCarrinhoCompra(carrinhoId);
+           * redirectAttributes.addFlashAttribute("mensagem", "Carrinho vazio!");
+           * logger.debug("Exclusão de carrinho::::::::::::::::::::::::::::::");
+           * }
+           */
 
         return mv;
     }
@@ -217,14 +231,15 @@ public class CarrinhoCompraController {
 
     @RequestMapping("/aumentar")
     @ResponseBody
-    public ResponseEntity<Map<String, Object>> aumentarQuantidade(@RequestParam Long itemProdutoId, HttpSession session) {
+    public ResponseEntity<Map<String, Object>> aumentarQuantidade(@RequestParam Long itemProdutoId,
+            HttpSession session) {
         Map<String, Object> response = new HashMap<>();
         try {
             ItemProduto itemProduto = itemProdutoService.obterItemProduto(itemProdutoId);
             Produto produto = itemProduto.getProduto();
             CarrinhoCompra carrinho = itemProduto.getCarrinhoCompra();
 
-            if(produto.getEstoque() == 0) {
+            if (produto.getEstoque() == 0) {
                 response.put("success", false);
                 response.put("message", "Estoque insuficiente!");
             } else {
@@ -246,10 +261,10 @@ public class CarrinhoCompraController {
         return ResponseEntity.ok(response);
     }
 
-
     @RequestMapping("/diminuir")
     @ResponseBody
-    public ResponseEntity<Map<String, Object>> diminuirQuantidade(@RequestParam Long itemProdutoId, HttpSession session) {
+    public ResponseEntity<Map<String, Object>> diminuirQuantidade(@RequestParam Long itemProdutoId,
+            HttpSession session) {
         Map<String, Object> response = new HashMap<>();
         try {
             ItemProduto itemProduto = itemProdutoService.obterItemProduto(itemProdutoId);
@@ -286,6 +301,5 @@ public class CarrinhoCompraController {
         }
         return ResponseEntity.ok(response);
     }
-
 
 }

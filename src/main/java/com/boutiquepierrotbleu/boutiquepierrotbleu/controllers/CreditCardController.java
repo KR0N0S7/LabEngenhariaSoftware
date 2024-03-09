@@ -21,21 +21,21 @@ import com.boutiquepierrotbleu.boutiquepierrotbleu.services.CreditcardService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("cartao") 
+@RequestMapping("cartao")
 public class CreditCardController {
 
-    @Autowired
-    private CreditcardService creditcardService;
+	@Autowired
+	private CreditcardService creditcardService;
 
 	@Autowired
 	private ClienteService clienteService;
 
-    private static final Logger logger = LoggerFactory.getLogger(CreditCardController.class);
+	private static final Logger logger = LoggerFactory.getLogger(CreditCardController.class);
 
-    @RequestMapping(path = "novo")
+	@RequestMapping(path = "novo")
 	public ModelAndView editarCartao(@RequestParam(required = false) Long id, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView("usr/cartao/novo.html");
-		logger.debug("Session id: ", session.getAttribute("id"));
+		logger.debug("Session id: {}", session.getAttribute("id"));
 		Creditcard cartao;
 		if (id == null) {
 			cartao = new Creditcard();
@@ -52,10 +52,10 @@ public class CreditCardController {
 
 		return mv;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST, path = "editar")
-	public ModelAndView cartaoSalvo(Creditcard creditcard, 
-		BindingResult bidingResult, RedirectAttributes redirectAttributes, HttpSession session) throws Exception {
+	public ModelAndView cartaoSalvo(Creditcard creditcard,
+			BindingResult bidingResult, RedirectAttributes redirectAttributes, HttpSession session) throws Exception {
 
 		if (bidingResult.hasErrors()) {
 			ModelAndView mv = new ModelAndView("usr/cartao/novo.html");
@@ -68,7 +68,7 @@ public class CreditCardController {
 			novo = false;
 		}
 		if (!novo) {
-			//mv.addObject("creditcard", new Creditcard());
+			// mv.addObject("creditcard", new Creditcard());
 			Cliente cliente = clienteService.obterCliente((Long) session.getAttribute("id"));
 			creditcard.setCliente(cliente);
 			creditcardService.salvarCreditcard(creditcard);
@@ -81,17 +81,17 @@ public class CreditCardController {
 		return mv;
 	}
 
-    @RequestMapping("/listar")
-    public ModelAndView listarCartaos(HttpSession session) {
-        ModelAndView mv = new ModelAndView("usr/cartao/list.html");
+	@RequestMapping("/listar")
+	public ModelAndView listarCartaos(HttpSession session) {
+		ModelAndView mv = new ModelAndView("usr/cartao/list.html");
 		Long idSession = (Long) session.getAttribute("id");
 		logger.debug("Session id: ", session.getAttribute("id"));
 		mv.addObject("lista", creditcardService.getCartaoByClienteId(idSession));
 		mv.addObject("nome", "Cartões");
 		return mv;
-    }
+	}
 
-    @RequestMapping("/excluir")
+	@RequestMapping("/excluir")
 	public ModelAndView excluirCartao(@RequestParam Long id, RedirectAttributes redirectAttributes) {
 		ModelAndView mv = new ModelAndView("redirect:/usr/cartao/listar");
 		try {
@@ -103,4 +103,3 @@ public class CreditCardController {
 		return mv;
 	}
 }
- 
