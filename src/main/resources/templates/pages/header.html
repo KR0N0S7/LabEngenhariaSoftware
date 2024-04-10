@@ -1,13 +1,15 @@
 
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<!-- <script src="https://cdn.tailwindcss.com"></script> -->
 <div th:replace="pages/head :: head"></div>
-
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <body>
     <header th:fragment="header">
+        <title>Boutique Pierrot Bleu</title>
         <nav>
             <script defer th:src="@{https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js}"></script>
-            <div class="container flex justify-between py-5 bg-gray-dark z-10">
+            <div class="container-fluid flex justify-between p-5 bg-gray-dark z-10">
                 <div>
                     <h2 class="font-bold">
                         <a th:href="@{/}">Boutique Pierrot Bleu</a>

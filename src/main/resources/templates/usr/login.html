@@ -34,7 +34,7 @@
 			<div class="wrap-login100">
 				<form class="login100-form validate-form" th:action="@{/cliente/login/autenticar}" method="post">
 					<span class="login100-form-title p-b-43">
-						Login to continue
+						Faça seu Login
 					</span>
 					
 					
@@ -55,11 +55,11 @@
 						<div class="contact100-form-checkbox">
 							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
 							<label class="label-checkbox100" for="ckb1">
-								Remember me
+								Lembrar
 							</label>
 						</div>
 
-						<div>
+						<div style="display: none;">
 							<a th:href="@{/#}" class="txt1">
 								Esqueceu a senha?
 							</a>
@@ -79,26 +79,21 @@
 						</span>
 					</div>
 
-					<div class="login100-form-social flex-c-m">
+					<div class="login100-form-social flex-c-m" style="display: none;">
 						<a th:href="@{/#}" class="login100-form-social-item flex-c-m bg1 m-r-5">
 							<i class="fa fa-facebook-f" aria-hidden="true"></i>
 						</a>
 
-						<a th:href="@{/#}" class="login100-form-social-item flex-c-m bg2 m-r-5">
+						<a th:href="@{/#}" class="login100-form-social-item flex-c-m bg2 m-r-5" style="display: none;">
 							<i class="fa fa-twitter" aria-hidden="true"></i>
 						</a>
 					</div>
 				</form>
 
-				<img class="login100-more" th:src="@{/images/bg-01.jpg}"> 
-			</img>
+				<img class="login100-more" th:src="@{/images/bg-01.jpg}" style="height: 919px;"> 
 			</div>
 		</div>
 	</div>
-	
-	
-
-	
 	
 <!--===============================================================================================-->
 	<script th:src="@{/vendor/jquery/jquery-3.2.1.min.js}"></script>
