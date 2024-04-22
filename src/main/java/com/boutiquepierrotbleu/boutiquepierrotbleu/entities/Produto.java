@@ -39,7 +39,6 @@ public class Produto {
     @JsonManagedReference
     private ValorCategoria categoria;
 
-
     @OneToMany(mappedBy = "produto")
     @JsonIgnore
     private List<ItemProduto> itemProduto;
@@ -47,6 +46,10 @@ public class Produto {
     @OneToMany(mappedBy = "produto")
     @JsonIgnore
     private List<ItemTroca> itemTrocas;
+
+    @OneToMany(mappedBy = "produto")
+    @JsonIgnore
+    private List<NotasProdutos> notasProdutos;
 
     public List<ItemProduto> getItemProduto() {
         return itemProduto;
@@ -183,7 +186,7 @@ public class Produto {
     public void setTroca(List<ItemTroca> troca) {
         this.itemTrocas = troca;
     }
-    
+
     public boolean isAtivo() {
         return ativo;
     }
@@ -192,13 +195,37 @@ public class Produto {
         this.ativo = ativo;
     }
 
+    public ValorCategoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(ValorCategoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public List<ItemTroca> getItemTrocas() {
+        return itemTrocas;
+    }
+
+    public void setItemTrocas(List<ItemTroca> itemTrocas) {
+        this.itemTrocas = itemTrocas;
+    }
+
+    public List<NotasProdutos> getNotasProdutos() {
+        return notasProdutos;
+    }
+
+    public void setNotasProdutos(List<NotasProdutos> notasProdutos) {
+        this.notasProdutos = notasProdutos;
+    }
+
     // New methods to manage stock
     public boolean isStockAvailable(int requiredQuantity) {
         return this.estoque >= requiredQuantity;
     }
 
     public void reserveStock(int quantity) {
-        if(!isStockAvailable(quantity)) {
+        if (!isStockAvailable(quantity)) {
             throw new InsufficientStockException("Estoque insuficiente!");
         }
         this.estoque -= quantity;

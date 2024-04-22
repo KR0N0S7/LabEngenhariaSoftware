@@ -11,10 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -57,7 +54,7 @@ public class CarrinhoCompraController {
         return carrinhoCompraService.salvarCarrinhoCompra(carrinho);
     }
 
-    @RequestMapping(value = "/detalhar", method = RequestMethod.GET)
+    @GetMapping("/detalhar")
     public ModelAndView detalharCarrinho(HttpSession session, @RequestParam(required = false) Long id)
             throws Exception {
         ModelAndView mv;
@@ -86,9 +83,9 @@ public class CarrinhoCompraController {
 
     }
 
-    @RequestMapping(value = "/adicionar", method = RequestMethod.POST)
+    @PostMapping("/adicionar")
     public ModelAndView adicionarItemNoCarrinho(HttpSession session,
-            @RequestParam(value = "produtoId") Long produtoId,
+            @RequestParam Long produtoId,
             @RequestParam(value = "quantidade") Integer quantity) throws Exception {
 
         Long clienteId = (Long) session.getAttribute("id");

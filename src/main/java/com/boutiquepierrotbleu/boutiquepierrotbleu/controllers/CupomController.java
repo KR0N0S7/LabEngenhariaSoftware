@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cupom;
@@ -27,21 +27,21 @@ public class CupomController {
 
     private static final Logger logger = LoggerFactory.getLogger(CupomController.class);
 
-    @RequestMapping(value = "/criar", method = RequestMethod.GET)
+    @GetMapping("/criar")
     public ModelAndView criarCupom() {
         ModelAndView mv = new ModelAndView("path/to/your/view");
         // Your implementation here
         return mv;
     }
 
-    @RequestMapping(value = "/detalhar", method = RequestMethod.GET)
+    @GetMapping("/detalhar")
     public ModelAndView detalharCupom(Long id) {
         ModelAndView mv = new ModelAndView("path/to/your/view");
         // Your implementation here
         return mv;
     }
 
-    @RequestMapping(value = "/aplicar", method = RequestMethod.GET)
+    @GetMapping("/aplicar")
     public ModelAndView aplicarCupomAUmaCompra(Long id, Long compraId) {
         ModelAndView mv = new ModelAndView("path/to/your/view");
         // Your implementation here
@@ -59,7 +59,7 @@ public class CupomController {
         return mv;
     }
 
-    @RequestMapping(value = "/deletar", method = RequestMethod.GET)
+    @GetMapping("/deletar")
     public ModelAndView deletarCupom(Long id) {
         ModelAndView mv = new ModelAndView("path/to/your/view");
         // Your implementation here

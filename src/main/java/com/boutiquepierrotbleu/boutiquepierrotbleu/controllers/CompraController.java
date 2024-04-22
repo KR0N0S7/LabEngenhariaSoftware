@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -175,7 +174,7 @@ public class CompraController {
         return mv;
     }
 
-    @RequestMapping(value = "/aplicarCupom", method = RequestMethod.POST)
+    @PostMapping("/aplicarCupom")
     @ResponseBody
     public ResponseEntity<?> aplicarCupom(@RequestBody String cupomIdStr, HttpSession session) throws Exception {
         logger.debug("Entrou aqui!!!:::::::::::::::::::::::::::::::::::::::::::::::::::");
@@ -252,7 +251,7 @@ public class CompraController {
         return mv;
     }
 
-    @RequestMapping(value = "/finalizar", method = RequestMethod.POST)
+    @PostMapping("/finalizar")
     public ModelAndView finalizarCompra(HttpSession session) throws Exception {
         ModelAndView mv = new ModelAndView("compra/finalizada");
 
@@ -287,7 +286,7 @@ public class CompraController {
     }
 
     @RequestMapping("/detail")
-    public ModelAndView detalharCompra(@RequestParam("id") Long id, HttpSession session) throws Exception {
+    public ModelAndView detalharCompra(@RequestParam Long id, HttpSession session) throws Exception {
         ModelAndView mv = new ModelAndView("usr/compra/detail");
         Compra compra = compraService.obterCompra(id);
         logger.debug("Status:::::::: {}", compra.getStatus());
@@ -298,7 +297,7 @@ public class CompraController {
     }
 
     @RequestMapping("/recebido")
-    public ModelAndView recebidoCompra(@RequestParam("id") Long id, HttpSession session) throws Exception {
+    public ModelAndView recebidoCompra(@RequestParam Long id, HttpSession session) throws Exception {
         ModelAndView mv = new ModelAndView("usr/compra/detail");
         Compra compra = compraService.obterCompra(id);
         if(compra.getStatus() == Status.EM_TRANSITO) {
@@ -344,12 +343,12 @@ public class CompraController {
     }
 
     @RequestMapping("/detalharAdmin")
-    public ModelAndView detalharCompraAdmin(@RequestParam("id") Long id, HttpSession session) throws Exception {
+    public ModelAndView detalharCompraAdmin(@RequestParam Long id, HttpSession session) throws Exception {
         return respostaDetalhesCompraAdmin(id);
     }
 
     @RequestMapping("/aprovar")
-    public ModelAndView aprovarCompraADM(@RequestParam("id") Long id, HttpSession session) throws Exception {
+    public ModelAndView aprovarCompraADM(@RequestParam Long id, HttpSession session) throws Exception {
         Compra compra = compraService.obterCompra(id);
         if(compra.getStatus() == Status.EM_PROCESSAMENTO) {
             compra.setStatus(Status.APROVADO);
@@ -359,7 +358,7 @@ public class CompraController {
     }
 
     @RequestMapping("/enviar") 
-    public ModelAndView enviarCompraADM(@RequestParam("id") Long id, HttpSession session) throws Exception {
+    public ModelAndView enviarCompraADM(@RequestParam Long id, HttpSession session) throws Exception {
         Compra compra = compraService.obterCompra(id);
         if(compra.getStatus() == Status.APROVADO) {
             compra.setStatus(Status.EM_TRANSITO);
@@ -369,7 +368,7 @@ public class CompraController {
     }
 
     @RequestMapping("/entregue")
-    public ModelAndView entregarCompraADM(@RequestParam("id") Long id, HttpSession session) throws Exception {
+    public ModelAndView entregarCompraADM(@RequestParam Long id, HttpSession session) throws Exception {
         Compra compra = compraService.obterCompra(id);
         compra.setStatus(Status.ENTREGUE);
         compraService.salvarCompra(compra);
@@ -377,7 +376,7 @@ public class CompraController {
     }
 
     @RequestMapping("/cancelar")
-    public ModelAndView cancelarCompraADM(@RequestParam("id") Long id, HttpSession session) throws Exception {
+    public ModelAndView cancelarCompraADM(@RequestParam Long id, HttpSession session) throws Exception {
         Compra compra = compraService.obterCompra(id);
         compra.setStatus(Status.CANCELADO);
         compraService.salvarCompra(compra);
@@ -385,7 +384,7 @@ public class CompraController {
     }
 
     @RequestMapping("/trocar")
-    public ModelAndView trocarCompra(@RequestParam("id") Long id, HttpSession session) throws Exception {
+    public ModelAndView trocarCompra(@RequestParam Long id, HttpSession session) throws Exception {
         Compra compra = compraService.obterCompra(id);
         List<ItemProduto> itens = compra.getItens();
         ModelAndView mv = new ModelAndView("usr/compra/troca");
@@ -450,7 +449,7 @@ public class CompraController {
     }
     
     @RequestMapping("/aceitar")
-    public ModelAndView aceitarTrocaADM(@RequestParam("id") Long id, HttpSession session) throws Exception {
+    public ModelAndView aceitarTrocaADM(@RequestParam Long id, HttpSession session) throws Exception {
         Troca troca = trocaService.obterTroca(id);
         Compra compra = troca.getCompra();
         if(compra.getStatus() == Status.EM_TROCA) {
@@ -474,7 +473,7 @@ public class CompraController {
     }
     
     @RequestMapping("/recusar")
-    public ModelAndView recusarTrocaADM(@RequestParam("id") Long id, HttpSession session) throws Exception {
+    public ModelAndView recusarTrocaADM(@RequestParam Long id, HttpSession session) throws Exception {
         Compra compra = compraService.obterCompra(id);
         if(compra.getStatus() == Status.EM_TROCA) {
             compra.setStatus(Status.REPROVADO);
@@ -484,7 +483,7 @@ public class CompraController {
     }
 
     @RequestMapping("/enviado")
-    public ModelAndView enviadoTroca(@RequestParam("id") Long id, HttpSession session) throws Exception {
+    public ModelAndView enviadoTroca(@RequestParam Long id, HttpSession session) throws Exception {
         Compra compra = compraService.obterCompra(id);
         if(compra.getStatus() == Status.TROCA_AUTORIZADA) {
             logger.debug("Compra status:::::::: {}", compra.getStatus());
@@ -500,7 +499,7 @@ public class CompraController {
     }
 
     @RequestMapping("/recebidoTroca")
-    public ModelAndView recebidoTrocaADM(@RequestParam("id") Long id, HttpSession session) throws Exception {
+    public ModelAndView recebidoTrocaADM(@RequestParam Long id, HttpSession session) throws Exception {
         Troca troca = trocaService.obterTroca(id);
         Cliente cliente =  troca.getCliente();
         

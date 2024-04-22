@@ -21,31 +21,49 @@ public class ValorCategoria {
     @OneToMany(mappedBy = "categoria")
     @JsonBackReference
     private List<Produto> produto;
-    
+
+    @OneToMany(mappedBy = "categoria")
+    @JsonBackReference
+    private List<NotasProdutos> notasProdutos;
+
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getCategoria() {
         return categoria;
     }
+
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
+
     public Float getPorcentagem() {
         return porcentagem;
     }
+
     public void setPorcentagem(Float porcentagem) {
         this.porcentagem = porcentagem;
     }
+
     public List<Produto> getProduto() {
         return produto;
     }
+
     public void setProduto(List<Produto> produto) {
         this.produto = produto;
     }
 
-    
+    public List<NotasProdutos> getNotasProdutos() {
+        return notasProdutos;
+    }
+
+    public void setNotasProdutos(List<NotasProdutos> notasProdutos) {
+        this.notasProdutos = notasProdutos;
+    }
+
 }

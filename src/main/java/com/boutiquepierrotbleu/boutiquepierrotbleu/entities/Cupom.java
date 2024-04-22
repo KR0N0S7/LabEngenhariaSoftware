@@ -69,7 +69,7 @@ public class Cupom {
     public boolean isValid() {
         return dataValidade.after(new Date()) && (usoLimite == null || usoContador < usoLimite);
     }
-    
+
     public Double getValor() {
         return valor;
     }
@@ -81,7 +81,7 @@ public class Cupom {
     public Integer getUsoLimite() {
         return usoLimite;
     }
-    
+
     public void setUsoLimite(Integer usoLimite) {
         this.usoLimite = usoLimite;
     }
@@ -97,7 +97,7 @@ public class Cupom {
     public Cliente getCliente() {
         return cliente;
     }
-    
+
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
@@ -117,7 +117,7 @@ public class Cupom {
     public void setTroca(Troca troca) {
         this.troca = troca;
     }
-    
+
     public Double aplicarDesconto(Double valorOriginal) {
         if (isValid()) {
             if ("PERCENTAGE".equals(tipo)) {
@@ -132,8 +132,8 @@ public class Cupom {
     public Cupom gerarCupom(Cliente cliente, Compra compra, String tipo, Double valor) {
         // Logic to generate a unique coupon code
         this.codigo = UUID.randomUUID().toString();
-        this.setCliente(cliente);  // assuming a bidirectional relationship
-        this.setCompra(compra);    // assuming a bidirectional relationship
+        this.setCliente(cliente); // assuming a bidirectional relationship
+        this.setCompra(compra); // assuming a bidirectional relationship
         this.setUsoContador(0);
         this.setUsoLimite(1);
         this.setTipo(tipo);
@@ -142,5 +142,15 @@ public class Cupom {
         return this;
     }
 
-    
+    public Cupom gerarCupomAniversario(Cliente cliente, Double valor) {
+        // Logic to generate a unique coupon code
+        this.codigo = UUID.randomUUID().toString();
+        this.setCliente(cliente); // assuming a bidirectional relationship
+        this.setUsoContador(0);
+        this.setUsoLimite(1);
+        this.setTipo("Aniversário");
+        this.setValor(valor);
+
+        return this;
+    }
 }

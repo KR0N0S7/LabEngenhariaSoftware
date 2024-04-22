@@ -23,6 +23,7 @@ public class Endereco {
     private String rua;
     private String complemento;
     private String bairro;
+    private Integer numero;
     private String cidade;
     private String estado;
     private String cep;
@@ -114,6 +115,14 @@ public class Endereco {
 
     public void setCompra(List<Compra> compra) {
         this.compra = compra;
+    }
+
+    public Integer getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Integer numero) {
+        this.numero = numero;
     }
 
 }

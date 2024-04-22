@@ -54,4 +54,9 @@ public class ProdutoService {
         produto.setAtivo(!produto.isAtivo());  // Toggle the ativo status
         produtoRepository.save(produto);
     }
+
+    // public List<Produto> listarProdutosAPartirDeUmaCategoria() {
+    //     // TODO Auto-generated method stub
+    //     return produtoRepository.listarProdutosAPartirDeUmaCategoria();
+    // }
 }

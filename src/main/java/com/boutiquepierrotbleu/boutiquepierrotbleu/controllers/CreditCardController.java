@@ -7,8 +7,8 @@ import org.springframework.boot.actuate.autoconfigure.observation.ObservationPro
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -53,7 +53,7 @@ public class CreditCardController {
 		return mv;
 	}
 
-	@RequestMapping(method = RequestMethod.POST, path = "editar")
+	@PostMapping("editar")
 	public ModelAndView cartaoSalvo(Creditcard creditcard,
 			BindingResult bidingResult, RedirectAttributes redirectAttributes, HttpSession session) throws Exception {
 

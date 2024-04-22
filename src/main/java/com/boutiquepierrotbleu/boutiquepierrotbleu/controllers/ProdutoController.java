@@ -22,7 +22,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -93,7 +92,7 @@ public class ProdutoController {
         return mv;
     }
 
-    @RequestMapping(value = "/detalhar", method = RequestMethod.GET)
+    @GetMapping("/detalhar")
     public ModelAndView detalharProduto(Long id) {
         ModelAndView mv = new ModelAndView("path/to/your/view");
         // Your implementation here
@@ -121,7 +120,7 @@ public class ProdutoController {
         return mv;
     }
 
-    @RequestMapping(method = RequestMethod.POST, path = "editar")
+    @PostMapping("editar")
     public ModelAndView produtoSalvo(Produto produto, BindingResult bidingResult,
             RedirectAttributes redirectAttributes) {
         if (bidingResult.hasErrors()) {
@@ -156,7 +155,7 @@ public class ProdutoController {
         return mv;
     }
 
-    @RequestMapping(value = "estoque", method = RequestMethod.GET)
+    @GetMapping("estoque")
     public ModelAndView atualizarEstoqueProduto(@RequestParam(required = false) Long id) {
         ModelAndView mv = new ModelAndView("adm/produto/estoque");
 
@@ -177,9 +176,9 @@ public class ProdutoController {
         return mv;
     }
 
-    @RequestMapping(value = "atualizar", method = RequestMethod.POST)
-    public ModelAndView reservarEstoqueDeProduto(@RequestParam("id") Long id,
-            @RequestParam("quantidade") Integer quantidade) {
+    @PostMapping("atualizar")
+    public ModelAndView reservarEstoqueDeProduto(@RequestParam Long id,
+            @RequestParam Integer quantidade) {
         ModelAndView mv = new ModelAndView("adm/produto/list");
         Produto produto;
         try {
@@ -197,14 +196,14 @@ public class ProdutoController {
         return mv;
     }
 
-    @RequestMapping(value = "/deletar", method = RequestMethod.GET)
+    @GetMapping("/deletar")
     public ModelAndView deletarProduto(Long id) {
         ModelAndView mv = new ModelAndView("path/to/your/view");
         // Your implementation here
         return mv;
     }
 
-    @RequestMapping(value = "/liberar", method = RequestMethod.GET)
+    @GetMapping("/liberar")
     public ModelAndView liberarEstoqueDeProduto(Long id, Integer quantity) {
         ModelAndView mv = new ModelAndView("path/to/your/view");
         // Your implementation here
@@ -212,7 +211,7 @@ public class ProdutoController {
     }
 
     @PostMapping("/updateAtivo")
-    public ModelAndView updateAtivoStatus(@RequestParam("produtoId") Long produtoId, RedirectAttributes attributes) {
+    public ModelAndView updateAtivoStatus(@RequestParam Long produtoId, RedirectAttributes attributes) {
         ModelAndView mv = new ModelAndView("redirect:/produto/list");
         produtoService.toggleAtivoStatusById(produtoId);
         attributes.addFlashAttribute("message", "Status atualizado com sucesso!");
@@ -264,6 +263,14 @@ public class ProdutoController {
 
         // Nome do template Thymeleaf para exibir o gráfico
         return "adm/main/linechart";
+    }
+
+    @RequestMapping("/camisa")
+    public ModelAndView categoriaCamisa() {
+        ModelAndView mv = new ModelAndView("produto/camisa");
+        // List<Produto> produtos =
+        // produtoService.listarProdutosAPartirDeUmaCategoria();
+        return mv;
     }
 
 }

@@ -51,7 +51,7 @@ public class CupomService {
 
         // Save the coupon in the database
         cupomRepository.save(novoCupom);
-        
+
         return novoCupom;
     }
 
@@ -66,23 +66,23 @@ public class CupomService {
     public boolean validateCupom(String cupomCodigo) {
         // Check if the cupom with the provided code exists
         Optional<Cupom> existingCupom = cupomRepository.findByCodigo(cupomCodigo);
-        
+
         // If the cupom does not exist, return false
-        if(existingCupom.isEmpty()) {
+        if (existingCupom.isEmpty()) {
             return false;
         }
-        
+
         Cupom cupom = existingCupom.get();
-        
+
         // Additional validation logic here.
         // For example, check if the cupom is not expired or has not been used, etc.
         // Check if the coupon is expired
-        if(cupom.getDataValidade().before(Date.valueOf(LocalDate.now()))) {
+        if (cupom.getDataValidade().before(Date.valueOf(LocalDate.now()))) {
             return false;
         }
 
         // Check if the coupon has been used too many times
-        if(cupom.getUsoContador() >= cupom.getUsoLimite()) {
+        if (cupom.getUsoContador() >= cupom.getUsoLimite()) {
             return false;
         }
 
@@ -96,6 +96,16 @@ public class CupomService {
 
     public double getDiscountAmount(String couponCode) {
         return cupomRepository.findByCodigo(couponCode).get().getValor();
+    }
+
+    public Cupom criarCupomParaClienteAniversariante(Cliente cliente, Double porcentagem) {
+        Cupom novoCupom = new Cupom();
+        novoCupom.gerarCupomAniversario(cliente, porcentagem);
+
+        // Save the coupon in the database
+        cupomRepository.save(novoCupom);
+
+        return novoCupom;
     }
 
 }

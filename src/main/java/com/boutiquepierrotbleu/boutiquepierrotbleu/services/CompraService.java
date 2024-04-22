@@ -49,7 +49,7 @@ public class CompraService {
     
         return compras.stream()
                       .collect(Collectors.toMap(
-                          compra -> String.format("%02d", (Integer) compra.get("mes")), // Garante que o mês seja formatado como "01", "02", etc.
+                          compra -> "%02d".formatted((Integer) compra.get("mes")), // Garante que o mês seja formatado como "01", "02", etc.
                           compra -> ((Number) compra.get("total")).longValue(), // Valor do mapa: total, convertido para Long
                           (oldValue, newValue) -> oldValue // Em caso de chaves duplicadas, mantenha o valor antigo
                       ));
