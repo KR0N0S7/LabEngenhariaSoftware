@@ -6,6 +6,17 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+  mail:
+    host: smtp.gmail.com # Example if using Gmail
+    port: 587
+    username: boutiquepierrotbleu@gmail.com
+    password: Pierrot753
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
 logging:
   level:

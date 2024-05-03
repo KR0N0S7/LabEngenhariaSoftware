@@ -75,7 +75,7 @@ public class ClienteService {
         return cliente.get();
     }
 
-    @Scheduled(cron = "0 53 2 * * *") // Executa à meia-noite todos os dias
+    @Scheduled(cron = "0 4 19 * * *") // Executa à 0 sec 0 min 0 h (* * *) todos os dias
     public void verificarAniversariosEmitirCupons() {
         LocalDate hoje = LocalDate.now();
 

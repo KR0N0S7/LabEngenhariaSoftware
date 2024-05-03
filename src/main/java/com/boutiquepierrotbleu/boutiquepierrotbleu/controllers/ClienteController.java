@@ -1,10 +1,13 @@
 package com.boutiquepierrotbleu.boutiquepierrotbleu.controllers;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.aspectj.weaver.ast.Not;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +26,7 @@ import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Endereco;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.ItemProduto;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.NotasProdutos;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Produto;
+import com.boutiquepierrotbleu.boutiquepierrotbleu.integrations.JsonUtil;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.integrations.RecomendaProduto;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.repositories.criteriaFilter.ClienteRepositoryImpl;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.ClienteService;
@@ -31,8 +35,12 @@ import com.boutiquepierrotbleu.boutiquepierrotbleu.services.EnderecoService;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.NotasProdutosService;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.ProdutoService;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.wrapper.ClienteSearchWrapper;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.http.HttpSession;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -122,12 +130,41 @@ public class ClienteController {
                 Cliente cliente = clienteService.autenticarCliente(email, senha);
                 session.setAttribute("id", cliente.getId());
                 session.setAttribute("nome", cliente.getNomeCompleto());
-                List<NotasProdutos> notas = notasProdutosService.listarNotasProdutos();
-                recomendaProduto.sendNotasProduto(notas);
+                List<NotasProdutos> notasGlobais = notasProdutosService.listarNotasProdutos();
+                Long clienteId = cliente.getId();
+                List<NotasProdutos> notasClienteLogin = notasProdutosService.listarNotasProdutosPorCliente(clienteId);
 
-                // implementar retorno para pegar as recomendações
-                // List<Produto> recomendacoes = recomendaProduto.getRecomendacoes();
-                // mv.addObject("recomendacoes", recomendacoes);
+                System.out.println("Notas ########: " + notasGlobais.size());
+                System.out.println("Notas do usuriooooooo ########: " + notasClienteLogin.size());
+
+                Mono<String> recomendacoes = recomendaProduto.sendNotasProduto(notasGlobais, notasClienteLogin);
+
+                recomendacoes.subscribe(
+                        data -> {
+                            // Here, 'data' is the result of the Mono once it completes
+                            try {
+                                List<String> lista = new ArrayList<>();
+                                lista = JsonUtil.parseJsonToNomeProdutoLista(data);
+                                List<Produto> listaProdutosRecomendados = produtoService
+                                        .listarProdutosAPartirDeUmaListaDeNomes(lista);
+                                session.setAttribute("recomendacoes", listaProdutosRecomendados); // Set to session
+                                System.out.println("Recommendations saved in session.");
+                            } catch (IOException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            }
+
+                        },
+                        error -> {
+                            // Handle errors here
+                            System.err.println("Error fetching recommendations: " + error.getMessage());
+                        });
+
+                List<Produto> listaProdutosRecomendados = session.getAttribute("recomendacoes") != null
+                        ? (List<Produto>) session.getAttribute("recomendacoes")
+                        : new ArrayList<>();
+
+                // mv.addObject("recomendacoes", listaProdutosRecomendados);
                 mv.addObject("id", session.getAttribute("id"));
                 mv.addObject("nome", session.getAttribute("nome"));
             } catch (Exception e) {
@@ -135,6 +172,17 @@ public class ClienteController {
             }
         }
         return mv;
+    }
+
+    private List<Integer> parseRecommendations(String jsonString) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.readValue(jsonString, new TypeReference<List<Integer>>() {
+            });
+        } catch (IOException e) {
+            // Log error or throw an exception
+            return Collections.emptyList();
+        }
     }
 
     @RequestMapping("cadastro")
@@ -333,6 +381,23 @@ public class ClienteController {
         mv.addObject("lista", clientes);
 
         logger.debug("Clients filtered by criteria: {}", clientes);
+        return mv;
+    }
+
+    @RequestMapping("/teste")
+    public ModelAndView testeClients(HttpSession session) {
+
+        ModelAndView mv = new ModelAndView("pages/teste");
+
+        List<Produto> listaProdutosRecomendados = session.getAttribute("recomendacoes") != null
+                ? (List<Produto>) session.getAttribute("recomendacoes")
+                : new ArrayList<>();
+
+        for (Produto pro : listaProdutosRecomendados) {
+            System.out.println("Produto: " + pro.getNome());
+        }
+
+        mv.addObject("lista", listaProdutosRecomendados);
         return mv;
     }
 }

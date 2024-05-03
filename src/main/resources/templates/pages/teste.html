@@ -1,55 +1,46 @@
-
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <link rel="stylesheet" href="../../static/css/style.css">
-</head>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{usr/layout.html}">
+<meta charset="UTF-8">
+<div layout:fragment="content">
+    <div class="alert alert-primary" th:if="${#lists.isEmpty(lista)}">
+        Nenhum produto recomendado.
+    </div>
+    <div th:if="${mensagem}" class="alert alert-success" role="alert">
+        <p th:text="${mensagem}"></p>
+    </div>
+    <div th:if="${not #lists.isEmpty(lista)}">
+        
+
+        <table id="tabelaproduto" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    
+                    <th>Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="produto : ${lista}">
+                    <td th:text="${produto.nome}"></td>
+                    
+                                     
+                    <td>
+                        <a class="btn btn-primary btn-sm" th:href="@{/produto/novo(id=${produto.id})}">Editar</a>
+                        <a class="btn btn-primary btn-sm ml-3" th:href="@{/produto/excluir(id=${produto.id})}" 
+                           onclick="return confirm('Você realmente deseja excluir esse produto?')">Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</html>
+
+<div th:replace="pages/head :: head"></div>
 <body>
-    
-        <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js"></script>
-        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-     
-      
-
-        <nav>
-            <div class="container flex justify-between py-5 bg-gray-dark z-10">
-                <div>
-                    <h2 class="font-bold">
-                        <a href="#">Boutique Pierrot Bleu</a>
-                    </h2>
-                </div>
-                <ol class="flex">
-                    <li class="mx-3">
-                        <a href="#" class="transition duration-500 hover:bg-purple rounded-xl px-3 py-2">Novidades</a>
-                    </li>
-                    <li class="mx-3">
-                        <a href="#" class="transition duration-500 hover:bg-purple rounded-xl px-3 py-2">Masculino</a>
-                    </li>
-                    <li class="mx-3">
-                        <a href="#"class="transition duration-500 hover:bg-purple rounded-xl px-3 py-2">Feminino</a>
-                    </li>
-                </ol>
-
-                <div>
-                    <ion-icon class="mx-3" name="search-outline"></ion-icon>
-                    <div x-data="{ isOpen: false }">
-                        <button @click="isOpen = !isOpen">
-                            <ion-icon class="mx-3" name="cart-outline">
-                        </button>
-                        <div x-show="isOpen">
-
-                            <h1 class="bg-bl">
-                                testeue
-                            </h1>
-                        </div>
-                    </div>
-                        
-                    </ion-icon>
-                    <a href=""><ion-icon class="mx-3" name="people-outline"></ion-icon></a>
-                </div>
-            </div> 
-        </nav>
-    </header>
+	<div th:replace="pages/footer :: footer"></div>
 </body>
 
 

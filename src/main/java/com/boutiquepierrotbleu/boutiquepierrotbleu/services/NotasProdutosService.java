@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cliente;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.NotasProdutos;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.repositories.NotasProdutosRepository;
 
@@ -32,5 +33,9 @@ public class NotasProdutosService {
 
     public void deletarNotaProduto(Long id) {
         notasProdutosRepository.deleteById(id);
+    }
+
+    public List<NotasProdutos> listarNotasProdutosPorCliente(Long clienteId) {
+        return notasProdutosRepository.findByClienteId(clienteId);
     }
 }

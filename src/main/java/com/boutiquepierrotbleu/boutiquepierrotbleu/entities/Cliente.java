@@ -71,6 +71,10 @@ public class Cliente {
     @JsonIgnore
     private List<Mensagens> mensagens;
 
+    @OneToMany(mappedBy = "cliente")
+    @JsonIgnore
+    private List<AlertaEstoqueProduto> alertaEstoqueProduto;
+
     private boolean ativo = true;
 
     public Long getId() {
@@ -220,4 +224,13 @@ public class Cliente {
     public void setMensagens(List<Mensagens> mensagens) {
         this.mensagens = mensagens;
     }
+
+    public List<AlertaEstoqueProduto> getAlertaEstoqueProduto() {
+        return alertaEstoqueProduto;
+    }
+
+    public void setAlertaEstoqueProduto(List<AlertaEstoqueProduto> alertaEstoqueProduto) {
+        this.alertaEstoqueProduto = alertaEstoqueProduto;
+    }
+
 }

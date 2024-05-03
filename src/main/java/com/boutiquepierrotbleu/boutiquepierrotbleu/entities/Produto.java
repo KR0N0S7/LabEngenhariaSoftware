@@ -2,6 +2,8 @@ package com.boutiquepierrotbleu.boutiquepierrotbleu.entities;
 
 import java.util.List;
 
+import org.springframework.web.servlet.ModelAndView;
+
 import com.boutiquepierrotbleu.boutiquepierrotbleu.exceptions.InsufficientStockException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -33,6 +35,7 @@ public class Produto {
     private String estilo;
     private Integer estoque;
     private boolean ativo = true;
+    private boolean aviseMe = false;
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")
@@ -50,6 +53,10 @@ public class Produto {
     @OneToMany(mappedBy = "produto")
     @JsonIgnore
     private List<NotasProdutos> notasProdutos;
+
+    @OneToMany(mappedBy = "produto")
+    @JsonIgnore
+    private List<AlertaEstoqueProduto> alertaEstoqueProduto;
 
     public List<ItemProduto> getItemProduto() {
         return itemProduto;
@@ -224,6 +231,22 @@ public class Produto {
         return this.estoque >= requiredQuantity;
     }
 
+    public boolean isAviseMe() {
+        return aviseMe;
+    }
+
+    public void setAviseMe(boolean aviseMe) {
+        this.aviseMe = aviseMe;
+    }
+
+    public List<AlertaEstoqueProduto> getAlertaEstoqueProduto() {
+        return alertaEstoqueProduto;
+    }
+
+    public void setAlertaEstoqueProduto(List<AlertaEstoqueProduto> alertaEstoqueProduto) {
+        this.alertaEstoqueProduto = alertaEstoqueProduto;
+    }
+
     public void reserveStock(int quantity) {
         if (!isStockAvailable(quantity)) {
             throw new InsufficientStockException("Estoque insuficiente!");
@@ -238,4 +261,5 @@ public class Produto {
     public void decreaseEstoque(int quantity) {
         this.estoque -= quantity;
     }
+
 }
