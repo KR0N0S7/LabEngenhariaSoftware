@@ -1,5 +1,7 @@
 package com.boutiquepierrotbleu.boutiquepierrotbleu.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,12 +20,19 @@ public class Creditcard {
     private String codigoSeguranca;
     private String bandeira;
     private String cpfTitular;
+    private String apelidoCartao;
+    private Double valorParcela;
+
+    @ManyToOne
+    @JoinColumn(name = "compra_id")
+    private Compra compra;
 
     //private String paymentGatewayId; // New attribute to represent payment gateway ID
     //private String transactionId; // New attribute to represent transaction ID
 
     @ManyToOne
     @JoinColumn(name = "cliente_id")
+    @JsonBackReference
     private Cliente cliente;
 
     public Long getId() {
@@ -88,6 +97,31 @@ public class Creditcard {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public String getApelidoCartao() {
+        return apelidoCartao;
+    }
+
+    public void setApelidoCartao(String apelidoCartao) {
+        this.apelidoCartao = apelidoCartao;
+    }
+
+    public Compra getCompra() {
+        return compra;
+    }
+
+    public void setCompra(Compra compra) {
+        this.compra = compra;
+    }
+
+
+    public Double getValorParcela() {
+        return valorParcela;
+    }
+
+    public void setValorParcela(Double valorParcela) {
+        this.valorParcela = valorParcela;
     }
 
     // Methods to interact with the payment gateway API

@@ -20,8 +20,8 @@ public class Compra {
     private Long id;
     private String data;
     private String hora;
-    private String status;
-    private String formaPagamento;
+    private Status status;
+    private Pagamento formaPagamento;
     private Double valorTotal;
     private Double valorFrete;
     private Double valorDesconto;
@@ -29,6 +29,14 @@ public class Compra {
     private String observacao;
     private String numeroCompra;
     private Integer numeroParcelas;
+    
+    private Long carrinhoId;
+
+    @OneToMany(mappedBy = "compra")
+    private List<Creditcard> cartao;
+
+    @OneToMany(mappedBy = "compra")
+    private List<Cupom> cupons;
 
     @ManyToOne
     @JoinColumn(name = "endereco_id")
@@ -40,6 +48,12 @@ public class Compra {
 
     @OneToMany(mappedBy = "compra")
     private List<ItemProduto> itens;
+
+    @OneToMany(mappedBy = "compra")
+    private List<Troca> trocas;
+
+    @OneToMany(mappedBy = "compra")
+    private List<ItemTroca> itemTroca;
 
     public Long getId() {
         return id;
@@ -65,19 +79,19 @@ public class Compra {
         this.hora = hora;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
-    public String getFormaPagamento() {
+    public Pagamento getFormaPagamento() {
         return formaPagamento;
     }
 
-    public void setFormaPagamento(String formaPagamento) {
+    public void setFormaPagamento(Pagamento formaPagamento) {
         this.formaPagamento = formaPagamento;
     }
 
@@ -161,18 +175,69 @@ public class Compra {
         this.itens = itens;
     }
 
+    public List<Cupom> getCupons() {
+        return cupons;
+    }
 
-    public void criarCompra(CarrinhoCompra carrinho, String formaPagamento, Integer numeroParcelas) {
+    public void setCupons(List<Cupom> cupons) {
+        this.cupons = cupons;
+    }
+
+    public List<Creditcard> getCartao() {
+        return cartao;
+    }
+
+    public void setCartao(List<Creditcard> cartao) {
+        this.cartao = cartao;
+    }
+
+    public Long getCarrinhoId() {
+        return carrinhoId;
+    }
+
+    public void setCarrinhoId(Long carrinhoId) {
+        this.carrinhoId = carrinhoId;
+    }
+    
+     public List<Troca> getTrocas() {
+        return trocas;
+    }
+
+    public void setTrocas(List<Troca> trocas) {
+        this.trocas = trocas;
+    }
+
+    public List<ItemTroca> getItemTroca() {
+        return itemTroca;
+    }
+
+    public void setItemTroca(List<ItemTroca> itemTroca) {
+        this.itemTroca = itemTroca;
+    }
+
+    public Compra(CarrinhoCompra carrinho) {
         this.cliente = carrinho.getCliente();
         this.itens = carrinho.getItemProduto();
-        this.formaPagamento = formaPagamento;
-        this.numeroParcelas = numeroParcelas;
-        this.valorTotal = carrinho.getValorTotal();
+        this.formaPagamento = null;
+        this.numeroParcelas = 0;
+        if(carrinho.getValorTotal() != null) {
+            this.valorTotal = carrinho.getValorTotal();
+        } else {
+            this.valorTotal = 0.0;
+        }
         this.data = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         this.hora = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
         this.valorFrete = 0.0;
         this.valorDesconto = 0.0;
         this.valorFinal = this.valorTotal + this.valorFrete - this.valorDesconto;
-        this.status = "Aguardando pagamento";
+        this.status = Status.EM_PROCESSAMENTO;
+        this.observacao = "";
+        this.numeroCompra = "";
+        this.enderecoEntrega = null;
+        this.cartao = null;
+        this.carrinhoId = carrinho.getId();
+    }
+
+    public Compra() {
     }
 }

@@ -1,8 +1,10 @@
 package com.boutiquepierrotbleu.boutiquepierrotbleu.entities;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
@@ -17,6 +19,8 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nomeCompleto;
+    private LocalDate dataAniversario;
+
     private String email;
     private String cpf;
     private String telefone;
@@ -25,24 +29,51 @@ public class Cliente {
     private Boolean logged;
 
     @OneToMany(mappedBy = "cliente")
-    @JsonManagedReference // evita loop infinito cliente>enderecos>cliente>enderecos>... 
+    @JsonManagedReference // evita loop infinito cliente>enderecos>cliente>enderecos>...
     // net::ERR_INCOMPLETE_CHUNKED_ENCODING 200
-    // Caused by: org.thymeleaf.exceptions.TemplateProcessingException: An exception was raised while trying to serialize object to JavaScript using Jackson
-	// at org.thymeleaf.standard.serializer.StandardJavaScriptSerializer$JacksonStandardJavaScriptSerializer.serializeValue(StandardJavaScriptSerializer.java:190) ~[thymeleaf-3.1.2.RELEASE.jar:3.1.2.RELEASE]
+    // Caused by: org.thymeleaf.exceptions.TemplateProcessingException: An exception
+    // was raised while trying to serialize object to JavaScript using Jackson
+    // at
+    // org.thymeleaf.standard.serializer.StandardJavaScriptSerializer$JacksonStandardJavaScriptSerializer.serializeValue(StandardJavaScriptSerializer.java:190)
+    // ~[thymeleaf-3.1.2.RELEASE.jar:3.1.2.RELEASE]
     // Caused by: com.fasterxml.jackson.databind.JsonMa
     private List<Endereco> enderecos = new ArrayList<>();
 
     @OneToMany(mappedBy = "cliente")
+    @JsonIgnore
     private List<CarrinhoCompra> carrinhoCompra;
 
     @OneToMany(mappedBy = "cliente")
+    @JsonManagedReference
     private List<Creditcard> creditcard;
 
     @OneToMany(mappedBy = "cliente")
+    @JsonIgnore
     private List<Compra> compra;
 
     @OneToMany(mappedBy = "cliente")
+    @JsonIgnore
     private List<Cupom> cupom;
+
+    @OneToMany(mappedBy = "cliente")
+    @JsonIgnore
+    private List<Troca> trocas;
+
+    @OneToMany(mappedBy = "cliente")
+    @JsonIgnore
+    private List<ItemTroca> itemTroca;
+
+    @OneToMany(mappedBy = "cliente")
+    @JsonIgnore
+    private List<NotasProdutos> notasProdutos;
+
+    @OneToMany(mappedBy = "cliente")
+    @JsonIgnore
+    private List<Mensagens> mensagens;
+
+    @OneToMany(mappedBy = "cliente")
+    @JsonIgnore
+    private List<AlertaEstoqueProduto> alertaEstoqueProduto;
 
     private boolean ativo = true;
 
@@ -60,6 +91,14 @@ public class Cliente {
 
     public void setNomeCompleto(String nomeCompleto) {
         this.nomeCompleto = nomeCompleto;
+    }
+
+    public LocalDate getDataAniversario() {
+        return dataAniversario;
+    }
+
+    public void setDataAniversario(LocalDate dataAniversario) {
+        this.dataAniversario = dataAniversario;
     }
 
     public String getEmail() {
@@ -154,5 +193,44 @@ public class Cliente {
         this.enderecos = enderecos;
     }
 
-}
+    public List<Troca> getTrocas() {
+        return trocas;
+    }
 
+    public void setTrocas(List<Troca> trocas) {
+        this.trocas = trocas;
+    }
+
+    public List<ItemTroca> getItemTroca() {
+        return itemTroca;
+    }
+
+    public void setItemTroca(List<ItemTroca> itemTroca) {
+        this.itemTroca = itemTroca;
+    }
+
+    public List<NotasProdutos> getNotasProdutos() {
+        return notasProdutos;
+    }
+
+    public void setNotasProdutos(List<NotasProdutos> notasProdutos) {
+        this.notasProdutos = notasProdutos;
+    }
+
+    public List<Mensagens> getMensagens() {
+        return mensagens;
+    }
+
+    public void setMensagens(List<Mensagens> mensagens) {
+        this.mensagens = mensagens;
+    }
+
+    public List<AlertaEstoqueProduto> getAlertaEstoqueProduto() {
+        return alertaEstoqueProduto;
+    }
+
+    public void setAlertaEstoqueProduto(List<AlertaEstoqueProduto> alertaEstoqueProduto) {
+        this.alertaEstoqueProduto = alertaEstoqueProduto;
+    }
+
+}

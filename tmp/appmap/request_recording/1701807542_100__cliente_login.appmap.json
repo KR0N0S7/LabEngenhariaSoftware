@@ -1,0 +1,159 @@
+{
+  "events": [
+    {
+      "event": "call",
+      "http_server_request": {
+        "headers": {
+          "sec-fetch-mode": "navigate",
+          "referer": "http://localhost:8080/?id=1&nome=Rog%C3%A9rio",
+          "sec-fetch-site": "same-origin",
+          "accept-language": "en-US,en;q=0.9",
+          "cookie": "JSESSIONID=30186157B535225896768F210891E7A0",
+          "sec-fetch-user": "?1",
+          "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+          "sec-ch-ua": "\"Microsoft Edge\";v=\"119\", \"Chromium\";v=\"119\", \"Not?A_Brand\";v=\"24\"",
+          "sec-ch-ua-mobile": "?0",
+          "sec-ch-ua-platform": "\"Linux\"",
+          "host": "localhost:8080",
+          "upgrade-insecure-requests": "1",
+          "connection": "keep-alive",
+          "accept-encoding": "gzip, deflate, br",
+          "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 Edg/119.0.0.0",
+          "sec-fetch-dest": "document"
+        },
+        "normalized_path_info": "/cliente/login",
+        "path_info": "/cliente/login",
+        "protocol": "HTTP/1.1",
+        "request_method": "GET"
+      },
+      "id": 1,
+      "thread_id": 53
+    },
+    {
+      "defined_class": "com.boutiquepierrotbleu.boutiquepierrotbleu.controllers.ClienteController",
+      "event": "call",
+      "id": 2,
+      "lineno": 44,
+      "method_id": "telaLoginCliente",
+      "parameters": [
+        {
+          "class": "org.apache.catalina.session.StandardSessionFacade",
+          "kind": "req",
+          "name": "session",
+          "object_id": 2101966632,
+          "value": "org.apache.catalina.session.StandardSessionFacade@7d497728"
+        }
+      ],
+      "path": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/controllers/ClienteController.java",
+      "receiver": {
+        "class": "com.boutiquepierrotbleu.boutiquepierrotbleu.controllers.ClienteController",
+        "object_id": 1777536876,
+        "value": "com.boutiquepierrotbleu.boutiquepierrotbleu.controllers.ClienteController@69f30f6c"
+      },
+      "static": false,
+      "thread_id": 53
+    },
+    {
+      "elapsed": 0.0002738975,
+      "event": "return",
+      "id": 3,
+      "parent_id": 2,
+      "return_value": {
+        "class": "org.springframework.web.servlet.ModelAndView",
+        "object_id": 729605004,
+        "value": "ModelAndView [view=\"usr/login\"; model={}]"
+      },
+      "thread_id": 53
+    },
+    {
+      "elapsed": 0.015260024,
+      "event": "return",
+      "http_server_response": {
+        "headers": {
+          "Transfer-Encoding": "chunked",
+          "Keep-Alive": "timeout=60",
+          "Connection": "keep-alive",
+          "Set-Cookie": "JSESSIONID=FE9B038F4142DD5EE957689DFB65FFEB; Path=/; HttpOnly",
+          "Content-Language": "en-US",
+          "Date": "Tue, 05 Dec 2023 20:19:02 GMT",
+          "Content-Type": "text/html;charset=UTF-8"
+        },
+        "status": 200
+      },
+      "id": 4,
+      "parent_id": 1,
+      "thread_id": 53
+    }
+  ],
+  "version": "1.2",
+  "metadata": {
+    "name": "GET /cliente/login (200) - 17:19:02.100",
+    "app": "LabEngenhariaSoftware",
+    "language": {
+      "name": "java",
+      "version": "17.0.8+7",
+      "engine": "OpenJDK 64-Bit Server VM"
+    },
+    "client": {
+      "name": "appmap-java",
+      "url": "https://github.com/appland/appmap-java"
+    },
+    "recorder": {
+      "name": "request_recording",
+      "type": "requests"
+    },
+    "recording": {},
+    "git": {
+      "repository": "https://github.com/KR0N0S7/LabEngenhariaSoftware.git",
+      "branch": "manutencao"
+    }
+  },
+  "classMap": [
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "name": "telaLoginCliente",
+                          "type": "function",
+                          "static": false,
+                          "location": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/controllers/ClienteController.java:44"
+                        }
+                      ],
+                      "name": "ClienteController",
+                      "type": "class"
+                    }
+                  ],
+                  "name": "controllers",
+                  "type": "package"
+                }
+              ],
+              "name": "boutiquepierrotbleu",
+              "type": "package"
+            }
+          ],
+          "name": "boutiquepierrotbleu",
+          "type": "package"
+        }
+      ],
+      "name": "com",
+      "type": "package"
+    },
+    {
+      "type": "http",
+      "name": "HTTP server requests",
+      "children": [
+        {
+          "type": "route",
+          "name": "GET /cliente/login"
+        }
+      ]
+    }
+  ]
+}

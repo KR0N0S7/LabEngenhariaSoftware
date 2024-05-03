@@ -1,0 +1,12 @@
+[
+  {
+    "route": "GET /assets/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css",
+    "parameters": "()",
+    "status": 404
+  },
+  {
+    "route": "GET /error",
+    "parameters": "()",
+    "status": 404
+  }
+]

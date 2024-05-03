@@ -2,6 +2,8 @@ package com.boutiquepierrotbleu.boutiquepierrotbleu.entities;
 
 import java.util.List;
 
+import com.boutiquepierrotbleu.boutiquepierrotbleu.exceptions.InsufficientStockException;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,6 +18,8 @@ public class CarrinhoCompra {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Double valorTotal;
+
+    private boolean ativo = true;
 
     @ManyToOne
     @JoinColumn(name = "cliente_id")
@@ -56,26 +60,36 @@ public class CarrinhoCompra {
         this.cliente = cliente;
     }
 
+    public Boolean isEmpty() {
+        return itemProduto.isEmpty();
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
     public void addItemProduto(ItemProduto item) {
-        if (item.getProduto().isStockAvailable(item.getQuantidade())) {
+        if(item.getProduto().isStockAvailable(item.getQuantidade())) {
             item.getProduto().reserveStock(item.getQuantidade());
-            itemProduto.add(item);
-            calcularValorTotal();
+            this.itemProduto.add(item);
+            //calcularValorTotal();
         } else {
-            throw new RuntimeException("Insufficient stock available");
+            throw new InsufficientStockException("Estoque insuficiente do produto: " + item.getProduto().getNome());
         }
     }
-
+    
     public void removeItemProduto(ItemProduto item) {
-        if (itemProduto.remove(item)) {
-            item.getProduto().releaseStock(item.getQuantidade());
-            calcularValorTotal();
-        }
+        this.itemProduto.remove(item);
+        //calcularValorTotal();
     }
 
-    public void calcularValorTotal() {
-        valorTotal = itemProduto.stream()
-                .mapToDouble(item -> item.getQuantidade() * item.getProduto().getPreco())
+    public Double calcularValorTotal(CarrinhoCompra carrinhoCompra) {
+        return carrinhoCompra.itemProduto.stream()
+                .mapToDouble(item -> item.getPreco())
                 .sum();
     }
 }

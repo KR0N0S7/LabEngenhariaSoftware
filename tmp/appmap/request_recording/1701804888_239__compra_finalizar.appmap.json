@@ -1,0 +1,656 @@
+{
+  "events": [
+    {
+      "event": "call",
+      "http_server_request": {
+        "headers": {
+          "sec-fetch-mode": "navigate",
+          "content-length": "0",
+          "referer": "http://localhost:8080/compra/detalhar",
+          "sec-fetch-site": "same-origin",
+          "accept-language": "en-US,en;q=0.9",
+          "cookie": "JSESSIONID=C4FCCA9EFCEAFD2E5FA5A43053E7A77C",
+          "origin": "http://localhost:8080",
+          "sec-fetch-user": "?1",
+          "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+          "sec-ch-ua": "\"Microsoft Edge\";v=\"119\", \"Chromium\";v=\"119\", \"Not?A_Brand\";v=\"24\"",
+          "sec-ch-ua-mobile": "?0",
+          "sec-ch-ua-platform": "\"Linux\"",
+          "host": "localhost:8080",
+          "upgrade-insecure-requests": "1",
+          "connection": "keep-alive",
+          "content-type": "application/x-www-form-urlencoded",
+          "cache-control": "max-age=0",
+          "accept-encoding": "gzip, deflate, br",
+          "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 Edg/119.0.0.0",
+          "sec-fetch-dest": "document"
+        },
+        "normalized_path_info": "/compra/finalizar",
+        "path_info": "/compra/finalizar",
+        "protocol": "HTTP/1.1",
+        "request_method": "POST"
+      },
+      "id": 1,
+      "thread_id": 48
+    },
+    {
+      "defined_class": "com.boutiquepierrotbleu.boutiquepierrotbleu.controllers.CompraController",
+      "event": "call",
+      "id": 2,
+      "lineno": 301,
+      "method_id": "finalizarCompra",
+      "parameters": [
+        {
+          "class": "org.apache.catalina.session.StandardSessionFacade",
+          "kind": "req",
+          "name": "session",
+          "object_id": 315169705,
+          "value": "org.apache.catalina.session.StandardSessionFacade@12c91ba9"
+        }
+      ],
+      "path": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/controllers/CompraController.java",
+      "receiver": {
+        "class": "com.boutiquepierrotbleu.boutiquepierrotbleu.controllers.CompraController",
+        "object_id": 1665430343,
+        "value": "com.boutiquepierrotbleu.boutiquepierrotbleu.controllers.CompraController@63447347"
+      },
+      "static": false,
+      "thread_id": 48
+    },
+    {
+      "defined_class": "com.boutiquepierrotbleu.boutiquepierrotbleu.services.ClienteService",
+      "event": "call",
+      "id": 3,
+      "lineno": 28,
+      "method_id": "obterCliente",
+      "parameters": [
+        {
+          "class": "java.lang.Long",
+          "kind": "req",
+          "name": "id",
+          "object_id": 1308048504,
+          "value": "1"
+        }
+      ],
+      "path": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/services/ClienteService.java",
+      "receiver": {
+        "class": "com.boutiquepierrotbleu.boutiquepierrotbleu.services.ClienteService",
+        "object_id": 959660557,
+        "value": "com.boutiquepierrotbleu.boutiquepierrotbleu.services.ClienteService@3933420d"
+      },
+      "static": false,
+      "thread_id": 48
+    },
+    {
+      "event": "call",
+      "id": 4,
+      "sql_query": {
+        "database_type": "MySQL",
+        "sql": "select c1_0.id,c1_0.ativo,c1_0.cpf,c1_0.email,c1_0.logged,c1_0.nome_completo,c1_0.senha,c1_0.telefone from cliente c1_0 where c1_0.id=?"
+      },
+      "thread_id": 48
+    },
+    {
+      "elapsed": 0.0001210423,
+      "event": "return",
+      "id": 5,
+      "parent_id": 4,
+      "thread_id": 48
+    },
+    {
+      "elapsed": 0.0017692836,
+      "event": "return",
+      "id": 6,
+      "parent_id": 3,
+      "return_value": {
+        "class": "com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cliente",
+        "object_id": 601833663,
+        "value": "com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cliente@23df40bf"
+      },
+      "thread_id": 48
+    },
+    {
+      "defined_class": "com.boutiquepierrotbleu.boutiquepierrotbleu.services.CarrinhoCompraService",
+      "event": "call",
+      "id": 7,
+      "lineno": 66,
+      "method_id": "getOrCreateCart",
+      "parameters": [
+        {
+          "class": "com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cliente",
+          "kind": "req",
+          "name": "cliente",
+          "object_id": 601833663,
+          "value": "com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cliente@23df40bf"
+        }
+      ],
+      "path": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/services/CarrinhoCompraService.java",
+      "receiver": {
+        "class": "com.boutiquepierrotbleu.boutiquepierrotbleu.services.CarrinhoCompraService",
+        "object_id": 515778982,
+        "value": "com.boutiquepierrotbleu.boutiquepierrotbleu.services.CarrinhoCompraService@1ebe29a6"
+      },
+      "static": false,
+      "thread_id": 48
+    },
+    {
+      "defined_class": "com.boutiquepierrotbleu.boutiquepierrotbleu.repositories.CarrinhoCompraRepository",
+      "event": "call",
+      "id": 8,
+      "lineno": -1,
+      "method_id": "findByClienteAndAtivo",
+      "parameters": [
+        {
+          "class": "com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cliente",
+          "kind": "req",
+          "name": "p0",
+          "object_id": 601833663,
+          "value": "com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cliente@23df40bf"
+        },
+        {
+          "class": "java.lang.Boolean",
+          "kind": "req",
+          "name": "p1",
+          "object_id": 1543544051,
+          "value": "true"
+        }
+      ],
+      "path": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/repositories/CarrinhoCompraRepository.java",
+      "receiver": {
+        "class": "jdk.proxy4.$Proxy154",
+        "object_id": 1383899387,
+        "value": "org.springframework.data.jpa.repository.support.SimpleJpaRepository@57103380"
+      },
+      "static": false,
+      "thread_id": 48
+    },
+    {
+      "event": "call",
+      "id": 9,
+      "sql_query": {
+        "database_type": "MySQL",
+        "sql": "select cc1_0.id,cc1_0.ativo,cc1_0.cliente_id,cc1_0.valor_total from carrinho_compra cc1_0 where cc1_0.cliente_id=? and cc1_0.ativo=?"
+      },
+      "thread_id": 48
+    },
+    {
+      "elapsed": 0.0001975094,
+      "event": "return",
+      "id": 10,
+      "parent_id": 9,
+      "thread_id": 48
+    },
+    {
+      "elapsed": 0.0012119098,
+      "event": "return",
+      "id": 11,
+      "parent_id": 8,
+      "return_value": {
+        "class": "java.util.Optional",
+        "object_id": 264255430,
+        "value": "Optional[com.boutiquepierrotbleu.boutiquepierrotbleu.entities.CarrinhoCompra@5b92c6b8]"
+      },
+      "thread_id": 48
+    },
+    {
+      "elapsed": 0.0012639046,
+      "event": "return",
+      "id": 12,
+      "parent_id": 7,
+      "return_value": {
+        "class": "com.boutiquepierrotbleu.boutiquepierrotbleu.entities.CarrinhoCompra",
+        "object_id": 1536345784,
+        "value": "com.boutiquepierrotbleu.boutiquepierrotbleu.entities.CarrinhoCompra@5b92c6b8"
+      },
+      "thread_id": 48
+    },
+    {
+      "defined_class": "com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Compra",
+      "event": "call",
+      "id": 13,
+      "lineno": 199,
+      "method_id": "setCarrinhoId",
+      "parameters": [
+        {
+          "class": "java.lang.Long",
+          "kind": "req",
+          "name": "carrinhoId",
+          "object_id": 2061244573,
+          "value": "14"
+        }
+      ],
+      "path": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/entities/Compra.java",
+      "receiver": {
+        "class": "com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Compra",
+        "object_id": 2108340901,
+        "value": "com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Compra@7daabaa5"
+      },
+      "static": false,
+      "thread_id": 48
+    },
+    {
+      "elapsed": 0.0000229209,
+      "event": "return",
+      "id": 14,
+      "parent_id": 13,
+      "thread_id": 48
+    },
+    {
+      "defined_class": "com.boutiquepierrotbleu.boutiquepierrotbleu.services.CompraService",
+      "event": "call",
+      "id": 15,
+      "lineno": 20,
+      "method_id": "salvarCompra",
+      "parameters": [
+        {
+          "class": "com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Compra",
+          "kind": "req",
+          "name": "compra",
+          "object_id": 2108340901,
+          "value": "com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Compra@7daabaa5"
+        }
+      ],
+      "path": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/services/CompraService.java",
+      "receiver": {
+        "class": "com.boutiquepierrotbleu.boutiquepierrotbleu.services.CompraService",
+        "object_id": 282538579,
+        "value": "com.boutiquepierrotbleu.boutiquepierrotbleu.services.CompraService@10d73253"
+      },
+      "static": false,
+      "thread_id": 48
+    },
+    {
+      "event": "call",
+      "id": 16,
+      "sql_query": {
+        "database_type": "MySQL",
+        "sql": "insert into compra (carrinho_id,cliente_id,data,endereco_id,forma_pagamento,hora,numero_compra,numero_parcelas,observacao,status,valor_desconto,valor_final,valor_frete,valor_total) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+      },
+      "thread_id": 48
+    },
+    {
+      "elapsed": 0.0004594797,
+      "event": "return",
+      "id": 17,
+      "parent_id": 16,
+      "thread_id": 48
+    },
+    {
+      "elapsed": 0.014204599,
+      "event": "return",
+      "id": 18,
+      "parent_id": 15,
+      "return_value": {
+        "class": "com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Compra",
+        "object_id": 2108340901,
+        "value": "com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Compra@7daabaa5"
+      },
+      "thread_id": 48
+    },
+    {
+      "defined_class": "com.boutiquepierrotbleu.boutiquepierrotbleu.services.CarrinhoCompraService",
+      "event": "call",
+      "id": 19,
+      "lineno": 30,
+      "method_id": "obterCarrinhoCompra",
+      "parameters": [
+        {
+          "class": "java.lang.Long",
+          "kind": "req",
+          "name": "id",
+          "object_id": 2061244573,
+          "value": "14"
+        }
+      ],
+      "path": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/services/CarrinhoCompraService.java",
+      "receiver": {
+        "class": "com.boutiquepierrotbleu.boutiquepierrotbleu.services.CarrinhoCompraService",
+        "object_id": 515778982,
+        "value": "com.boutiquepierrotbleu.boutiquepierrotbleu.services.CarrinhoCompraService@1ebe29a6"
+      },
+      "static": false,
+      "thread_id": 48
+    },
+    {
+      "elapsed": 0.001272185,
+      "event": "return",
+      "id": 20,
+      "parent_id": 19,
+      "return_value": {
+        "class": "com.boutiquepierrotbleu.boutiquepierrotbleu.entities.CarrinhoCompra",
+        "object_id": 1536345784,
+        "value": "com.boutiquepierrotbleu.boutiquepierrotbleu.entities.CarrinhoCompra@5b92c6b8"
+      },
+      "thread_id": 48
+    },
+    {
+      "defined_class": "com.boutiquepierrotbleu.boutiquepierrotbleu.entities.CarrinhoCompra",
+      "event": "call",
+      "id": 21,
+      "lineno": 72,
+      "method_id": "setAtivo",
+      "parameters": [
+        {
+          "class": "java.lang.Boolean",
+          "kind": "req",
+          "name": "ativo",
+          "object_id": 646863268,
+          "value": "false"
+        }
+      ],
+      "path": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/entities/CarrinhoCompra.java",
+      "receiver": {
+        "class": "com.boutiquepierrotbleu.boutiquepierrotbleu.entities.CarrinhoCompra",
+        "object_id": 1536345784,
+        "value": "com.boutiquepierrotbleu.boutiquepierrotbleu.entities.CarrinhoCompra@5b92c6b8"
+      },
+      "static": false,
+      "thread_id": 48
+    },
+    {
+      "elapsed": 0.0000227518,
+      "event": "return",
+      "id": 22,
+      "parent_id": 21,
+      "thread_id": 48
+    },
+    {
+      "defined_class": "com.boutiquepierrotbleu.boutiquepierrotbleu.services.CarrinhoCompraService",
+      "event": "call",
+      "id": 23,
+      "lineno": 26,
+      "method_id": "salvarCarrinhoCompra",
+      "parameters": [
+        {
+          "class": "com.boutiquepierrotbleu.boutiquepierrotbleu.entities.CarrinhoCompra",
+          "kind": "req",
+          "name": "carrinhoCompra",
+          "object_id": 1536345784,
+          "value": "com.boutiquepierrotbleu.boutiquepierrotbleu.entities.CarrinhoCompra@5b92c6b8"
+        }
+      ],
+      "path": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/services/CarrinhoCompraService.java",
+      "receiver": {
+        "class": "com.boutiquepierrotbleu.boutiquepierrotbleu.services.CarrinhoCompraService",
+        "object_id": 515778982,
+        "value": "com.boutiquepierrotbleu.boutiquepierrotbleu.services.CarrinhoCompraService@1ebe29a6"
+      },
+      "static": false,
+      "thread_id": 48
+    },
+    {
+      "event": "call",
+      "id": 24,
+      "sql_query": {
+        "database_type": "MySQL",
+        "sql": "update carrinho_compra set ativo=?,cliente_id=?,valor_total=? where id=?"
+      },
+      "thread_id": 48
+    },
+    {
+      "elapsed": 0.0001433617,
+      "event": "return",
+      "id": 25,
+      "parent_id": 24,
+      "thread_id": 48
+    },
+    {
+      "elapsed": 0.0022948065,
+      "event": "return",
+      "id": 26,
+      "parent_id": 23,
+      "return_value": {
+        "class": "com.boutiquepierrotbleu.boutiquepierrotbleu.entities.CarrinhoCompra",
+        "object_id": 1536345784,
+        "value": "com.boutiquepierrotbleu.boutiquepierrotbleu.entities.CarrinhoCompra@5b92c6b8"
+      },
+      "thread_id": 48
+    },
+    {
+      "event": "call",
+      "id": 27,
+      "sql_query": {
+        "database_type": "MySQL",
+        "sql": "select ip1_0.carrinho_compra_id,ip1_0.id,c1_0.id,c1_0.carrinho_id,c2_0.id,c2_0.ativo,c2_0.cpf,c2_0.email,c2_0.logged,c2_0.nome_completo,c2_0.senha,c2_0.telefone,c1_0.data,ee1_0.id,ee1_0.bairro,ee1_0.cep,ee1_0.cidade,ee1_0.cliente_id,ee1_0.complemento,ee1_0.estado,ee1_0.rua,ee1_0.tipo,c1_0.forma_pagamento,c1_0.hora,c1_0.numero_compra,c1_0.numero_parcelas,c1_0.observacao,c1_0.status,c1_0.valor_desconto,c1_0.valor_final,c1_0.valor_frete,c1_0.valor_total,ip1_0.preco,p1_0.id,p1_0.ativo,c4_0.id,c4_0.categoria,c4_0.porcentagem,p1_0.cor,p1_0.custo,p1_0.descricao,p1_0.estilo,p1_0.estoque,p1_0.genero,p1_0.imagem,p1_0.marca,p1_0.material,p1_0.nome,p1_0.preco,p1_0.tamanho,p1_0.tipo,ip1_0.quantidade from item_produto ip1_0 left join compra c1_0 on c1_0.id=ip1_0.compra_id left join cliente c2_0 on c2_0.id=c1_0.cliente_id left join endereco ee1_0 on ee1_0.id=c1_0.endereco_id left join produto p1_0 on p1_0.id=ip1_0.produto_id left join valor_categoria c4_0 on c4_0.id=p1_0.categoria_id where ip1_0.carrinho_compra_id=?"
+      },
+      "thread_id": 48
+    },
+    {
+      "elapsed": 0.0001398307,
+      "event": "return",
+      "id": 28,
+      "parent_id": 27,
+      "thread_id": 48
+    },
+    {
+      "elapsed": 0.02234437,
+      "event": "return",
+      "id": 29,
+      "parent_id": 2,
+      "return_value": {
+        "class": "org.springframework.web.servlet.ModelAndView",
+        "object_id": 1821483804,
+        "value": "ModelAndView [view=\"compra/finalizada\"; model={}]"
+      },
+      "thread_id": 48
+    },
+    {
+      "elapsed": 0.026440378,
+      "event": "return",
+      "http_server_response": {
+        "headers": {
+          "Transfer-Encoding": "chunked",
+          "Keep-Alive": "timeout=60",
+          "Cache-Control": "no-store",
+          "Connection": "keep-alive",
+          "Content-Language": "en-US",
+          "Date": "Tue, 05 Dec 2023 19:34:48 GMT",
+          "Content-Type": "text/html;charset=UTF-8"
+        },
+        "status": 200
+      },
+      "id": 30,
+      "parent_id": 1,
+      "thread_id": 48
+    }
+  ],
+  "version": "1.2",
+  "metadata": {
+    "name": "POST /compra/finalizar (200) - 16:34:48.239",
+    "app": "LabEngenhariaSoftware",
+    "language": {
+      "name": "java",
+      "version": "17.0.8+7",
+      "engine": "OpenJDK 64-Bit Server VM"
+    },
+    "client": {
+      "name": "appmap-java",
+      "url": "https://github.com/appland/appmap-java"
+    },
+    "recorder": {
+      "name": "request_recording",
+      "type": "requests"
+    },
+    "recording": {},
+    "git": {
+      "repository": "https://github.com/KR0N0S7/LabEngenhariaSoftware.git",
+      "branch": "manutencao"
+    }
+  },
+  "classMap": [
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "name": "setCarrinhoId",
+                          "type": "function",
+                          "static": false,
+                          "location": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/entities/Compra.java:199"
+                        }
+                      ],
+                      "name": "Compra",
+                      "type": "class"
+                    },
+                    {
+                      "children": [
+                        {
+                          "name": "setAtivo",
+                          "type": "function",
+                          "static": false,
+                          "location": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/entities/CarrinhoCompra.java:72"
+                        }
+                      ],
+                      "name": "CarrinhoCompra",
+                      "type": "class"
+                    }
+                  ],
+                  "name": "entities",
+                  "type": "package"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "name": "getOrCreateCart",
+                          "type": "function",
+                          "static": false,
+                          "location": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/services/CarrinhoCompraService.java:66"
+                        },
+                        {
+                          "name": "obterCarrinhoCompra",
+                          "type": "function",
+                          "static": false,
+                          "location": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/services/CarrinhoCompraService.java:30"
+                        },
+                        {
+                          "name": "salvarCarrinhoCompra",
+                          "type": "function",
+                          "static": false,
+                          "location": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/services/CarrinhoCompraService.java:26"
+                        }
+                      ],
+                      "name": "CarrinhoCompraService",
+                      "type": "class"
+                    },
+                    {
+                      "children": [
+                        {
+                          "name": "obterCliente",
+                          "type": "function",
+                          "static": false,
+                          "location": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/services/ClienteService.java:28"
+                        }
+                      ],
+                      "name": "ClienteService",
+                      "type": "class"
+                    },
+                    {
+                      "children": [
+                        {
+                          "name": "salvarCompra",
+                          "type": "function",
+                          "static": false,
+                          "location": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/services/CompraService.java:20"
+                        }
+                      ],
+                      "name": "CompraService",
+                      "type": "class"
+                    }
+                  ],
+                  "name": "services",
+                  "type": "package"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "name": "findByClienteAndAtivo",
+                          "type": "function",
+                          "static": false,
+                          "location": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/repositories/CarrinhoCompraRepository.java:-1"
+                        }
+                      ],
+                      "name": "CarrinhoCompraRepository",
+                      "type": "class"
+                    }
+                  ],
+                  "name": "repositories",
+                  "type": "package"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "name": "finalizarCompra",
+                          "type": "function",
+                          "static": false,
+                          "location": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/controllers/CompraController.java:301"
+                        }
+                      ],
+                      "name": "CompraController",
+                      "type": "class"
+                    }
+                  ],
+                  "name": "controllers",
+                  "type": "package"
+                }
+              ],
+              "name": "boutiquepierrotbleu",
+              "type": "package"
+            }
+          ],
+          "name": "boutiquepierrotbleu",
+          "type": "package"
+        }
+      ],
+      "name": "com",
+      "type": "package"
+    },
+    {
+      "type": "http",
+      "name": "HTTP server requests",
+      "children": [
+        {
+          "type": "route",
+          "name": "POST /compra/finalizar"
+        }
+      ]
+    },
+    {
+      "type": "database",
+      "name": "Database",
+      "children": [
+        {
+          "type": "query",
+          "name": "select c1_0.id,c1_0.ativo,c1_0.cpf,c1_0.email,c1_0.logged,c1_0.nome_completo,c1_0.senha,c1_0.telefone from cliente c1_0 where c1_0.id=?"
+        },
+        {
+          "type": "query",
+          "name": "select cc1_0.id,cc1_0.ativo,cc1_0.cliente_id,cc1_0.valor_total from carrinho_compra cc1_0 where cc1_0.cliente_id=? and cc1_0.ativo=?"
+        },
+        {
+          "type": "query",
+          "name": "insert into compra (carrinho_id,cliente_id,data,endereco_id,forma_pagamento,hora,numero_compra,numero_parcelas,observacao,status,valor_desconto,valor_final,valor_frete,valor_total) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+        },
+        {
+          "type": "query",
+          "name": "update carrinho_compra set ativo=?,cliente_id=?,valor_total=? where id=?"
+        },
+        {
+          "type": "query",
+          "name": "select ip1_0.carrinho_compra_id,ip1_0.id,c1_0.id,c1_0.carrinho_id,c2_0.id,c2_0.ativo,c2_0.cpf,c2_0.email,c2_0.logged,c2_0.nome_completo,c2_0.senha,c2_0.telefone,c1_0.data,ee1_0.id,ee1_0.bairro,ee1_0.cep,ee1_0.cidade,ee1_0.cliente_id,ee1_0.complemento,ee1_0.estado,ee1_0.rua,ee1_0.tipo,c1_0.forma_pagamento,c1_0.hora,c1_0.numero_compra,c1_0.numero_parcelas,c1_0.observacao,c1_0.status,c1_0.valor_desconto,c1_0.valor_final,c1_0.valor_frete,c1_0.valor_total,ip1_0.preco,p1_0.id,p1_0.ativo,c4_0.id,c4_0.categoria,c4_0.porcentagem,p1_0.cor,p1_0.custo,p1_0.descricao,p1_0.estilo,p1_0.estoque,p1_0.genero,p1_0.imagem,p1_0.marca,p1_0.material,p1_0.nome,p1_0.preco,p1_0.tamanho,p1_0.tipo,ip1_0.quantidade from item_produto ip1_0 left join compra c1_0 on c1_0.id=ip1_0.compra_id left join cliente c2_0 on c2_0.id=c1_0.cliente_id left join endereco ee1_0 on ee1_0.id=c1_0.endereco_id left join produto p1_0 on p1_0.id=ip1_0.produto_id left join valor_categoria c4_0 on c4_0.id=p1_0.categoria_id where ip1_0.carrinho_compra_id=?"
+        }
+      ]
+    }
+  ]
+}

@@ -2,10 +2,18 @@ package com.boutiquepierrotbleu.boutiquepierrotbleu.entities;
 
 import java.util.List;
 
+import org.springframework.web.servlet.ModelAndView;
+
+import com.boutiquepierrotbleu.boutiquepierrotbleu.exceptions.InsufficientStockException;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 @Entity
@@ -16,8 +24,8 @@ public class Produto {
     private String nome;
     private String descricao;
     private Double preco;
+    private Double custo;
     private String imagem;
-    private String categoria;
     private String tamanho;
     private String cor;
     private String marca;
@@ -26,9 +34,29 @@ public class Produto {
     private String tipo;
     private String estilo;
     private Integer estoque;
+    private boolean ativo = true;
+    private boolean aviseMe = false;
+
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    @JsonManagedReference
+    private ValorCategoria categoria;
 
     @OneToMany(mappedBy = "produto")
+    @JsonIgnore
     private List<ItemProduto> itemProduto;
+
+    @OneToMany(mappedBy = "produto")
+    @JsonIgnore
+    private List<ItemTroca> itemTrocas;
+
+    @OneToMany(mappedBy = "produto")
+    @JsonIgnore
+    private List<NotasProdutos> notasProdutos;
+
+    @OneToMany(mappedBy = "produto")
+    @JsonIgnore
+    private List<AlertaEstoqueProduto> alertaEstoqueProduto;
 
     public List<ItemProduto> getItemProduto() {
         return itemProduto;
@@ -70,6 +98,14 @@ public class Produto {
         this.preco = preco;
     }
 
+    public Double getCusto() {
+        return custo;
+    }
+
+    public void setCusto(Double custo) {
+        this.custo = custo;
+    }
+
     public String getImagem() {
         return imagem;
     }
@@ -78,11 +114,11 @@ public class Produto {
         this.imagem = imagem;
     }
 
-    public String getCategoria() {
+    public ValorCategoria getValorCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setValorCategoria(ValorCategoria categoria) {
         this.categoria = categoria;
     }
 
@@ -150,25 +186,80 @@ public class Produto {
         this.estoque = estoque;
     }
 
+    public List<ItemTroca> getTroca() {
+        return itemTrocas;
+    }
+
+    public void setTroca(List<ItemTroca> troca) {
+        this.itemTrocas = troca;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    public ValorCategoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(ValorCategoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public List<ItemTroca> getItemTrocas() {
+        return itemTrocas;
+    }
+
+    public void setItemTrocas(List<ItemTroca> itemTrocas) {
+        this.itemTrocas = itemTrocas;
+    }
+
+    public List<NotasProdutos> getNotasProdutos() {
+        return notasProdutos;
+    }
+
+    public void setNotasProdutos(List<NotasProdutos> notasProdutos) {
+        this.notasProdutos = notasProdutos;
+    }
+
     // New methods to manage stock
-    public boolean isStockAvailable(int quantity) {
-        return estoque != null && estoque >= quantity;
+    public boolean isStockAvailable(int requiredQuantity) {
+        return this.estoque >= requiredQuantity;
+    }
+
+    public boolean isAviseMe() {
+        return aviseMe;
+    }
+
+    public void setAviseMe(boolean aviseMe) {
+        this.aviseMe = aviseMe;
+    }
+
+    public List<AlertaEstoqueProduto> getAlertaEstoqueProduto() {
+        return alertaEstoqueProduto;
+    }
+
+    public void setAlertaEstoqueProduto(List<AlertaEstoqueProduto> alertaEstoqueProduto) {
+        this.alertaEstoqueProduto = alertaEstoqueProduto;
     }
 
     public void reserveStock(int quantity) {
-        if (isStockAvailable(quantity)) {
-            estoque -= quantity;
-        } else {
-            throw new RuntimeException("Insufficient stock available");
+        if (!isStockAvailable(quantity)) {
+            throw new InsufficientStockException("Estoque insuficiente!");
         }
+        this.estoque -= quantity;
     }
 
-    public void releaseStock(int quantity) {
-        if (estoque != null) {
-            estoque += quantity;
-        } else {
-            estoque = quantity;
-        }
+    public void increaseEstoque(int quantity) {
+        this.estoque += quantity;
+    }
+
+    public void decreaseEstoque(int quantity) {
+        this.estoque -= quantity;
     }
 
 }

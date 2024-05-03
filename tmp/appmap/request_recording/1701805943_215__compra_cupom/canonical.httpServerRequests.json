@@ -1,0 +1,7 @@
+[
+  {
+    "route": "POST /compra/cupom",
+    "parameters": "(selectedEndereco)",
+    "status": 200
+  }
+]

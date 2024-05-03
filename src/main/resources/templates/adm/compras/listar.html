@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<html layout:decorate="~{adm/layout.html}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8" />
+<div layout:fragment="content">
+    <div class="alert alert-primary" th:if="${#lists.isEmpty(lista)}">
+        Nenhuma compra cadastrada.
+    </div>
+    <div th:if="${mensagem}" class="alert alert-success" role="alert">
+        <p th:text="${mensagem}"></p>
+    </div>
+    <div th:if="${not #lists.isEmpty(lista)}">
+        
+        <div class="form-check form-switch mt-3" onclick="toggleContent()">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Pesquisa</label>
+        </div>
+
+        <div id="hiddenContent" th:style="${condition} ? '' : 'display: none;'">
+            
+            <button type="button" onclick="addSearchFilter()">+</button>
+            <input class="my-3" id="txtSearch" placeholder="Nome Completo" type="text" name="keyword"></input>
+
+        </div>
+
+        <table id="tabelaCompra" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Número da Compra</th>
+                    <th>Data</th>
+                    <th>Hora</th>
+                    <th>Forma Pagamento</th>
+                    <th>Valor do Frete</th>
+                    <th>Valor Total</th>
+                    <th>Status</th>
+                    <th>Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="compra : ${lista}">
+                    <td th:text="${compra.numeroCompra}"></td>
+                    <td th:text="${compra.data}"></td>
+                    <td th:text="${compra.hora}"></td>
+                    <td th:text="${compra.formaPagamento}"></td>
+                    <td th:text="${compra.valorFrete}"></td>
+                    <td th:text="${compra.valorTotal}"></td>
+                    <td th:text="${compra.status}"></td>
+                    
+                    <td>
+                        <a class="btn btn-primary btn-sm" th:href="@{/compra/detalharAdmin(id=${compra.id})}">Detalhes</a>
+                        
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</html>
+<!--
+<script th:inline="javascript">
+    /*<![CDATA[*/
+        var compras = /*[[${lista}]]*/ 'default';
+    /*]]>*/
+    $('#txtSearch').keyup(function(){
+        filterTable($(this).val(), 'nome');
+    });
+
+    function addSearchFilter() {
+        var hiddenContent = document.getElementById('hiddenContent');
+        var filterInput = document.createElement('input');
+        filterInput.className = 'my-3';
+        filterInput.type = 'text';
+        filterInput.onkeyup = function() {
+            var attribute = this.getAttribute('data-attribute');
+            filterTable(this.value, attribute);
+        };
+        
+        // Determine the next filter based on existing filters in the hiddenContent div
+        var existingFilters = hiddenContent.getElementsByTagName('input').length;
+        var placeholders = ['Nome', 'Cor', 'Marca', 'Gênero', 'Material', 'Tipo', 'Tamanho', 'Ativo'];
+        var names = ['nome', 'cor', 'marca', 'genero', 'material', 'tipo', 'tamanho', 'ativo'];
+        if (existingFilters < placeholders.length) {
+            filterInput.placeholder = placeholders[existingFilters];
+            filterInput.setAttribute('data-attribute', names[existingFilters]);
+            hiddenContent.appendChild(filterInput);
+        }
+    }
+
+    function toggleContent() {
+        var content = document.getElementById('hiddenContent');
+        if(content.style.display === "none") {
+            content.style.display = "block";
+        } else {
+            content.style.display = "none";
+        }
+    }
+
+
+    function filterTable(value, attribute) {
+        var data = Filtro(value, compras, attribute);
+        rebuildTable(data);
+    }
+
+    function Filtro(value, data, attribute){
+        var filteredData = [];
+        
+        // If the filter value is empty or null, return the full dataset
+        if (!value || value.trim() === "") {
+            return data;
+        }
+
+        for(var i = 0; i < data.length; i++){
+            // Ensure the attribute exists and isn't null before calling toLowerCase
+            if (data[i][attribute]) {
+                value = value.toLowerCase();
+                var columnValue = data[i][attribute].toLowerCase();
+                if(columnValue.includes(value)){
+                    filteredData.push(data[i]);
+                }
+            }
+        }
+        return filteredData;
+    }
+
+
+
+    function rebuildTable(data){
+        var table = document.getElementById('tabelaCompra'); // target the entire table
+        table.innerHTML = '<thead>' +
+            '<tr>' +
+                '<th>Nome</th>' +
+                '<th>Descrição</th>' +
+                '<th>Categoria</th>' +
+                '<th>Tamanho</th>' +
+                '<th>Cor</th>' +
+                '<th>Marca</th>' +
+                '<th>Gênero</th>' +
+                '<th>Material</th>' +
+                '<th>Tipo</th>' +
+                '<th>Estoque</th>' +
+                '<th>Preço</th>' +
+                '<th>Ativo</th>' +
+                '<th>Opções</th>' +
+            '</tr>' +
+                '</thead><tbody id="tabelacompraBody"></tbody>'; // add the thead structure
+        var tbody = document.getElementById('tabelacompraBody'); // target the newly added tbody
+        for(var i = 0; i < data.length; i++){
+            tbody.innerHTML += '<tr>' +
+                                    '<td>' + data[i].nome + '</td>' +
+                                    '<td>' + data[i].descricao + '</td>' +
+                                    '<td>' + data[i].valorCategoria.categoria + '</td>' +
+                                    '<td>' + data[i].tamanho + '</td>' +
+                                    '<td>' + data[i].cor + '</td>' +
+                                    '<td>' + data[i].marca + '</td>' +
+                                    '<td>' + data[i].genero + '</td>' +
+                                    '<td>' + data[i].material + '</td>' +
+                                    '<td>' + data[i].tipo + '</td>' +
+                                    '<td>' + data[i].estoque + '</td>' +
+                                    '<td>' + data[i].preco + '</td>' +
+                                    '<td>' + 
+                                        '<form action="/compra/updateAtivo" method="post">' +
+                                            '<input type="hidden" name="compraId" value="' + data[i].id + '" />' +
+                                            '<input type="checkbox" class="ativo-checkbox" value="' + data[i].ativo + '" ' + (data[i].ativo ? 'checked' : '') + ' onclick="updateAtivoStatus(this.form, this)" />' +
+                                        '</form>' +
+                                    '</td>' +
+                                    '<td>' +
+                                        '<a class="btn btn-primary btn-sm" th:href="@{/compra/criar(id=${compra.id})}">Editar</a>' +
+                                        '<a class="btn btn-primary btn-sm ml-3" th:href="@{/compra/excluir(id=${compra.id})}" onclick="return confirm(\'Você realmente deseja excluir esse compra?\')">Excluir</a>' +
+                                    '</td>' +
+                                '</tr>';
+        }
+    }
+
+
+</script>
+-->

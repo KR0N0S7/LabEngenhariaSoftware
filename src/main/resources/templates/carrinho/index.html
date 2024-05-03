@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{usr/layout.html}">
+<meta charset="UTF-8">
+<head>
+	<link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<div layout:fragment="content">
+    
+    <div th:replace="pages/head :: head"></div>
+	<div class="alert alert-primary" th:if="${#lists.isEmpty(lista)}">
+        Carrinho vazio.
+    </div>
+    <div th:if="${message}" class="alert alert-success" role="alert">
+        <p th:text="${message}"></p>
+    </div>
+    <div th:if="${not #lists.isEmpty(lista)}">
+        <table id="tabelaCarrinho" class="table table-striped">
+            <thead>
+                <tr>
+                    
+                    <th>Nome</th>
+                    <th>Quantidade</th>
+                    <th>Preço</th>
+                    
+                    <th>Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="itemProduto : ${lista}">
+					<td th:text="${itemProduto.produto.nome}"></td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-outline-secondary change-quantity" data-action="decrease" th:data-item-id="${itemProduto.id}">-</button>
+                        <span th:text="${itemProduto.quantidade}"></span>
+                        <button type="button" class="btn btn-sm btn-outline-secondary change-quantity" data-action="increase" th:data-item-id="${itemProduto.id}">+</button>
+                    </td>
+                    
+                    <td th:text="${itemProduto.preco}"></td>
+                    
+                    
+                    <td>
+                        <a class="btn btn-primary btn-sm ml-3" th:href="@{/carrinho/remover(id=${itemProduto.id})}" 
+                           onclick="return confirm('Você realmente deseja retirar esse produto?')">Excluir</a>
+                    </td>
+                </tr>
+
+				<tr>
+					<td colspan="2">Total</td>
+					<td th:text="${total}"></td>
+				</tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mt-10 flex justify-between mb-3">
+        <div>
+            <a th:href="@{/}" class="bg-gray py-2 px-2 rounded-lg hover:bg-black hover:text-white transition duration-500 cursor-pointer">Retornar</a>
+        </div>
+        <form th:action="@{/compra/iniciar}" th:object="${carrinho}" method="post">
+            <!-- Hidden fields for carrinhoCompra's properties -->
+            <input type="hidden" th:field="*{id}" />
+            <input type="hidden" th:field="*{valorTotal}" />
+            <input type="hidden" th:field="*{cliente}" />
+            <!-- Submit button -->
+            <button class="btn btn-primary btn-sm ml-3" type="submit">Finalizar Compra</button>
+        </form>
+        <div>
+            <!--<a th:object="${compra}" th:href="@{/compra/iniciar}" 
+                class="bg-purple text-white py-2 px-2 rounded-lg hover:bg-black hover:text-white' transition duration-500 cursor-pointer">
+                Finalizar Compra</a>-->
+        </div>
+    </div>
+
+    <div th:replace="pages/footer :: footer"></div>
+</div>
+</html>
+
+<script>
+    $(document).ready(function () {
+        $('.change-quantity').click(function () {
+            const action = $(this).data('action');
+            const itemProdutoId = $(this).data('item-id');
+            
+            const url = action === 'increase' ? '/carrinho/aumentar' : '/carrinho/diminuir';
+
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: { itemProdutoId: itemProdutoId },
+                success: function (response) {
+                    if (response.success) {
+                        // alert('Quantidade atualizada com sucesso!');
+                        // Atualize a quantidade na tela aqui, se necessário
+                        location.reload();
+                    } else {
+                        alert('Erro ao atualizar a quantidade: ' + response.message);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert('Ocorreu um erro ao atualizar a quantidade');
+                    console.error('Detalhes do erro:', error);
+                }
+
+            });
+        });
+    });
+
+    
+</script>

@@ -1,0 +1,7 @@
+[
+  {
+    "route": "POST /compra/detalhar",
+    "parameters": "(paymentMethod,selectedCartao,valorParcela)",
+    "status": 200
+  }
+]

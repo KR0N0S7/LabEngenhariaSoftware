@@ -1,0 +1,12 @@
+[
+  {
+    "route": "GET /error",
+    "parameters": "()",
+    "status": 404
+  },
+  {
+    "route": "GET /produto/js/bootstrap.min.js",
+    "parameters": "()",
+    "status": 404
+  }
+]

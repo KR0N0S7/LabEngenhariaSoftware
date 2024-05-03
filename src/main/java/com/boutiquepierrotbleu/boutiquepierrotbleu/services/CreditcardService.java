@@ -45,4 +45,8 @@ public class CreditcardService {
         // Integrate with real payment gateway API to process payment here
         return true;
     }
+
+    public List<Creditcard> getCartaoByClienteId(Long clienteId) {
+        return creditcardRepository.findByClienteId(clienteId);
+    }
 }

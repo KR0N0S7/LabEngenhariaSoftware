@@ -1,0 +1,5 @@
+[
+  "com/boutiquepierrotbleu/boutiquepierrotbleu/controllers/CompraController",
+  "com/boutiquepierrotbleu/boutiquepierrotbleu/repositories/CreditcardRepository",
+  "com/boutiquepierrotbleu/boutiquepierrotbleu/services/CreditcardService"
+]

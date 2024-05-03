@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{usr/layout.html}">
+<meta charset="UTF-8">
+<div layout:fragment="content">
+    <div class="alert alert-primary" th:if="${#lists.isEmpty(lista)}">
+        Nenhuma troca realizada.
+    </div>
+    <div th:if="${mensagem}" class="alert alert-success" role="alert">
+        <p th:text="${mensagem}"></p>
+    </div>
+    <div th:if="${not #lists.isEmpty(lista)}">
+
+        <table id="tabelaTroca" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Código da troca</th>
+                    <th>Data</th>
+                    <th>Valor</th>
+                    <th>Cliente</th>
+                    <th>Status</th>
+                    <th>Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="troca : ${lista}">
+                    <td th:text="${troca.codigo}"></td>
+                    <td th:text="${troca.data}"></td>
+                    <td th:text="${troca.valorTroca}"></td>
+                    <td th:text="${troca.cliente.nome}"></td>
+                    <td th:text="${troca.status}"></td>
+                                     
+                    <td>
+                        <a class="btn btn-primary btn-sm" th:href="@{/troca/detail(id=${troca.id})}">Verificar</a>
+                        
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</html>
+
+
+
+<div th:replace="pages/head :: head"></div>
+<body>
+	<div th:replace="pages/footer :: footer"></div>
+</body>
+
