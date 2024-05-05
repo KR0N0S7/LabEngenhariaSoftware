@@ -1,0 +1,25 @@
+.btn_logout{
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.492);
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.btn_logout:hover{
+    background-color: rgba(0, 0, 255, 0.511);
+    color: white;
+    transition-duration: 700ms;
+}
+
+.menu__item{
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: capitalize;
+}
