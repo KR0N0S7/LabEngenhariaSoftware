@@ -8,7 +8,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Produto;
+import com.boutiquepierrotbleu.boutiquepierrotbleu.integrations.JsonUtil;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.repositories.ProdutoRepository;
+
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Service
 public class ProdutoService {
@@ -45,7 +49,34 @@ public class ProdutoService {
     @Transactional
     public void liberarEstoque(Long id, int quantidade) throws Exception {
         Produto produto = obterProduto(id);
-        produto.releaseStock(quantidade);
+        produto.increaseEstoque(quantidade);
         produtoRepository.save(produto);
     }
+
+    public void toggleAtivoStatusById(Long produtoId) {
+        Produto produto = produtoRepository.findById(produtoId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Produto Id:" + produtoId));
+        produto.setAtivo(!produto.isAtivo()); // Toggle the ativo status
+        produtoRepository.save(produto);
+    }
+
+    public Mono<List<Produto>> getRecommendedProducts(Mono<String> recomendacoes) {
+        return recomendacoes
+                .flatMap(JsonUtil::parseJsonToProductNames) // Convert JSON to List<String> of product names
+                .flatMapMany(this::listarProdutosAPartirDeUmaListaDeNomesFlux) // Convert List<String> to Flux<Produto>
+                .collectList(); // Collect Flux<Produto> to List<Produto>
+    }
+
+    public Flux<Produto> listarProdutosAPartirDeUmaListaDeNomesFlux(List<String> nomeProduto) {
+        return Flux.fromIterable(produtoRepository.findByNomeIn(nomeProduto));
+    }
+
+    public List<Produto> listarProdutosAPartirDeUmaListaDeNomes(List<String> nomeProduto) {
+        return produtoRepository.findByNomeIn(nomeProduto);
+    }
+
+    // public List<Produto> listarProdutosAPartirDeUmaCategoria() {
+    // // TODO Auto-generated method stub
+    // return produtoRepository.listarProdutosAPartirDeUmaCategoria();
+    // }
 }

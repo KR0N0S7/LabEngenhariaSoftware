@@ -1,0 +1,10 @@
+[
+  {
+    "caller": "POST /compra/detalhar",
+    "callee": "com/boutiquepierrotbleu"
+  },
+  {
+    "caller": "POST /compra/detalhar",
+    "callee": "select c1_0.id,c1_0.apelido_cartao,c1_0.bandeira,c2_0.id,c2_0.ativo,c2_0.cpf,c2_0.email,c2_0.logged,c2_0.nome_completo,c2_0.senha,c2_0.telefone,c1_0.codigo_seguranca,c3_0.id,c3_0.carrinho_id,c4_0.id,c4_0.ativo,c4_0.cpf,c4_0.email,c4_0.logged,c4_0.nome_completo,c4_0.senha,c4_0.telefone,c3_0.data,ee1_0.id,ee1_0.bairro,ee1_0.cep,ee1_0.cidade,ee1_0.cliente_id,ee1_0.complemento,ee1_0.estado,ee1_0.rua,ee1_0.tipo,c3_0.forma_pagamento,c3_0.hora,c3_0.numero_compra,c3_0.numero_parcelas,c3_0.observacao,c3_0.status,c3_0.valor_desconto,c3_0.valor_final,c3_0.valor_frete,c3_0.valor_total,c1_0.cpf_titular,c1_0.data_validade,c1_0.nome_titular,c1_0.numero_cartao,c1_0.valor_parcela from creditcard c1_0 left join cliente c2_0 on c2_0.id=c1_0.cliente_id left join compra c3_0 on c3_0.id=c1_0.compra_id left join cliente c4_0 on c4_0.id=c3_0.cliente_id left join endereco ee1_0 on ee1_0.id=c3_0.endereco_id where c1_0.id=?"
+  }
+]

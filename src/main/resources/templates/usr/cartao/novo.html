@@ -7,45 +7,50 @@
 <div class="alert alert-primary" th:if="${mensagem != null}"
 		th:text="${mensagem}"></div>
 
-	<div class="card">
+	<div class="card mb-4">
 		<div class="card-header">
 			<p class="text-primary">Cartão de Crédito</p>
 		</div>
 		<div>
 			<div class="card-body">
 				<form class="row g-3" method="POST" th:object="${creditcard}"
-					th:action="@{/cartao/novo}">
+					th:action="@{/cartao/editar}">
 					<input type="hidden" th:field="*{id}"></input>
 
 					<div class="col-4">
+						<label for="nome" class="form-label">Apelido Cartão </label> <input
+							type="text" class="form-control" th:field="*{apelidoCartao}"
+							placeholder="Corporativo, pessoal, refeição, ...">
+					</div>
+					<div class="col-4">
 						<label for="nome" class="form-label">Número Cartão </label> <input
 							type="text" class="form-control" th:field="*{numeroCartao}"
-							placeholder="">
+							placeholder="0000.0000.0000.0000">
 					</div>
 					<div class="col-4">
 						<label for="nome" class="form-label">Nome Titular </label> <input
 							type="text" class="form-control" th:field="*{nomeTitular}"
-							placeholder="">
+							placeholder="Nome aqui...">
 					</div>
 					<div class="col-4">
 						<label for="nome" class="form-label">Data Validade </label> <input
 							type="text" class="form-control" th:field="*{dataValidade}"
-							placeholder="">
+							placeholder="DD/MM/AAAA">
 					</div>
 					<div class="col-4">
 						<label for="nome" class="form-label">Código Segurança </label> <input
 							type="text" class="form-control" th:field="*{codigoSeguranca}"
-							placeholder="">
+							placeholder="000">
 					</div>
 					<div class="col-4">
 						<label for="nome" class="form-label">Bandeira </label> <input
 							type="text" class="form-control" th:field="*{bandeira}"
-							placeholder="">
+							placeholder="Master, Visa, ...">
 					</div>
 					<div class="col-4">
 						<label for="nome" class="form-label">CPF Titular </label> <input
 							type="text" class="form-control" th:field="*{cpfTitular}"
-							placeholder="">
+							placeholder="000.000.000-00">
 					</div>
 					
 
@@ -53,10 +58,10 @@
 						
 					</div>
 
-				<div class="col-md-2">
-					<button type="submit" class="btn btn-primary">Salvar
-						Cadastro</button>
-				</div>
+					<div class="col-md-2">
+						<button type="submit" class="btn btn-primary">Salvar
+							Cadastro</button>
+					</div>
 
 				</form>
 			</div>
@@ -64,3 +69,8 @@
 	</div>
 </div>
 </html>
+
+<div th:replace="pages/head :: head"></div>
+<body>
+	<div th:replace="pages/footer :: footer"></div>
+</body>

@@ -1,0 +1,16 @@
+[
+  {
+    "type": "http",
+    "name": "HTTP server requests",
+    "children": [
+      {
+        "type": "route",
+        "name": "GET /webjars/bootstrap/js/bootstrap.min.js"
+      },
+      {
+        "type": "route",
+        "name": "GET /error"
+      }
+    ]
+  }
+]

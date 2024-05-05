@@ -1,0 +1,76 @@
+[
+  {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "name": "obterCliente",
+                        "type": "function",
+                        "static": false,
+                        "location": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/services/ClienteService.java:28"
+                      }
+                    ],
+                    "name": "ClienteService",
+                    "type": "class"
+                  }
+                ],
+                "name": "services",
+                "type": "package"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "name": "cadastroCliente",
+                        "type": "function",
+                        "static": false,
+                        "location": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/controllers/ClienteController.java:87"
+                      }
+                    ],
+                    "name": "ClienteController",
+                    "type": "class"
+                  }
+                ],
+                "name": "controllers",
+                "type": "package"
+              }
+            ],
+            "name": "boutiquepierrotbleu",
+            "type": "package"
+          }
+        ],
+        "name": "boutiquepierrotbleu",
+        "type": "package"
+      }
+    ],
+    "name": "com",
+    "type": "package"
+  },
+  {
+    "type": "http",
+    "name": "HTTP server requests",
+    "children": [
+      {
+        "type": "route",
+        "name": "GET /cliente/cadastro"
+      }
+    ]
+  },
+  {
+    "type": "database",
+    "name": "Database",
+    "children": [
+      {
+        "type": "query",
+        "name": "select c1_0.id,c1_0.ativo,c1_0.cpf,c1_0.email,c1_0.logged,c1_0.nome_completo,c1_0.senha,c1_0.telefone from cliente c1_0 where c1_0.id=?"
+      }
+    ]
+  }
+]

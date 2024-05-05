@@ -1,0 +1,134 @@
+[
+  {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "name": "setCliente",
+                        "type": "function",
+                        "static": false,
+                        "location": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/entities/CarrinhoCompra.java:60"
+                      },
+                      {
+                        "name": "setValorTotal",
+                        "type": "function",
+                        "static": false,
+                        "location": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/entities/CarrinhoCompra.java:52"
+                      },
+                      {
+                        "name": "setId",
+                        "type": "function",
+                        "static": false,
+                        "location": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/entities/CarrinhoCompra.java:36"
+                      }
+                    ],
+                    "name": "CarrinhoCompra",
+                    "type": "class"
+                  }
+                ],
+                "name": "entities",
+                "type": "package"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "name": "iniciarCompra",
+                        "type": "function",
+                        "static": false,
+                        "location": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/controllers/CompraController.java:176"
+                      },
+                      {
+                        "name": "initializeCompra",
+                        "type": "function",
+                        "static": false,
+                        "location": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/controllers/CompraController.java:87"
+                      }
+                    ],
+                    "name": "CompraController",
+                    "type": "class"
+                  }
+                ],
+                "name": "controllers",
+                "type": "package"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "name": "getEnderecosByClienteId",
+                        "type": "function",
+                        "static": false,
+                        "location": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/services/EnderecoService.java:38"
+                      }
+                    ],
+                    "name": "EnderecoService",
+                    "type": "class"
+                  }
+                ],
+                "name": "services",
+                "type": "package"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "name": "getEnderecosByClienteId",
+                        "type": "function",
+                        "static": false,
+                        "location": "src/main/java/com/boutiquepierrotbleu/boutiquepierrotbleu/repositories/EnderecoRepository.java:-1"
+                      }
+                    ],
+                    "name": "EnderecoRepository",
+                    "type": "class"
+                  }
+                ],
+                "name": "repositories",
+                "type": "package"
+              }
+            ],
+            "name": "boutiquepierrotbleu",
+            "type": "package"
+          }
+        ],
+        "name": "boutiquepierrotbleu",
+        "type": "package"
+      }
+    ],
+    "name": "com",
+    "type": "package"
+  },
+  {
+    "type": "http",
+    "name": "HTTP server requests",
+    "children": [
+      {
+        "type": "route",
+        "name": "POST /compra/iniciar"
+      }
+    ]
+  },
+  {
+    "type": "database",
+    "name": "Database",
+    "children": [
+      {
+        "type": "query",
+        "name": "select c1_0.id,c1_0.ativo,c1_0.cpf,c1_0.email,c1_0.logged,c1_0.nome_completo,c1_0.senha,c1_0.telefone from cliente c1_0 where c1_0.id=?"
+      },
+      {
+        "type": "query",
+        "name": "select e1_0.id,e1_0.bairro,e1_0.cep,e1_0.cidade,e1_0.cliente_id,e1_0.complemento,e1_0.estado,e1_0.rua,e1_0.tipo from endereco e1_0 where e1_0.cliente_id=?"
+      }
+    ]
+  }
+]

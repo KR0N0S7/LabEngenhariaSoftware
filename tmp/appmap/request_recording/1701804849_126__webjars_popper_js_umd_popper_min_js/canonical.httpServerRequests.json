@@ -1,0 +1,12 @@
+[
+  {
+    "route": "GET /error",
+    "parameters": "()",
+    "status": 404
+  },
+  {
+    "route": "GET /webjars/popper.js/umd/popper.min.js",
+    "parameters": "()",
+    "status": 404
+  }
+]

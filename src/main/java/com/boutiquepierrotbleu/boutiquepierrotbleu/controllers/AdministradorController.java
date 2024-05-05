@@ -1,16 +1,23 @@
 package com.boutiquepierrotbleu.boutiquepierrotbleu.controllers;
 
+import java.text.DecimalFormat;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Cliente;
+import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Compra;
+import com.boutiquepierrotbleu.boutiquepierrotbleu.entities.ItemProduto;
 import com.boutiquepierrotbleu.boutiquepierrotbleu.services.ClienteService;
+import com.boutiquepierrotbleu.boutiquepierrotbleu.services.CompraService;
+import com.boutiquepierrotbleu.boutiquepierrotbleu.services.ProdutoService;
 
 @Controller
 @RequestMapping("admin")
@@ -18,10 +25,16 @@ public class AdministradorController {
 
 	@Autowired
 	private ClienteService clienteService;
+
+	@Autowired
+	private CompraService compraService;
+
+	@Autowired
+	private ProdutoService produtoService;
 	
-	@RequestMapping(path = "editar")
+	@RequestMapping("editar")
 	public ModelAndView editarcliente(@RequestParam(required = false) Long id) {
-		ModelAndView mv = new ModelAndView("adm/index.html");
+		ModelAndView mv = new ModelAndView("adm/main/index.html");
 		Cliente cliente;
 		if (id == null) {
 			cliente = new Cliente();
@@ -34,13 +47,43 @@ public class AdministradorController {
 			}
 		}
 		mv.addObject("admin", cliente);
+		List<Compra> compras = compraService.listarCompras();
+		Double lucro = 0.0;
+		Double valorVenda = 0.0;
+		Double valorCusto = 0.0;
+		Integer quantiaProduto = 0;
+		List<ItemProduto> itens = null;
+		for (Compra compra : compras) {
+			itens = compra.getItens();
+			for(ItemProduto item : itens) {
+				quantiaProduto = item.getQuantidade();
+				valorVenda += item.getProduto().getPreco()*quantiaProduto;
+				valorCusto += item.getProduto().getCusto()*quantiaProduto;
+			}
+		}
+		lucro = valorVenda - valorCusto;
+		DecimalFormat decimalFormat = new DecimalFormat("#.##");
+
+        String numeroFormatado = decimalFormat.format(lucro);
+		mv.addObject("vendas", compras.size());
+		mv.addObject("clientes", clienteService.listarClientes().size());
+		mv.addObject("produtos", produtoService.listarProdutos().size());
+
+		mv.addObject("lucro", numeroFormatado);
+		return mv;
+	}
+
+	@RequestMapping("main")
+	public ModelAndView mainAdmin() {
+		ModelAndView mv = new ModelAndView("adm/index.html");
+		
 		return mv;
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, path = "editar")
+	@PostMapping("editar")
 	public ModelAndView clienteSalvo(Cliente cliente, BindingResult bidingResult, RedirectAttributes redirectAttributes) {
 		if (bidingResult.hasErrors()) {
-			ModelAndView mv = new ModelAndView("admin/form.html");
+			ModelAndView mv = new ModelAndView("admin/cliente/novo");
 			mv.addObject("admin", cliente);
 			return mv;
 		}
@@ -55,7 +98,7 @@ public class AdministradorController {
 		} else {
 			mv.addObject("admin", cliente);
 		}
-		redirectAttributes.addFlashAttribute("mensagem", "Cliente salvo com sucesso.");
+		redirectAttributes.addFlashAttribute("clienteCreatedSuccess", true);
 		return mv;
 	}
 	
@@ -78,4 +121,14 @@ public class AdministradorController {
 		}
 		return mv;
 	}
+
+	@RequestMapping("cliente")
+	public ModelAndView novoCliente() {
+		ModelAndView mv = new ModelAndView("adm/cliente/novo");
+		Cliente cliente = new Cliente();
+		mv.addObject("cliente", cliente);
+		return mv;
+	}
+
+
 }

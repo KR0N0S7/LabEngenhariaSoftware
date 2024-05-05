@@ -54,7 +54,17 @@
 						</a>
 							<ul class="dropdown-menu"
 								aria-labelledby="navbarDropdownMenuLink">
-								<li><a class="dropdown-item" th:href="@{/cliente/editar(id=${id})}">Editar</a></li>
+								<li><a class="dropdown-item" th:href="@{/cliente/editar(id=${session.id})}">Editar</a></li>
+								
+							</ul></li>
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="navbarDropdownMenuLink" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"> Senha
+						</a>
+							<ul class="dropdown-menu"
+								aria-labelledby="navbarDropdownMenuLink">
+								<li><a class="dropdown-item" th:href="@{/cliente/senha(id=${session.id})}">Alterar</a></li>
 								
 							</ul></li>
 						<li class="nav-item dropdown"><a
@@ -73,8 +83,8 @@
 							data-bs-toggle="dropdown" aria-expanded="false"> Cartões de Crédito </a>
 							<ul class="dropdown-menu"
 								aria-labelledby="navbarDropdownMenuLink">
-								<li><a class="dropdown-item" th:href="@{/cupom/listar}">Listar</a></li>
-								<li><a class="dropdown-item" th:href="@{/cupom/novo}">Cadastrar</a></li>
+								<li><a class="dropdown-item" th:href="@{/cartao/listar}">Listar</a></li>
+								<li><a class="dropdown-item" th:href="@{/cartao/novo}">Cadastrar</a></li>
 								
 							</ul></li>
 						<li class="nav-item dropdown"><a
@@ -83,8 +93,8 @@
 							data-bs-toggle="dropdown" aria-expanded="false"> Cupons </a>
 							<ul class="dropdown-menu"
 								aria-labelledby="navbarDropdownMenuLink">
-								<li><a class="dropdown-item" th:href="@{/}">Listar</a></li>
-								<li><a class="dropdown-item" th:href="@{//novo}">Cadastrar</a></li>
+								<li><a class="dropdown-item" th:href="@{/cupom/listar}">Listar</a></li>
+								
 							</ul></li>
 
 						<li class="nav-item dropdown"><a
@@ -93,10 +103,36 @@
 							data-bs-toggle="dropdown" aria-expanded="false"> Compras </a>
 							<ul class="dropdown-menu"
 								aria-labelledby="navbarDropdownMenuLink">
-								<li><a class="dropdown-item" th:href="@{/}">Listar</a></li>
-								<li><a class="dropdown-item" th:href="@{//novo}">Cadastrar</a></li>
+								<li><a class="dropdown-item" th:href="@{/compra/listar}">Listar</a></li>
+								
 							</ul></li>
-					</ul>
+							<li class="nav-item dropdown"><a
+								class="nav-link dropdown-toggle" href="#"
+								id="navbarDropdownMenuLink" role="button"
+								data-bs-toggle="dropdown" aria-expanded="false"> Trocas </a>
+								<ul class="dropdown-menu"
+									aria-labelledby="navbarDropdownMenuLink">
+									<li><a class="dropdown-item" th:href="@{/troca/listar}">Listar</a></li>
+									
+								</ul></li>
+
+
+								<li class="nav-item dropdown"><a
+									class="nav-link dropdown-toggle" href="#"
+									id="navbarDropdownMenuLink" role="button"
+									data-bs-toggle="dropdown" aria-expanded="false"> TESTE </a>
+									<ul class="dropdown-menu"
+										aria-labelledby="navbarDropdownMenuLink">
+										<li><a class="dropdown-item" th:href="@{/cliente/teste}">Testar</a></li>
+										
+									</ul></li>
+						</ul>
+						
+						
+
+						<a class="btn btn-primary btn-sm ml-3 ms-auto" th:href="@{/user/logout}" 
+						onclick="return confirm('Você realmente deseja encerrar sessão?')">Logout</a>
+						
 				</div>
 			</div>
 		</nav>
@@ -118,6 +154,6 @@
 		th:src="@{/assets/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.js}"></script>
 
 	<div layout:fragment="scripts"></div>
-
+	
 </body>
 </html>

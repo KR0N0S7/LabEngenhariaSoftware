@@ -1,0 +1,18 @@
+[
+  {
+    "caller": "GET /carrinho/detalhar",
+    "callee": "com/boutiquepierrotbleu"
+  },
+  {
+    "caller": "GET /carrinho/detalhar",
+    "callee": "select ip1_0.carrinho_compra_id,ip1_0.id,c1_0.id,c1_0.carrinho_id,c2_0.id,c2_0.ativo,c2_0.cpf,c2_0.email,c2_0.logged,c2_0.nome_completo,c2_0.senha,c2_0.telefone,c1_0.data,ee1_0.id,ee1_0.bairro,ee1_0.cep,ee1_0.cidade,ee1_0.cliente_id,ee1_0.complemento,ee1_0.estado,ee1_0.rua,ee1_0.tipo,c1_0.forma_pagamento,c1_0.hora,c1_0.numero_compra,c1_0.numero_parcelas,c1_0.observacao,c1_0.status,c1_0.valor_desconto,c1_0.valor_final,c1_0.valor_frete,c1_0.valor_total,ip1_0.preco,p1_0.id,p1_0.ativo,c4_0.id,c4_0.categoria,c4_0.porcentagem,p1_0.cor,p1_0.custo,p1_0.descricao,p1_0.estilo,p1_0.estoque,p1_0.genero,p1_0.imagem,p1_0.marca,p1_0.material,p1_0.nome,p1_0.preco,p1_0.tamanho,p1_0.tipo,ip1_0.quantidade from item_produto ip1_0 left join compra c1_0 on c1_0.id=ip1_0.compra_id left join cliente c2_0 on c2_0.id=c1_0.cliente_id left join endereco ee1_0 on ee1_0.id=c1_0.endereco_id left join produto p1_0 on p1_0.id=ip1_0.produto_id left join valor_categoria c4_0 on c4_0.id=p1_0.categoria_id where ip1_0.carrinho_compra_id=?"
+  },
+  {
+    "caller": "com/boutiquepierrotbleu",
+    "callee": "select c1_0.id,c1_0.ativo,c1_0.cpf,c1_0.email,c1_0.logged,c1_0.nome_completo,c1_0.senha,c1_0.telefone from cliente c1_0 where c1_0.id=?"
+  },
+  {
+    "caller": "com/boutiquepierrotbleu",
+    "callee": "select cc1_0.id,cc1_0.ativo,cc1_0.cliente_id,cc1_0.valor_total from carrinho_compra cc1_0 where cc1_0.cliente_id=? and cc1_0.ativo=?"
+  }
+]

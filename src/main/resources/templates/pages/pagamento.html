@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
-    <div th:replace="pages/head :: head"></div>
+
+<head>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<div th:replace="pages/head :: head"></div>
 
 <body>
     <div th:replace="pages/header :: header"></div>
@@ -9,81 +15,237 @@
         <div class="container my-10">
             <div class="flex flex-wrap">
                 <div class="w-6/12">
-                    <div th:replace="pages/passo :: passo"></div>
-                
+                    <!--<div th:replace="pages/passo :: passo"></div>-->
+
+
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="50"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+
                     <div class="flex justify-between my-4">
                         <h2 class="font-bold text-xl">
-                          Método de pagamento
+                            Método de pagamento
                         </h2>
                     </div>
 
                     <div>
-                        <form action="" method="" class="flex flex-col">
+                        <form th:action="@{/compra/detalhar}" th:object="${creditcard}" method="post"
+                            modelAttribute="compra" class="flex flex-col">
+                            <!-- Credit Card Radio Button -->
                             <div class="flex justify-between items-center">
-                                
                                 <div class="flex">
-                                    <input type="radio" class="w-5">    
+                                    <input type="radio" id="creditCardRadio" class="w-5" name="paymentMethod">
                                     <div class="flex flex-col ml-3">
                                         <h2 class="font-medium">Cartao de crédito</h2>
                                     </div>
                                 </div>
-
                                 <img th:src="@{/img/pagamento.png}" alt="pagamento">
                             </div>
                             
+                            <div id="creditCardContainer">
+                            <!-- Credit Card Fields - initially hidden -->
+                                <div class="creditCardFields" style="display:none;">
+                                    <!--<label class="font-bold">Selecione um Cartão.</label>-->
+                                    <select class="form-select" th:object="${creditcard}" name="selectedCartao"
+                                        id="cartaoDropdown" onchange="updateFields()">
+                                        <option value="" selected="selected">Selecione um Cartão:</option>
+                                        <option th:each="creditcard : ${lista}" th:value="${creditcard.id}"
+                                            th:data-numero="${creditcard.numeroCartao}"
+                                            th:data-nome="${creditcard.nomeTitular}"
+                                            th:data-validade="${creditcard.dataValidade}"
+                                            th:data-codigo="${creditcard.codigoSeguranca}"
+                                            th:data-bandeira="${creditcard.bandeira}" 
+                                            th:data-cpf="${creditcard.cpfTitular}"
+                                            th:data-parcela="${creditcard.valorParcela}"
+                                            th:text="${creditcard.apelidoCartao}"></option>
+                                    </select>
 
-                            <input type="text" placeholder="Número do Cartão" class="my-5 outline-none">
-                            <input type="text" placeholder="Nome do Cartão" class="my-5 outline-none">
-                            <div class="flex justify-between my-5">
-                                <!-- no backend podems usar esse date que ja mostra o mes, ano, dia -->
 
-                                <!-- <input type="datetime">  -->
+                                    <input class="my-3" placeholder="Número do Cartão" type="text" id="numeroCartaoInput"
+                                        readonly />
+                                    <input placeholder="Nome do Titular" type="text" id="nomeTitularInput" readonly />
+                                    <input class="my-3" placeholder="dataValidade" type="text" id="dataValidadeInput"
+                                        readonly />
+                                    <input placeholder="Código de Segurança" type="text" id="codigoSegurancaInput"
+                                        readonly />
+                                    <input class="my-3" placeholder="Bandeira" type="text" id="bandeiraInput" readonly />
+                                    <input placeholder="CPF do Titular" type="text" id="cpfTitularInput" readonly />
+                                    <input type="number" placeholder="Valor da Parcela" name="valorParcela" 
+                                        step="0.01"
+                                        id="valorParcelaInput" class="valorParcelaInput" />
 
-                                <!-- só comentar ou descomentar o que for usar -->
+                                    <div>
+                                        <button type="button"
+                                            class="addCardButton bg-purple px-3 py-3 text-white hover:bg-black transition-all duration-500">+</button>
 
-                                <!-- ou se preferir podemos fazer com select, seria desse jeito -->
-                                <select name="date" id="date" class="font-medium">
-                                    <option value="janeiro">janeiro</option>
-                                    <option value="fevereiro">fevereiro</option>
-                                    <option value="marco">março</option>
-                                    <option value="abril">abril</option>
-                                </select>
-
-
-                                <select name="years" id="years" class="font-medium">
-                                    <option value="2022">2022</option>
-                                    <option value="2023">2024</option>
-                                    <option value="2024">2023</option>
-                                    <option value="2025">2025</option>
-                                </select>
-
-                                <input type="text" placeholder="CCV" >
+                                    </div>
+                                </div>
                             </div>
-                            
 
+
+
+                            <div class="flex my-5">
+                                <input type="radio" class="w-5" name="paymentMethod">
+                                <div class="flex flex-col ml-3">
+                                    <h2 class="font-medium">Boleto bancário</h2>
+                                </div>
+                            </div>
+
+                            <div class="flex my-3">
+                                <input type="radio" class="w-5" name="paymentMethod">
+                                <div class="flex flex-col ml-3">
+                                    <h2 class="font-medium">PIX</h2>
+                                </div>
+                            </div>
+
+                            <div id="total" th:text="${total}" style="display: none;"></div>
+
+                            <div class="flex justify-between my-5 items-center  ">
+
+                                <a class="hover:border-solid hover:border-2 hover:border-gray-dark px-1 py-1"
+                                    th:href="@{/compra/cupom}">Retornar</a>
+                                <button id="botaoContinuar" onclick="return validarParcelaAoContinuar();"
+                                    class="bg-purple px-3 py-3 text-white hover:bg-black transition-all duration-500"
+                                    data-total="${total}" 
+                                    type="submit">Continue</button>
+
+                            </div>
 
                         </form>
                     </div>
 
-                    <div class="flex justify-between my-5 items-center  ">
-
-                        <a href="#" class="hover:border-solid hover:border-2 hover:border-gray-dark px-1 py-1">Retornar</a>
-                        <button class="bg-purple px-3 py-3 text-white hover:bg-black transition-all duration-500">Continue</button>
-
-                    </div>
-
                 </div>
-                
+
                 <div class="w-6/12 pl-10">
                     <div th:replace="pages/roupascarrinho :: roupascarrinho"></div>
                 </div>
-                
+
             </div>
         </div>
     </section>
 
 
     <div th:replace="pages/footer :: footer"></div>
-</body>
-</html>
 
+    <!-- JavaScript to toggle visibility of credit card fields -->
+    <script>
+        // Get all radio buttons with the name 'paymentMethod'
+        var radioButtons = document.querySelectorAll('input[name="paymentMethod"]');
+
+        // Function to toggle credit card fields
+        function toggleCreditCardFields() {
+            var creditCardFields = document.querySelector(".creditCardFields");
+            var creditCardRadio = document.getElementById("creditCardRadio");
+            if (creditCardRadio.checked) {
+                creditCardFields.style.display = "block";
+            } else {
+                creditCardFields.style.display = "none";
+            }
+        }
+
+        // Attach the function to the 'change' event for all radio buttons
+        radioButtons.forEach(function (radio) {
+            radio.addEventListener("change", toggleCreditCardFields);
+        });
+    </script>
+
+    <script>
+        function updateFields() {
+            const dropdown = document.getElementById('cartaoDropdown');
+            const selectedOption = dropdown.options[dropdown.selectedIndex];
+
+            if (selectedOption.value === "") {
+                // Clear all fields if empty option is selected
+                document.getElementById('numeroCartaoInput').value = "";
+                document.getElementById('nomeTitularInput').value = "";
+                document.getElementById('dataValidadeInput').value = "";
+                document.getElementById('codigoSegurancaInput').value = "";
+                document.getElementById('bandeiraInput').value = "";
+                document.getElementById('cpfTitularInput').value = "";
+            } else {
+                document.getElementById('numeroCartaoInput').value = selectedOption.getAttribute('data-numero');
+                document.getElementById('nomeTitularInput').value = selectedOption.getAttribute('data-nome');
+                document.getElementById('dataValidadeInput').value = selectedOption.getAttribute('data-validade');
+                document.getElementById('codigoSegurancaInput').value = selectedOption.getAttribute('data-codigo');
+                document.getElementById('bandeiraInput').value = selectedOption.getAttribute('data-bandeira');
+                document.getElementById('cpfTitularInput').value = selectedOption.getAttribute('data-cpf');
+            }
+        }
+    </script>
+ 
+    <script>
+        function updateSelectOptions() {
+            var allSelectedValues = Array.from(document.querySelectorAll('.creditCardFields select'))
+                                        .map(select => select.value)
+                                        .filter(value => value); // Filtra valores não vazios
+
+            document.querySelectorAll('.creditCardFields select').forEach(select => {
+                Array.from(select.options).forEach(option => {
+                    option.style.display = allSelectedValues.includes(option.value) ? 'none' : 'block';
+                });
+            });
+        }
+
+        function addNewCardFields(button) {
+            var allContainers = document.querySelectorAll('.creditCardFields');
+            var lastContainer = allContainers[allContainers.length - 1];
+            var select = lastContainer.querySelector('select');
+
+            if (select && select.value) {
+                var clone = lastContainer.cloneNode(true); // Clona o último conjunto de campos
+                clone.querySelector('select').selectedIndex = 0; // Reseta o select
+                clone.querySelector('.valorParcelaInput').value = ''; // Reseta o valor da parcela
+
+                // Remova o botão '+' do clone para evitar duplicação
+                var addButtonClone = clone.querySelector('.addCardButton');
+                addButtonClone.parentNode.removeChild(addButtonClone);
+
+                // Adiciona o clone ao DOM após o último conjunto de campos
+                lastContainer.after(clone);
+
+                // Move o botão '+' para depois do clone
+                button.parentNode.removeChild(button);
+                clone.after(button);
+
+                updateSelectOptions(); // Atualiza as opções dos selects
+            } else {
+                alert("Por favor, selecione um cartão antes de adicionar outro.");
+            }
+        }
+
+        // Selecione todos os botões '+' e adicione o evento de clique
+        document.querySelectorAll('.addCardButton').forEach(button => {
+            button.addEventListener('click', function() {
+                addNewCardFields(this);
+            });
+        });
+
+        // Atualização inicial das opções de seleção
+        updateSelectOptions();
+    </script>
+    <script>
+        function validarParcelaAoContinuar() {
+            var parcelas = document.getElementsByClassName('valorParcelaInput');
+            var somaParcelas = 0;
+            for (var i = 0; i < parcelas.length; i++) {
+                somaParcelas += parseFloat(parcelas[i].value) || 0;
+            }
+            console.log(somaParcelas);
+            var divTotal = document.getElementById('total');
+            var valorFinal = parseFloat(divTotal.innerText);
+            var tolerancia = 0.01;
+            console.log(valorFinal);
+
+            if (somaParcelas < 10 || Math.abs(somaParcelas - valorFinal) > tolerancia) {
+                alert("Valor da parcela deve ser entre R$10 e o valor final da compra.");
+                return false; // Impede a submissão do formulário
+            }
+        
+            return true; // Permite a submissão do formulário
+        }
+    </script>        
+
+</body>
+
+</html>

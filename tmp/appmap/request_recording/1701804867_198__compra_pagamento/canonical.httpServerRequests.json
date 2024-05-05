@@ -1,0 +1,7 @@
+[
+  {
+    "route": "POST /compra/pagamento",
+    "parameters": "(couponSelect)",
+    "status": 200
+  }
+]

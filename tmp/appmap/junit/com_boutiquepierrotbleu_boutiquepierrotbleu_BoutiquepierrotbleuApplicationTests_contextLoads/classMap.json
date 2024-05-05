@@ -1,0 +1,32 @@
+[
+  {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "name": "contextLoads",
+                    "type": "function",
+                    "static": false,
+                    "location": "src/test/java/com/boutiquepierrotbleu/boutiquepierrotbleu/BoutiquepierrotbleuApplicationTests.java:11"
+                  }
+                ],
+                "name": "BoutiquepierrotbleuApplicationTests",
+                "type": "class"
+              }
+            ],
+            "name": "boutiquepierrotbleu",
+            "type": "package"
+          }
+        ],
+        "name": "boutiquepierrotbleu",
+        "type": "package"
+      }
+    ],
+    "name": "com",
+    "type": "package"
+  }
+]

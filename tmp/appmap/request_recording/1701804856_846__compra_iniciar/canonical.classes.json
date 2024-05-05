@@ -1,0 +1,6 @@
+[
+  "com/boutiquepierrotbleu/boutiquepierrotbleu/controllers/CompraController",
+  "com/boutiquepierrotbleu/boutiquepierrotbleu/entities/CarrinhoCompra",
+  "com/boutiquepierrotbleu/boutiquepierrotbleu/repositories/EnderecoRepository",
+  "com/boutiquepierrotbleu/boutiquepierrotbleu/services/EnderecoService"
+]
