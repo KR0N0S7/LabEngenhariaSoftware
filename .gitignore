@@ -6,6 +6,7 @@ target/
 !**/src/main/resources/application.yml
 !**/target/classes/application.yml
 !logs/
+less\logs\application.log
 
 ### STS ###
 .apt_generated
