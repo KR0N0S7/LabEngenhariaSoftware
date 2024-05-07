@@ -37,30 +37,20 @@
             <img th:src="@{img/marcas.png}" alt="marcas de roupas">
             <div class="swiper swiper-roupas my-10" >
                 <div class="swiper-wrapper">
-
-                    <div class="swiper-slide"> 
+                    
+                    <!-- <div class="swiper-slide" th:each="product: ${products}">
                         <div class="w-full">
-                            <a href="">
-                                <img th:src="@{img/swiper-1.png}" alt="roupas">
+                            <a th:href="@{'/produto/' + ${produto.id}}">
+                                <img style="width:200px;" th:src="@{'/media/' + ${product.image}}">
                                 <div class="text-center my-2">
-                                    <h2 class="font-bold">Casaco Zebra</h2>
-                                    <h3 class="font-bold text-purple">R$1.300</h3>
+                                    <h2 class="font-bold" th:text="${produto.name}"></h2>
+                                    <h3 class="font-bold text-purple" th:text="'$' + ${product.price}"></h3>
                                 </div>
                             </a>
                         </div>
-                    </div>
-                    <div class="swiper-slide"> 
-                        <div class="w-full">
-                            <a href="#">
-                                <img th:src="@{img/swiper-1.png}" alt="roupas">
-                                <div class="text-center my-2">
-                                    <h2 class="font-bold">Casaco Zebra</h2>
-                                    <h3 class="font-bold text-purple">R$1.300</h3>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="swiper-slide"> 
+                    </div> -->
+            
+                     <div class="swiper-slide"> 
                         <div class="w-full">
                             <a href="#">
                                 <img th:src="@{img/swiper-1.png}" alt="roupas">
@@ -115,6 +105,17 @@
                             </a>
                         </div>
                     </div>
+                    <div class="swiper-slide"> 
+                        <div class="w-full">
+                            <a href="#">
+                                <img th:src="@{img/swiper-1.png}" alt="roupas">
+                                <div class="text-center my-2">
+                                    <h2 class="font-bold">Casaco Zebra</h2>
+                                    <h3 class="font-bold text-purple">R$1.300</h3>
+                                </div>
+                            </a>
+                        </div>
+                    </div> 
 
                 </div>
                 <div class="swiper-button-next"></div>
