@@ -30,7 +30,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin: 0px;">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="#!">Pierrot Bleu</a>
+            <a class="navbar-brand" th:href="@{/}">Pierrot Bleu</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -39,16 +39,16 @@
                     <li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{/}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" th:href="@{/}"></a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <!-- <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">Shop</a> -->
+                        <!-- <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" th:href="@{/}">Produtos</a></li>
                             <li>
                                 <hr class="dropdown-divider" />
                             </li>
-                            <!--<li><a class="dropdown-item" href="#!">Produtos Populares</a></li>
-                                <li><a class="dropdown-item" href="#!">Novidades</a></li>-->
-                        </ul>
+                            <li><a class="dropdown-item" href="#!">Produtos Populares</a></li>
+                                <li><a class="dropdown-item" href="#!">Novidades</a></li>
+                        </ul> -->
                     </li>
                 </ul>
                 <form class="d-flex">
@@ -111,8 +111,8 @@
                                 <li><a href="#">Page 3</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">Portfolio</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <!-- <li><a href="#">Portfolio</a></li> -->
+                
                     </ul>
                 </div>
                 
@@ -159,7 +159,7 @@
                                     </div>
                                     <form method="post" class="flex justify-center my-3">
                                         <input type="hidden" th:value="${produto.id}" name="produtoId" />
-                                        <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" 
+                                        <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md" 
                                             th:attr="data-product-id=${produto.id}" th:disabled="${produto.estoque == 0}">
                                             Adicionar ao Carrinho</button>
                                     </form>
@@ -242,12 +242,13 @@
     <!-- Bootstrap core JS-->
     <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js}"></script>
     <!-- Core theme JS-->
+    <script th:src="@{/js/dropdown-roupas.js}"></script>
     <script th:src="@{js/scripts.js}"></script>
     <script th:src="@{js/jquery.min.js}"></script>
     <script th:src="@{js/popper.js}"></script>
     <script th:src="@{js/bootstrap.min.js}"></script>
     <script th:src="@{js/main.js}"></script>
-    <script th:src="@{/js/dropdown-roupas.js}"></script>
+    
 </body>
 <div th:replace="pages/footer :: footer"></div>
 

@@ -6,10 +6,11 @@
 <body>
     <style>
         .banner-principal {
-            background-image: url(/img/banner-principal.png);
+            background-image: url(/img/Banner-loja-de-roupas-3.webp);
             height: 100vh;
             background-repeat: no-repeat;
             background-size: cover;
+            background-position: top;
         }
     </style>
 
@@ -19,7 +20,7 @@
 
         <div class="container">
             <div class="pt-52">
-                <img th:src="@{img/desconto.png}" alt="desconto">
+                <!-- <img th:src="@{img/desconto.png}" alt="desconto"> -->
                 <div>
                     <a th:href="@{produto/listarProdutos}" class="bg-purple px-5 py-5 rounded-2xl inline-block hover:bg-black hover:text-white transition duration-500">
                         Compre Agora <ion-icon name="arrow-forward-outline"></ion-icon>
