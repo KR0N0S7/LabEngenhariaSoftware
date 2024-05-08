@@ -1,9 +1,14 @@
 var swiper = new Swiper(".swiper-roupas", {
-    slidesPerView: 4,
-    spaceBetween: 30,
-    
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-  });
+  slidesPerView: 'auto',
+  spaceBetween: 30,
+  loop: true,
+  autoplay: {
+    delay: 1000,
+    disableOnInteraction: false,
+  },
+  
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+});

@@ -530,3 +530,164 @@ org.attoparser.ParseException: (Line = 32, Column = 55) Incomplete structure: "<
 
 2024-05-07T21:34:43.846-03:00  WARN 4852 --- [http-nio-8080-exec-6] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-6][pages/teste] Deprecated unwrapped fragment expression "pages/head :: head" found in template pages/teste, line 41, col 6. Please use the complete syntax of fragment expressions instead ("~{pages/head :: head}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
 2024-05-07T21:34:43.848-03:00  WARN 4852 --- [http-nio-8080-exec-6] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-6][pages/teste] Deprecated unwrapped fragment expression "pages/footer :: footer" found in template pages/teste, line 43, col 7. Please use the complete syntax of fragment expressions instead ("~{pages/footer :: footer}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-05-07T21:37:31.955-03:00  INFO 4852 --- [Thread-14] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-05-07T21:37:31.961-03:00  INFO 4852 --- [Thread-14] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-05-07T21:37:49.170-03:00  INFO 4852 --- [restartedMain] c.b.b.BoutiquepierrotbleuApplication     : Starting BoutiquepierrotbleuApplication using Java 17.0.10 with PID 4852 (C:\Users\srodr\Desktop\less\target\classes started by Gustavo in C:\Users\srodr\Desktop\less)
+2024-05-07T21:37:49.171-03:00 DEBUG 4852 --- [restartedMain] c.b.b.BoutiquepierrotbleuApplication     : Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-05-07T21:37:49.172-03:00  INFO 4852 --- [restartedMain] c.b.b.BoutiquepierrotbleuApplication     : No active profile set, falling back to 1 default profile: "default"
+2024-05-07T21:37:50.101-03:00  INFO 4852 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-05-07T21:37:50.103-03:00  INFO 4852 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2024-05-07T21:37:50.166-03:00  INFO 4852 --- [restartedMain] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2024-05-07T21:37:50.380-03:00  INFO 4852 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-05-07T21:37:50.387-03:00  INFO 4852 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-05-07T21:37:50.414-03:00  INFO 4852 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2024-05-07T21:37:50.433-03:00  INFO 4852 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6c3e63c
+2024-05-07T21:37:50.435-03:00  INFO 4852 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2024-05-07T21:37:50.437-03:00  WARN 4852 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000511: The 5.7.0 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2024-05-07T21:37:51.095-03:00  INFO 4852 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-05-07T21:37:52.141-03:00  WARN 4852 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-05-07T21:37:53.129-03:00  INFO 4852 --- [restartedMain] c.b.b.BoutiquepierrotbleuApplication     : Started BoutiquepierrotbleuApplication in 4.003 seconds (process running for 2165.311)
+2024-05-07T21:37:53.387-03:00  INFO 4852 --- [http-nio-8080-exec-3] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-05-07T21:37:53.412-03:00  WARN 4852 --- [http-nio-8080-exec-3] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-3][pages/home] Deprecated unwrapped fragment expression "pages/head :: head" found in template pages/home, line 4, col 6. Please use the complete syntax of fragment expressions instead ("~{pages/head :: head}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-05-07T21:37:53.415-03:00  WARN 4852 --- [http-nio-8080-exec-3] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-3][pages/home] Deprecated unwrapped fragment expression "pages/header :: header" found in template pages/home, line 6, col 6. Please use the complete syntax of fragment expressions instead ("~{pages/header :: header}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-05-07T21:37:53.420-03:00  WARN 4852 --- [http-nio-8080-exec-3] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-3][pages/home] Deprecated unwrapped fragment expression "pages/footer :: footer" found in template pages/home, line 135, col 6. Please use the complete syntax of fragment expressions instead ("~{pages/footer :: footer}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-05-07T21:38:11.492-03:00  INFO 4852 --- [Thread-16] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2024-05-07T21:38:11.496-03:00  INFO 4852 --- [Thread-16] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2024-05-07T21:38:31.191-03:00  INFO 4852 --- [restartedMain] c.b.b.BoutiquepierrotbleuApplication     : Starting BoutiquepierrotbleuApplication using Java 17.0.10 with PID 4852 (C:\Users\srodr\Desktop\less\target\classes started by Gustavo in C:\Users\srodr\Desktop\less)
+2024-05-07T21:38:31.192-03:00 DEBUG 4852 --- [restartedMain] c.b.b.BoutiquepierrotbleuApplication     : Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-05-07T21:38:31.192-03:00  INFO 4852 --- [restartedMain] c.b.b.BoutiquepierrotbleuApplication     : No active profile set, falling back to 1 default profile: "default"
+2024-05-07T21:38:32.140-03:00  INFO 4852 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-05-07T21:38:32.140-03:00  INFO 4852 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2024-05-07T21:38:32.220-03:00  INFO 4852 --- [restartedMain] o.a.c.c.C.[Tomcat-2].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2024-05-07T21:38:32.493-03:00  INFO 4852 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-05-07T21:38:32.499-03:00  INFO 4852 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-05-07T21:38:32.510-03:00  INFO 4852 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2024-05-07T21:38:32.528-03:00  INFO 4852 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-3 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5cedc834
+2024-05-07T21:38:32.529-03:00  INFO 4852 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2024-05-07T21:38:32.532-03:00  WARN 4852 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000511: The 5.7.0 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2024-05-07T21:38:32.851-03:00  INFO 4852 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-05-07T21:38:33.848-03:00  WARN 4852 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-05-07T21:38:34.640-03:00  INFO 4852 --- [restartedMain] c.b.b.BoutiquepierrotbleuApplication     : Started BoutiquepierrotbleuApplication in 3.498 seconds (process running for 2206.828)
+2024-05-07T21:38:34.666-03:00  INFO 4852 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat-2].[localhost].[/]     : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-05-07T21:38:34.672-03:00 DEBUG 4852 --- [http-nio-8080-exec-2] c.b.b.r.c.ClienteRepositoryImpl          : Session: 7, Gustavo santos
+2024-05-07T21:38:34.673-03:00 DEBUG 4852 --- [http-nio-8080-exec-2] c.b.b.r.c.ClienteRepositoryImpl          : Session ID::::::::::::::::::: 7
+2024-05-07T21:38:34.673-03:00 DEBUG 4852 --- [http-nio-8080-exec-2] c.b.b.r.c.ClienteRepositoryImpl          : Logica!!!!!!!!!!!!!!::::::::::::::::::: false
+2024-05-07T21:38:34.674-03:00 DEBUG 4852 --- [http-nio-8080-exec-2] c.b.b.r.c.ClienteRepositoryImpl          : Caiu aqui!!!!!!!!!!!!:::::::::::::::::::
+2024-05-07T21:38:34.807-03:00  WARN 4852 --- [http-nio-8080-exec-1] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-1][usr/index] Deprecated unwrapped fragment expression "pages/head :: head" found in template usr/index, line 14, col 8. Please use the complete syntax of fragment expressions instead ("~{pages/head :: head}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-05-07T21:38:34.829-03:00  WARN 4852 --- [http-nio-8080-exec-1] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-1][usr/index] Deprecated unwrapped fragment expression "pages/footer :: footer" found in template usr/index, line 19, col 7. Please use the complete syntax of fragment expressions instead ("~{pages/footer :: footer}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-05-07T21:38:45.294-03:00  WARN 4852 --- [http-nio-8080-exec-9] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-9][usr/cadastro] Deprecated unwrapped fragment expression "pages/header :: header" found in template usr/cadastro, line 18, col 10. Please use the complete syntax of fragment expressions instead ("~{pages/header :: header}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-05-07T21:38:45.328-03:00  WARN 4852 --- [http-nio-8080-exec-9] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-9][usr/cadastro] Deprecated unwrapped fragment expression "pages/footer :: footer" found in template usr/cadastro, line 128, col 10. Please use the complete syntax of fragment expressions instead ("~{pages/footer :: footer}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-05-07T21:40:05.436-03:00  INFO 4852 --- [Thread-23] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
+2024-05-07T21:40:05.440-03:00  INFO 4852 --- [Thread-23] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
+2024-05-07T21:40:05.692-03:00  INFO 4852 --- [restartedMain] c.b.b.BoutiquepierrotbleuApplication     : Starting BoutiquepierrotbleuApplication using Java 17.0.10 with PID 4852 (C:\Users\srodr\Desktop\less\target\classes started by Gustavo in C:\Users\srodr\Desktop\less)
+2024-05-07T21:40:05.693-03:00 DEBUG 4852 --- [restartedMain] c.b.b.BoutiquepierrotbleuApplication     : Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-05-07T21:40:05.694-03:00  INFO 4852 --- [restartedMain] c.b.b.BoutiquepierrotbleuApplication     : No active profile set, falling back to 1 default profile: "default"
+2024-05-07T21:40:06.994-03:00  INFO 4852 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-05-07T21:40:06.995-03:00  INFO 4852 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2024-05-07T21:40:07.065-03:00  INFO 4852 --- [restartedMain] o.a.c.c.C.[Tomcat-2].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2024-05-07T21:40:07.304-03:00  INFO 4852 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-05-07T21:40:07.310-03:00  INFO 4852 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-05-07T21:40:07.338-03:00  INFO 4852 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Starting...
+2024-05-07T21:40:07.352-03:00  INFO 4852 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-4 - Added connection com.mysql.cj.jdbc.ConnectionImpl@59258db4
+2024-05-07T21:40:07.352-03:00  INFO 4852 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Start completed.
+2024-05-07T21:40:07.354-03:00  WARN 4852 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000511: The 5.7.0 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2024-05-07T21:40:07.764-03:00  INFO 4852 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-05-07T21:40:08.326-03:00  WARN 4852 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'administradorController': Unsatisfied dependency expressed through field 'produtoService': Error creating bean with name 'produtoService': Lookup method resolution failed
+2024-05-07T21:40:08.329-03:00  INFO 4852 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown initiated...
+2024-05-07T21:40:08.345-03:00  INFO 4852 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown completed.
+2024-05-07T21:40:08.348-03:00  INFO 4852 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2024-05-07T21:40:08.366-03:00 ERROR 4852 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'administradorController': Unsatisfied dependency expressed through field 'produtoService': Error creating bean with name 'produtoService': Lookup method resolution failed
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:787) ~[spring-beans-6.1.5.jar:6.1.5]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:767) ~[spring-beans-6.1.5.jar:6.1.5]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:145) ~[spring-beans-6.1.5.jar:6.1.5]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:508) ~[spring-beans-6.1.5.jar:6.1.5]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1419) ~[spring-beans-6.1.5.jar:6.1.5]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:599) ~[spring-beans-6.1.5.jar:6.1.5]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.5.jar:6.1.5]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326) ~[spring-beans-6.1.5.jar:6.1.5]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.5.jar:6.1.5]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.1.5.jar:6.1.5]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.1.5.jar:6.1.5]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:975) ~[spring-beans-6.1.5.jar:6.1.5]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:962) ~[spring-context-6.1.5.jar:6.1.5]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:624) ~[spring-context-6.1.5.jar:6.1.5]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.2.4.jar:3.2.4]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754) ~[spring-boot-3.2.4.jar:3.2.4]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456) ~[spring-boot-3.2.4.jar:3.2.4]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:334) ~[spring-boot-3.2.4.jar:3.2.4]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-3.2.4.jar:3.2.4]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343) ~[spring-boot-3.2.4.jar:3.2.4]
+	at com.boutiquepierrotbleu.boutiquepierrotbleu.BoutiquepierrotbleuApplication.main(BoutiquepierrotbleuApplication.java:12) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.2.4.jar:3.2.4]
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'produtoService': Lookup method resolution failed
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.checkLookupMethods(AutowiredAnnotationBeanPostProcessor.java:497) ~[spring-beans-6.1.5.jar:6.1.5]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.determineCandidateConstructors(AutowiredAnnotationBeanPostProcessor.java:367) ~[spring-beans-6.1.5.jar:6.1.5]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.determineConstructorsFromBeanPostProcessors(AbstractAutowireCapableBeanFactory.java:1294) ~[spring-beans-6.1.5.jar:6.1.5]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1189) ~[spring-beans-6.1.5.jar:6.1.5]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:562) ~[spring-beans-6.1.5.jar:6.1.5]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522) ~[spring-beans-6.1.5.jar:6.1.5]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326) ~[spring-beans-6.1.5.jar:6.1.5]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.1.5.jar:6.1.5]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.1.5.jar:6.1.5]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.1.5.jar:6.1.5]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254) ~[spring-beans-6.1.5.jar:6.1.5]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1443) ~[spring-beans-6.1.5.jar:6.1.5]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1353) ~[spring-beans-6.1.5.jar:6.1.5]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:784) ~[spring-beans-6.1.5.jar:6.1.5]
+	... 25 common frames omitted
+Caused by: java.lang.IllegalStateException: Failed to introspect Class [com.boutiquepierrotbleu.boutiquepierrotbleu.services.ProdutoService] from ClassLoader [org.springframework.boot.devtools.restart.classloader.RestartClassLoader@374d9baf]
+	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:483) ~[spring-core-6.1.5.jar:6.1.5]
+	at org.springframework.util.ReflectionUtils.doWithLocalMethods(ReflectionUtils.java:320) ~[spring-core-6.1.5.jar:6.1.5]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.checkLookupMethods(AutowiredAnnotationBeanPostProcessor.java:475) ~[spring-beans-6.1.5.jar:6.1.5]
+	... 38 common frames omitted
+Caused by: java.lang.NoClassDefFoundError: Flux
+	at java.base/java.lang.Class.getDeclaredMethods0(Native Method) ~[na:na]
+	at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3402) ~[na:na]
+	at java.base/java.lang.Class.getDeclaredMethods(Class.java:2504) ~[na:na]
+	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:465) ~[spring-core-6.1.5.jar:6.1.5]
+	... 40 common frames omitted
+Caused by: java.lang.ClassNotFoundException: Flux
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641) ~[na:na]
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188) ~[na:na]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525) ~[na:na]
+	at java.base/java.lang.Class.forName0(Native Method) ~[na:na]
+	at java.base/java.lang.Class.forName(Class.java:467) ~[na:na]
+	at org.springframework.boot.devtools.restart.classloader.RestartClassLoader.loadClass(RestartClassLoader.java:121) ~[spring-boot-devtools-3.2.4.jar:3.2.4]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525) ~[na:na]
+	... 44 common frames omitted
+
+2024-05-07T21:40:38.787-03:00  INFO 4852 --- [restartedMain] c.b.b.BoutiquepierrotbleuApplication     : Starting BoutiquepierrotbleuApplication using Java 17.0.10 with PID 4852 (C:\Users\srodr\Desktop\less\target\classes started by Gustavo in C:\Users\srodr\Desktop\less)
+2024-05-07T21:40:38.788-03:00 DEBUG 4852 --- [restartedMain] c.b.b.BoutiquepierrotbleuApplication     : Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-05-07T21:40:38.788-03:00  INFO 4852 --- [restartedMain] c.b.b.BoutiquepierrotbleuApplication     : No active profile set, falling back to 1 default profile: "default"
+2024-05-07T21:40:39.852-03:00  INFO 4852 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-05-07T21:40:39.853-03:00  INFO 4852 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2024-05-07T21:40:39.948-03:00  INFO 4852 --- [restartedMain] o.a.c.c.C.[Tomcat-3].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2024-05-07T21:40:40.137-03:00  INFO 4852 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-05-07T21:40:40.144-03:00  INFO 4852 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-05-07T21:40:40.154-03:00  INFO 4852 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Starting...
+2024-05-07T21:40:40.168-03:00  INFO 4852 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-5 - Added connection com.mysql.cj.jdbc.ConnectionImpl@58b7781
+2024-05-07T21:40:40.169-03:00  INFO 4852 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Start completed.
+2024-05-07T21:40:40.171-03:00  WARN 4852 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000511: The 5.7.0 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2024-05-07T21:40:40.523-03:00  INFO 4852 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-05-07T21:40:41.506-03:00  WARN 4852 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-05-07T21:40:42.183-03:00  INFO 4852 --- [restartedMain] c.b.b.BoutiquepierrotbleuApplication     : Started BoutiquepierrotbleuApplication in 3.435 seconds (process running for 2334.388)
+2024-05-07T21:42:15.874-03:00  INFO 4852 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat-3].[localhost].[/]     : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-05-07T21:42:15.894-03:00  WARN 4852 --- [http-nio-8080-exec-1] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-1][usr/cadastro] Deprecated unwrapped fragment expression "pages/header :: header" found in template usr/cadastro, line 18, col 10. Please use the complete syntax of fragment expressions instead ("~{pages/header :: header}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-05-07T21:42:15.938-03:00  WARN 4852 --- [http-nio-8080-exec-1] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-1][usr/cadastro] Deprecated unwrapped fragment expression "pages/footer :: footer" found in template usr/cadastro, line 128, col 10. Please use the complete syntax of fragment expressions instead ("~{pages/footer :: footer}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-05-07T21:42:17.080-03:00  WARN 4852 --- [http-nio-8080-exec-1] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-1][usr/cadastro] Deprecated unwrapped fragment expression "pages/header :: header" found in template usr/cadastro, line 18, col 10. Please use the complete syntax of fragment expressions instead ("~{pages/header :: header}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-05-07T21:42:17.086-03:00  WARN 4852 --- [http-nio-8080-exec-1] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-1][usr/cadastro] Deprecated unwrapped fragment expression "pages/footer :: footer" found in template usr/cadastro, line 128, col 10. Please use the complete syntax of fragment expressions instead ("~{pages/footer :: footer}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-05-07T21:42:17.322-03:00  WARN 4852 --- [http-nio-8080-exec-1] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-1][usr/cadastro] Deprecated unwrapped fragment expression "pages/header :: header" found in template usr/cadastro, line 18, col 10. Please use the complete syntax of fragment expressions instead ("~{pages/header :: header}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-05-07T21:42:17.327-03:00  WARN 4852 --- [http-nio-8080-exec-1] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-1][usr/cadastro] Deprecated unwrapped fragment expression "pages/footer :: footer" found in template usr/cadastro, line 128, col 10. Please use the complete syntax of fragment expressions instead ("~{pages/footer :: footer}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-05-07T21:42:17.521-03:00  WARN 4852 --- [http-nio-8080-exec-1] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-1][usr/cadastro] Deprecated unwrapped fragment expression "pages/header :: header" found in template usr/cadastro, line 18, col 10. Please use the complete syntax of fragment expressions instead ("~{pages/header :: header}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-05-07T21:42:17.527-03:00  WARN 4852 --- [http-nio-8080-exec-1] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-1][usr/cadastro] Deprecated unwrapped fragment expression "pages/footer :: footer" found in template usr/cadastro, line 128, col 10. Please use the complete syntax of fragment expressions instead ("~{pages/footer :: footer}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-05-07T21:42:21.624-03:00  WARN 4852 --- [http-nio-8080-exec-1] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-1][pages/home] Deprecated unwrapped fragment expression "pages/head :: head" found in template pages/home, line 4, col 6. Please use the complete syntax of fragment expressions instead ("~{pages/head :: head}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-05-07T21:42:21.627-03:00  WARN 4852 --- [http-nio-8080-exec-1] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-1][pages/home] Deprecated unwrapped fragment expression "pages/header :: header" found in template pages/home, line 17, col 10. Please use the complete syntax of fragment expressions instead ("~{pages/header :: header}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-05-07T21:42:21.631-03:00  WARN 4852 --- [http-nio-8080-exec-1] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-1][pages/home] Deprecated unwrapped fragment expression "pages/footer :: footer" found in template pages/home, line 143, col 10. Please use the complete syntax of fragment expressions instead ("~{pages/footer :: footer}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-05-07T21:42:25.528-03:00  WARN 4852 --- [http-nio-8080-exec-3] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-3][usr/cadastro] Deprecated unwrapped fragment expression "pages/header :: header" found in template usr/cadastro, line 18, col 10. Please use the complete syntax of fragment expressions instead ("~{pages/header :: header}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-05-07T21:42:25.538-03:00  WARN 4852 --- [http-nio-8080-exec-3] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-3][usr/cadastro] Deprecated unwrapped fragment expression "pages/footer :: footer" found in template usr/cadastro, line 128, col 10. Please use the complete syntax of fragment expressions instead ("~{pages/footer :: footer}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
