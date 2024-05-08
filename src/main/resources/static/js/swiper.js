@@ -1,6 +1,6 @@
 var swiper = new Swiper(".swiper-roupas", {
   slidesPerView: 'auto',
-  spaceBetween: 30,
+  spaceBetween: 10,
   loop: true,
   autoplay: {
     delay: 1000,
