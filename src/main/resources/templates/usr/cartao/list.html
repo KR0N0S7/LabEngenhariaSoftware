@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{usr/layout.html}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{usr/layout.html}">
 <meta charset="UTF-8">
 <div layout:fragment="content">
     <div class="alert alert-primary" th:if="${#lists.isEmpty(lista)}">
@@ -11,10 +10,9 @@
         <p th:text="${mensagem}"></p>
     </div>
     <div th:if="${not #lists.isEmpty(lista)}">
-        
+
         <div>
             <a class="btn btn-primary btn-sm" th:href="@{/cartao/novo}">Cadastrar</a>
-            
         </div>
 
         <div class="form-check form-switch mt-3" onclick="toggleContent()">
@@ -23,10 +21,9 @@
         </div>
 
         <div id="hiddenContent" th:style="${condition} ? '' : 'display: none;'">
-            
-            <button type="button" onclick="addSearchFilter()">+</button>
-            <input class="my-3" id="txtSearch" placeholder="Apelido do Cartão" type="text" name="keyword"></input>
 
+            <button type="button" onclick="addSearchFilter()">+</button>
+            <input class="my-3" id="txtSearch" placeholder="Apelido do Cartão" type="text" name="keyword">
         </div>
 
         <table id="tabelacartao" class="table table-striped">
@@ -51,29 +48,31 @@
                     <td th:text="${cartao.codigoSeguranca}"></td>
                     <td th:text="${cartao.bandeira}"></td>
                     <td th:text="${cartao.cpfTitular}"></td>
-                                     
+
                     <td>
-                        <a class="btn btn-primary btn-sm" th:href="@{/cartao/novo(id=${cartao.id})}">Editar</a>
-                        <a class="btn btn-primary btn-sm" th:href="@{/cartao/excluir(id=${cartao.id})}" 
-                           onclick="return confirm('Você realmente deseja excluir esse cartao?')">Excluir</a>
+                        <a class="btn btn-primary bg-purple text-white py-2 px-2 rounded-lg hover:bg-black hover:text-white' transition duration-500 cursor-pointer" th:href="@{/cartao/novo(id=${cartao.id})}">Editar</a>
+                        <a class="btn btn-primary bg-red-500 text-white py-2 px-2 rounded-lg hover:bg-black hover:text-white' transition duration-500 cursor-pointer" th:href="@{/cartao/excluir(id=${cartao.id})}"
+                            onclick="return confirm('Você realmente deseja excluir este cartao?')">Excluir</a>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
+
 </html>
 
 <div th:replace="pages/head :: head"></div>
+
 <body>
-	<div th:replace="pages/footer :: footer"></div>
+    <div th:replace="pages/footer :: footer"></div>
 </body>
 
 <script th:inline="javascript">
     /*<![CDATA[*/
-        var cartaos = /*[[${lista}]]*/ 'default';
+    var cartaos = /*[[${lista}]]*/ 'default';
     /*]]>*/
-    $('#txtSearch').keyup(function(){
+    $('#txtSearch').keyup(function () {
         filterTable($(this).val(), 'apelidoCartao');
     });
 
@@ -82,11 +81,11 @@
         var filterInput = document.createElement('input');
         filterInput.className = 'my-3';
         filterInput.type = 'text';
-        filterInput.onkeyup = function() {
+        filterInput.onkeyup = function () {
             var attribute = this.getAttribute('data-attribute');
             filterTable(this.value, attribute);
         };
-        
+
         // Determine the next filter based on existing filters in the hiddenContent div
         var existingFilters = hiddenContent.getElementsByTagName('input').length;
         var placeholders = ['Apelido do Cartão', 'Nome do Titular', 'Data de Validade', 'Bandeira', 'CPF do Titular'];
@@ -100,7 +99,7 @@
 
     function toggleContent() {
         var content = document.getElementById('hiddenContent');
-        if(content.style.display === "none") {
+        if (content.style.display === "none") {
             content.style.display = "block";
         } else {
             content.style.display = "none";
@@ -113,20 +112,20 @@
         rebuildTable(data);
     }
 
-    function Filtro(value, data, attribute){
+    function Filtro(value, data, attribute) {
         var filteredData = [];
-        
+
         // If the filter value is empty or null, return the full dataset
         if (!value || value.trim() === "") {
             return data;
         }
 
-        for(var i = 0; i < data.length; i++){
+        for (var i = 0; i < data.length; i++) {
             // Ensure the attribute exists and isn't null before calling toLowerCase
             if (data[i][attribute]) {
                 value = value.toLowerCase();
                 var columnValue = data[i][attribute].toLowerCase();
-                if(columnValue.includes(value)){
+                if (columnValue.includes(value)) {
                     filteredData.push(data[i]);
                 }
             }
@@ -135,38 +134,35 @@
     }
 
 
-    function rebuildTable(data){
+    function rebuildTable(data) {
         var table = document.getElementById('tabelacartao'); // target the entire table
         table.innerHTML = '<thead>' +
             '<tr>' +
-                '<th>Apelido do Cartão</th>' +
-                '<th>Número do Cartão</th>' +
-                '<th>Nome do Titular</th>' +
-                '<th>Data de Validade</th>' +
-                '<th>Código de Segurança</th>' +
-                '<th>Bandeira</th>' +
-                '<th>CPF do Titular</th>' +
-                '<th>Opções</th>' +
+            '<th>Apelido do Cartão</th>' +
+            '<th>Número do Cartão</th>' +
+            '<th>Nome do Titular</th>' +
+            '<th>Data de Validade</th>' +
+            '<th>Código de Segurança</th>' +
+            '<th>Bandeira</th>' +
+            '<th>CPF do Titular</th>' +
+            '<th>Opções</th>' +
             '</tr>' +
-                '</thead><tbody id="tabelaCartaoBody"></tbody>'; // add the thead structure
+            '</thead><tbody id="tabelaCartaoBody"></tbody>'; // add the thead structure
         var tbody = document.getElementById('tabelaCartaoBody'); // target the newly added tbody
-        for(var i = 0; i < data.length; i++){
+        for (var i = 0; i < data.length; i++) {
             tbody.innerHTML += '<tr>' +
-                                    '<td>' + data[i].apelidoCartao + '</td>' +
-                                    '<td>' + data[i].numeroCartao + '</td>' +
-                                    '<td>' + data[i].nomeTitular + '</td>' +
-                                    '<td>' + data[i].dataValidade + '</td>' +
-                                    '<td>' + data[i].codigoSegurança + '</td>' +
-                                    '<td>' + data[i].bandeira + '</td>' +
-                                    '<td>' + data[i].cpfTitular + '</td>' +
-                                    '<td>' +
-                                        '<a class="btn btn-primary btn-sm" th:href="@{{/cartao/novo(id=${{cartao.id}})}}">Editar</a>' +
-                                        '<a class="btn btn-primary btn-sm ml-3" th:href="@{{/cartao/excluir(id=${{cartao.id}})}}" onclick="return confirm(\'Você realmente deseja excluir esse cartão?\')">Excluir</a>' +
-                                    '</td>' +
-                                '</tr>';
+                '<td>' + data[i].apelidoCartao + '</td>' +
+                '<td>' + data[i].numeroCartao + '</td>' +
+                '<td>' + data[i].nomeTitular + '</td>' +
+                '<td>' + data[i].dataValidade + '</td>' +
+                '<td>' + data[i].codigoSegurança + '</td>' +
+                '<td>' + data[i].bandeira + '</td>' +
+                '<td>' + data[i].cpfTitular + '</td>' +
+                '<td>' +
+                '<a class="btn btn-primary btn-sm" th:href="@{{/cartao/novo(id=${{cartao.id}})}}">Editar</a>' +
+                '<a class="btn btn-primary btn-sm ml-3" th:href="@{{/cartao/excluir(id=${{cartao.id}})}}" onclick="return confirm(\'Você realmente deseja excluir esse cartão?\')">Excluir</a>' +
+                '</td>' +
+                '</tr>';
         }
     }
-
-
 </script>
-
