@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{usr/layout.html}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{usr/layout.html}">
 <meta charset="UTF-8">
 <div layout:fragment="content">
     <div class="alert alert-primary" th:if="${#lists.isEmpty(lista)}">
@@ -19,7 +18,7 @@
                     <th>Tipo</th>
                     <th>Valor</th>
                     <th>Data de Validade</th>
-                    
+
                     <th>Opções</th>
                 </tr>
             </thead>
@@ -29,24 +28,23 @@
                     <td th:text="${cupom.tipo}"></td>
                     <td th:text="${cupom.valor}"></td>
                     <td th:text="${cupom.dataValidade}"></td>
-                                     
+
                     <td>
                         <a class="btn btn-primary btn-sm" th:href="@{/cupom/detail(id=${cupom.id})}">Voltar</a>
-                        
+
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
+
 </html>
 
 
 
 <div th:replace="pages/head :: head"></div>
+
 <body>
-	<div th:replace="pages/footer :: footer"></div>
+    <div th:replace="pages/footer :: footer"></div>
 </body>
-
-
-
