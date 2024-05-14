@@ -164,7 +164,7 @@ public class ClienteController {
                         ? (List<Produto>) session.getAttribute("recomendacoes")
                         : new ArrayList<>();
 
-                // mv.addObject("recomendacoes", listaProdutosRecomendados);
+                mv.addObject("recomendacoes", listaProdutosRecomendados);
                 mv.addObject("id", session.getAttribute("id"));
                 mv.addObject("nome", session.getAttribute("nome"));
             } catch (Exception e) {
