@@ -1,4 +1,0 @@
-[
-  "select c1_0.id,c1_0.ativo,c1_0.cpf,c1_0.email,c1_0.logged,c1_0.nome_completo,c1_0.senha,c1_0.telefone from cliente c1_0 where c1_0.id=?",
-  "select e1_0.id,e1_0.bairro,e1_0.cep,e1_0.cidade,e1_0.cliente_id,e1_0.complemento,e1_0.estado,e1_0.rua,e1_0.tipo from endereco e1_0 where e1_0.cliente_id=?"
-]

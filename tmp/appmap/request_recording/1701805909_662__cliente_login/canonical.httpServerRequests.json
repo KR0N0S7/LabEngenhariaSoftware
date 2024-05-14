@@ -1,7 +1,0 @@
-[
-  {
-    "route": "GET /cliente/login",
-    "parameters": "()",
-    "status": 302
-  }
-]

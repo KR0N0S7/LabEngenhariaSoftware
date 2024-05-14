@@ -1,7 +1,0 @@
-[
-  {
-    "route": "POST /cliente/login/autenticar",
-    "parameters": "(email,senha)",
-    "status": 302
-  }
-]

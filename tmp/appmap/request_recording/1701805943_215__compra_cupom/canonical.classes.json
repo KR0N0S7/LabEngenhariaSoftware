@@ -1,6 +1,0 @@
-[
-  "com/boutiquepierrotbleu/boutiquepierrotbleu/controllers/CompraController",
-  "com/boutiquepierrotbleu/boutiquepierrotbleu/entities/Compra",
-  "com/boutiquepierrotbleu/boutiquepierrotbleu/repositories/CupomRepository",
-  "com/boutiquepierrotbleu/boutiquepierrotbleu/services/CupomService"
-]

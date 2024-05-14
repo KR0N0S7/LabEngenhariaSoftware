@@ -1,7 +1,0 @@
-[
-  {
-    "route": "POST /carrinho/adicionar",
-    "parameters": "(produtoId,quantidade)",
-    "status": 302
-  }
-]

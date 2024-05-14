@@ -1,7 +1,0 @@
-[
-  {
-    "route": "POST /compra/finalizar",
-    "parameters": "()",
-    "status": 200
-  }
-]

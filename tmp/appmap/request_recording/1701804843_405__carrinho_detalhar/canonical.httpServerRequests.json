@@ -1,7 +1,0 @@
-[
-  {
-    "route": "GET /carrinho/detalhar",
-    "parameters": "()",
-    "status": 200
-  }
-]

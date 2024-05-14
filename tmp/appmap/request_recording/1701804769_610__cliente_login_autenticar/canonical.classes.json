@@ -1,5 +1,0 @@
-[
-  "com/boutiquepierrotbleu/boutiquepierrotbleu/controllers/ClienteController",
-  "com/boutiquepierrotbleu/boutiquepierrotbleu/repositories/ClienteRepository",
-  "com/boutiquepierrotbleu/boutiquepierrotbleu/services/ClienteService"
-]

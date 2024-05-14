@@ -1,7 +1,0 @@
-[
-  {
-    "route": "POST /compra/iniciar",
-    "parameters": "(id,valorTotal,cliente)",
-    "status": 200
-  }
-]
