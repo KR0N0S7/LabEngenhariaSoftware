@@ -1,9 +1,0 @@
-{
-  "scripts": {
-    "dev": "npx tailwindcss -i ./src/main/resources/static/css/tailwindcss.css -o ./src/main/resources/static/css/style.css --watch"
-  },
-  "dependencies": {
-    "alpinejs": "^3.13.0",
-    "swiper": "^10.1.0"
-  }
-}
