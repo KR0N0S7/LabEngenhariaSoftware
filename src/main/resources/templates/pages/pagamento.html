@@ -42,9 +42,9 @@
                                 </div>
                                 <img th:src="@{/img/pagamento.png}" alt="pagamento">
                             </div>
-                            
+
                             <div id="creditCardContainer">
-                            <!-- Credit Card Fields - initially hidden -->
+                                <!-- Credit Card Fields - initially hidden -->
                                 <div class="creditCardFields" style="display:none;">
                                     <!--<label class="font-bold">Selecione um Cartão.</label>-->
                                     <select class="form-select" th:object="${creditcard}" name="selectedCartao"
@@ -55,30 +55,24 @@
                                             th:data-nome="${creditcard.nomeTitular}"
                                             th:data-validade="${creditcard.dataValidade}"
                                             th:data-codigo="${creditcard.codigoSeguranca}"
-                                            th:data-bandeira="${creditcard.bandeira}" 
+                                            th:data-bandeira="${creditcard.bandeira}"
                                             th:data-cpf="${creditcard.cpfTitular}"
                                             th:data-parcela="${creditcard.valorParcela}"
                                             th:text="${creditcard.apelidoCartao}"></option>
                                     </select>
 
+                                    <input class="my-3 border-2 border-solid border-[#d1d5db] outline-none pl-5 py-2 rounded-lg" placeholder="Número do Cartão" type="text" id="numeroCartaoInput" readonly >
+                                    <input class="my-3 border-2 border-solid border-[#d1d5db] outline-none pl-5 py-2 rounded-lg" placeholder="Nome do Titular" type="text" id="nomeTitularInput" readonly >
+                                    <input class="my-3 border-2 border-solid border-[#d1d5db] outline-none pl-5 py-2 rounded-lg" placeholder="dataValidade" type="text" id="dataValidadeInput" readonly >
+                                    <input class="my-3 border-2 border-solid border-[#d1d5db] outline-none pl-5 py-2 rounded-lg" placeholder="Código de Segurança" type="text" id="codigoSegurancaInput" readonly >
+                                    <input class="my-3 border-2 border-solid border-[#d1d5db] outline-none pl-5 py-2 rounded-lg" placeholder="Bandeira" type="text" id="bandeiraInput" readonly >
+                                    <input class="my-3 border-2 border-solid border-[#d1d5db] outline-none pl-5 py-2 rounded-lg" placeholder="CPF do Titular" type="text" id="cpfTitularInput" readonly >
+                                    <input type="number" placeholder="Valor da Parcela" name="valorParcela" step="0.01" id="valorParcelaInput" class="valorParcelaInput border-2 border-solid border-[#d1d5db] outline-none pl-5 py-2 rounded-lg" >
 
-                                    <input class="my-3" placeholder="Número do Cartão" type="text" id="numeroCartaoInput"
-                                        readonly />
-                                    <input placeholder="Nome do Titular" type="text" id="nomeTitularInput" readonly />
-                                    <input class="my-3" placeholder="dataValidade" type="text" id="dataValidadeInput"
-                                        readonly />
-                                    <input placeholder="Código de Segurança" type="text" id="codigoSegurancaInput"
-                                        readonly />
-                                    <input class="my-3" placeholder="Bandeira" type="text" id="bandeiraInput" readonly />
-                                    <input placeholder="CPF do Titular" type="text" id="cpfTitularInput" readonly />
-                                    <input type="number" placeholder="Valor da Parcela" name="valorParcela" 
-                                        step="0.01"
-                                        id="valorParcelaInput" class="valorParcelaInput" />
-
-                                    <div>
+                                    <div class="flex items-center justify-center">
+                                        <h2 class="font-medium">Caso voce queira adicionar um novo cartão, clique no botão</h2>
                                         <button type="button"
-                                            class="addCardButton bg-purple px-3 py-3 text-white hover:bg-black transition-all duration-500">+</button>
-
+                                            class="addCardButton p-2 m-2 bg-purple text-white hover:bg-black transition-all duration-500">+</button>
                                     </div>
                                 </div>
                             </div>
@@ -103,12 +97,11 @@
 
                             <div class="flex justify-between my-5 items-center  ">
 
-                                <a class="hover:border-solid hover:border-2 hover:border-gray-dark px-1 py-1"
+                                <a class="bg-purple inline-block w-52 my-5 text-center py-2 rounded-md text-white hover:bg-black transition-all duration-500"
                                     th:href="@{/compra/cupom}">Retornar</a>
                                 <button id="botaoContinuar" onclick="return validarParcelaAoContinuar();"
                                     class="bg-purple px-3 py-3 text-white hover:bg-black transition-all duration-500"
-                                    data-total="${total}" 
-                                    type="submit">Continue</button>
+                                    data-total="${total}" type="submit">Continue</button>
 
                             </div>
 
@@ -173,12 +166,12 @@
             }
         }
     </script>
- 
+
     <script>
         function updateSelectOptions() {
             var allSelectedValues = Array.from(document.querySelectorAll('.creditCardFields select'))
-                                        .map(select => select.value)
-                                        .filter(value => value); // Filtra valores não vazios
+                .map(select => select.value)
+                .filter(value => value); // Filtra valores não vazios
 
             document.querySelectorAll('.creditCardFields select').forEach(select => {
                 Array.from(select.options).forEach(option => {
@@ -216,7 +209,7 @@
 
         // Selecione todos os botões '+' e adicione o evento de clique
         document.querySelectorAll('.addCardButton').forEach(button => {
-            button.addEventListener('click', function() {
+            button.addEventListener('click', function () {
                 addNewCardFields(this);
             });
         });
@@ -241,10 +234,10 @@
                 alert("Valor da parcela deve ser entre R$10 e o valor final da compra.");
                 return false; // Impede a submissão do formulário
             }
-        
+
             return true; // Permite a submissão do formulário
         }
-    </script>        
+    </script>
 
 </body>
 
