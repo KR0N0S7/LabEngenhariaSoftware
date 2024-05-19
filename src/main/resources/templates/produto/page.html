@@ -31,6 +31,15 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin: 0px;">
         <div class="container px-4 px-lg-5">
             <a class="navbar-brand" th:href="@{/}">Pierrot Bleu</a>
+            <div>
+                <ion-icon class="mx-3" name="search-outline"></ion-icon>
+                <a th:href="@{/carrinho/detalhar}">
+                    <ion-icon class="mx-3" name="cart-outline"></ion-icon>
+                </a>
+                <a th:href="@{/cliente/login}">
+                    <ion-icon class="mx-3" name="people-outline"></ion-icon>
+                </a>
+            </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -39,16 +48,11 @@
                     <li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{/}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" th:href="@{/}"></a></li>
                     <li class="nav-item dropdown">
-                        <!-- <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">Shop</a> -->
-                        <!-- <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" th:href="@{/}">Produtos</a></li>
-                            <li>
-                                <hr class="dropdown-divider" />
-                            </li>
-                            <li><a class="dropdown-item" href="#!">Produtos Populares</a></li>
-                                <li><a class="dropdown-item" href="#!">Novidades</a></li>
-                        </ul> -->
+                        </ul>
                     </li>
                 </ul>
                 <form class="d-flex">
@@ -81,13 +85,15 @@
             </video>
         </div>
         <div class="absolute inset-0 flex flex-col justify-center items-center text-white">
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-rose-200 via-cyan-300 to-pink-500">Compre com estilo</h1>
+            <h1
+                class="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-rose-200 via-cyan-300 to-pink-500">
+                Compre com estilo</h1>
 
 
             <p class="text-3xl font-normal text-black">Com Pierrot Bleu</p>
         </div>
     </div>
-    
+
 
     <div class="wrapper d-flex align-items-stretch">
         <nav id="sidebar">
@@ -112,18 +118,19 @@
                             </ul>
                         </li>
                         <!-- <li><a href="#">Portfolio</a></li> -->
-                
+
                     </ul>
                 </div>
-                
+
                 <style>
                     .submenu {
                         display: none;
                     }
+
                     .submenu.show {
                         display: block;
                     }
-                </style>  
+                </style>
 
                 <div class="mb-5">
                     <h3 class="h6">Procurar</h3>
@@ -149,18 +156,20 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-4" th:each="produto : ${produtos}">
-                                    <img th:src="@{'/images/produtos/' + ${produto.imagem}}" alt="Product Image" class="img-fluid">
+                                    <img th:src="@{'/images/produtos/' + ${produto.imagem}}" alt="Product Image"
+                                        class="img-fluid">
                                     <div class="flex flex-col">
                                         <h2 class="text-xl py-2" th:text="'Nome do Produto: ' + ${produto.nome}"></h2>
                                         <h2 class="text-xl py-2">
                                             <span class="text-blue-600" th:text="'Price: R$' + ${produto.preco}"></span>
                                         </h2>
-                                        
+
                                     </div>
                                     <form method="post">
                                         <input type="hidden" th:value="${produto.id}" name="produtoId" />
-                                        <button type="button" class="btn btn-primary add-to-cart-btn" 
-                                            th:attr="data-product-id=${produto.id}" th:disabled="${produto.estoque == 0}">
+                                        <button type="button" class="btn btn-primary add-to-cart-btn"
+                                            th:attr="data-product-id=${produto.id}"
+                                            th:disabled="${produto.estoque == 0}">
                                             Adicionar ao Carrinho</button>
 
                                     </form>
@@ -176,69 +185,70 @@
         </div>
     </div>
 
-    <div class="modal fade" id="quantityModal" tabindex="-1" role="dialog" aria-labelledby="quantityModalLabel" aria-hidden="true">
+    <div class="modal fade" id="quantityModal" tabindex="-1" role="dialog" aria-labelledby="quantityModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="quantityModalLabel">Selecione a quantidade</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="quantityModalLabel">Selecione a quantidade</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group">
+                        <button class="btn btn-outline-secondary" type="button" id="button-minus">-</button>
+                        <input type="text" class="form-control" value="1" id="quantityInput">
+                        <button class="btn btn-outline-secondary" type="button" id="button-plus">+</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" id="addToCartBtn">Adicionar</button>
+                </div>
             </div>
-            <div class="modal-body">
-              <div class="input-group">
-                <button class="btn btn-outline-secondary" type="button" id="button-minus">-</button>
-                <input type="text" class="form-control" value="1" id="quantityInput">
-                <button class="btn btn-outline-secondary" type="button" id="button-plus">+</button>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-              <button type="button" class="btn btn-primary" id="addToCartBtn">Adicionar</button>
-            </div>
-          </div>
         </div>
-      </div>
-      <script>
+    </div>
+    <script>
         $(document).ready(function () {
-          let selectedProductId = null;
-          let selectedQuantity = 1;
-      
-          $('.add-to-cart-btn').click(function () {
-            selectedProductId = $(this).data('product-id');
-            $('#quantityModal').modal('show');
-          });
-      
-          $('#button-plus').click(function () {
-            selectedQuantity++;
-            $('#quantityInput').val(selectedQuantity);
-          });
-      
-          $('#button-minus').click(function () {
-            if (selectedQuantity > 1) {
-              selectedQuantity--;
-              $('#quantityInput').val(selectedQuantity);
-            }
-          });
-      
-          $('#addToCartBtn').click(function () {
-            $.ajax({
-                url: "/carrinho/adicionar",
-                type: "POST",
-                data: { produtoId: selectedProductId, quantidade: selectedQuantity },
-                success: function (response) {
-                alert('Produto adicionado com sucesso!');
-                },
-                error: function (error) {
-                alert('Para adicionar o produto no carrinho, realize o login!');
+            let selectedProductId = null;
+            let selectedQuantity = 1;
+
+            $('.add-to-cart-btn').click(function () {
+                selectedProductId = $(this).data('product-id');
+                $('#quantityModal').modal('show');
+            });
+
+            $('#button-plus').click(function () {
+                selectedQuantity++;
+                $('#quantityInput').val(selectedQuantity);
+            });
+
+            $('#button-minus').click(function () {
+                if (selectedQuantity > 1) {
+                    selectedQuantity--;
+                    $('#quantityInput').val(selectedQuantity);
                 }
             });
-            $('#quantityModal').modal('hide');
+
+            $('#addToCartBtn').click(function () {
+                $.ajax({
+                    url: "/carrinho/adicionar",
+                    type: "POST",
+                    data: { produtoId: selectedProductId, quantidade: selectedQuantity },
+                    success: function (response) {
+                        window.location.href = '/carrinho/detalhar';
+                    },
+                    error: function (error) {
+                        alert('Para adicionar o produto no carrinho, realize o login!');
+                    }
+                });
+                $('#quantityModal').modal('hide');
             });
 
         });
-      </script>
-    
+    </script>
+
 
     <!-- Bootstrap core JS-->
     <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js}"></script>
@@ -249,10 +259,8 @@
     <script th:src="@{js/popper.js}"></script>
     <script th:src="@{js/bootstrap.min.js}"></script>
     <script th:src="@{js/main.js}"></script>
-    
+
 </body>
 <div th:replace="pages/footer :: footer"></div>
 
 </html>
-
-  
