@@ -953,3 +953,9 @@ INFO:werkzeug: * Restarting with stat
 2024-05-03 14:40:19,630 Eligible products: ['Andalax', 'Asoka', 'Namfix', 'Gembucket', 'Stronghold', 'Bytecard', 'Aerified', 'Domainer', 'Flexidy', 'Solarbreeze', 'Greenlam', 'Lotlux', 'Sonair', 'Home Ing', 'Cookley', 'Toughjoyfax', 'Opela', 'Matsoft', 'Biodex', 'Ronstring', 'Voyatouch', 'Span', 'Cardify', 'It', 'Flowdesk', 'Bigtax', 'Tin', 'Zaam-Dox', 'Zathin', 'Ventosanzap', 'Lotstring', 'Tempsoft', 'Tres-Zap', 'Tampflex', 'Wrapsafe', 'Bitwolf', 'Stringtough', 'Holdlamis', 'Stim', 'Hatity', 'Fintone', 'Alphazap', 'Redhold', 'Quo Lux', 'Fixflex', 'Alpha']
 2024-05-03 14:40:19,630 Recommendations generated: [{'nomeProduto': 'Matsoft', 'nota': 10.0}, {'nomeProduto': 'Wrapsafe', 'nota': 10.0}, {'nomeProduto': 'Stim', 'nota': 10.0}, {'nomeProduto': 'Quo Lux', 'nota': 10.0}, {'nomeProduto': 'Andalax', 'nota': 9.0}]
 2024-05-03 14:40:19,632 127.0.0.1 - - [03/May/2024 14:40:19] "POST /recommend/ HTTP/1.1" 200 -
+2024-05-16 20:52:45,315 [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-05-16 20:52:45,315 [33mPress CTRL+C to quit[0m
+2024-05-16 20:52:45,317  * Restarting with stat
+2024-05-16 20:52:46,035  * Debugger is active!
+2024-05-16 20:52:46,052  * Debugger PIN: 659-816-701
