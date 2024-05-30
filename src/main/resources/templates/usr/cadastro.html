@@ -64,13 +64,44 @@
                             </div>
                             <div class="my-3 flex flex-col">
                                 <label for="password" class="font-bold my-3">Senha</label>
-                                <input type="text" placeholder="password"
-                                    class="border-2 border-solid border-[#d1d5db] outline-none pl-5 py-2 rounded-lg"
-                                    required th:field="*{senha}">
+                                <div class="relative">
+                                    <input id="senha" type="password" placeholder="password"
+                                        class="border-2 border-gray-300 outline-none pl-5 py-2 rounded-lg w-full"
+                                        required th:field="*{senha}">
+                                    <button type="button" id="togglePassword"
+                                        class="absolute right-3 top-2.5 text-gray-600">
+                                        <i id="eyeIcon" class="fa-solid fa-eye"></i>
+                                        <i id="eyeSlashIcon" class="fa-solid fa-eye-slash hidden"></i>
+                                    </button>
+                                </div>
                                 <div class="text-danger" th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}">
                                 </div>
                             </div>
 
+                            <!-- <div class="my-3 flex flex-col">
+                                <label for="dataAniversario" class="font-bold my-3">Data de Aniversário</label>
+                                <input id="dataAniversario" type="text" placeholder="Selecione a Data de Aniversário"
+                                       class="border-2 border-solid border-[#d1d5db] outline-none pl-5 py-2 rounded-lg"
+                                       required th:field="*{data_aniversario}">
+                                <div class="text-danger" th:if="${#fields.hasErrors('data_aniversario')}" th:errors="*{data_aniversario}"></div>
+                            </div>
+                            
+                            <script>
+                                $(function() {
+                                    // Configuração do datepicker
+                                    $("#dataAniversario").datepicker({
+                                        dateFormat: 'dd/mm/yy', // Formato de data desejado
+                                        changeMonth: true, // Permitir a alteração do mês
+                                        changeYear: true, // Permitir a alteração do ano
+                                        yearRange: '-100:+0', // Limitar o intervalo de anos (opcional)
+                                        onSelect: function(dateText) {
+                                            var selectedDate = $.datepicker.formatDate('yy-mm-dd', $(this).datepicker('getDate'));
+                                            $("#dataAniversario").val(selectedDate); // Atualiza o valor do campo de entrada com a data selecionada
+                                        }
+                                    });
+                                });
+                            </script> -->
+                            
                             <hr>
                             <div class="flex flex-col">
                                 <!-- Endereco Fields -->
@@ -123,6 +154,7 @@
     <!-- mascara para o numero de telefone e cpf -->
     <script th:src="@{/js/mask-tel-new.js}"></script>
     <script th:src="@{/js/mask-cpf-new.js}"></script>
+    <script th:src="@{/js/password-eye.js}"></script>
     <!-- end mascara para o numero de telefone e cpf -->
 
     <div th:replace="pages/footer :: footer"></div>

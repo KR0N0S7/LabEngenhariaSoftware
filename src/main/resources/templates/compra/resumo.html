@@ -21,46 +21,68 @@
                 <div class="progress-bar" role="progressbar" style="width: 95%;" aria-valuenow="75" aria-valuemin="0"
                   aria-valuemax="100"></div>
               </div>
-    
+
               <div class="flex justify-between my-4">
-                <h5 class="text-muted mb-0">Revise sua Compra <span style="color: #a8729a;"
-                    th:text="${session.nome}"></span>!</h5>
+                <h5 class="text-muted mb-0 uppercase text-xl">Revise sua Compra <span class="text-black font-semibold text-xl" th:text="${session.nome}"></span>!</h5>
               </div>
 
               <h2 class="font-bold text-xl mt-10 mb-3">Endereço de envio</h2>
-              <h5 class="text-muted mb-0">Rua</h5>
-              <span class="my-3" type="text" th:text="${endereco.rua}" readonly />
-              <h5 class="text-muted mb-0">Complemento</h5>
-              <span type="text" th:text="${endereco.complemento}" readonly />
-              <h5 class="text-muted mb-0">Bairro</h5>
-              <span class="my-3" type="text" th:text="${endereco.bairro}" readonly />
-              <h5 class="text-muted mb-0">Cidade</h5>
-              <span type="text" th:text="${endereco.cidade}" readonly />
-              <h5 class="text-muted mb-0">Estado</h5>
-              <span class="my-3" type="text" th:text="${endereco.estado}" readonly />
-              <h5 class="text-muted mb-0">CEP</h5>
-              <span type="text" th:text="${endereco.cep}" readonly />
+              <table class="min-w-full border-collapse border border-gray-300">
+                <tbody>
+                  <tr class="border-b border-gray-300">
+                    <th class="text-left p-2">Rua</th>
+                    <td class="p-2" th:text="${endereco.rua}"></td>
+                  </tr>
+                  <tr class="border-b border-gray-300">
+                    <th class="text-left p-2">Complemento</th>
+                    <td class="p-2" th:text="${endereco.complemento}"></td>
+                  </tr>
+                  <tr class="border-b border-gray-300">
+                    <th class="text-left p-2">Bairro</th>
+                    <td class="p-2" th:text="${endereco.bairro}"></td>
+                  </tr>
+                  <tr class="border-b border-gray-300">
+                    <th class="text-left p-2">Cidade</th>
+                    <td class="p-2" th:text="${endereco.cidade}"></td>
+                  </tr>
+                  <tr class="border-b border-gray-300">
+                    <th class="text-left p-2">Estado</th>
+                    <td class="p-2" th:text="${endereco.estado}"></td>
+                  </tr>
+                  <tr>
+                    <th class="text-left p-2">CEP</th>
+                    <td class="p-2" th:text="${endereco.cep}"></td>
+                  </tr>
+                </tbody>
+              </table>
               
               <h2 class="font-bold text-xl mt-10 mb-3">Cartão de Crédito</h2>
               <div th:each="cartao : ${cartoes}">
-                <h5 class="text-muted mb-0">Número do Cartão</h5>
-                <span class="my-3" th:text="${cartao.numeroCartao}" readonly></span>
-                <h5 class="text-muted mb-0">Nome do Titular</h5>
-                <span th:text="${cartao.nomeTitular}" readonly></span>
-                <h5 class="text-muted mb-0">Data de Validade</h5>
-                <span class="my-3" th:text="${cartao.dataValidade}" readonly></span>
-                <h5 class="text-muted mb-0">Bandeira</h5>
-                <span th:text="${cartao.bandeira}" readonly></span>
-                <!-- <h5 class="text-muted mb-0">Valor da Parcela</h5>
-                <span th:text="${cartao.valorParcela}" readonly></span> -->
-                <div class="flex justify-between my-5"></div>
-            </div>
+                <table class="min-w-full border-collapse border border-gray-300 mb-6">
+                  <tbody>
+                    <tr class="border-b border-gray-300">
+                      <th class="text-left p-2">Número do Cartão</th>
+                      <td class="p-2" th:text="${cartao.numeroCartao}"></td>
+                    </tr>
+                    <tr class="border-b border-gray-300">
+                      <th class="text-left p-2">Nome do Titular</th>
+                      <td class="p-2" th:text="${cartao.nomeTitular}"></td>
+                    </tr>
+                    <tr class="border-b border-gray-300">
+                      <th class="text-left p-2">Data de Validade</th>
+                      <td class="p-2" th:text="${cartao.dataValidade}"></td>
+                    </tr>
+                    <tr>
+                      <th class="text-left p-2">Bandeira</th>
+                      <td class="p-2" th:text="${cartao.bandeira}"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             
-              
-
               <div class="flex justify-between my-5 items-center  ">
 
-                <a href="#" class="hover:border-solid hover:border-2 hover:border-gray-dark px-1 py-1"
+                <a href="#" class="font-medium inline-block w-52 my-5 text-center py-2 rounded-md bg-gradient-to-r from-pink-300 to-pink-500 hover:from-pink-500 hover:to-pink-700 transition duration-500"
                   th:href="@{/compra/pagamento}">Retornar</a>
                 <button class="bg-purple px-3 py-3 text-white hover:bg-black transition-all duration-500"
                   type="submit">Finalizar</button>

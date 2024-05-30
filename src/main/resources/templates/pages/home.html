@@ -14,6 +14,10 @@
         }
     </style>
 
+    <div class="loading-screen" id="loading-screen">
+        <div class="lds-dual-ring"></div>
+    </div>
+
     <div th:replace="pages/header :: header"></div>
 
     <section class="h-[100vh] banner-principal">
@@ -38,19 +42,7 @@
             <img th:src="@{img/marcas.png}" alt="marcas de roupas">
             <div class="swiper swiper-roupas my-10" >
                 <div class="swiper-wrapper">
-                    
-                    <!-- <div class="swiper-slide" th:each="product: ${products}">
-                        <div class="w-full">
-                            <a th:href="@{'/produto/' + ${produto.id}}">
-                                <img style="width:200px;" th:src="@{'/media/' + ${product.image}}">
-                                <div class="text-center my-2">
-                                    <h2 class="font-bold" th:text="${produto.name}"></h2>
-                                    <h3 class="font-bold text-purple" th:text="'$' + ${product.price}"></h3>
-                                </div>
-                            </a>
-                        </div>
-                    </div> -->
-            
+                
                     <div class="swiper-slide swiper-slide:w-80">
                         <div class="w-full">
                             <a href="">
@@ -62,6 +54,7 @@
                             </a>
                         </div>
                     </div>
+                    
                     <div class="swiper-slide swiper-slide:w-80">
                         <div class="w-full">
                             <a href="">
@@ -142,6 +135,12 @@
     </section>
  
     <div th:replace="pages/footer :: footer"></div>
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            const loading = document.querySelector('#loading-screen');
+            loading.classList.add('hide');
+        })
+    </script>
 </body>
 </html>
 
