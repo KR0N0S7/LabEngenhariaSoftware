@@ -5,6 +5,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 import org.aspectj.weaver.ast.Not;
@@ -94,7 +95,7 @@ public class ClienteController {
 
     @RequestMapping("login/autenticar")
     public ModelAndView autenticarCliente(@RequestParam String email, @RequestParam String senha,
-            HttpSession session) {
+            HttpSession session, RedirectAttributes redirectAttributes) {
         ModelAndView mv = new ModelAndView();
         logger.debug("Credenciais: {}", email + ", " + senha);
         if (email.contentEquals("admin@admin.co") && senha.contentEquals("admin")) {
@@ -130,45 +131,44 @@ public class ClienteController {
                 Cliente cliente = clienteService.autenticarCliente(email, senha);
                 session.setAttribute("id", cliente.getId());
                 session.setAttribute("nome", cliente.getNomeCompleto());
-                List<NotasProdutos> notasGlobais = notasProdutosService.listarNotasProdutos();
-                Long clienteId = cliente.getId();
-                List<NotasProdutos> notasClienteLogin = notasProdutosService.listarNotasProdutosPorCliente(clienteId);
-
-                System.out.println("Notas ########: " + notasGlobais.size());
-                System.out.println("Notas do usuriooooooo ########: " + notasClienteLogin.size());
-
-                Mono<String> recomendacoes = recomendaProduto.sendNotasProduto(notasGlobais, notasClienteLogin);
-
-                recomendacoes.subscribe(
-                        data -> {
-                            // Here, 'data' is the result of the Mono once it completes
-                            try {
-                                List<String> lista = new ArrayList<>();
-                                lista = JsonUtil.parseJsonToNomeProdutoLista(data);
-                                List<Produto> listaProdutosRecomendados = produtoService
-                                        .listarProdutosAPartirDeUmaListaDeNomes(lista);
-                                session.setAttribute("recomendacoes", listaProdutosRecomendados); // Set to session
-                                System.out.println("Recommendations saved in session.");
-                            } catch (IOException e) {
-                                // TODO Auto-generated catch block
-                                e.printStackTrace();
-                            }
-
-                        },
-                        error -> {
-                            // Handle errors here
-                            System.err.println("Error fetching recommendations: " + error.getMessage());
-                        });
-
-                List<Produto> listaProdutosRecomendados = session.getAttribute("recomendacoes") != null
-                        ? (List<Produto>) session.getAttribute("recomendacoes")
-                        : new ArrayList<>();
-
-                mv.addObject("recomendacoes", listaProdutosRecomendados);
-                mv.addObject("id", session.getAttribute("id"));
-                mv.addObject("nome", session.getAttribute("nome"));
+        
+                AtomicReference<ModelAndView> mvAR = new AtomicReference<>(mv); // Encapsula o ModelAndView
+        
+                // 3. Obtenção de Recomendações e Adição ao ModelAndView (usando doOnSuccess)
+                recomendaProduto.sendNotasProduto(
+                        notasProdutosService.listarNotasProdutos(),
+                        notasProdutosService.listarNotasProdutosPorCliente(cliente.getId())
+                    )
+                    .flatMap(data -> {
+                        try {
+                            List<String> lista = JsonUtil.parseJsonToNomeProdutoLista(data);
+                            List<Produto> listaProdutosRecomendados = produtoService.listarProdutosAPartirDeUmaListaDeNomes(lista);
+                            session.setAttribute("recomendacoes", listaProdutosRecomendados);
+                            return Mono.just(listaProdutosRecomendados);
+                        } catch (IOException e) {
+                            return Mono.error(e); 
+                        }
+                    })
+                    .doOnSuccess(listaProdutosRecomendados -> { // Adiciona os objetos ao ModelAndView existente
+                        redirectAttributes.addFlashAttribute("recomendacoes", listaProdutosRecomendados);
+                        redirectAttributes.addFlashAttribute("id", session.getAttribute("id"));
+                        redirectAttributes.addFlashAttribute("nome", session.getAttribute("nome"));
+                    })
+                    .onErrorResume(error -> { // Lidar com erros na obtenção das recomendações
+                        redirectAttributes.addFlashAttribute("erroRecomendacoes", "Erro ao obter recomendações.");
+                        return Mono.empty(); // Não retorna nenhum valor em caso de erro
+                    })
+                    .doOnTerminate(() -> { // Bloco executado após o término do Mono (sucesso ou erro)
+                        System.out.println("Mono terminado. Recomendações no ModelAndView: " + 
+                        session.getAttribute("recomendacoes")); 
+                    })
+                    .subscribe(); // Inicia o fluxo
+        
+                return mvAR.get(); // Retorna o ModelAndView atualizado
+        
             } catch (Exception e) {
                 mv.addObject("mensagem", e.getMessage());
+                return mv;
             }
         }
         return mv;
