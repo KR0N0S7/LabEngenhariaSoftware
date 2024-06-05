@@ -108,14 +108,14 @@ public class ClienteController {
             Double valorCusto = 0.0;
             Integer quantiaProduto = 0;
             List<ItemProduto> itens = null;
-            for (Compra compra : compras) {
+            /*for (Compra compra : compras) {
                 itens = compra.getItens();
                 for (ItemProduto item : itens) {
                     quantiaProduto = item.getQuantidade();
                     valorVenda += item.getProduto().getPreco() * quantiaProduto;
                     valorCusto += item.getProduto().getCusto() * quantiaProduto;
                 }
-            }
+            }*/
             lucro = valorVenda - valorCusto;
             DecimalFormat decimalFormat = new DecimalFormat("#.##");
 

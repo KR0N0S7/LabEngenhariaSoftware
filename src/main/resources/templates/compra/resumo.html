@@ -41,7 +41,7 @@
               <h5 class="text-muted mb-0">CEP</h5>
               <span type="text" th:text="${endereco.cep}" readonly />
               
-              <h2 class="font-bold text-xl mt-10 mb-3">Cartão de Crédito</h2>
+              <h2 class="font-bold text-xl mt-10 mb-3">Pagamento</h2>
               <div th:each="cartao : ${cartoes}">
                 <h5 class="text-muted mb-0">Número do Cartão</h5>
                 <span class="my-3" th:text="${cartao.numeroCartao}" readonly></span>
