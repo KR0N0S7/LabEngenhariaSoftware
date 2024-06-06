@@ -9697,3 +9697,8 @@ Caused by: java.lang.ClassNotFoundException: Flux
 2024-06-06T19:31:10.115-03:00  INFO 19172 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 2024-06-06T19:31:10.796-03:00  WARN 19172 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
 2024-06-06T19:31:11.523-03:00  INFO 19172 --- [restartedMain] c.b.b.BoutiquepierrotbleuApplication     : Started BoutiquepierrotbleuApplication in 2.511 seconds (process running for 979.56)
+2024-06-06T19:37:53.021-03:00  INFO 19172 --- [Thread-58] com.zaxxer.hikari.HikariDataSource       : HikariPool-9 - Shutdown initiated...
+2024-06-06T19:37:53.025-03:00  INFO 19172 --- [Thread-58] com.zaxxer.hikari.HikariDataSource       : HikariPool-9 - Shutdown completed.
+2024-06-06T19:37:53.160-03:00  INFO 19172 --- [restartedMain] c.b.b.BoutiquepierrotbleuApplication     : Starting BoutiquepierrotbleuApplication using Java 17.0.10 with PID 19172 (C:\Users\srodr\Desktop\less\target\classes started by Gustavo in C:\Users\srodr\Desktop\less)
+2024-06-06T19:37:53.161-03:00 DEBUG 19172 --- [restartedMain] c.b.b.BoutiquepierrotbleuApplication     : Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-06-06T19:37:53.161-03:00  INFO 19172 --- [restartedMain] c.b.b.BoutiquepierrotbleuApplication     : No active profile set, falling back to 1 default profile: "default"
