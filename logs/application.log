@@ -8483,7 +8483,7 @@ Caused by: org.hibernate.HibernateException: Unable to determine Dialect without
 2024-05-05T15:07:24.574-03:00 DEBUG 4460 --- [http-nio-8080-exec-10] c.b.b.c.CarrinhoCompraController         : Lista de ItemProduto::::: [ItemProduto [carrinhoCompra=com.boutiquepierrotbleu.boutiquepierrotbleu.entities.CarrinhoCompra@18d560e6, id=1, preco=12.11, produto=nome, quantidade=1]]
 2024-05-05T15:07:24.575-03:00 DEBUG 4460 --- [http-nio-8080-exec-10] c.b.b.c.CarrinhoCompraController         : Valor total antes::::: null
 2024-05-05T15:07:24.610-03:00 DEBUG 4460 --- [http-nio-8080-exec-10] c.b.b.c.CarrinhoCompraController         : Valor total depois::::: 12.11
-2024-05-05T15:07:24.618-03:00 DEBUG 4460 --- [http-nio-8080-exec-10] c.b.b.c.CarrinhoCompraController         : Número de produtos::::: 1
+2024-05-05T15:07:24.618-03:00 DEBUG 4460 --- [http-nio-8080-exec-10] c.b.b.c.CarrinhoCompraController         : Nï¿½mero de produtos::::: 1
 2024-05-05T15:07:24.636-03:00 DEBUG 4460 --- [http-nio-8080-exec-7] c.b.b.controllers.ProdutoController      : Numero de produtos: 1
 2024-05-05T15:07:24.636-03:00 DEBUG 4460 --- [http-nio-8080-exec-7] c.b.b.controllers.ProdutoController      : Session id: F548CB9A01F61DFADA5160ED00FDB382
 2024-05-05T15:07:24.636-03:00 DEBUG 4460 --- [http-nio-8080-exec-7] c.b.b.controllers.ProdutoController      : Session id: 7
