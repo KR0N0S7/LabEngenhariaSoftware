@@ -9650,3 +9650,15 @@ Caused by: java.lang.ClassNotFoundException: Flux
 2024-06-06T19:24:36.601-03:00  INFO 19172 --- [restartedMain] c.b.b.BoutiquepierrotbleuApplication     : Starting BoutiquepierrotbleuApplication using Java 17.0.10 with PID 19172 (C:\Users\srodr\Desktop\less\target\classes started by Gustavo in C:\Users\srodr\Desktop\less)
 2024-06-06T19:24:36.602-03:00 DEBUG 19172 --- [restartedMain] c.b.b.BoutiquepierrotbleuApplication     : Running with Spring Boot v3.2.4, Spring v6.1.5
 2024-06-06T19:24:36.603-03:00  INFO 19172 --- [restartedMain] c.b.b.BoutiquepierrotbleuApplication     : No active profile set, falling back to 1 default profile: "default"
+2024-06-06T19:24:37.384-03:00  INFO 19172 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-06-06T19:24:37.385-03:00  INFO 19172 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2024-06-06T19:24:37.446-03:00  INFO 19172 --- [restartedMain] o.a.c.c.C.[Tomcat-2].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2024-06-06T19:24:37.583-03:00  INFO 19172 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-06-06T19:24:37.588-03:00  INFO 19172 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-06-06T19:24:37.598-03:00  INFO 19172 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Starting...
+2024-06-06T19:24:37.613-03:00  INFO 19172 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-7 - Added connection com.mysql.cj.jdbc.ConnectionImpl@49ad83d2
+2024-06-06T19:24:37.613-03:00  INFO 19172 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Start completed.
+2024-06-06T19:24:37.614-03:00  WARN 19172 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000511: The 5.7.0 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2024-06-06T19:24:37.909-03:00  INFO 19172 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-06-06T19:24:38.739-03:00  WARN 19172 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-06-06T19:24:39.278-03:00  INFO 19172 --- [restartedMain] c.b.b.BoutiquepierrotbleuApplication     : Started BoutiquepierrotbleuApplication in 2.742 seconds (process running for 587.315)
