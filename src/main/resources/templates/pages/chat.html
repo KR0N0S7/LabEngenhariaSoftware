@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<div th:fragment="chat">
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce Chatbot</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/styles_chat.css}">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header"> 
+            <h2>Chat</h2> 
+            <button id="close-chat">X</button> 
+        </div>
+        
+        <div class="chat-history" id="chat-container">
+            </div>
+        <div class="user-input">
+            <input type="text" id="message-input" placeholder="Type your message here">
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+    <script th:src="@{js/script_chat.js}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#chat-form').on('submit', function(e) {
+                e.preventDefault();
+                var message = $('#chat-input').val();
+    
+                $.ajax({
+                    url: '/send-message',
+                    type: 'POST',
+                    data: { message: message },
+                    success: function(response) {
+                        // Update the chat UI with the received 'response'
+                        $('#chat-messages').append('<div class="chatbot-message">' + response + '</div>');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+</div>

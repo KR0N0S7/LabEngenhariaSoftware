@@ -156,8 +156,14 @@ public class CompraController {
         logger.debug("Endereco:::::::: {}", endereco.getRua());
 
         List<Cupom> listaCupom = cupomService.listarCuponsByClienteId(userId);
+        List<Cupom> listaCuponsValidos = new ArrayList<>();
+        for (Cupom cupom : listaCupom) {
+            if (cupom.getUsoLimite() - cupom.getUsoContador() > 0) {
+                listaCuponsValidos.add(cupom);
+            }
+        }
 
-        mv.addObject("listaCupom", listaCupom);
+        mv.addObject("listaCupom", listaCuponsValidos);
 
         if(!listaCupom.isEmpty()) {
             mv.addObject("total", compra.getValorTotal());
@@ -194,6 +200,7 @@ public class CompraController {
             compra.setValorFinal(novoValorTotal);
 
             session.setAttribute("compra", compra);
+            session.setAttribute("codigoCupom", cupom.getCodigo());
 
             logger.debug("Compra_2total:::::::: {}", compra.getValorTotal());
             logger.debug("Compra_2final:::::::: {}", compra.getValorFinal());
@@ -234,18 +241,20 @@ public class CompraController {
     }
     
     @RequestMapping("detalhar")
-    public ModelAndView detalharCompra(HttpSession session, @RequestParam("selectedCartao") Creditcard cartao) {
+    public ModelAndView detalharCompra(HttpSession session, @RequestParam(required = false, name = "selectedCartao") Creditcard cartao) {
         logger.debug("Session:::::::: {}", session.getAttribute("compra-obj"));
         ModelAndView mv = new ModelAndView("compra/resumo");
         Compra compra = (Compra) session.getAttribute("compra-obj");
         Endereco enderecoEnvio = compra.getEnderecoEntrega();
-        List<Creditcard> cartoes = new ArrayList<>();
-        cartoes.add(cartao);
-        compra.setCartao(cartoes);
+        if (cartao != null) {
+            List<Creditcard> cartoes = new ArrayList<>();
+            cartoes.add(cartao);
+            compra.setCartao(cartoes);
+            mv.addObject("cartoes", cartoes);
+        }
         logger.debug("Endereço Rua:::::::: {}", enderecoEnvio.getRua());
         mv.addObject("endereco", enderecoEnvio);
         mv.addObject("total", compra.getValorFinal());
-        mv.addObject("cartoes", cartoes);
 
         mv.addObject("compra", compra);
         return mv;
@@ -258,7 +267,8 @@ public class CompraController {
         Compra compra = (Compra) session.getAttribute("compra-obj");
         Long clienteId = session.getAttribute("id") != null ? (Long) session.getAttribute("id") : null;
         Cliente cliente = clienteService.obterCliente(clienteId);
-        compra.setCarrinhoId(carrinhoCompraService.getOrCreateCart(cliente).getId());
+        Long carrinhoId = carrinhoCompraService.getOrCreateCart(cliente).getId();
+        compra.setCarrinhoId(carrinhoId);
 
         Compra compraFinalizada = compraService.salvarCompra(compra);
         Long compraId = compraFinalizada.getId();
@@ -266,6 +276,19 @@ public class CompraController {
         compraFinalizada.setNumeroCompra(numeroCompra);
         compraService.salvarCompra(compraFinalizada);
         
+        List<ItemProduto> itens = carrinhoCompraService.obterCarrinhoCompra(carrinhoId).getItemProduto();
+        for (ItemProduto item : itens) {
+            item.setCompra(compraFinalizada);
+        }
+        itemProdutoService.salvarItens(itens);
+
+        String codigoCupom = (String) session.getAttribute("codigoCupom");
+        if (codigoCupom != null) {
+            Cupom cupom = cupomService.obterCupomByCodigo(codigoCupom);
+            cupom.setUsoContador(cupom.getUsoContador() + 1);
+            cupomService.salvarCupom(cupom);
+        }
+
         CarrinhoCompra carrinho = carrinhoCompraService.obterCarrinhoCompra(compraFinalizada.getCarrinhoId());
         carrinho.setAtivo(false);
         carrinhoCompraService.salvarCarrinhoCompra(carrinho);
@@ -396,13 +419,17 @@ public class CompraController {
     @RequestMapping("/trocarSelecionados")
     public ModelAndView trocarSelecionados(@RequestParam("selectedItems") List<Long> id, HttpSession session) throws Exception {
         logger.debug("Lista produtos selecionados:::::::: {}", id.size());
+        Long idCompra = null;
         for(Long idz : id) {
             logger.debug("Nome do produto selecionado:::::::: {}", itemProdutoService.obterItemProduto(idz));
+            idCompra = itemProdutoService.obterItemProduto(idz).getCompra().getId();
         }
-        Long idCliente = (Long) session.getAttribute("id");
+        //Long idCliente = (Long) session.getAttribute("id");
         ModelAndView mv = new ModelAndView("usr/compra/solicitacaoTroca");
-        Compra compra = compraService.obterCompra(idCliente);
+        Compra compra = compraService.obterCompra(idCompra);
+        logger.debug("Compra status:::::::: {}", compra.getStatus());
         if(compra.getStatus() == Status.ENTREGUE) {
+            System.out.println("Chegou até aqui!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             compra.setStatus(Status.EM_TROCA);
             compra = compraService.salvarCompra(compra);
             List<Produto> produtos = new ArrayList<Produto>();

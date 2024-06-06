@@ -15,6 +15,8 @@
 
     <div th:replace="pages/header :: header"></div>
 
+    <div th:replace="pages/chat :: chat"></div>
+
     <section class="h-[100vh] banner-principal">
 
         <div class="container">
@@ -37,88 +39,18 @@
             <img th:src="@{img/marcas.png}" alt="marcas de roupas">
             <div class="swiper swiper-roupas my-10" >
                 <div class="swiper-wrapper">
-
-                    <div class="swiper-slide"> 
-                        <div class="w-full">
-                            <a href="">
-                                <img th:src="@{img/swiper-1.png}" alt="roupas">
-                                <div class="text-center my-2">
-                                    <h2 class="font-bold">Casaco Zebra</h2>
-                                    <h3 class="font-bold text-purple">R$1.300</h3>
-                                </div>
-                            </a>
+                    <th:block th:if="${recomendacoes != null}"> 
+                        <div class="col-md-4" th:each="produto : ${recomendacoes}">
+                            <div class="swiper-slide swiper-slide:w-80">
+                                <img th:src="@{'/images/produtos/' + ${produto.imagem}}" alt="Product Image" class="img-fluid">
+                                <h2 th:text="${produto.nome}"></h2>
+                                <p th:text="'Preço: $' + ${produto.preco}"></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="swiper-slide"> 
-                        <div class="w-full">
-                            <a href="#">
-                                <img th:src="@{img/swiper-1.png}" alt="roupas">
-                                <div class="text-center my-2">
-                                    <h2 class="font-bold">Casaco Zebra</h2>
-                                    <h3 class="font-bold text-purple">R$1.300</h3>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="swiper-slide"> 
-                        <div class="w-full">
-                            <a href="#">
-                                <img th:src="@{img/swiper-1.png}" alt="roupas">
-                                <div class="text-center my-2">
-                                    <h2 class="font-bold">Casaco Zebra</h2>
-                                    <h3 class="font-bold text-purple">R$1.300</h3>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="swiper-slide"> 
-                        <div class="w-full">
-                            <a href="#">
-                                <img th:src="@{img/swiper-1.png}" alt="roupas">
-                                <div class="text-center my-2">
-                                    <h2 class="font-bold">Casaco Zebra</h2>
-                                    <h3 class="font-bold text-purple">R$1.300</h3>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="swiper-slide"> 
-                        <div class="w-full">
-                            <a href="#">
-                                <img th:src="@{img/swiper-1.png}" alt="roupas">
-                                <div class="text-center my-2">
-                                    <h2 class="font-bold">Casaco Zebra</h2>
-                                    <h3 class="font-bold text-purple">R$1.300</h3>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="swiper-slide"> 
-                        <div class="w-full">
-                            <a href="#">
-                                <img th:src="@{img/swiper-1.png}" alt="roupas">
-                                <div class="text-center my-2">
-                                    <h2 class="font-bold">Casaco Zebra</h2>
-                                    <h3 class="font-bold text-purple">R$1.300</h3>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="swiper-slide"> 
-                        <div class="w-full">
-                            <a href="#">
-                                <img th:src="@{img/swiper-1.png}" alt="roupas">
-                                <div class="text-center my-2">
-                                    <h2 class="font-bold">Casaco Zebra</h2>
-                                    <h3 class="font-bold text-purple">R$1.300</h3>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
+                        </th:block>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
                 </div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
             </div>
 
             <div class="flex justify-center">
@@ -135,10 +67,22 @@
                     </a>
                 </div>
             </div>
+            
         </div>
     </section>
  
     <div th:replace="pages/footer :: footer"></div>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Inicialização do Swiper após o DOM estar pronto e os elementos carregados
+            var swiper = new Swiper('.swiper-roupas', {
+                // ... suas configurações do Swiper ...
+            });
+        });
+        /*]]>*/
+    </script>
 </body>
 </html>
 

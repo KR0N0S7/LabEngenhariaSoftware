@@ -108,4 +108,12 @@ public class CupomService {
         return novoCupom;
     }
 
+    public Cupom obterCupomByCodigo(String codigoCupom) throws Exception {
+        Optional<Cupom> cupom = cupomRepository.findByCodigo(codigoCupom);
+        if (cupom.isEmpty()) {
+            throw new Exception("Cupom não existe!");
+        }
+        return cupom.get();
+    }
+
 }
