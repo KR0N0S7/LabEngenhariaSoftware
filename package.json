@@ -1,12 +1,22 @@
 {
   "devDependencies": {
-    "tailwindcss": "^3.3.3"
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.4"
   },
   "scripts": {
-    "dev": "npx tailwindcss -i ./src/main/resources/static/css/tailwindcss.css -o ./src/main/resources/static/css/style.css --watch"
+    "dev": "npx tailwindcss -i ./src/main/resources/static/css/tailwindcss.css -o ./src/main/resources/static/css/style.css --watch",
+    "build": "tailwindcss -i ./input.css -o ./output.css"
   },
   "dependencies": {
     "alpinejs": "^3.13.0",
     "swiper": "^10.1.0"
-  }
+  },
+  "name": "labengenhariasoftware",
+  "version": "1.0.0",
+  "main": "tailwind.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
