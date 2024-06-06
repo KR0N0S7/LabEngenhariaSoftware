@@ -14,10 +14,6 @@ target/
 logs/
 *.log
 
-# Ignorar logs específicos em subdiretórios (ajustado para lidar com barras invertidas)
-logs/
-less/logs/application.log
-
 ### STS ###
 .apt_generated
 .classpath
