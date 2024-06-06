@@ -1,10 +1,18 @@
+# Ignorar arquivos específicos
 HELP.md
+
+# Ignorar diretórios de build
 target/
-!.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+
+# Ignorar arquivos de configuração específicos
 !**/src/main/resources/application.yml
 !**/target/classes/application.yml
+
+# Ignorar logs
+logs/
+*.log
 
 
 ### STS ###
