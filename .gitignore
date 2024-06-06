@@ -1,12 +1,22 @@
+# Ignorar arquivos específicos
 HELP.md
+
+# Ignorar diretórios de build
 target/
-!.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+
+# Ignorar arquivos de configuração específicos
 !**/src/main/resources/application.yml
 !**/target/classes/application.yml
-!logs/
-less\logs\application.log
+
+# Ignorar logs
+logs/
+*.log
+
+# Ignorar logs específicos em subdiretórios (ajustado para lidar com barras invertidas)
+logs/
+less/logs/application.log
 
 ### STS ###
 .apt_generated
@@ -16,14 +26,12 @@ less\logs\application.log
 .settings
 .springBeans
 .sts4-cache
-application.yml
 
 ### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
-application.yml
 
 ### NetBeans ###
 /nbproject/private/
@@ -34,8 +42,6 @@ application.yml
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
-application.log
-application.yml
+
 ### VS Code ###
 .vscode/
-application.yml
