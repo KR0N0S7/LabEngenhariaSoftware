@@ -33,4 +33,9 @@ public class ItemProdutoService {
     public void deletarItemProduto(Long id) {
         itemProdutoRepository.deleteById(id);
     }
+
+    public List<ItemProduto> salvarItens(List<ItemProduto> itens) {
+        // TODO Auto-generated method stub
+        return itemProdutoRepository.saveAll(itens);
+    }
 }

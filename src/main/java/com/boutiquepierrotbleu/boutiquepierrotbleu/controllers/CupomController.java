@@ -1,5 +1,6 @@
 package com.boutiquepierrotbleu.boutiquepierrotbleu.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -54,7 +55,13 @@ public class CupomController {
         Long clienteId = (Long) session.getAttribute("id");
         logger.debug("Cliente ID::::::::: {}", clienteId);
         List<Cupom> lista = cupomService.listarCuponsByClienteId(clienteId);
-        mv.addObject("lista", lista);
+        List<Cupom> listaCuponsValidos = new ArrayList<>();
+        for (Cupom cupom : lista) {
+            if (cupom.getUsoLimite() - cupom.getUsoContador() > 0) {
+                listaCuponsValidos.add(cupom);
+            }
+        }
+        mv.addObject("lista", listaCuponsValidos);
         logger.debug("Número de Cupons::::::::: {}", lista.size());
         return mv;
     }
