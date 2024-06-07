@@ -9,7 +9,7 @@ target/
 # Ignorar arquivos de configuração específicos
 !**/src/main/resources/application.yml
 !**/target/classes/application.yml
-
+# teste
 ### STS ###
 .apt_generated
 .classpath
