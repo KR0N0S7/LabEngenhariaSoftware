@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/style.css}">
-    <title>Home</title>
+    <!-- <title>Home</title> -->
     <link rel="shortcut icon" href="../../static/img/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script th:src="@{/js/header.js}"></script>
@@ -16,104 +17,149 @@
 <body>
     <div th:replace="pages/header :: header"></div>
 
-    <div class="alert alert-primary" th:if="${mensagem != null}"
-        th:text="${mensagem}"></div>
+    <div class="alert alert-primary" th:if="${mensagem != null}" th:text="${mensagem}"></div>
 
     <div class="form-validation">
 
-    <div class="container my-10">
-        <div class="flex">
-            <div class="w-6/12">
-                <form class="form-valide" th:action="@{/cliente/salvar}" method="POST" th:object="${cliente}">
-                    <div class="flex flex-col">
-                        <input type="hidden" th:field="*{id}"/>
-                        
-                        <div class="my-3 flex flex-col">
-                            <label for="Nome Completo" class="my-3 font-bold">Nome Completo</label>
-                            <input type="text" placeholder="Seu nome Completo"
-                                class="form-control" required th:field="*{nomeCompleto}">
-                            <div class="text-danger" th:if="${#fields.hasErrors('nomeCompleto')}"
-                                th:errors="*{nomeCompleto}"></div>
-                        </div>
-                        
-                        <div class="my-3 flex flex-col">
-                            <label for="Telefone" class="my-3 font-bold">Telefone</label>
-                            <input type="text" placeholder="Digite seu Telefone"
-                                class="form-control" required th:field="*{telefone}">
-                            <div class="text-danger" th:if="${#fields.hasErrors('telefone')}"
-                                th:errors="*{telefone}"></div>
-                        </div>
-
-
-                        <div class="my-3 flex flex-col">
-                            <label for="CPF" class="font-bold my-3" >Digite seu CPF</label>
-                            <input type="number" placeholder="00000000000"
-                                class="form-control" required th:field="*{cpf}">
-                            <div class="text-danger" th:if="${#fields.hasErrors('cpf')}"
-                                th:errors="*{cpf}"></div>
-                        </div>
-                        
-                        <div class="my-3 flex flex-col">
-                            <label for="Email" class="font-bold my-3">Email</label>
-                            <input type="text" placeholder="exemplo@email.com"
-                                class="form-control" required th:field="*{email}">
-                            <div class="text-danger" th:if="${#fields.hasErrors('email')}"
-                                th:errors="*{email}"></div>
-                        </div>
-<!--
-                        <div class="my-3 flex flex-col">
-                            <label for="Senha" class="font-bold my-3">Senha</label>
-                            <input type="password" placeholder="Senha"
-                                class="form-control" required th:field="*{senha}">
-                            <div class="text-danger" th:if="${#fields.hasErrors('senha')}"
-                                th:errors="*{senha}"></div>
-                        </div>
--->
-
-                        <hr>
+        <div class="container my-10">
+            <div class="flex">
+                <div class="w-6/12">
+                    <form class="form-valide" th:action="@{/cliente/salvar}" method="POST" th:object="${cliente}">
                         <div class="flex flex-col">
-                            <!-- Endereco Fields -->
-                            <div id="enderecos">
-                                <div th:each="endereco, stat : *{enderecos}" th:if="${cliente.id == null}">
-                                    <input type="text" th:name="'enderecos[' + ${stat.index} + '].cep'" placeholder="CEP" required th:field="*{enderecos[__${stat.index}__].cep}">
-                                    <input type="text" th:name="'enderecos[' + ${stat.index} + '].rua'" placeholder="Rua" required th:field="*{enderecos[__${stat.index}__].rua}">
-                                    <input type="text" th:name="'enderecos[' + ${stat.index} + '].numero'" placeholder="Número" required th:field="*{enderecos[__${stat.index}__].numero}">
-                                    <input type="text" th:name="'enderecos[' + ${stat.index} + '].bairro'" placeholder="Bairro" required th:field="*{enderecos[__${stat.index}__].bairro}">
-                                    <input type="text" th:name="'enderecos[' + ${stat.index} + '].cidade'" placeholder="Cidade" required th:field="*{enderecos[__${stat.index}__].cidade}">
-                                    <input type="text" th:name="'enderecos[' + ${stat.index} + '].estado'" placeholder="Estado" required th:field="*{enderecos[__${stat.index}__].estado}">
+                            <input type="hidden" th:field="*{id}" />
+
+                            <div class="my-3 flex flex-col">
+                                <label for="Nome Completo" class="my-3 font-bold">Nome Completo</label>
+                                <input type="text" placeholder="Seu nome Completo"
+                                    class="border-2 border-solid border-[#d1d5db] outline-none pl-5 py-2 rounded-lg"
+                                    required th:field="*{nomeCompleto}">
+                                <div class="text-danger" th:if="${#fields.hasErrors('nomeCompleto')}"
+                                    th:errors="*{nomeCompleto}"></div>
+                            </div>
+
+                            <div class="my-3 flex flex-col">
+                                <label for="Telefone" class="my-3 font-bold">Telefone</label>
+                                <input id="telefone" type="text" placeholder="Digite seu Telefone" required
+                                    th:field="*{telefone}"
+                                    class="border-2 border-solid border-[#d1d5db] outline-none pl-5 py-2 rounded-lg">
+                                <div class="text-danger" th:if="${#fields.hasErrors('telefone')}"
+                                    th:errors="*{telefone}"></div>
+                            </div>
+
+                            <div class="my-3 flex flex-col">
+                                <label for="CPF" class="font-bold my-3">Digite seu CPF</label>
+                                <input id="cpf" type="text" placeholder="00000000000"
+                                    class="border-2 border-solid border-[#d1d5db] outline-none pl-5 py-2 rounded-lg"
+                                    required th:field="*{cpf}">
+                                <div class="text-danger" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></div>
+                            </div>
+
+                            <div class="my-3 flex flex-col">
+                                <label for="Email" class="font-bold my-3">Email</label>
+                                <input type="text" placeholder="exemplo@email.com"
+                                    class="border-2 border-solid border-[#d1d5db] outline-none pl-5 py-2 rounded-lg"
+                                    required th:field="*{email}">
+                                <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
                                 </div>
-                                <!-- <div th:each="index, stat : ${cliente.enderecos}" class="endereco-entry" th:if="${cliente.id != null}">
-                                    <input type="text" th:name="'enderecos[' + ${stat.index} + '].cep'" placeholder="CEP" required th:field="*{enderecos[__${stat.index}__].cep}">
-                                    <input type="text" th:name="'enderecos[' + ${stat.index} + '].rua'" placeholder="Rua" required th:field="*{enderecos[__${stat.index}__].rua}">
-                                    <input type="text" th:name="'enderecos[' + ${stat.index} + '].numero'" placeholder="Número" required th:field="*{enderecos[__${stat.index}__].numero}">
-                                    <input type="text" th:name="'enderecos[' + ${stat.index} + '].bairro'" placeholder="Bairro" required th:field="*{enderecos[__${stat.index}__].bairro}">
-                                    <input type="text" th:name="'enderecos[' + ${stat.index} + '].cidade'" placeholder="Cidade" required th:field="*{enderecos[__${stat.index}__].cidade}">
-                                    <input type="text" th:name="'enderecos[' + ${stat.index} + '].estado'" placeholder="Estado" required th:field="*{enderecos[__${stat.index}__].estado}">
-                                </div> -->
+                            </div>
+                            <div class="my-3 flex flex-col">
+                                <label for="password" class="font-bold my-3">Senha</label>
+                                <div class="relative">
+                                    <input id="senha" type="password" placeholder="password"
+                                        class="border-2 border-gray-300 outline-none pl-5 py-2 rounded-lg w-full"
+                                        required th:field="*{senha}">
+                                    <button type="button" id="togglePassword"
+                                        class="absolute right-3 top-2.5 text-gray-600">
+                                        <i id="eyeIcon" class="fa-solid fa-eye"></i>
+                                        <i id="eyeSlashIcon" class="fa-solid fa-eye-slash hidden"></i>
+                                    </button>
+                                </div>
+                                <div class="text-danger" th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}">
+                                </div>
+                            </div>
+
+                            <!-- <div class="my-3 flex flex-col">
+                                <label for="dataAniversario" class="font-bold my-3">Data de Aniversário</label>
+                                <input id="dataAniversario" type="text" placeholder="Selecione a Data de Aniversário"
+                                       class="border-2 border-solid border-[#d1d5db] outline-none pl-5 py-2 rounded-lg"
+                                       required th:field="*{data_aniversario}">
+                                <div class="text-danger" th:if="${#fields.hasErrors('data_aniversario')}" th:errors="*{data_aniversario}"></div>
                             </div>
                             
-                            <!-- Button to add more Endereco fields -->
-                            <button type="button" onclick="addEnderecoFields()">Adicionar Endereco</button>
+                            <script>
+                                $(function() {
+                                    // Configuração do datepicker
+                                    $("#dataAniversario").datepicker({
+                                        dateFormat: 'dd/mm/yy', // Formato de data desejado
+                                        changeMonth: true, // Permitir a alteração do mês
+                                        changeYear: true, // Permitir a alteração do ano
+                                        yearRange: '-100:+0', // Limitar o intervalo de anos (opcional)
+                                        onSelect: function(dateText) {
+                                            var selectedDate = $.datepicker.formatDate('yy-mm-dd', $(this).datepicker('getDate'));
+                                            $("#dataAniversario").val(selectedDate); // Atualiza o valor do campo de entrada com a data selecionada
+                                        }
+                                    });
+                                });
+                            </script> -->
+                            
+                            <hr>
+                            <div class="flex flex-col">
+                                <!-- Endereco Fields -->
+                                <div id="enderecos">
+                                    <div th:each="endereco, stat : *{enderecos}" th:if="${cliente.id == null}">
+                                        <input type="text" th:name="'enderecos[' + ${stat.index} + '].cep'"
+                                            placeholder="CEP" required th:field="*{enderecos[__${stat.index}__].cep}">
+                                        <input type="text" th:name="'enderecos[' + ${stat.index} + '].rua'"
+                                            placeholder="Rua" required th:field="*{enderecos[__${stat.index}__].rua}">
+                                        <input type="text" th:name="'enderecos[' + ${stat.index} + '].numero'"
+                                            placeholder="Número" required
+                                            th:field="*{enderecos[__${stat.index}__].numero}">
+                                        <input type="text" th:name="'enderecos[' + ${stat.index} + '].bairro'"
+                                            placeholder="Bairro" required
+                                            th:field="*{enderecos[__${stat.index}__].bairro}">
+                                        <input type="text" th:name="'enderecos[' + ${stat.index} + '].cidade'"
+                                            placeholder="Cidade" required
+                                            th:field="*{enderecos[__${stat.index}__].cidade}">
+                                        <input type="text" th:name="'enderecos[' + ${stat.index} + '].estado'"
+                                            placeholder="Estado" required
+                                            th:field="*{enderecos[__${stat.index}__].estado}">
+                                    </div>
+                                </div>
+
+                                <!-- Button to add more Endereco fields -->
+                                <button
+                                    class="font-medium inline-block w-52 my-5 text-center py-2 rounded-md bg-gradient-to-r from-pink-300 to-pink-500 hover:from-pink-500 hover:to-pink-700 transition duration-500"
+                                    type="button" onclick="addEnderecoFields()">Adicionar Endereço</button>
+                            </div>
                         </div>
-                    </div>
-                    </div>
+
+                        <div class="mt-10 flex justify-between">
+                            <!-- <div>
+                                <a th:href="@{/}"
+                                    class="bg-gray py-2 px-2 rounded-lg hover:bg-black hover:text-white transition duration-500 cursor-pointer">Retornar</a>
+                            </div> -->
+                            <div>
+                                <button type="submit"
+                                    class="btn btn-primary bg-purple text-white py-2 px-2 rounded-lg hover:bg-black hover:text-white' transition duration-500 cursor-pointer">Cadastrar</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="mt-10 flex justify-between">
-                    <div>
-                        <a th:href="@{/}" class="bg-gray py-2 px-2 rounded-lg hover:bg-black hover:text-white transition duration-500 cursor-pointer">Retornar</a>
-                    </div>
-                    <div>
-                        <button type="submit" class="btn btn-primary bg-purple text-white py-2 px-2 rounded-lg hover:bg-black hover:text-white' transition duration-500 cursor-pointer">Cadastrar</button>
-                    </div>
-                </div>
-                </form>
             </div>
 
         </div>
 
+    </div>
+
+    <!-- mascara para o numero de telefone e cpf -->
+    <script th:src="@{/js/mask-tel-new.js}"></script>
+    <script th:src="@{/js/mask-cpf-new.js}"></script>
+    <script th:src="@{/js/password-eye.js}"></script>
+    <!-- end mascara para o numero de telefone e cpf -->
 
     <div th:replace="pages/footer :: footer"></div>
 </body>
+
 </html>
 
 <script>
@@ -121,21 +167,27 @@
         // Get the enderecos container and determine the next index
         const container = document.getElementById('enderecos');
         const currentIndex = container.children.length;
-        
+
         // Create new Endereco fields with the next index
         const newEnderecoDiv = document.createElement('div');
         newEnderecoDiv.className = 'endereco';
         newEnderecoDiv.setAttribute('data-index', currentIndex);
         newEnderecoDiv.innerHTML = `
-            <input type="text" name="enderecos[${currentIndex}].rua" placeholder="Rua" required>
-            <input type="text" name="enderecos[${currentIndex}].numero" placeholder="Numero" required>
-            <input type="text" name="enderecos[${currentIndex}].bairro" placeholder="Bairro" required>
-            <input type="text" name="enderecos[${currentIndex}].cidade" placeholder="Cidade" required>
-            <input type="text" name="enderecos[${currentIndex}].estado" placeholder="Estado" required>
+        <input type="text" name="enderecos[${currentIndex}].rua" placeholder="Rua" required
+            class="border-2 border-solid border-[#d1d5db] outline-none pl-5 py-2 rounded-lg">
+        <input type="text" name="enderecos[${currentIndex}].numero" placeholder="Número" required
+            class="border-2 border-solid border-[#d1d5db] outline-none pl-5 py-2 rounded-lg mt-3">
+        <input type="text" name="enderecos[${currentIndex}].bairro" placeholder="Bairro" required
+            class="border-2 border-solid border-[#d1d5db] outline-none pl-5 py-2 rounded-lg mt-3">
+        <input type="text" name="enderecos[${currentIndex}].cidade" placeholder="Cidade" required
+            class="border-2 border-solid border-[#d1d5db] outline-none pl-5 py-2 rounded-lg mt-3">
+        <input type="text" name="enderecos[${currentIndex}].estado" placeholder="Estado" required
+            class="border-2 border-solid border-[#d1d5db] outline-none pl-5 py-2 rounded-lg mt-3">
         `;
 
         // Append the new Endereco fields to the container
         container.appendChild(newEnderecoDiv);
     }
+
 
 </script>

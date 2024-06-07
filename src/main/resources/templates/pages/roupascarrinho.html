@@ -31,10 +31,11 @@
 
         </div>
 
-        <div class="font-bold flex justify-between mt-5">
+        <div class="font-bold flex mt-5">
             <h2>Total</h2>
-            <span id="totalCompra" th:text="${total}">R$ 240.00</span>
+            <span id="totalCompra" class="ml-2" th:text="'R$ ' + ${total}"></span>
         </div>
+        
       
     </div>
 </div>

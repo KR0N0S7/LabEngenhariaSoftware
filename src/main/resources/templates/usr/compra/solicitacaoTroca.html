@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <title>Home</title>
     <link rel="shortcut icon" href="../../static/img/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script th:src="@{/js/header.js}"></script>
@@ -14,28 +15,24 @@
 </head>
 
 <body>
-    <div th:replace="pages/header :: header"></div> 
+    <div th:replace="pages/header :: header"></div>
 
-<div th:replace="pages/head :: head"></div>
+    <div th:replace="pages/head :: head"></div>
 
-<body>
-    
+    <body>
 
-
-    <div class="container my-10">
-        <div class="flex justify-center items-center flex-col">
+        <div class="container my-10">
+            <div class="flex justify-center items-center flex-col">
 
 
-            <img th:src="@{/img/cadastro-completo.png}" alt="cadastro completo">
+                <img th:src="@{/img/cadastro-completo.png}" alt="cadastro completo">
 
-            <h2 class="font-bold text-3xl">Sua solicitação para troca foi realizada!</h2>
+                <h2 class="font-bold text-3xl">Sua solicitação para troca foi realizada!</h2>
+            </div>
         </div>
-    </div>
 
-
-    <div th:replace="pages/footer :: footer"></div>
-</body>
+        <div th:replace="pages/footer :: footer"></div>
+    </body>
 
 
 </html>
-

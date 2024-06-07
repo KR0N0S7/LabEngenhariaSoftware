@@ -1,7 +1,7 @@
 <footer class="bg-gray" th:fragment="footer">
     <div class="container py-10">
         <div class="flex">
-            <div class="w-4/12">
+            <!-- <div class="w-4/12">
                 <div>
                     <h2 class="text-2xl tracking-wider font-bold mt-10 mb-16">Boutique Pierrot Bleu</h2>
                     <h3 class="text-xl">Inscreva-se no nosso site</h3>
@@ -12,9 +12,9 @@
                         </button>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
-            <div class="w-2/12">
+            <!-- <div class="w-2/12">
                 <h2 class="mt-10 font-semibold">Nossa Loja</h2>
                 <ol>
                     <li class="my-3">
@@ -30,33 +30,33 @@
                         <a href="#">SAC</a>
                     </li>
                 </ol>
-            </div>
+            </div> -->
 
-            <div class="w-2/12">
+            <div class="w-6/12">
                 <h2 class="mt-10 font-semibold">Compras</h2>
                 <ol>
                     <li class="my-3">
-                        <a href="#">Produtos</a>
+                        <a  th:href="@{produto/listarProdutos}">Produtos</a>
                     </li>
                     <li>
-                        <a href="#">Minha Conta</a>
+                        <a th:href="@{cliente/login}">Minha Conta</a>
                     </li>
-                    <li class="my-3">
+                    <!-- <li class="my-3">
                         <a href="#">Regras de envio</a>
-                    </li>
+                    </li> -->
                     <li>
                         <a href="#">Devolução</a>
                     </li>
                 </ol>
             </div>
 
-            <div class="w-2/12">
-                <h2 class="mt-10 font-semibold">Suporte</h2>
+            <div class="w-6/12">
+                <!-- <h2 class="mt-10 font-semibold">Suporte</h2> -->
                 <ol>
-                    <li class="my-3">
+                    <!-- <li class="my-3">
                         <a href="#">Contate-nos</a>
-                    </li>
-                    <li>
+                    </li> -->
+                    <!-- <li>
                         <a href="#">Opções de pagamento</a>
                     </li>
                     <li class="my-3">
@@ -64,7 +64,7 @@
                     </li>
                     <li>
                         <a href="#">Afiliados</a>
-                    </li>
+                    </li> -->
                 </ol>
             </div>
     
@@ -73,7 +73,7 @@
         <div class="flex justify-between mt-12">
 
             <h2 class="text-sm">
-                @2023 Todos os direitos reservados Pierrot Team.
+                @2024 Todos os direitos reservados Pierrot Team.
             </h2>
 
             <div class="flex">
@@ -100,6 +100,8 @@
     <script th:src="@{https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js}"></script>
     <script th:src="@{/js/swiper.js}"></script>
     <script type="module" th:src="@{https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js}"></script>
+     <!-- Font Awesome -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
    
     <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
     

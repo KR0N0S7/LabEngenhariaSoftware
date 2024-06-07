@@ -3,9 +3,8 @@
 
 <head>
     <link rel="stylesheet" th:href="@{/css/styles.css}" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
-        crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 
 <div th:replace="pages/head :: head"></div>
@@ -20,42 +19,44 @@
                     <div id="passo-placeholder"></div>
 
                     <div>
-                        <form th:action="@{/compra/cupom}" th:object="${endereco}" method="post" class="flex flex-col" >
-                            
+                        <form th:action="@{/compra/cupom}" th:object="${endereco}" method="post" class="flex flex-col">
+
                             <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
 
                             <h2 class="font-bold text-xl mt-10 mb-3">Endereço de envio</h2>
 
                             <div>
-                                <label class="font-bold">Selecione o endereço de envio</label>
-                                <select class="form-select" th:object="${endereco}" name="selectedEndereco" id="addressDropdown" onchange="updateFields()">
+                                <label class="font-bold my-3">Selecione o endereço de envio</label>
+                                <select class="form-select" th:object="${endereco}" name="selectedEndereco"
+                                    id="addressDropdown" onchange="updateFields()">
                                     <option value="" selected="selected">Selecione um endereço</option>
-                                    <option th:each="endereco : ${listaEnderecos}" 
-                                        th:value="${endereco.id}" 
-                                        th:data-rua="${endereco.rua}" 
-                                        th:data-complemento="${endereco.complemento}" 
-                                        th:data-bairro="${endereco.bairro}" 
-                                        th:data-cidade="${endereco.cidade}" 
-                                        th:data-estado="${endereco.estado}" 
-                                        th:data-cep="${endereco.cep}"
+                                    <option th:each="endereco : ${listaEnderecos}" th:value="${endereco.id}"
+                                        th:data-rua="${endereco.rua}" th:data-complemento="${endereco.complemento}"
+                                        th:data-bairro="${endereco.bairro}" th:data-cidade="${endereco.cidade}"
+                                        th:data-estado="${endereco.estado}" th:data-cep="${endereco.cep}"
                                         th:text="${endereco.tipo}"></option>
                                 </select>
                             </div>
-    
-                            <input class="my-3" placeholder="Endereço" type="text" id="enderecoInput" readonly />
-                            <input placeholder="Complemento" type="text" id="complementoInput" readonly />
-                            <input class="my-3" placeholder="Bairro" type="text" id="bairroInput" readonly />
-                            <input placeholder="Cidade" type="text" id="cidadeInput" readonly />
-                            <input class="my-3" placeholder="Estado" type="text" id="estadoInput" readonly />
-                            <input placeholder="CEP" type="text" id="cepInput" readonly />
+
+                            <!-- tinha um atributo readonly mas eu tirei -->
+                            <input readonly class="my-3 border-2 border-solid border-[#d1d5db] outline-none pl-5 py-2 rounded-lg"  placeholder="Endereço" type="text" id="enderecoInput" />
+                            <input readonly class="border-2 border-solid border-[#d1d5db] outline-none pl-5 py-2 rounded-lg" placeholder="Complemento" type="text" id="complementoInput" />
+                            <input readonly class="my-3 border-2 border-solid border-[#d1d5db] outline-none pl-5 py-2 rounded-lg" placeholder="Bairro" type="text" id="bairroInput" />
+                            <input readonly class="border-2 border-solid border-[#d1d5db] outline-none pl-5 py-2 rounded-lg" placeholder="Cidade" type="text" id="cidadeInput" />
+                            <input readonly class="my-3 border-2 border-solid border-[#d1d5db] outline-none pl-5 py-2 rounded-lg" placeholder="Estado" type="text" id="estadoInput" />
+                            <input readonly class="border-2 border-solid border-[#d1d5db] outline-none pl-5 py-2 rounded-lg" placeholder="CEP" type="text" id="cepInput" />
 
                             <div class="flex justify-between my-5 items-center">
-                                <a class="hover:border-solid hover:border-2 hover:border-gray-dark px-1 py-1"
-                                    th:href="@{/carrinho/detalhar}">Retornar</a>
-                                <button class="bg-purple px-3 py-3 text-white hover:bg-black transition-all duration-500"
-                                    type="submit">Continue</button>
+                                <a class="font-medium text-white inline-block w-52 my-5 text-center py-2 rounded-md bg-gradient-to-r from-pink-300 to-pink-500 hover:from-pink-500 hover:to-pink-700 transition duration-500"
+                                    th:href="@{/carrinho/detalhar}">Retornar
+                                </a>
+                                <button
+                                    class="bg-purple inline-block w-52 my-5 text-center py-2 rounded-md text-white hover:bg-black transition-all duration-500"
+                                    type="submit">Continue
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -96,4 +97,3 @@
 </body>
 
 </html>
-

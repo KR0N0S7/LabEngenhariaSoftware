@@ -11,17 +11,16 @@
         <p th:text="${mensagem}"></p>
     </div>
     <div th:if="${not #lists.isEmpty(lista)}">
-        
+
         <div class="form-check form-switch mt-3" onclick="toggleContent()">
             <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
             <label class="form-check-label" for="flexSwitchCheckDefault">Pesquisa</label>
         </div>
 
         <div id="hiddenContent" th:style="${condition} ? '' : 'display: none;'">
-            
-            <button type="button" onclick="addSearchFilter()">+</button>
-            <input class="my-3" id="txtSearch" placeholder="Nome Completo" type="text" name="keyword"></input>
 
+            <button type="button" onclick="addSearchFilter()">+</button>
+            <input class="my-3" id="txtSearch" placeholder="Nome Completo" type="text" name="keyword">
         </div>
 
         <table id="tabelaCompra" class="table table-striped">
@@ -46,16 +45,17 @@
                     <td th:text="${compra.valorFrete}"></td>
                     <td th:text="${compra.valorTotal}"></td>
                     <td th:text="${compra.status}"></td>
-                    
+
                     <td>
-                        <a class="btn btn-primary btn-sm" th:href="@{/compra/detalharAdmin(id=${compra.id})}">Detalhes</a>
-                        
+                        <a class="btn btn-primary btn-sm"
+                            th:href="@{/compra/detalharAdmin(id=${compra.id})}">Detalhes</a>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
+
 </html>
 <!--
 <script th:inline="javascript">
