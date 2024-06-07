@@ -10,10 +10,6 @@ target/
 !**/src/main/resources/application.yml
 !**/target/classes/application.yml
 
-# Ignorar logs
-logs/
-*.log
-
 ### STS ###
 .apt_generated
 .classpath
