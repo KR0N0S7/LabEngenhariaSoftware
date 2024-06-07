@@ -20,6 +20,8 @@
 
     <div th:replace="pages/header :: header"></div>
 
+    <div th:replace="pages/chat :: chat"></div>
+
     <section class="h-[100vh] banner-principal">
 
         <div class="container">
@@ -42,6 +44,7 @@
             <img th:src="@{img/marcas.png}" alt="marcas de roupas">
             <div class="swiper swiper-roupas my-10" >
                 <div class="swiper-wrapper">
+<<<<<<< HEAD
                 
                     <div class="swiper-slide swiper-slide:w-80">
                         <div class="w-full">
@@ -112,9 +115,20 @@
                     </div>
                    
 
+=======
+                    <th:block th:if="${recomendacoes != null}"> 
+                        <div class="col-md-4" th:each="produto : ${recomendacoes}">
+                            <div class="swiper-slide swiper-slide:w-80">
+                                <img th:src="@{'/images/produtos/' + ${produto.imagem}}" alt="Product Image" class="img-fluid">
+                                <h2 th:text="${produto.nome}"></h2>
+                                <p th:text="'Preço: $' + ${produto.preco}"></p>
+                            </div>
+                        </div>
+                        </th:block>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+>>>>>>> main
                 </div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
             </div>
 
             <div class="flex justify-center">
@@ -131,15 +145,29 @@
                     </a>
                 </div>
             </div>
+            
         </div>
     </section>
  
     <div th:replace="pages/footer :: footer"></div>
+<<<<<<< HEAD
     <script>
         window.addEventListener('DOMContentLoaded', function () {
             const loading = document.querySelector('#loading-screen');
             loading.classList.add('hide');
         })
+=======
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Inicialização do Swiper após o DOM estar pronto e os elementos carregados
+            var swiper = new Swiper('.swiper-roupas', {
+                // ... suas configurações do Swiper ...
+            });
+        });
+        /*]]>*/
+>>>>>>> main
     </script>
 </body>
 </html>

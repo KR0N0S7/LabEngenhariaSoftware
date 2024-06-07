@@ -9892,3 +9892,47 @@ org.hibernate.LazyInitializationException: failed to lazily initialize a collect
 2024-06-06T22:58:10.810-03:00  WARN 19172 --- [http-nio-8080-exec-10] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-10][pages/home] Deprecated unwrapped fragment expression "pages/head :: head" found in template pages/home, line 4, col 6. Please use the complete syntax of fragment expressions instead ("~{pages/head :: head}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
 2024-06-06T22:58:10.820-03:00  WARN 19172 --- [http-nio-8080-exec-10] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-10][pages/home] Deprecated unwrapped fragment expression "pages/header :: header" found in template pages/home, line 21, col 10. Please use the complete syntax of fragment expressions instead ("~{pages/header :: header}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
 2024-06-06T22:58:10.825-03:00  WARN 19172 --- [http-nio-8080-exec-10] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-10][pages/home] Deprecated unwrapped fragment expression "pages/footer :: footer" found in template pages/home, line 137, col 10. Please use the complete syntax of fragment expressions instead ("~{pages/footer :: footer}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2024-06-06T23:00:00.041-03:00 ERROR 19172 --- [scheduling-1] o.s.s.s.TaskUtils$LoggingErrorHandler    : Unexpected error occurred in scheduled task
+
+org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: com.boutiquepierrotbleu.boutiquepierrotbleu.entities.Produto.alertaEstoqueProduto: could not initialize proxy - no Session
+	at org.hibernate.collection.spi.AbstractPersistentCollection.throwLazyInitializationException(AbstractPersistentCollection.java:634) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.collection.spi.AbstractPersistentCollection.withTemporarySessionIfNeeded(AbstractPersistentCollection.java:217) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.collection.spi.AbstractPersistentCollection.initialize(AbstractPersistentCollection.java:613) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.collection.spi.AbstractPersistentCollection.read(AbstractPersistentCollection.java:136) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.collection.spi.PersistentBag.iterator(PersistentBag.java:371) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at com.boutiquepierrotbleu.boutiquepierrotbleu.services.AlertaEstoqueProdutoService.checkAndSendAlerts(AlertaEstoqueProdutoService.java:29) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.runInternal(ScheduledMethodRunnable.java:130) ~[spring-context-6.1.5.jar:6.1.5]
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.lambda$run$2(ScheduledMethodRunnable.java:124) ~[spring-context-6.1.5.jar:6.1.5]
+	at io.micrometer.observation.Observation.observe(Observation.java:499) ~[micrometer-observation-1.12.4.jar:1.12.4]
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.run(ScheduledMethodRunnable.java:124) ~[spring-context-6.1.5.jar:6.1.5]
+	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54) ~[spring-context-6.1.5.jar:6.1.5]
+	at org.springframework.scheduling.concurrent.ReschedulingRunnable.run(ReschedulingRunnable.java:96) ~[spring-context-6.1.5.jar:6.1.5]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539) ~[na:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[na:na]
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+
+2024-06-06T23:00:22.423-03:00  INFO 19172 --- [Thread-118] com.zaxxer.hikari.HikariDataSource       : HikariPool-14 - Shutdown initiated...
+2024-06-06T23:00:22.427-03:00  INFO 19172 --- [Thread-118] com.zaxxer.hikari.HikariDataSource       : HikariPool-14 - Shutdown completed.
+2024-06-06T23:00:22.574-03:00  INFO 19172 --- [restartedMain] c.b.b.BoutiquepierrotbleuApplication     : Starting BoutiquepierrotbleuApplication using Java 17.0.10 with PID 19172 (C:\Users\srodr\Desktop\less\target\classes started by Gustavo in C:\Users\srodr\Desktop\less)
+2024-06-06T23:00:22.575-03:00 DEBUG 19172 --- [restartedMain] c.b.b.BoutiquepierrotbleuApplication     : Running with Spring Boot v3.2.4, Spring v6.1.5
+2024-06-06T23:00:22.576-03:00  INFO 19172 --- [restartedMain] c.b.b.BoutiquepierrotbleuApplication     : No active profile set, falling back to 1 default profile: "default"
+2024-06-06T23:00:23.202-03:00  INFO 19172 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-06-06T23:00:23.203-03:00  INFO 19172 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2024-06-06T23:00:23.238-03:00  INFO 19172 --- [restartedMain] o.a.c.c.C.[Tomcat-2].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2024-06-06T23:00:23.336-03:00  INFO 19172 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-06-06T23:00:23.339-03:00  INFO 19172 --- [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-06-06T23:00:23.347-03:00  INFO 19172 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-15 - Starting...
+2024-06-06T23:00:23.369-03:00  INFO 19172 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-15 - Added connection com.mysql.cj.jdbc.ConnectionImpl@40ed85
+2024-06-06T23:00:23.369-03:00  INFO 19172 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-15 - Start completed.
+2024-06-06T23:00:23.370-03:00  WARN 19172 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000511: The 5.7.0 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2024-06-06T23:00:23.483-03:00  INFO 19172 --- [restartedMain] o.h.m.i.EntityInstantiatorPojoStandard   : HHH000182: No default (no-argument) constructor for class: com.boutiquepierrotbleu.boutiquepierrotbleu.entities.ChatMessage (class must be instantiated by Interceptor)
+2024-06-06T23:00:23.549-03:00  INFO 19172 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-06-06T23:00:24.474-03:00  WARN 19172 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-06-06T23:00:25.245-03:00  INFO 19172 --- [restartedMain] c.b.b.BoutiquepierrotbleuApplication     : Started BoutiquepierrotbleuApplication in 2.711 seconds (process running for 13532.798)
